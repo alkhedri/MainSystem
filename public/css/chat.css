@@ -1,0 +1,14 @@
+.my-custom-scrollbar {
+  position: relative;
+  height: 350px;
+  width: 1100px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+
+  tbody  tr:hover {
+    background-color: #d7e5eb;
+    color: #000000;
+  }
