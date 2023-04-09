@@ -18,6 +18,10 @@ Route::get('/', function () {
 });
 
  ///////////////////////////////////////////////////////////////////
+
+ Route::group(['middleware' => ['role:college']], function() {
+ 
+
 Route::get('/test', 'App\Http\Controllers\ExaminationController@index')->name('test');;
 
 Route::get('/Departments', 'App\Http\Controllers\ExaminationController@index_DepartmetsMenu')->name('DepartmentsMenu');
@@ -36,8 +40,14 @@ Route::get('/StudentsMovement', 'App\Http\Controllers\ExaminationController@inde
 Route::get('/RegRenewal', 'App\Http\Controllers\ExaminationController@index_RegRenewal')->name('RegRenewal');
 Route::get('/StopEnrollment', 'App\Http\Controllers\ExaminationController@index_StopEnrollment')->name('StopEnrollment');
 //////////////////////////////////////////////////////////////////
-Route::get('/inst', 'App\Http\Controllers\InstrController@index')->name('inst');;
 
+ 
+    //Route::get('/manage', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
+});
+
+
+Route::group(['middleware' => ['role:instructor']], function() {
+    Route::get('/inst', 'App\Http\Controllers\InstrController@index')->name('inst');;
 //HEAD OF DEPARTMENT
 Route::get('/facultyMembers', 'App\Http\Controllers\InstrController@index_facultyMembers')->name('FacultyMembers');;
 Route::get('/SemestersPlanB', 'App\Http\Controllers\InstrController@index_SemestersPlan')->name('SemestersPlanB');;
@@ -67,6 +77,15 @@ Route::get('/ClassTable', 'App\Http\Controllers\InstrController@index_ClassTable
 
 
 
+ 
+        //Route::get('/manage', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
+    });
+    
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

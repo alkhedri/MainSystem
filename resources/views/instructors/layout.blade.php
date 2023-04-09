@@ -89,6 +89,8 @@
                  <li class="nav-title">
                    الفصول الدراسية
                  </li> --}}
+                 @permission('hod-read')
+               
                  <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>رئيس القسم</a>
                     <ul class="nav-dropdown-items">
@@ -109,10 +111,13 @@
                 
                 </ul>
                     </li>
-              
+                  
+                @endpermission
                     {{-- <li class="nav-title">
                         الأقسام الدراسية
                      </li> --}}
+                     @permission('dec-read')
+           
                       <li class="nav-item nav-dropdown">
                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>الدراسة و الامتحانات</a>
                         <ul class="nav-dropdown-items">
@@ -140,7 +145,7 @@
                                </li>
                     </ul>
                         </li>
-     
+                        @endpermission
                     {{-- <li class="nav-title">
                        الطلبة
                       </li> --}}
