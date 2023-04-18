@@ -5,7 +5,7 @@
 @section('breadcramp')
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
-    <li class="breadcrumb-item"><a href="#">بيانات الطالب</a>
+
     </li>
      
  

@@ -1,11 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Instructor;
+use App\Models\City;
+use App\Models\Department;
+use App\Models\College;
 use Illuminate\Http\Request;
 
 class InstrController extends Controller
 {
+
+    public function students()
+    {
+      
+        $ids = City::all('name','id');
+        $departments = Department::all('arabic_name','id');
+        $colleges = College::all('arabic_name','id');
+    
+        return view ('auth.Testregister',  compact('ids' , 'departments' , 'colleges'));
+ 
+ 
+    }
+  
     public function index()
     {
         return view('instructors._main');

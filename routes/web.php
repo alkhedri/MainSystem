@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
  ///////////////////////////////////////////////////////////////////
+ Route::get('/reg', 'App\Http\Controllers\InstrController@students')->name('registerTest');;
 
  Route::group(['middleware' => ['role:college']], function() {
  
@@ -26,10 +27,18 @@ Route::get('/test', 'App\Http\Controllers\ExaminationController@index')->name('t
 
 Route::get('/Departments', 'App\Http\Controllers\ExaminationController@index_DepartmetsMenu')->name('DepartmentsMenu');
 Route::get('/DepartmentsInfo', 'App\Http\Controllers\ExaminationController@index_DepartmentsInfo')->name('DepartmentsInfo');
+Route::post('/DepartmentsUpdate', 'App\Http\Controllers\ExaminationController@Update_DepartmentsInfo')->name('DepartmentsUpdate');
+Route::get('/NewDepartments', 'App\Http\Controllers\ExaminationController@New_Departments')->name('NewDepartments');
+Route::post('/AddDepartments', 'App\Http\Controllers\ExaminationController@Add_Departments')->name('AddDepartments');
+
 Route::get('/DepartmentsDelete', 'App\Http\Controllers\ExaminationController@index_DepartmetsDelete')->name('DepartmentsDelete');
+Route::get('/DepartmentsDeleteAction', 'App\Http\Controllers\ExaminationController@delete_Departments')->name('DepartmentsDeleteAction');
 
 
 Route::get('/Semesters', 'App\Http\Controllers\ExaminationController@index_SemestersMenu')->name('SemestersMenu');
+Route::get('/CurrentSemesterActivate', 'App\Http\Controllers\ExaminationController@CurrentSemesterActivate')->name('CurrentSemesterActivate');
+
+
 Route::get('/NewSemester', 'App\Http\Controllers\ExaminationController@index_NewSemester')->name('NewSemester');
 Route::get('/Request', 'App\Http\Controllers\ExaminationController@index_Override')->name('Request');
 Route::get('/FinalResults', 'App\Http\Controllers\ExaminationController@index_FinalResults')->name('FinalResults');

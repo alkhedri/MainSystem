@@ -17,6 +17,10 @@
 
 <div class="row">
      
+
+    @if(Session::has('message'))
+<p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('message') }}</p>
+@endif
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> Striped Table
@@ -32,30 +36,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($departments as $department)
+                            
+                   
                         <tr>
-                            <td>1</td>
-                            <td>الحاسب الالى</td>
+                            <td>{{$loop->index + 1 }}</td>
+                            <td>{{$department->arabic_name}}</td>
                             <td>
-                                <button type="button" class="btn btn-danger">حذف</button>
+                                <a href="{{route('DepartmentsDeleteAction' , ['id' => $department->id])}}" class="btn btn-danger" >حذف</a>
                             </td>
                         
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>الميكانيكية</td>
-                            <td>
-                                <button type="button" class="btn btn-danger">حذف</button>
-                            </td>
-                          
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>الكهربائية</td>
-                            <td>
-                                <button type="button" class="btn btn-danger">حذف</button>
-                            </td>
-                          
-                        </tr>
+                        @endforeach
                
                     </tbody>
                 </table>

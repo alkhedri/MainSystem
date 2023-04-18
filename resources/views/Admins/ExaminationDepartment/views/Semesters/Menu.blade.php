@@ -20,7 +20,7 @@
     <div class="col-lg-6">
         <div class="card card-inverse card-primary">
             <div class="card-header">
-                الفصل الدراسي الحالي : ربيع 2020
+               {{$semester_name}}
             </div>
          
                  
@@ -41,58 +41,45 @@
                         <tr>
                             <th>#</th>
                             <th>الفصل</th>
-                            <th>السنة</th>
+                      
                             <th>الحالة</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($Semesters as $semester)
+                            
+                      
                         <tr>
-                            <td>Member</td>
-                            <td>ربيع</td>
-                            <td>2012/01/01</td>
+                            <td>{{ $loop->index }}</td>
+                            <td>{{$semester->name}}</td>
+                            
                          
                             <td>
-                                <button type="button" class="btn btn-outline-danger btn-sm">تعيين</button>
+                     
+                                @if ($semester_id == $semester->id)
+                                         
+                                <a class="btn btn-outline-success btn-sm" href="{{ route('CurrentSemesterActivate') }}"
+                   >
+                                 {{ __('active') }}
+                             </a>
+                        
+                                   @else
+                                   <a class="btn btn-outline-danger btn-sm" href="{{ route('CurrentSemesterActivate' , ['id' => $semester->id]) }}"
+                             >
+                                    {{ __('activate') }}
+                                </a>  
+                      
+                                @endif
+                       
+                            
+                               
                             </td>
                         </tr>
-                        <tr>
-                            <td>Staff</td>
-                            <td>خريف</td>
-                            <td>2012/02/01</td>
-                          
-                            <td>
-                                <button type="button" class="btn btn-outline-danger btn-sm">تعيين</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Admin</td>
-                            <td>ربيع</td>
-                            <td>2012/02/01</td>
-                           
-                            <td>
-                                <button type="button" class="btn btn-outline-danger btn-sm">تعيين</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Member</td>
-                            <td>خريف</td>
-                            <td>2012/03/01</td>
-                          
-                            <td>
-                                <button type="button" class="btn btn-outline-danger btn-sm">تعيين</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Staff</td>
-                            <td>ربيع</td>
-                            <td>2012/01/21</td>
-                          
-                            <td>
-                                <button type="button" class="btn btn-outline-danger btn-sm">تعيين</button>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
+
+
                 <ul class="pagination">
                     <li class="page-item"><a class="page-link" href="#">السابق</a>
                     </li>

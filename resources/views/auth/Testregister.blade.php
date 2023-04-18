@@ -1,38 +1,14 @@
 @extends('layouts.app')
 
-
-
 @section('content')
-
-
-<div class="container">
-
-    <div class="row">
-    
-        <div class="col-6 sign-in">
-          <button class="btn sign-in__button active">
-            Sign in        
-          </button>
-        </div>
-  
-        <div class="col-6 register">
-          <button class="btn register__button">
-            Register        
-          </button>
-        </div>
-  
-      </div>
-    
-</div>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Tset Register') }}</div>
 
-                <div class="card-body register__form">
-                    <form method="POST" action="{{ route('register') }} ">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -70,6 +46,20 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="Badge" class="col-md-4 col-form-label text-md-end">{{ __('Badge  ') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="Badge" type="text" class="form-control @error('Badge') is-invalid @enderror" name="Badge" value="{{ old('Badge') }}" required autocomplete="Badge" autofocus>
+
+                                @error('Badge')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -136,7 +126,7 @@
                             <div class="col-md-6">
                                   <select id="city" class="form-control @error('city') is-invalid @enderror" name="city">
                                     @foreach($ids as $id)
-                                    <option value="1">{{ $id->name }}</option>
+                                    <option value="{{ $id->id }}">{{ $id->name }}</option>
                                     @endforeach
                               
                                   </select>
@@ -232,7 +222,7 @@
                             <div class="col-md-6">
                                   <select id="department" class="form-control @error('department') is-invalid @enderror" name="department">
                                     @foreach($departments as $id)
-                                    <option value="1">{{ $id->arabic_name }}</option>
+                                    <option value="{{ $id->id }}">{{ $id->arabic_name }}</option>
                                     @endforeach
                               
                                   </select>
@@ -251,7 +241,7 @@
                             <div class="col-md-6">
                                   <select id="college" class="form-control @error('college') is-invalid @enderror" name="college">
                                     @foreach($colleges as $id)
-                                    <option value="1">{{ $id->arabic_name }}</option>
+                                    <option value="{{ $id->id }}">{{ $id->arabic_name }}</option>
                                     @endforeach
                               
                                   </select>
@@ -264,10 +254,8 @@
                         </div>
 
 
-
-                        <input id="user_type" type="hidden" value="instructor"  name="user_type">
+                        <input id="user_type" type="hidden" value="student"  name="user_type">
                                 
-
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
