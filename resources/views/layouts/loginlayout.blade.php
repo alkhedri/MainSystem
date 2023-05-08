@@ -23,23 +23,7 @@
     <script src="js/libs/jquery.min.js"></script>
     <script src="js/libs/tether.min.js"></script>
     <script src="js/libs/bootstrap.min.js"></script>
-    <script>
-        function verticalAlignMiddle()
-        {
-            var bodyHeight = $(window).height();
-            var formHeight = $('.vamiddle').height();
-            var marginTop = (bodyHeight / 2) - (formHeight / 2);
-            if (marginTop > 0)
-            {
-                $('.vamiddle').css('margin-top', marginTop);
-            }
-        }
-        $(document).ready(function()
-        {
-            verticalAlignMiddle();
-        });
-        $(window).bind('resize', verticalAlignMiddle);
-    </script>
+
     <!-- Grunt watch plugin -->
     <script src="//localhost:35729/livereload.js"></script>
 

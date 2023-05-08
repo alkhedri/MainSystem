@@ -40,15 +40,46 @@ Route::get('/CurrentSemesterActivate', 'App\Http\Controllers\ExaminationControll
 
 
 Route::get('/NewSemester', 'App\Http\Controllers\ExaminationController@index_NewSemester')->name('NewSemester');
+Route::post('/AddSemesters', 'App\Http\Controllers\ExaminationController@add_Semester')->name('AddSemesters');
+Route::get('/SemestersDeleteAction', 'App\Http\Controllers\ExaminationController@delete_Semester')->name('SemestersDeleteAction');
+
+
 Route::get('/Request', 'App\Http\Controllers\ExaminationController@index_Override')->name('Request');
+Route::get('/OverrideRequestAccept', 'App\Http\Controllers\OverrideActionsController@Override_Accept')->name('OverrideRequestAccept');
+Route::get('/OverrideRequestDeny', 'App\Http\Controllers\OverrideActionsController@Override_Denied')->name('OverrideRequestDeny');
+
+
+
+
 Route::get('/FinalResults', 'App\Http\Controllers\ExaminationController@index_FinalResults')->name('FinalResults');
 Route::get('/SemestersPlan', 'App\Http\Controllers\ExaminationController@index_SemestersPlan')->name('SemestersPlan');
+Route::post('/SetSemestersPlan', 'App\Http\Controllers\ExaminationController@set_SemestersPlan')->name('SetSemestersPlan');
 
 Route::get('/StudentsPlacement', 'App\Http\Controllers\ExaminationController@index_StudentsPlacement')->name('StudentsPlacement');
+
+
 Route::get('/StudentsMovement', 'App\Http\Controllers\ExaminationController@index_StudentsMovement')->name('StudentsMovement');
+Route::post('/StudentsMovementSearch', 'App\Http\Controllers\student_movementController@search')->name('StudentsMovementSearch');
+Route::get('/StudentsMovementAction', 'App\Http\Controllers\student_movementController@index_StudentsMovementAction')->name('StudentsMovementAction');
+Route::get('/StudentsMovementActionDone', 'App\Http\Controllers\student_movementController@MoveAction')->name('StudentsMovementActionDone');
+
+
 Route::get('/RegRenewal', 'App\Http\Controllers\ExaminationController@index_RegRenewal')->name('RegRenewal');
+Route::post('/StudentsRenewalSearch', 'App\Http\Controllers\regRenewalController@search_renewal')->name('StudentsRenewalSearch');
+Route::get('/RegRenewalIntermettent', 'App\Http\Controllers\regRenewalController@show_inter')->name('RegRenewalIntermettent');
+Route::get('/RenewalComplete', 'App\Http\Controllers\regRenewalController@action_complete')->name('RenewalComplete');
+Route::get('/RenewalCancel', 'App\Http\Controllers\regRenewalController@action_cancel')->name('RenewalCancel');
+Route::get('/RenewalStop', 'App\Http\Controllers\regRenewalController@action_stop')->name('RenewalStop');
+
+
+
+
 Route::get('/StopEnrollment', 'App\Http\Controllers\ExaminationController@index_StopEnrollment')->name('StopEnrollment');
+
+Route::get('/StudentNotify', 'App\Http\Controllers\ExaminationController@index_StudentNotify')->name('StudentNotify');
 //////////////////////////////////////////////////////////////////
+
+Route::post('/NotifyStudent', 'App\Http\Controllers\NotificationsController@action_NotifyStudent')->name('NotifyStudent');
 
  
     //Route::get('/manage', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
@@ -56,10 +87,18 @@ Route::get('/StopEnrollment', 'App\Http\Controllers\ExaminationController@index_
 
 
 Route::group(['middleware' => ['role:instructor']], function() {
-    Route::get('/inst', 'App\Http\Controllers\InstrController@index')->name('inst');;
-//HEAD OF DEPARTMENT
-Route::get('/facultyMembers', 'App\Http\Controllers\InstrController@index_facultyMembers')->name('FacultyMembers');;
-Route::get('/SemestersPlanB', 'App\Http\Controllers\InstrController@index_SemestersPlan')->name('SemestersPlanB');;
+    Route::get('/inst', 'App\Http\Controllers\InstrController@index')->name('inst');
+
+//----------  HEAD OF DEPARTMENT
+Route::get('/facultyMembers', 'App\Http\Controllers\InstrController@index_facultyMembers')->name('FacultyMembers');
+Route::get('/InstructorProfile', 'App\Http\Controllers\Instructors\InstructorsMenuController@profile_instructor')->name('InstructorProfile');
+
+Route::post('/InstructorSearch', 'App\Http\Controllers\Instructors\InstructorsMenuController@search_instructor')->name('InstructorSearch');
+
+
+
+
+Route::get('/SemestersPlanShow', 'App\Http\Controllers\InstrController@index_SemestersPlan')->name('SemestersPlanB');
 
 Route::get('/StudentsMenu', 'App\Http\Controllers\InstrController@index_StudentsMenu')->name('StudentsMenu');;
 

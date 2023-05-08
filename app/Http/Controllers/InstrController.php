@@ -5,6 +5,10 @@ use App\Models\Instructor;
 use App\Models\City;
 use App\Models\Department;
 use App\Models\College;
+use App\Models\semesterplan;
+use App\Models\semester;
+
+
 use Illuminate\Http\Request;
 
 class InstrController extends Controller
@@ -24,18 +28,40 @@ class InstrController extends Controller
   
     public function index()
     {
+        
+
         return view('instructors._main');
     }
 
 
     public function index_facultyMembers()
     {
-        return view('instructors.HOD.FacultyMembers');
+        $user_id = auth()->user()->id;
+
+        $user_College_id = Instructor::where('id',$user_id)->value('college_id');
+
+        $user_department_id = Instructor::where('id',$user_id)->value('department_id');
+
+        $instructors = Instructor::where('department_id',$user_department_id)->get();
+
+        return view('instructors.HOD.FacultyMembers' , compact('instructors'));
     }
     
     public function index_SemestersPlan()
     {
-        return view('instructors.HOD.SemestersPlan');
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $semester_id = College::where('id',$College_id)->value('current_semester');
+
+
+        $semesterplan =  semesterplan::all()->where('college_id',$College_id)->where('semester_id' , $semester_id);
+     $SEMESTER_NAME = Semester::where('id',$semester_id)->value('name');
+
+
+        return view('instructors.HOD.SemestersPlan' , compact('semesterplan' , 'SEMESTER_NAME'));
     }
 
     public function index_StudentsMenu()

@@ -141,6 +141,11 @@ if ($data['user_type'] != 'student' ){
             
             'department_id'   =>   $data['department'],
             'college_id'   =>   $data['college'],
+            'units'   =>   0,
+            'gpa'   =>   0,
+            'enrollment_status_id'   =>   3,
+            
+            
 
         ]);
         $user->addRole('student');

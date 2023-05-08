@@ -23,7 +23,7 @@
      <!-- Main styles for this application -->
      <link href="dest/style.css" rel="stylesheet">
           <!-- CHAT styles for this application -->
-          <link href="css/chat.css" rel="stylesheet">
+          <link href="css/profile.css" rel="stylesheet">
   
  </head>
  <!-- BODY options, add following classes to body to change options

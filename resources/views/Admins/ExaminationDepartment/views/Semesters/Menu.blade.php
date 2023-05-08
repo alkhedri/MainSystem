@@ -18,16 +18,15 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <div class="card card-inverse card-primary">
-            <div class="card-header">
-               {{$semester_name}}
-            </div>
-         
-                 
-                    <span>ملاحظة : لتعيين فصل دراسي للوقت الحالي من جدول الفصول نضغط على تعيين</span>
-            </div>
-            <span class="border border-dark">ddddd</span>
-            <a class="btn btn-primary btn-lg btn-block" href="{{route('NewSemester')}}"><u>إضافة فصل دراسي جديد</u></a>
+        <div class="alert alert-info" role="alert">
+             
+            <p> الفصل الدراسي الحالي - [{{$semester_name}}]  </p>
+            <hr>
+            <p class="mb-0"> ملاحظة : لتعيين فصل دراسي للوقت الحالي من جدول الفصول نضغط على تعيين</p>
+          </div>
+        
+           
+            <a class="btn btn-info btn-lg btn-block" href="{{route('NewSemester')}}"><u>إضافة فصل دراسي جديد</u></a>
       
     </div>
     <div class="col-lg-6">
@@ -43,6 +42,7 @@
                             <th>الفصل</th>
                       
                             <th>الحالة</th>
+                            <th>خيارات</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                             
                       
                         <tr>
-                            <td>{{ $loop->index }}</td>
+                            <td>{{ $loop->index + 1}}</td>
                             <td>{{$semester->name}}</td>
                             
                          
@@ -60,19 +60,25 @@
                                          
                                 <a class="btn btn-outline-success btn-sm" href="{{ route('CurrentSemesterActivate') }}"
                    >
-                                 {{ __('active') }}
+                                 {{ __('الفصل الحالي') }}
                              </a>
                         
                                    @else
                                    <a class="btn btn-outline-danger btn-sm" href="{{ route('CurrentSemesterActivate' , ['id' => $semester->id]) }}"
                              >
-                                    {{ __('activate') }}
+                                    {{ __('تعيين') }}
                                 </a>  
-                      
+                                          
                                 @endif
                        
                             
                                
+                            </td>
+
+                            <td>
+                                <a class="btn btn-outline-danger btn-sm" href="{{route('SemestersDeleteAction' , ['id' => $semester->id])}}"
+                                    >    {{ __('حذف') }}
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -80,22 +86,11 @@
                 </table>
 
 
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">السابق</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">التالي</a>
-                    </li>
-                </ul>
+                {{ $Semesters->links()}}
+                  
+               
             </div>
+          
         </div>
     </div>
 </div>

@@ -20,22 +20,19 @@
     <div class="col-8">
         <div class="card">
             <div class="card-header">
-                <strong>بحث</strong> طالب
+                <strong>اسم </strong> الطالب
             </div>
             <div class="card-block">
-                <form class="form-horizontal" action="{{ route('StudentsMovementSearch') }} " method="post">
-                    
-                    @csrf
-                    <div class="form-group row">
+                  <div class="form-group row">
+                    @if(Session::has('message'))
+                    <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('message') }}</p>
+                    @endif
                         <div class="col-md-6">
-                            <div class="input-group">
+                        
+                                {{App\Models\student::GetNameById($student_id)}}
                                 
-                                <input type="text" id="input1-group2" name="badge" class="form-control" placeholder="رقم القيد">
-                            </div>
                         </div>
-                        <button type="submit" class="btn btn btn-success"><i class="fa fa-dot-circle-o"></i> بحث</button>
-
-                        </form>
+                    
                     </div>
     </div>
    
@@ -49,31 +46,27 @@
  
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i>قائمة الطلبة 
+                        <i class="fa fa-align-justify"></i>قائمة الاقسام الدراسية 
                     </div>
                     <div class="card-block">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>الطالب</th>
-                                    <th>رقم القيد</th>
-                                    <th>القسم الدراسي</th>
+                                    <th>القسم</th>
                                     <th>الاجراء</th>
                                 </tr>
                             </thead>
                             <tbody>
-                          @foreach ($students as $student)
+                          @foreach ($departments as $department)
                           <tr>
                             <td>{{$loop->index + 1}}</td>
-                            <td>{{$student->arabic_name}}</td>
-                            <td>{{$student->badge}}</td>
-
+                            <td> {{$department->arabic_name}}</td>
                            
-                            <td> {{App\Models\department::getDepNameById($student->department_id)}} </td>
-                            <td>
                             
-                                <a class="btn btn-primary btn-sm" href="{{ route('StudentsMovementAction' , ['id' => $student->id ]) }}">نقل</a>
+                            <td>
+                               
+                                <a class="btn btn-primary btn-sm" href="{{route('StudentsMovementActionDone' , ['newDepId' => $department->id , 'student_id' => $student_id])}}">نقل</a>
                             </td>
                         </tr>
        

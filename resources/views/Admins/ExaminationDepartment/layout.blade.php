@@ -129,29 +129,20 @@
                          <ul class="nav-dropdown-items">
                              <li class="nav-item">
                              
-                          <a class="nav-link" href="{{route('StudentsPlacement')}}"><i class="icon-docs"></i>إضافة طالب</a>
+                          <a class="nav-link" href="{{route('registerTest')}}"><i class="icon-docs"></i>إضافة طالب</a>
                           <a class="nav-link" href="{{route('StudentsPlacement')}}"><i class="icon-docs"></i>تنسيب طالب إلى قسم</a>
                           <a class="nav-link" href="{{route('StudentsMovement')}}"><i class="icon-docs"></i>نقل طالب إلى قسم</a>
                           <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>تجديد القيد</a>
                           <a class="nav-link" href="{{route('StopEnrollment')}}"><i class="icon-docs"></i>إيقاف القيد</a>
                           <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>عرض حالة طالب</a>
-                          <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>إخطار طالب</a>
+                          <a class="nav-link" href="{{route('StudentNotify')}}"><i class="icon-docs"></i>إخطار طالب</a>
                           <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>عرض الطلبة المتعثرين</a>
                          </li>
                          
                          
                      </ul>
                          </li>
-                 <li class="nav-title">
-                   اخرى
-                 </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href=""><i class="icon-people"></i>الجدول الدراسي</a>
-                   
-                    <a class="nav-link" href=""><i class="icon-people"></i>مقرر 1</a>
-                    <a class="nav-link" href=""><i class="icon-people"></i>مقرر 2</a>
-                   
-                    </li>
+           
                  <!--<li class="nav-item nav-dropdown">
                      <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> ثبت کاربر جدید</a>
                      <ul class="nav-dropdown-items">

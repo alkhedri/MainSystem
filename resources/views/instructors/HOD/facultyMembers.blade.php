@@ -22,19 +22,25 @@
                 <strong>بحث</strong> عضو هيئة تدريس
             </div>
             <div class="card-block">
-                <form action="" method="post" class="form-horizontal ">
+                <form action="{{route('InstructorSearch')}}" method="post" class="form-horizontal ">
+                    @csrf
                     <div class="form-group row">
                         <div class="col-md-6">
                             <div class="input-group">
                        
-                                <input type="text" id="input1-group2" name="input1-group2" class="form-control" placeholder="رقم القيد">
+                                <input type="text" id="input1-group2" name="inst_name" class="form-control" placeholder="الاسم">
                             </div>
                         </div>
+
                         <button type="submit" class="btn btn btn-success"><i class="fa fa-dot-circle-o"></i> بحث</button>
                     </div>
+                    <a class="btn btn btn-primary" href="{{route('FacultyMembers')}}">
+                        <i class="fa fa-dot-circle-o"></i>
+                          عرض الكل
+                    </a>
     </div>
    
- 
+                        
 </div> 
 
  
@@ -58,36 +64,20 @@
                             </thead>
                             <tbody>
                           
+                                @foreach ($instructors as $instructor)
+                                    
+                             
                                 <tr>
-                                    <td>1</td>
-                                    <td>2012/02/01</td>
-                                    <td>Admin</td>
+                                    <td>{{$loop->index + 1}}</td>
+                                    <td>{{$instructor->arabic_name}}</td>
+                                    <td>{{$instructor->specialization}}</td>
                
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
+                                        <a class="btn btn-primary btn-sm" href="{{route('InstructorProfile' , [ 'inst_id' => $instructor->id])}}">عرض البيانات</a>
                                         <button type="button" class="btn btn-danger btn-sm">حذف</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2012/03/01</td>
-                                    <td>Member</td>
-                        
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                                        <button type="button" class="btn btn-danger btn-sm">حذف</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>2012/01/21</td>
-                                    <td>Staff</td>
-                     
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                                        <button type="button" class="btn btn-danger btn-sm">حذف</button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <ul class="pagination">

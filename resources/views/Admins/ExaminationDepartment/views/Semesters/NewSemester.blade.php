@@ -23,26 +23,31 @@
        
             <div class="card">
                 <div class="card-header">
-                    Example Form
+                    بيانات الفصل الدراسي الجديد
                 </div>
                 <div class="card-block">
-                    <form action="" method="post">
+                    <form action="{{ route('AddSemesters') }} " method="POST">
+                        @csrf
                         <div class="form-group">
                             <div class="input-group">
-                                <select id="select" name="select" class="form-control input-sm" size="1">
-                                    <option value="0">الفصل</option>
-                                    <option value="1">ربيع</option>
-                                    <option value="2">خريف</option>
-                                </select>
-                                <span class="input-group-addon"><i class="fa fa-user"></i>
+                                <span class="input-group-addon"><i class="fa fa-sticky-note"></i>
                                 </span>
+                                <select id="select" name="seassion" class="form-control input-sm" size="1">
+                                    <option value="0">الفصل</option>
+                                    <option value="ربيع">ربيع</option>
+                                    <option value="خريف">خريف</option>
+                                    <option value="صيف">صيف</option>
+                                    
+                                </select>
+                           
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="email" id="email2" name="email2" class="form-control" placeholder="السنة">
-                                <span class="input-group-addon"><i class="fa fa-envelope"></i>
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i>
                                 </span>
+                                <input type="text" id="email2" name="year" class="form-control" placeholder="السنة">
+                             
                             </div>
                         </div>
                  

@@ -1,10 +1,11 @@
-
 @extends('instructors.layout')
  
+
+
 @section('breadcramp')
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
-    <li class="breadcrumb-item">رئيس القسم</li>
+    <li class="breadcrumb-item"><a href="#">الفصل الدراسي</a>
     <li class="breadcrumb-item"><a href="#">الخطة الدراسية</a>
     </li>
      
@@ -16,10 +17,10 @@
 @section('content')
  
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-edit"></i>الخطة الدراسية
+                    <i class="fa fa-edit"></i>الخطة الدراسية <strong>[{{$SEMESTER_NAME}}]</strong>
                     <div class="card-actions">
                         <a href="#" class="btn-setting"><i class="icon-settings"></i></a>
                         <a href="#" class="btn-minimize"><i class="icon-arrow-up"></i></a>
@@ -27,102 +28,135 @@
                     </div>
                 </div>
                 <div class="card-block">
-                                <form action="" method="post" class="form-horizontal ">
-                                    <div class="form-group row">
-                                        <label class="col-lg-2 form-control-label" for="input-small">تجديد القيد :</label>
-                                        <div class="col-lg-4">
-                                            <input type="text" id="input-small" name="input-small" class="form-control input-md" placeholder=".input-sm">
+                    <div class="card-block">
+                        @foreach ($semesterplan as $plan)
+                        
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-small">تجديد القيد :</label>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-small" name="renewalStarts" class="form-control input-md" value="{{$plan->renewalStarts}}">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-small" name="renewalEnds" class="form-control input-md" value="{{$plan->renewalEnds}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-normal">تنزيل المواد</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-normal" name="input-normal" class="form-control" placeholder="Normal">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-normal">تنزيل المواد</label>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-normal" name="SubjectStarts" class="form-control" value="{{$plan->SubjectStarts}}">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-normal" name="SubjectEnds" class="form-control" value="{{$plan->SubjectEnds}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">تنسيب الطلبة للأقسام العلمية</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">تنسيب الطلبة للأقسام العلمية</label>
+                                            <div class="col-lg-6">
+                                                <input type="date" id="input-large" name="StudntsMove" class="form-control input-lg" value="{{$plan->StudntsMove}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">بداية الدراسة</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">بداية الدراسة</label>
+                                            <div class="col-lg-6">
+                                                <input type="date" id="input-large" name="semsStart" class="form-control input-lg" value="{{$plan->semsStart}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">نهاية الدراسة</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">نهاية الدراسة</label>
+                                            <div class="col-lg-6">
+                                                <input type="date" id="input-large" name="semsEnds" class="form-control input-lg" value="{{$plan->semsEnds}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">أخر موعد للإضافة</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">أخر موعد للإضافة</label>
+                                            <div class="col-lg-6">
+                                                <input type="date" id="input-large" name="LastChanceAdd" class="form-control input-lg" value="{{$plan->LastChanceAdd}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">أخر موعد للحذف</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">أخر موعد للحذف</label>
+                                            <div class="col-lg-6">
+                                                <input type="date" id="input-large" name="LastChanceDrop" class="form-control input-lg" value="{{$plan->LastChanceDrop}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">الامتحانات النصفية الاولى</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">الامتحانات النصفية الاولى</label>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="FirstMidsStarts" class="form-control input-lg" value="{{$plan->FirstMidsStarts}}">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="FirstMidsEnds" class="form-control input-lg" value="{{$plan->FirstMidsEnds}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">أخر موعد لايقاف القيد</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">أخر موعد لايقاف القيد</label>
+                                            <div class="col-lg-6">
+                                                <input type="date" id="input-large" name="LastStop" class="form-control input-lg" value="{{$plan->LastStop}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">الامتحانات النصفية الثانية</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">الامتحانات النصفية الثانية</label>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="SecondMidsStarts" class="form-control input-lg" value="{{$plan->SecondMidsStarts}}">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="SecondMidsEnds" class="form-control input-lg" value="{{$plan->SecondMidsEnds}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">موعد اخر محاضرة</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">موعد اخر محاضرة</label>
+                                            <div class="col-lg-6">
+                                                <input type="date" id="input-large" name="Lastlecture" class="form-control input-lg" value="{{$plan->LastLecture}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">الامتحانات النهائية</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">الامتحانات النهائية</label>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="FinalsStarts" class="form-control input-lg" value="{{$plan->FinalsStarts}}">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="FinalsEnds" class="form-control input-lg" value="{{$plan->FinalsEnds}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">موعد اعتماد النتيجة</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">موعد اعتماد النتيجة</label>
+                                            <div class="col-lg-6">
+                                                <input type="date" id="input-large" name="Results" class="form-control input-lg" value="{{$plan->Results}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">تقديم طلبات المراجعة</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">تقديم طلبات المراجعة</label>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="ReviewStarts" class="form-control input-lg" value="{{$plan->ReviewStarts}}">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="ReviewEnds" class="form-control input-lg" value="{{$plan->ReviewEnds}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">النظر في طلبات المراجعة</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">النظر في طلبات المراجعة</label>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="CheckStarts" class="form-control input-lg"  value="{{$plan->CheckStarts}}">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="date" id="input-large" name="CheckEnds" class="form-control input-lg"  value="{{$plan->CheckEnds}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                
-                                </form>
-                            </div>
-        </div>
-        <!--/col-->
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 form-control-label" for="input-large">موعد بداية الفصل القادم</label>
+                                            <div class="col-lg-6">
+                                                <input type="date" id="input-large" name="NextSem" class="form-control input-lg" value="{{$plan->NextSem}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-actions" dir="ltr">
+                                            
+                             
+                                        </div>
+                          
+                                    @endforeach
+                                </div>
+            </div>
+            <!--/col-->
     </div>
 </div>
  

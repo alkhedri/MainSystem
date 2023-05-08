@@ -4,24 +4,39 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Semester;
 use App\Models\Instructor;
+use App\Models\student;
+
 use App\Models\Auth;
 use App\Models\College;
+use App\Models\semesterplan;
+use App\Models\override_request;
+use App\Models\placement_request;
+use App\Models\Notification;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Validator;
 class ExaminationController extends Controller
 {
+  
+
     public function index()
     {
-        $departments = Department::all();
-        return view('Admins.ExaminationDepartment.views.Departments.Menu',  compact( 'departments'));
-    }
 
+    
+        return view('Admins.ExaminationDepartment.views._main');
+    }
 
     public function index_DepartmetsMenu()
     {
-        $departments = Department::all();
+
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+
+        $departments = Department::all()->where('college_id', $College_id);
         return view('Admins.ExaminationDepartment.views.Departments.Menu',  compact( 'departments'));
     }
     public function index_DepartmentsInfo(request $req)
@@ -35,27 +50,42 @@ class ExaminationController extends Controller
     {
 
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'code' => 'required',
         ]);
       
-   
+      if ($request->image != NULL){
         $imageName = time().'.'.$request->image->extension();  
        
         $request->image->move(public_path('depicon'), $imageName);
-    
-  
-
-
         Department::where('id', $request->id)
         ->update([
             'english_name' => $request->english_name,
+            'arabic_name' => $request->arabic_name,
            
             'code' => $request->code,
+            
             'icon' => $imageName,
            
             
          ]);
+      }else {
+        Department::where('id', $request->id)
+        ->update([
+            'english_name' => $request->english_name,
+            'arabic_name' => $request->arabic_name,
+           
+            'code' => $request->code,
+            
+          
+            
+         ]);
+      }
+       
+    
+  
+
+ 
 
         return back();
     }
@@ -104,7 +134,7 @@ class ExaminationController extends Controller
     //// Semesters Methods
     public function index_SemestersMenu()
     {
-        $Semesters = Semester::all();
+        $Semesters = Semester::paginate(5);
         $user_id = auth()->user()->id;
         
 
@@ -138,42 +168,191 @@ class ExaminationController extends Controller
     {
         return view('Admins.ExaminationDepartment.views.Semesters.NewSemester');
     }
+    public function add_Semester(Request $request)
+    {
 
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');;
+
+   $str = $request->seassion . ' ' . $request->year;
+        Semester::insert(
+            [
+             'name' => $str,
+             'college_id' => $College_id
+                
+             ]
+        );
+
+        return \Redirect::route('SemestersMenu');
+    }
+
+    public function delete_Semester(Request $request){
+        Semester::where('id',$request->id)->delete();
+        return back()->with('message', 'تم حذف القسم ');
+        
+    }
 
     
     public function index_Override()
     {
-        return view('Admins.ExaminationDepartment.views.Semesters.OverrideRequest');
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+      
+        $requests =  override_request::all();
+        $requests = override_request::paginate(8);
+        return view('Admins.ExaminationDepartment.views.Semesters.OverrideRequest', compact('requests'));
     }
 
+
+
+    
     public function index_FinalResults()
     {
-        return view('Admins.ExaminationDepartment.views.Semesters.FinalResults');
+
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+
+        $departments = Department::all()->where('college_id', $College_id);
+ 
+
+        return view('Admins.ExaminationDepartment.views.Semesters.FinalResults' ,  compact( 'departments'));
     }
+
+
 
     public function index_SemestersPlan()
     {
-        return view('Admins.ExaminationDepartment.views.Semesters.SemestersPlan');
+
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $semester_id = College::where('id',$College_id)->value('current_semester');
+
+
+        $semesterplan =  semesterplan::all()->where('college_id',$College_id)->where('semester_id' , $semester_id);
+       
+        return view('Admins.ExaminationDepartment.views.Semesters.SemestersPlan',  compact( 'semesterplan'));
     }
 
+    public function set_SemestersPlan(request $request)
+    {
+
+        $user_id = auth()->user()->id;
+        
+
+       
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $sem_id = College::where('id',$College_id)->value('current_semester');
+
+        semesterplan::where('college_id', $College_id)
+        ->where('semester_id', $sem_id)
+        ->update([
+            
+            'renewalStarts' => $request->renewalStarts,
+            'renewalEnds' => $request->renewalEnds,
+            'SubjectStarts' => $request->SubjectStarts,
+            'SubjectEnds' => $request->SubjectEnds,
+
+            'StudntsMove' => $request->StudntsMove,
+            'semsStart' => $request->semsStart,
+            'semsEnds' => $request->semsEnds,
+
+            'LastChanceAdd' => $request->LastChanceAdd,
+            'LastChanceDrop' => $request->LastChanceDrop,
+            'FirstMidsStarts' => $request->FirstMidsStarts,
+            'FirstMidsEnds' => $request->FirstMidsEnds,
+
+            'LastStop' => $request->LastStop,
+            'SecondMidsStarts' => $request->SecondMidsStarts,
+
+            'SecondMidsEnds' => $request->SecondMidsEnds,
+            'Lastlecture' => $request->Lastlecture,
+
+            'FinalsStarts' => $request->FinalsStarts,
+            'FinalsEnds' => $request->FinalsEnds,
+
+            'Results' => $request->Results,
+            'ReviewStarts' => $request->ReviewStarts,
+            'ReviewEnds' => $request->ReviewEnds,
+            
+            'CheckStarts' => $request->CheckStarts,
+            'CheckEnds' => $request->CheckEnds,
+            'NextSem' => $request->NextSem,
+
+
+         ]);
+       
+        return Back();
+    }
 
 
 
     // students
     public function index_StudentsPlacement()
     {
-        return view('Admins.ExaminationDepartment.views.Students.StudentsPlacement');
+
+
+        $requests =  placement_request::select('placement_requests.*' ,'students.gpa') 
+        ->join('students', 'placement_requests.student_id', '=', 'students.id')
+        ->groupBy('placement_requests.student_id')
+        ->orderBy('students.gpa', 'DESC')
+        ->get() ;
+
+
+
+     //   $requests = placement_request::all()->unique('student_id')->paginate(15);
+       // $requests = placement_request::get()->unique('student_id')->orderBy('gpa','asc')->toQuery()->paginate(20);
+
+        
+        return view('Admins.ExaminationDepartment.views.Students.StudentsPlacement',  compact( 'requests'));
     }
     public function index_StudentsMovement()
     {
-        return view('Admins.ExaminationDepartment.views.Students.StudentsMovement');
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+      
+        $students = student::where('college_id' , $College_id)->paginate(5);;
+        return view('Admins.ExaminationDepartment.views.Students.StudentsMovement' , compact('students'));
     }
+
+
+
+
+    
     public function index_RegRenewal()
     {
-        return view('Admins.ExaminationDepartment.views.Students.RegRenewal');
+        $user_id = auth()->user()->id;
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $students = student::where('college_id' , $College_id)->paginate(5);;
+
+        return view('Admins.ExaminationDepartment.views.Students.RegRenewal' , compact('students'));
     }
     public function index_StopEnrollment()
     {
         return view('Admins.ExaminationDepartment.views.Students.StopEnrollment');
+    }
+
+
+    public function index_StudentNotify()
+    {
+        $user_id = auth()->user()->id;
+        $notificationsList = Notification::where('sender_id',$user_id)->orderBy('id','DESC')->paginate(5);
+         
+
+        return view('Admins.ExaminationDepartment.views.Students.StudentsNotify' , compact('notificationsList'));
     }
 }

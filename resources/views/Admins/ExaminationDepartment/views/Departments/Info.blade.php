@@ -109,6 +109,38 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="appendedInputButton">منسق الجودة </label>
+                        <div class="controls">
+                            <div class="input-group">
+                                <select id="select" name="select" class="form-control" size="1">
+                                    <option value="0">{{$department->dec}}</option>
+                                    <option value="1">Option #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
+                                </select>
+                         
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="appendedInputButton">منسق المشاريع</label>
+                        <div class="controls">
+                            <div class="input-group">
+                                <select id="select" name="select" class="form-control" size="1">
+                                    <option value="0">{{$department->dec}}</option>
+                                    <option value="1">Option #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
+                                </select>
+                         
+                            </div>
+                        </div>
+                    </div>
+
+
                     <input id="id" type="hidden" value="{{$department->id}}"  name="id">
                                 
                     <div class="form-actions" dir="ltr">

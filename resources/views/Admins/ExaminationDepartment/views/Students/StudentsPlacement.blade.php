@@ -15,12 +15,15 @@
 
 
 @section('content')
-
-<div class="row">
-    <label for="">موعد تنسيب الطلبة </label>
-    <label for="">  date  </label>
-   
-</div>
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">تفاصيل طلبة التنسيب</h4>
+    <p>موعد التنسيب <span> [ 14/3/2020] </span></p>
+    <hr>
+     
+    <h4> العدد الاجمالي <span> [ 40 ]</span></h4>
+    <h4>   عدد الاقسام <span> [ 6 ]</span></h4>
+  </div>
+ 
  
  
 
@@ -32,90 +35,46 @@
  
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Bordered Table
+                        <i class="fa fa-align-justify"></i>   قائمة الطلبة   
+                        [الترتيب حسب المعدل التراكمي]
                     </div>
                     <div class="card-block">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>الطالب</th>
-                                    <th>رقم القيد</th>
-                                    <th>الرغبة الاولى</th>
-                                    <th>الرغبة الثانية</th>
-                                    <th>الرغبة الثالثة</th>
-                                    <th>الرغبة الرابعة</th>
-                                    <th>الرغبة الخامسة</th>
-                                    <th>الاجراءات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                          
-                                <tr>
-                                    <td>1</td>
-                                    <td>ابتهال محمد عمر ابوالخير
-                                    </td>
-                                    <td>2211110006</td>
-                                    <td>الهندسة الميكانيكية</td>
-                                    <td>الهندسة البيئية</td>
-                                    <td>الهندسة المعمارية</td>
-                                    <td>الهندسة الكهربائية</td>
-                                    <td>الهندسة المدنية</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-sm">Success</button>
-                                        <button type="button" class="btn btn-danger btn-sm">danger</button>
-                                        <button type="button" class="btn btn-primary btn-sm">danger</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>سامي علي محمد مشري
-                                    </td>
-                                    <td>2211110008</td>
-                                    <td>الهندسة الكهربائية</td>
-                                    <td>الهندسة المعمارية</td>
-                                    <td>الهندسة الميكانيكية</td>
-                                    <td>الهندسة البيئية</td>
-                                    <td>الهندسة المدنية</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-sm">Success</button>
-                                        <button type="button" class="btn btn-danger btn-sm">danger</button>
-                                        <button type="button" class="btn btn-primary btn-sm">danger</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>هدى عبدالإله محمد الطاهر
-                                    </td>
-                                    <td>17200723112</td>
-                                    <td>الهندسة الكيميائية</td>
-                                    <td>الهندسة النفطية</td>
-                                    <td>الهندسة المدنية</td>
-                                    <td>الهندسة الميكانيكية</td>
-                                    <td>الهندسة البيئية</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-sm">Success</button>
-                                        <button type="button" class="btn btn-danger btn-sm">danger</button>
-                                        <button type="button" class="btn btn-primary btn-sm">danger</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
+                  
+                          @foreach ($requests as $request)
+                              
+                         
+                          <div class="card card-default">
+                            <div class="card-header">
+                                {{ App\Models\student::getNameById($request->student_id) }} - 
+
+                                <span>المعدل التراكمي</span>
+                                {{ $request->gpa  }}  
+%
+                                <div class="card-actions">
+                                    <a class="btn-maximize collapsed" data-toggle="collapse" href="#collapseExample{{$request->id}}" aria-expanded="false" aria-controls="collapseExample"><i class="icon-arrow-down"></i></a>
+                                 </div>
+                            </div>
+                            <div class="card-block collapse" id="collapseExample{{$request->id}}" aria-expanded="false" style="height: 0px;">
+                           <ul>
+                         
+                            @foreach (App\Models\placement_request::getDeoartmentsById($request->student_id) as $item)
+                                
+                               
+                                    <li>
+                                        {{App\Models\department::getDepNameById($item->department_id)}} - 
+                                        <a class="btn btn-sm btn-primary" href="test">تنسيب</a>
+                                    </li>
+                              
+<br>                                
+                            @endforeach
+                       
+                           </ul>
+                            </div>
+                        </div>
+                                @endforeach
+                      
+                               
+                        
                     </div>
                 </div>
             </div>
