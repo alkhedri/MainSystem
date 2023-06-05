@@ -34,66 +34,30 @@
                                 <tr>
                       
 
-                                    <th>#</th>
-                                    <th style="width: 180px; overflow: hidden;">الطالب</th>
-                                    <th>رقم القيد</th>
-                                    <th>العنوان</th>
+                                    <th style="width: 20px; overflow: hidden;">#</th>
+                                    <th style="width: 120px; overflow: hidden;">التاريخ</th>
+                                    <th style="width: 220px; overflow: hidden;">العنوان</th>
+                                     <th>الشكوى</th>
                                     
-                                    <th>الاجراء</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
                           
+                                @foreach ($complaints as $complaint)
+                                    
+                              
                                 <tr>
-                                    <td>1</td>
-                                    <td>محمد فرج الطاهر الخذري</td>
-                                    <td>16611200398</td>
-                                    <td>Pompeius René Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus sunt odit inventore dignissimos sequi tenetur laboriosam totam deserunt perspiciatis, quidem consectetur quia debitis dicta reprehenderit, ut cumque, doloremque nisi asperiores.</td>
- 
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض الشكوى</button>
-                                      
-                                    </td>
+                                    <td> {{ $loop->index + 1 }}</td>
+                                    <td>{{$complaint->date}}</td>
+                                    <td>{{$complaint->title}}</td>
+                                    <td>{{$complaint->message}}</td>
+  
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>محمد فرج الطاهر الخذري</td>
-                                    <td>16611200398</td>
-                                    <td>Pompeius René Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam nisi distinctio rerum repudiandae recusandae quia expedita amet. Cumque labore maxime ea dolorem, molestias quibusdam obcaecati voluptas sequi dolores hic facere.</td>
-               
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض الشكوى</button>
-                                     
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>محمد فرج الطاهر الخذري</td>
-                                    <td>16611200398</td>
-                                    <td>Pompeius René Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus fuga optio quas dignissimos maxime exercitationem velit iure saepe, dolor dolorem! Non delectus consectetur labore cum corporis dolor eius. Perferendis, nulla?</td>
-               
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض الشكوى</button>
-                             
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
+                         {{$complaints->links()}}
                     </div>
                 </div>
             </div>

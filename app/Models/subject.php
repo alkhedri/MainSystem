@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class subject extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'arabic_name' => 'required',
+        'english_name' => 'required',
+        
+    ];
    //// GET NAME
     public static function getSubjectName($id){
         $data =  subject::where('id', $id)->value('arabic_name'); 

@@ -43,7 +43,7 @@
                         <i class="fa fa-align-justify"></i>قائمة   المقررات 
                     </div>
                     <div class="card-block">
-                        <table class="table">
+                        <table class="table table-hover table-outline">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -56,66 +56,36 @@
                             </thead>
                             <tbody>
                           
+                                @foreach ($subjects as $subject)
+                                    
+                           
                                 <tr>
                                     <td>1</td>
-                                    <td> البرمجيات هندسة</td>
-                                        <td>CET550</td>
-                                        <td>3</td>
+                                    <td>{{$subject->arabic_name}}</td>
+                                        <td>{{$subject->code}}</td>
+                                        <td>{{$subject->units}}</td>
                                         <td>
-                               
-                                            <button type="button" class="btn btn-success btn-sm">متاح</button>
+
+                                            @if ($subject->avaliablity === 1)
+                                            <a class="btn btn-success btn-sm" href="{{route('ActionActiveSubject' , ['id' => $subject->id,'status' => 0  ])}}">متاح</a>
+                                          
+                                            @else
+                                            <a class="btn btn-danger btn-sm" href="{{route('ActionActiveSubject' , ['id' => $subject->id,'status' => 1  ])}}">غير متاح</a>
+                                  
+                                            @endif
+                                         
+                                             
                                         </td>
                                     <td>
-                                        <a href="{{route('SubjectDetails')}}" class="btn btn-primary btn-sm">عرض</a>
-                                        <button type="button" class="btn btn-danger btn-sm">حذف</button>
+                                        <a href="{{route('SubjectsDetails' ,['id' => $subject->id ])}}" class="btn btn-primary btn-sm">عرض</a>
+                             
+                                        <a class="btn btn-danger btn-sm" href="{{route('ActionDeleteSubject' , ['id' => $subject->id ])}}">حذف</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>البرمجة نحو الاهداف</td>
-                                    <td>CET302</td>
-                                    <td>3</td>
-                                    <td>
-                               
-                                        <button type="button" class="btn btn-success btn-sm">متاح</button>
-                                    </td>
-                                    <td>
-                                   
-                                        <a href="{{route('SubjectDetails')}}" class="btn btn-primary btn-sm">عرض</a>
-                                        <button type="button" class="btn btn-danger btn-sm">حذف</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>مقدمة هندسة الشبكات</td>
-                                    <td>CET300</td>
-                                    <td>3</td>
-                                    <td>
-                               
-                                        <button type="button" class="btn btn-success btn-sm">متاح</button>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('SubjectDetails')}}" class="btn btn-primary btn-sm">عرض</a>
-                                        <button type="button" class="btn btn-danger btn-sm">حذف</button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
+                       {{$subjects->links()}}
                     </div>
                 </div>
             </div>

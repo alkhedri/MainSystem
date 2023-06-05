@@ -7,6 +7,14 @@ use App\Models\Department;
 use App\Models\College;
 use App\Models\semesterplan;
 use App\Models\semester;
+use App\Models\student;
+use App\Models\student_warning;
+use App\Models\complaint;
+use App\Models\subject;
+use App\Models\subject_requirement;
+use App\Models\room;
+
+use App\Models\TimeTable;
 
 
 use Illuminate\Http\Request;
@@ -42,7 +50,7 @@ class InstrController extends Controller
 
         $user_department_id = Instructor::where('id',$user_id)->value('department_id');
 
-        $instructors = Instructor::where('department_id',$user_department_id)->get();
+        $instructors = Instructor::where('department_id',$user_department_id)->paginate(5);
 
         return view('instructors.HOD.FacultyMembers' , compact('instructors'));
     }
@@ -66,34 +74,97 @@ class InstrController extends Controller
 
     public function index_StudentsMenu()
     {
-        return view('instructors.HOD.StudentsMenu');
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+    
+
+        $students =  student::where('college_id',$College_id)->where('department_id' , $department_id)->paginate(5);;
+   
+        $count = $students->count();
+        return view('instructors.HOD.StudentsMenu' , compact('students' , 'count'));
     }
 
     public function index_Dropped()
     {
-        return view('instructors.HOD.DropedStudents');
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+    
+        $students =  student_warning::where('college_id',$College_id)->where('department_id' , $department_id)->paginate(5);;
+   
+        $count = $students->count();
+        return view('instructors.HOD.DropedStudents' , compact('students' , 'count'));
+     
     }
     
     public function index_NewStudents()
     {
-        return view('instructors.HOD.NewStudents');
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+        $current_sem_id = college::where('id',$College_id)->value('current_semester');
+       
+
+        $students =  student::where('college_id',$College_id)->where('department_id' , $department_id)->where('DepartmentJoin_sem_id' , $current_sem_id)->paginate(5);;
+   
+        $count = $students->count();
+        
+
+        
+
+   $current_sem = semester::where('id',$current_sem_id)->value('name');
+
+        return view('instructors.HOD.NewStudents', compact('students' , 'count' , 'current_sem', 'department_id'));
     }
     public function index_Complaints()
     {
-        return view('instructors.HOD.StudentsComplaints');
+
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+    
+        $complaints =  complaint::where('college_id',$College_id)->where('department_id' , $department_id)->paginate(5);;
+   
+        $count = $complaints->count();
+        return view('instructors.HOD.StudentsComplaints' , compact('complaints' , 'count'));
+ 
     }
 
-    public function index_ClassesList()
-    {
-        return view('instructors.HOD.ClassesList');
-    }
+ 
     public function index_SubjectsMenu()
     {
-        return view('instructors.DEC.SubjectsMenu');
+        $user_id = auth()->user()->id;
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+        
+        $subjects =  subject::where('department_id',$department_id)->paginate(5);;
+   
+
+        return view('instructors.DEC.SubjectsMenu' , compact('subjects'));
     }
-    public function index_SubjectDetails()
+    public function index_SubjectDetails(Request $request)
     {
-        return view('instructors.DEC.SubjectDetails');
+        $user_id = auth()->user()->id;
+         $department_id = Instructor::where('id',$user_id)->value('department_id');
+        
+         $subjects =  subject::all()->where('department_id',$department_id)->where('id' , $request->id);
+         $Department_subjects =  subject::all()->where('department_id',$department_id);
+         $subject_Code =  subject::where('id',$request->id)->value('code');
+       
+         $requirements =  subject_requirement::all()->where('subject',$request->id);
+         $instructors =  instructor::all()->where('department_id',$department_id);
+       
+
+        return view('instructors.DEC.SubjectDetails' , compact('subjects' , 'requirements' ,'subject_Code' , 'instructors' , 'Department_subjects'));
     }
 
     public function index_NewSubject()
@@ -103,25 +174,117 @@ class InstrController extends Controller
 
     public function index_Supervision()
     {
-        return view('instructors.DEC.Supervision');
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+        $instructors =  instructor::all()->where('department_id',$department_id);
+        $students =  student::where('department_id',$department_id)->paginate(5);
+       
+
+        return view('instructors.DEC.Supervision' ,compact('instructors' , 'students'));
     }
+
+
+    
     public function index_OverrideRequest()
     {
-        return view('instructors.DEC.SubjectOverrideRequest');
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+        $instructors =  instructor::all()->where('department_id',$department_id);
+        $subjects =  subject::where('department_id',$department_id)->get();
+       
+
+
+        return view('instructors.DEC.SubjectOverrideRequest' , compact('subjects' , 'department_id'));
     }
     public function index_ClassTable()
     {
-        return view('instructors.DEC.ClassTable');
-    }
+        
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+  
+        $Saturday =  TimeTable::where('department_id',$department_id)->where('day',0)->get();
+        $Sunday =  TimeTable::where('department_id',$department_id)->where('day',1)->get();
+        $Monday =  TimeTable::where('department_id',$department_id)->where('day',2)->get();
+        $Tuesday =  TimeTable::where('department_id',$department_id)->where('day',3)->get();
+        $Wedensday =  TimeTable::where('department_id',$department_id)->where('day',4)->get();
+        $Thursday =  TimeTable::where('department_id',$department_id)->where('day',5)->get();
+       
 
+        return view('instructors.DEC.ClassTable', compact('Saturday' , 'Sunday' , 'Monday' , 'Tuesday' ,'Wedensday' , 'Thursday'));
+    }
+    public function index_ClassTableEdit()
+    {
+        
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+  
+        $Saturday =  TimeTable::where('department_id',$department_id)->where('day',0)->get();
+        $Sunday =  TimeTable::where('department_id',$department_id)->where('day',1)->get();
+        $Monday =  TimeTable::where('department_id',$department_id)->where('day',2)->get();
+        $Tuesday =  TimeTable::where('department_id',$department_id)->where('day',3)->get();
+        $Wedensday =  TimeTable::where('department_id',$department_id)->where('day',4)->get();
+        $Thursday =  TimeTable::where('department_id',$department_id)->where('day',5)->get();
+       
+        $subjects =  subject::where('department_id',$department_id)->get();
+       
+        $Rooms =  Room::where('department_id',$department_id)->get();
+       
+
+        return view('instructors.DEC.EditClassTable', compact('Saturday' , 'Sunday' , 'Monday' , 'Tuesday' ,'Wedensday' , 'Thursday' , 'subjects' , 'Rooms'));
+    }
+    public function index_DayToBeEdited(Request $request)
+    {
+        
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+  
+        $SelectedDay =  TimeTable::where('department_id',$department_id)->where('day',$request->day)->get();
+ 
+        $subjects =  subject::where('department_id',$department_id)->get();
+       
+        $Rooms =  Room::where('department_id',$department_id)->get();
+       $day =  $request->day ;
+       
+
+        return view('instructors.DEC.DayToBeEdited', compact('SelectedDay'   , 'subjects' , 'Rooms' , 'day'));
+    }
     ///////////////////////////////////////
 
     public function index_SubjectsList()
     {
-        return view('instructors.Professor.SubjectsList');
+        $user_id = auth()->user()->id;
+ 
+        $subjects =  subject::where('proffesor_id',$user_id)->paginate(5);;
+   
+
+        return view('instructors.Professor.SubjectsList' , compact('subjects'));
     }
     public function index_SupervisionList()
+    
     {
-        return view('instructors.Professor.SupervisionList');
+
+        $user_id = auth()->user()->id;
+ 
+        $students =  student::where('spv_id',$user_id)->paginate(5);
+   
+     
+        return view('instructors.Professor.SupervisionList' , compact ('students'));
+ 
+    }
+
+    
+    public function index_DroppedPaln()
+    
+    {
+
+        $user_id = auth()->user()->id;
+        
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+    
+      //  $studentsList =  student_warning::where('department_id',$department_id)->unique('student_id')->paginate(5);
+        $studentsList = student_warning::select('student_id')->groupBy('student_id')->where('department_id',$department_id)->paginate(5);
+     
+        return view('instructors.Professor.DroppedPaln' , compact ('studentsList'));
+ 
     }
 }

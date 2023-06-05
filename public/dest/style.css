@@ -3268,6 +3268,14 @@ a.tag:focus, a.tag:hover {
     top: -2px;
     left: -21px;
     color: inherit; }
+    .alert-primary {
+      color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff; }
+      .alert-primary hr {
+        border-top-color: #b3cbe2; }
+      .alert-primary .alert-link {
+        color: #004085; }
 
 .alert-success {
   background-color: #dff0d8;

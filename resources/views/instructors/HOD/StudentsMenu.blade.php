@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">رئيس القسم</li>
-    <li class="breadcrumb-item"><a href="#">الطلبة المستمرين</a>
+    <li class="breadcrumb-item"><a href="#">طلبة القسم</a>
     </li>
      
  
@@ -23,16 +23,22 @@
                 <strong>بحث</strong> طالب
             </div>
             <div class="card-block">
-                <form action="" method="post" class="form-horizontal ">
+                <form action="{{route('SearchStudent')}}" method="post" class="form-horizontal ">
+                    @csrf
                     <div class="form-group row">
                         <div class="col-md-6">
                             <div class="input-group">
                        
-                                <input type="text" id="input1-group2" name="input1-group2" class="form-control" placeholder="رقم القيد">
+                                <input type="text" id="input1-group2" name="student_name" class="form-control" placeholder="رقم القيد">
                             </div>
                         </div>
                         <button type="submit" class="btn btn btn-success"><i class="fa fa-dot-circle-o"></i> بحث</button>
                     </div>
+                    
+                    <a href="{{route('StudentsMenu')}}" class="btn btn btn-primary"><i class="fa fa-dot-circle-o"></i> الكل</a>
+                     <a class="btn btn btn-success" href="{{route('ActiveStudents')}}"> <i class="fa fa-dot-circle-o"></i>  المستمرين </a>
+                     
+                    <a  href="{{route('notActiveStudents')}}" class="btn btn btn-danger"><i class="fa fa-dot-circle-o"></i> المنقطعين</a>
     </div>
    
  
@@ -46,6 +52,8 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i>قائمة الطلبة 
+
+                         <span> - </span>  [ {{$count}} ]
                     </div>
                     <div class="card-block">
                         <table class="table">
@@ -54,59 +62,41 @@
                                     <th>#</th>
                                     <th>الطالب</th>
                                     <th>رقم القيد</th>
-                                    <th>القسم الدراسي</th>
-                                    <th>الاجراء</th>
+                                    <th>حالة القيد</th>
+                                                   <th>الاجراء</th>
                                 </tr>
                             </thead>
                             <tbody>
-                          
+                          @foreach ($students as $student)
+                              
+                       
                                 <tr>
-                                    <td>1</td>
-                                    <td>2012/02/01</td>
-                                    <td>Admin</td>
-                                    <td>Pompeius René</td>
+                                    <td> {{$loop->index + 1}}</td>
+                                    <td> {{ $student->arabic_name}}</td>
+                                    <td> {{$student->badge}}</td>
+
+                                  
+                                    @if ($student->enrollment_status_id == 1)
+                                    <td>  <span class="tag tag-success">{{App\Models\student::getEnrollmentStatus($student->enrollment_status_id) }}</span></td>
+                                   
+                                    @elseif($student->enrollment_status_id === 3)
+                                            
+                                <td><span class="tag tag-danger">{{App\Models\student::getEnrollmentStatus($student->enrollment_status_id) }}</span></td>
+                                   
+                                    @endif
+                                    
+
+                                    
+                                    
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                                        <button type="button" class="btn btn-danger btn-sm">حذف</button>
+                                        <a href="{{route('StudentsProfile' , [ 'id' => $student->id ])}}" class="btn btn-primary btn-sm">عرض البيانات</a>
+ 
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2012/03/01</td>
-                                    <td>Member</td>
-                                    <td>Pompeius René</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                                        <button type="button" class="btn btn-danger btn-sm">حذف</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>2012/01/21</td>
-                                    <td>Staff</td>
-                                    <td>Pompeius René</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                                        <button type="button" class="btn btn-danger btn-sm">حذف</button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
+                         {{$students->links()}}
                     </div>
                 </div>
             </div>

@@ -19,6 +19,9 @@ namespace App\Models;
 use App\Models\Auth;
 use App\Models\user;
 use App\Models\department;
+use App\Models\enrollment_status;
+use App\Models\student_mark;
+
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -58,6 +61,16 @@ class student extends Model
          return $badge;
      }
 
+     public static function getGpaById($id){
+        $Gpa =  student::where('id', $id)->value('gpa'); 
+         return $Gpa;
+     }
+
+
+     public static function getUnitsDoneById($id){
+       
+     }
+
     public static function count_all()
     {
 
@@ -80,4 +93,50 @@ class student extends Model
 
         return  $students->count();
     }
+
+    public static function getStudentSpv($id){
+        $spvName= Instructor::where('id', $id)->value('arabic_name');
+    
+        return  $spvName;
+    }
+
+    public static function getStudentEmail($id){
+        $StudentEmail = user::where('id', $id)->value('email');
+    
+        return  $StudentEmail;
+    }
+
+    public static function getEnrollmentStatus($id){
+        $enrollmentStatus = enrollment_status::where('id', $id)->value('status');
+    
+        return  $enrollmentStatus;
+    }
+
+
+
+public static function StudentsSemestersCount($id){
+    $Semesters = student_mark::where('student_id', $id)->get()->unique('semester_id');;
+
+    
+    $SemestersCount = $Semesters->count();
+
+    switch($SemestersCount){
+        case 1 :
+            return 'الاول';
+            break;
+
+            case 2 :
+                return 'الثاني';
+                break;
+                case 3 :
+                    return 'الثالث';
+                    break;
+                    case 2 :
+                        return 'الرابع';
+                        break;
+    }
+    
+}
+
+
 }

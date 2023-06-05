@@ -12,6 +12,7 @@ use App\Models\semesterplan;
 use App\Models\override_request;
 use App\Models\placement_request;
 use App\Models\Notification;
+use App\Models\Room;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -325,7 +326,7 @@ class ExaminationController extends Controller
         
         $College_id = Instructor::where('id',$user_id)->value('college_id');
       
-        $students = student::where('college_id' , $College_id)->paginate(5);;
+        $students = student::where('college_id' , $College_id)->paginate(5);
         return view('Admins.ExaminationDepartment.views.Students.StudentsMovement' , compact('students'));
     }
 
@@ -337,7 +338,7 @@ class ExaminationController extends Controller
     {
         $user_id = auth()->user()->id;
         $College_id = Instructor::where('id',$user_id)->value('college_id');
-        $students = student::where('college_id' , $College_id)->paginate(5);;
+        $students = student::where('college_id' , $College_id)->paginate(5);
 
         return view('Admins.ExaminationDepartment.views.Students.RegRenewal' , compact('students'));
     }
@@ -354,5 +355,22 @@ class ExaminationController extends Controller
          
 
         return view('Admins.ExaminationDepartment.views.Students.StudentsNotify' , compact('notificationsList'));
+    }
+
+
+
+
+    public function index_Rooms()
+    {
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+
+        $departments = Department::where('college_id' , $College_id)->get();
+
+         $RoomsList = Room::where('College_id',$College_id)->paginate(5);
+         
+
+        return view('Admins.ExaminationDepartment.views.Departments.RoomsMenu' , compact('RoomsList' , 'departments'));
     }
 }

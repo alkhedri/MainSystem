@@ -6,9 +6,8 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">منسق الدراسة و الامتحانات</li>
-    <li class="breadcrumb-item"><a href="#">الطلبة المستمرين</a>
+    <li class="breadcrumb-item"><a href="#">الاشراف</a>
     </li>
-     
  
 </ol>
 @endsection
@@ -20,27 +19,29 @@
     <div class="col-8">
         <div class="card">
             <div class="card-header">
-                <strong>فرز</strong> طالب
+                <strong>  فرز  </strong> حسب المشرف
             </div>
             <div class="card-block">
-                <form action="" method="post" class="form-horizontal ">
+                <form action="{{route('SupervisorSearch')}}" method="post" class="form-horizontal ">
+                    @csrf
                     <div class="form-group row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <select id="select" name="select" class="form-control" size="1">
+                                <select id="select" name="selectedSpv" class="form-control" size="1">
                                     <option value="0">المشرف</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
+               @foreach ($instructors as $instructor)
+               <option value="{{$instructor->id}}">{{$instructor->arabic_name}}</option>
+               @endforeach
                                 </select>
                                 
                             </div>
                         </div>
-                        <button type="submit" class="btn btn btn-success"><i class="fa fa-dot-circle-o"></i> عرض</button>
+                        <button type="submit" class="btn btn btn-success"><i class="fa fa-dot-circle-o"></i> فرز</button>
                     </div>
+                    <a  href="{{route('Supervision')}}" class="btn btn btn-primary"><i class="fa fa-dot-circle-o"></i>       عرض الكل     </a>
     </div>
    
- 
+   
 </div> 
 
  
@@ -53,7 +54,7 @@
                         <i class="fa fa-align-justify"></i>قائمة الطلبة 
                     </div>
                     <div class="card-block">
-                        <table class="table">
+                        <table class="table table-hover table-outline">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -65,51 +66,41 @@
                             </thead>
                             <tbody>
                           
+                                @foreach ($students as $student)
+                                    
+                              
                                 <tr>
-                                    <td>1</td>
-                                    <td>2012/02/01</td>
-                                    <td>Admin</td>
-                                    <td>Pompeius René</td>
+                                    <td> {{$loop->index + 1}}</td>
+                                    <td> {{$student->arabic_name}}</td>
+                                    <td>{{$student->badge}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-sm">تغيير</button>
-                            
+                                        <form></form>
+                                        <form id="change-form{{$student->id}}" action="{{route('SupervisorUpdateAction')}}" method="post">
+                                            @csrf
+                                             <select id="select" name="spvid" class="form-control" size="1">
+                                                <option value="0" selected hidden ><strong>{{App\Models\student::getStudentSpv($student->spv_id) }} </strong></option>
+                                                @foreach ($instructors as $instructor)
+                                                <option  class="bg-primary"value="{{$instructor->id}}"> {{$instructor->arabic_name}}</option>
+                                                @endforeach
+                                             </select>
+                                             <input type="hidden" name="id" value="{{$student->id}}">
+                                        </form>
+                                        </td>
+                                     
+                                    <td>
+                                        <a class="btn btn-primary btn-sm" href="{{route('SupervisorUpdateAction')}}"
+                                        onclick="event.preventDefault();
+                                                      document.getElementById('change-form{{$student->id}}').submit();">
+                                         {{ __('تغيير') }}
+                                     </a>
+                                         
+                                  
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2012/03/01</td>
-                                    <td>Member</td>
-                                    <td>Pompeius René</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">تغيير</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>2012/01/21</td>
-                                    <td>Staff</td>
-                                    <td>Pompeius René</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">تغيير</button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
+                         {{$students->links()}}
                     </div>
                 </div>
             </div>

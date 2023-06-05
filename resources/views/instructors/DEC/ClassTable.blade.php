@@ -17,13 +17,23 @@
 @section('content')
  
 <div class="col-lg-12">
+  @if(Session::has('message'))
+  <div class="alert alert-danger" role="alert">
+          {{Session::get('message')}} 
+</div>
+@endif
+  <div  style="display:flex;justify-content:end; margin:10px;">
+    <a class="btn btn-primary" href="{{route('ClassTableEdit')}}" style="margin-left: 10px">تعديل</a>
+ 
+    <a class="btn btn-success" href="{{route('CreateClassTable')}}">إنشاء</a>
+  </div>
     <div class="card">
         <div class="card-header">
-            <i class="fa fa-align-justify"></i> Striped Table
+            <i class="fa fa-align-justify"></i> جدول المحاضرات
         </div>
         <div class="card-block">
               
-<table class="table table-striped  table-bordered" style="width:100%">
+<table class="table  table-bordered" style="width:100%">
     <tr>
       <th rowspan="2">المحاضرة  اليوم </th>
    
@@ -36,366 +46,168 @@
     <td colspan="3" style="text-align: center">الرابعة</td>
    
    </tr>
-    <tr>
+   
+    <tr style="border-top:2px solid black">
         
-      <th rowspan="4"  style="text-align: center;vertical-align:middle">السبت</th>
-      <td>برمجة حاسوب</td>
-       <td>8:30</td>
-       <td>8:30</td>
-       <td>هيكلة بيانات</td>
-        <td>10:00</td>
-        <td>8:30</td>
-         <td>مقرر</td>
-         <td>قاعه</td>
-          <td>توقيت</td>
-           <td>مقرر</td>
-           <td>قاعه</td>
-            <td>توقيت</td>
+      <th rowspan="5"  style="text-align: center;vertical-align:middle"  >السبت</th>
     </tr>
-    <tr>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-        <td>8:30</td>
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
-         <td>8:30</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-    </tr>
-      <tr>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-        <td>8:30</td>
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
-         <td>8:30</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-    </tr>
-      <tr>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-        <td>8:30</td>
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
-         <td>8:30</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-    </tr>
-    
+     
+
+     @foreach ($Saturday as $item)
+     <tr class="alert-primary">
+      <td>  {{ App\Models\subject::find($item->Stp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getStpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Sp)->arabic_name ?? 'None' }}  </td>
+      <td>{{ App\Models\Timetable_Room::getSpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Tp)->arabic_name ?? 'None'  }} </td>
+      <td>{{ App\Models\Timetable_Room::getTpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>   {{ App\Models\subject::find($item->Fp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getFpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+     </tr>
+     @endforeach
+            
+          
+       
      <tr>
-      <th rowspan="4" style="text-align: center;vertical-align:middle">الاحد</th>
-      <td>برمجة حاسوب</td>
-      <td>8:30</td>
-      <td>8:30</td>
-      <td>هيكلة بيانات</td>
-       <td>10:00</td>
-       <td>8:30</td>
-        <td>مقرر</td>
-        <td>قاعه</td>
-         <td>توقيت</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-    </tr>
-    <tr>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-        <td>8:30</td>
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
-         <td>8:30</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-    </tr>
-      <tr>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-        <td>8:30</td>
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
-         <td>8:30</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-    </tr>
-      <tr>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-        <td>8:30</td>
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
-         <td>8:30</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-    </tr>
+      <th rowspan="5" style="text-align: center;vertical-align:middle">الاحد</th>
+    </tr> 
+
+     @foreach ($Sunday as $item)
+     <tr class="alert-success text-white">
+      <td>  {{ App\Models\subject::find($item->Stp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getStpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Sp)->arabic_name ?? 'None' }}  </td>
+      <td>{{ App\Models\Timetable_Room::getSpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Tp)->arabic_name ?? 'None'  }} </td>
+      <td>{{ App\Models\Timetable_Room::getTpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>   {{ App\Models\subject::find($item->Fp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getFpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+     </tr>
+     @endforeach
     
      <tr>
     
-        <th rowspan="4" style="text-align: center;vertical-align:middle">الاثنين</th>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-        <td>8:30</td>
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
-         <td>8:30</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-      </tr>
-      <tr>
-          <td>برمجة حاسوب</td>
-          <td>8:30</td>
-          <td>8:30</td>
-          <td>هيكلة بيانات</td>
-           <td>10:00</td>
-           <td>8:30</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-              <td>مقرر</td>
-              <td>قاعه</td>
-               <td>توقيت</td>
-      </tr>
-        <tr>
-          <td>برمجة حاسوب</td>
-          <td>8:30</td>
-          <td>8:30</td>
-          <td>هيكلة بيانات</td>
-           <td>10:00</td>
-           <td>8:30</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-              <td>مقرر</td>
-              <td>قاعه</td>
-               <td>توقيت</td>
-      </tr>
-        <tr>
-          <td>برمجة حاسوب</td>
-          <td>8:30</td>
-          <td>8:30</td>
-          <td>هيكلة بيانات</td>
-           <td>10:00</td>
-           <td>8:30</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-              <td>مقرر</td>
-              <td>قاعه</td>
-               <td>توقيت</td>
+        <th rowspan="5" style="text-align: center;vertical-align:middle">الاثنين</th>
+       
       </tr>
       
+     @foreach ($Monday as $item)
+     <tr class="alert-danger">
+      <td>  {{ App\Models\subject::find($item->Stp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getStpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Sp)->arabic_name ?? 'None' }}  </td>
+      <td>{{ App\Models\Timetable_Room::getSpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Tp)->arabic_name ?? 'None'  }} </td>
+      <td>{{ App\Models\Timetable_Room::getTpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>   {{ App\Models\subject::find($item->Fp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getFpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+    </tr>
+     @endforeach
        <tr>
       
     
-        <th rowspan="4" style="text-align: center;vertical-align:middle">الثلاثاء</th>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-        <td>8:30</td>
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
-         <td>8:30</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-      </tr>
-      <tr>
-          <td>برمجة حاسوب</td>
-          <td>8:30</td>
-          <td>8:30</td>
-          <td>هيكلة بيانات</td>
-           <td>10:00</td>
-           <td>8:30</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-              <td>مقرر</td>
-              <td>قاعه</td>
-               <td>توقيت</td>
-      </tr>
-        <tr>
-          <td>برمجة حاسوب</td>
-          <td>8:30</td>
-          <td>8:30</td>
-          <td>هيكلة بيانات</td>
-           <td>10:00</td>
-           <td>8:30</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-              <td>مقرر</td>
-              <td>قاعه</td>
-               <td>توقيت</td>
-      </tr>
-        <tr>
-          <td>برمجة حاسوب</td>
-          <td>8:30</td>
-          <td>8:30</td>
-          <td>هيكلة بيانات</td>
-           <td>10:00</td>
-           <td>8:30</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-              <td>مقرر</td>
-              <td>قاعه</td>
-               <td>توقيت</td>
+        <th rowspan="5" style="text-align: center;vertical-align:middle">الثلاثاء</th>
+         
       </tr>
       
-       <tr>
+     @foreach ($Tuesday as $item)
+     <tr class="alert-warning">
+      <td>  {{ App\Models\subject::find($item->Stp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getStpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
       
-        <th rowspan="4" style="text-align: center;vertical-align:middle">الاربعاء</th>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-        <td>8:30</td>
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
-         <td>8:30</td>
-          <td>مقرر</td>
-          <td>قاعه</td>
-           <td>توقيت</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-      </tr>
-      <tr>
-          <td>برمجة حاسوب</td>
-          <td>8:30</td>
-          <td>8:30</td>
-          <td>هيكلة بيانات</td>
-           <td>10:00</td>
-           <td>8:30</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-              <td>مقرر</td>
-              <td>قاعه</td>
-               <td>توقيت</td>
-      </tr>
-        <tr>
-          <td>برمجة حاسوب</td>
-          <td>8:30</td>
-          <td>8:30</td>
-          <td>هيكلة بيانات</td>
-           <td>10:00</td>
-           <td>8:30</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-              <td>مقرر</td>
-              <td>قاعه</td>
-               <td>توقيت</td>
-      </tr>
-        <tr>
-          <td>برمجة حاسوب</td>
-          <td>8:30</td>
-          <td>8:30</td>
-          <td>هيكلة بيانات</td>
-           <td>10:00</td>
-           <td>8:30</td>
-            <td>مقرر</td>
-            <td>قاعه</td>
-             <td>توقيت</td>
-              <td>مقرر</td>
-              <td>قاعه</td>
-               <td>توقيت</td>
-      </tr>
+      <td>  {{ App\Models\subject::find($item->Sp)->arabic_name ?? 'None' }}  </td>
+      <td>{{ App\Models\Timetable_Room::getSpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
       
-       <tr>
+      <td>  {{ App\Models\subject::find($item->Tp)->arabic_name ?? 'None'  }} </td>
+      <td>{{ App\Models\Timetable_Room::getTpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
       
-       <th rowspan="4" style="text-align: center;vertical-align:middle">الخميس</th>
-       <td>برمجة حاسوب</td>
-       <td>8:30</td>
-       <td>8:30</td>
-       <td>هيكلة بيانات</td>
-        <td>10:00</td>
-        <td>8:30</td>
-         <td>مقرر</td>
-         <td>قاعه</td>
-          <td>توقيت</td>
-           <td>مقرر</td>
-           <td>قاعه</td>
-            <td>توقيت</td>
+      <td>   {{ App\Models\subject::find($item->Fp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getFpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
      </tr>
+     @endforeach
+       <tr>
+      
+        <th rowspan="5" style="text-align: center;vertical-align:middle">الاربعاء</th>
+         
+      </tr>
+      
+     @foreach ($Wedensday as $item)
      <tr>
-         <td>برمجة حاسوب</td>
-         <td>8:30</td>
-         <td>8:30</td>
-         <td>هيكلة بيانات</td>
-          <td>10:00</td>
-          <td>8:30</td>
-           <td>مقرر</td>
-           <td>قاعه</td>
-            <td>توقيت</td>
-             <td>مقرر</td>
-             <td>قاعه</td>
-              <td>توقيت</td>
+      <td>  {{ App\Models\subject::find($item->Stp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getStpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Sp)->arabic_name ?? 'None' }}  </td>
+      <td>{{ App\Models\Timetable_Room::getSpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Tp)->arabic_name ?? 'None'  }} </td>
+      <td>{{ App\Models\Timetable_Room::getTpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>   {{ App\Models\subject::find($item->Fp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getFpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
      </tr>
+     @endforeach
        <tr>
-         <td>برمجة حاسوب</td>
-         <td>8:30</td>
-         <td>8:30</td>
-         <td>هيكلة بيانات</td>
-          <td>10:00</td>
-          <td>8:30</td>
-           <td>مقرر</td>
-           <td>قاعه</td>
-            <td>توقيت</td>
-             <td>مقرر</td>
-             <td>قاعه</td>
-              <td>توقيت</td>
-     </tr>
-       <tr>
-         <td>برمجة حاسوب</td>
-         <td>8:30</td>
-         <td>8:30</td>
-         <td>هيكلة بيانات</td>
-          <td>10:00</td>
-          <td>8:30</td>
-           <td>مقرر</td>
-           <td>قاعه</td>
-            <td>توقيت</td>
-             <td>مقرر</td>
-             <td>قاعه</td>
-              <td>توقيت</td>
+      
+       <th rowspan="5" style="text-align: center;vertical-align:middle">الخميس</th>
+       
      </tr>
      
-      <tr>
-     
+     @foreach ($Thursday as $item)
+     <tr class="alert-info">
+      <td>  {{ App\Models\subject::find($item->Stp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getStpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Sp)->arabic_name ?? 'None' }}  </td>
+      <td>{{ App\Models\Timetable_Room::getSpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>  {{ App\Models\subject::find($item->Tp)->arabic_name ?? 'None'  }} </td>
+      <td>{{ App\Models\Timetable_Room::getTpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+      
+      <td>   {{ App\Models\subject::find($item->Fp)->arabic_name ?? 'None' }} </td>
+      <td>{{ App\Models\Timetable_Room::getFpRoomByDayID($item->id) }} </td>
+      <td  style="border-left:2px solid black" >8:30</td>
+     </tr>
+     @endforeach
+      
     
   </table>
         </div>
     </div>
+
+
+   
 </div>
  
  

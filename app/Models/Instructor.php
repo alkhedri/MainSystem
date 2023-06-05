@@ -26,7 +26,13 @@ class Instructor extends Model
         'college_id',
     ];
 
+    public static function getInstructorsName($id){
 
+        $Instructorname = instructor::where('id', $id)->value('arabic_name');
+    
+        return  $Instructorname;
+  
+    }
     public static function getInstructorEmail($id){
 
         $InstructorEmail = user::where('id', $id)->value('email');

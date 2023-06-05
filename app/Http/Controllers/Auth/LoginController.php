@@ -34,6 +34,8 @@ class LoginController extends Controller
             }
             else if ($this->guard()->user()->hasRole('college')) {
                 return '/test';
+            }   else if ($this->guard()->user()->hasRole('student')) {
+                return '/studentDashboard';
             }
 
             return '/test';

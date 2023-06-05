@@ -46,6 +46,8 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i>قائمة الطلبة 
+                        -
+                        [{{$count}}]
                     </div>
                     <div class="card-block">
                         <table class="table">
@@ -54,68 +56,32 @@
                                     <th>#</th>
                                     <th>الطالب</th>
                                     <th>رقم القيد</th>
-                                    <th>الفصل الدراسي</th>
-                                    <th>المعدل الفصلي</th>
+                                   
                                     <th>المعدل التراكمي</th>
-                                    
+                                    <th>الوحدات المنجزة</th>
+                     
                                     <th>الاجراء</th>
                                 </tr>
                             </thead>
                             <tbody>
-                          
+                          @foreach ($students as $student)
+                              
+                   
                                 <tr>
-                                    <td>1</td>
-                                    <td>2012/02/01</td>
-                                    <td>Admin</td>
-                                    <td>Pompeius René</td>
-                                    <td>Pompeius René</td>
-                                    <td>Pompeius René</td>
+                                    <td> {{ $loop->index + 1}}</td>
+                                    <td>  {{App\Models\student::getNameById($student->student_id) }}</td>
+                                    <td> {{App\Models\student::getBadgeById($student->student_id) }}</td>
+                                    <td>{{App\Models\student::getGpaById($student->student_id) }}</td>
+                                    <td>{{App\Models\student::getUnitsDoneById($student->student_id) }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
                                       
+                                      <a href="{{route('StudentsProfile' , ['id' => $student->student_id])}}" class="btn btn-primary btn-sm">عرض البيانات</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2012/03/01</td>
-                                    <td>Member</td>
-                                    <td>Pompeius René</td>
-                                    <td>Pompeius René</td>
-                                    <td>Pompeius René</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                                     
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>2012/01/21</td>
-                                    <td>Staff</td>
-                                    <td>Pompeius René</td>
-                                    <td>Pompeius René</td>
-                                    <td>Pompeius René</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                             
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
+                      {{$students->links()}}
                     </div>
                 </div>
             </div>

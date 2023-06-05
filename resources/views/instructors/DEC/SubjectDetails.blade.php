@@ -1,12 +1,59 @@
 
 @extends('instructors.layout')
  
+
+@section('modals')
+     <!-- Modal -->
+     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">متطلب جديد</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('ActionInsertNewSubjectRequiremet' )}}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">المقرر</label>
+                      
+                      <Select id="input-large" name="requirement_id" class="form-control input-lg" >
+                          @foreach ($Department_subjects as $subject)
+                          <option value="{{$subject->id}}">{{ $subject->arabic_name }}</option>
+                          @endforeach
+                      </Select>
+                   
+@foreach ($subjects as $subject)
+<input type="hidden" value="{{$subject->id}}" name="subject_id">
+@endforeach
+                    
+                    </div>
+                   
+                     
+                      
+                  
+               
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+              <button type="submit" class="btn btn-primary">حفظ</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>      
+@endsection
+
 @section('breadcramp')
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">منسق الدراسة و الامتحانات</li>
-    <li class="breadcrumb-item"><a href="#">المقررات</a>
-        <li class="breadcrumb-item"><a href="#">تفاصيل مقرر</a>
+    <li class="breadcrumb-item"><a href="{{route('SubjectsMenu')}}">المقررات</a>
+        <li class="breadcrumb-item"> تفاصيل  مقرر</li>
+        <li class="breadcrumb-item">{{$subject_Code}}</li>
+       
     </li>
      
  
@@ -15,50 +62,109 @@
 
 
 @section('content')
- 
+@if(Session::has('message'))
+<div class="alert alert-primary" role="alert">
+    <p>{{Session::get('message')}}</p>
+
+   </div>
+
+@endif
     <div class="row">
 
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-edit"></i> تفاصيل المقرر
-                    <div class="card-actions">
-                        <a href="#" class="btn-setting"><i class="icon-settings"></i></a>
-                        <a href="#" class="btn-minimize"><i class="icon-arrow-up"></i></a>
-                        <a href="#" class="btn-close"><i class="icon-close"></i></a>
-                    </div>
+         
                 </div>
                 <div class="card-block">
-                                <form action="" method="post" class="form-horizontal ">
+                    @foreach ($subjects as $subject)
+                                     
+                                <form action="{{route('ActionUpdateSubject' , ['id' => $subject->id])}}" method="post" class="form-horizontal ">
+                                  
+                                   @csrf
                                     <div class="form-group row">
                                         <label class="col-lg-4 form-control-label" for="input-small">اسم المقرر [عربي]</label>
                                         <div class="col-lg-7">
-                                            <input type="text" id="input-small" name="input-small" class="form-control input-md" placeholder=".input-sm">
+                                            <input type="text" id="input-small" name="arabic_name" class="form-control input-md" value="{{$subject->arabic_name}}">
+                                            @error('arabic_name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-4 form-control-label" for="input-normal">اسم المقرر [انجليزي]</label>
                                         <div class="col-lg-7">
-                                            <input type="text" id="input-normal" name="input-normal" class="form-control" placeholder="Normal">
+                                            <input type="text" id="input-normal" name="english_name" class="form-control" value="{{$subject->english_name}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 form-control-label" for="input-large">رمز المقرر</label>
                                         <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                            <input type="text" id="input-large" name="code" class="form-control input-lg" value="{{$subject->code}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 form-control-label" for="input-large">عدد الوحدات</label>
                                         <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="input-large" class="form-control input-lg" placeholder=".input-lg">
+                                                
+                                       <Select id="input-large" name="units" class="form-control input-lg" placeholder=".input-lg">
+                                        <option value="{{$subject->units}}" selected  hidden>{{$subject->units}}</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                       </Select> </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 form-control-label" for="input-large">ساعات النظري</label>
+                                        <div class="col-lg-6">
+                                            
+                                            <Select id="input-large" name="course_hours" class="form-control input-lg" placeholder=".input-lg">
+                                                <option value="{{$subject->course_hours}}" selected  hidden>{{$subject->course_hours}}</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                               </Select>  </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 form-control-label" for="input-large">ساعات العملي</label>
+                                        <div class="col-lg-6"> 
+                                             
+                                            <Select id="input-large" name="work_hours" class="form-control input-lg" placeholder=".input-lg">
+                                                <option value="{{$subject->work_hours}}" selected  hidden>{{$subject->work_hours}}</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                               </Select>  
+                                            </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 form-control-label" for="input-large">أستاذ المقرر</label>
+                                        <div class="col-lg-6"> 
+                                            <Select id="input-large" name="professor_id" class="form-control input-lg" value="">
+                                                <option value="{{$subject->proffesor_id}}" selected hidden> {{ App\Models\instructor::getInstructorsName($subject->proffesor_id) }}</option>
+                                              
+                                             @foreach ($instructors as $instructor)
+                                             
+                                             <option value="{{$instructor->id}}"> {{ App\Models\instructor::getInstructorsName($instructor->id)}}</option>
+                                       
+                                             @endforeach
+                                              
+                                           
+                                               </Select>  
+                                         
                                         </div>
                                     </div>
                                     <div class="form-actions" dir="ltr">
                                         <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
-                                        <button type="button" class="btn btn-default">Cancel</button>
+ 
                                     </div>
                                 </form>
+                                @endforeach
                             </div>
         </div>
         <!--/col-->
@@ -82,30 +188,28 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($requirements as $requirement)
                             <tr>
-                                <td>1</td>
-                                <td>2012/01/01</td>
-                                <td>Member</td>
+                                <td>{{$loop->index + 1 }}</td>
+                                <td> {{App\Models\subject::getSubjectName($requirement->requirement) }} </td>
+                                <td> {{App\Models\subject::getSubjectCode($requirement->requirement) }} </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger">حذف</button>
+                              
+                                    <a class="btn btn-danger btn-sm" href="{{route('ActionDeleteSubjectRequiremet' , ['id' => $requirement->id ])}}">حذف</a>
+                                  
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>2012/02/01</td>
-                                <td>Staff</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">حذف</button>
-                                </td>
-                            </tr>
-                     
+                            @endforeach
+                        
+                          
                         </tbody>
 
                   
                     </table>
                     <div   dir="ltr">
-                        <button type="submit" class="btn btn-success">إضافة</button>
-                      
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            إضافة
+                          </button>
                     </div>
                 </div>
             </div>
@@ -113,6 +217,9 @@
  
 </div>
  
- 
+    
  
 @endsection
+
+
+ 

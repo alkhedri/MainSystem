@@ -28,6 +28,8 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i>قائمة الطلبة 
+                        -
+                        [    {{  $students->count()}}]
                     </div>
                     <div class="card-block">
                         <table class="table">
@@ -36,57 +38,42 @@
                                     <th>#</th>
                                     <th>الطالب</th>
                                     <th>رقم القيد</th>
+                                    <th>الانذارات</th>
                                     <th>الاجراء</th>
+                              
                                 </tr>
                             </thead>
                             <tbody>
                           
+                                @foreach ($students as $student)
+                                    
+                             
                                 <tr>
-                                    <td>1</td>
-                                    <td>إهدوة نوري محمد المبروك</td>
-                                    <td>2011110064</td>
+                                    <td> {{$loop->index +1}}</td>
+                                    <td style="width: 280px"><strong>{{$student->arabic_name}}</strong></td>
+                                    <td style="width: 280px">{{$student->badge}}</td>
                      
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                                        <button type="button" class="btn btn-secondary btn-sm">نموذج 2</button>
-                            
-                                    </td>
+                                  
+                                    @if (App\Models\student_warning::CheckWarnings($student->id) == 0)
+                                    <td>   <span class="tag tag-success"> 0 </span></td>
+                                    @else         
+                                   <td><span class="tag tag-danger"><strong>{{App\Models\student_warning::CheckWarnings($student->id)}}</strong></span></td>
+                                   @endif
+
+
+                                   <td>
+                                    <a href="{{route('StudentsProfile' , [ 'id' => $student->id ])}}" class="btn btn-primary btn-sm">عرض البيانات</a>
+                                    <a href="{{route('Model2Template' , [ 'student_id' => $student->id ])}}" class="btn btn-secondary btn-sm">نموذج 2</a>
+                                    <a href="{{route('Model2Template' , [ 'student_id' => $student->id ])}}" class="btn btn-warning btn-sm">سجل الانذارات</a>
+                                  
+                                </td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>إبراهيم عبدالحكيم ابراهيم مخلوف  </td>
-                                    <td>2211110213</td>
-                     
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                                        <button type="button" class="btn btn-secondary btn-sm">نموذج 2</button>
-                               </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>هدى عبدالإله محمد الطاهر</td>
-                                    <td>17200723112</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">عرض البيانات</button>
-                                        <button type="button" class="btn btn-secondary btn-sm">نموذج 2</button>
-                              </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
+                            {{$students->links()}}
                         </ul>
                     </div>
                 </div>

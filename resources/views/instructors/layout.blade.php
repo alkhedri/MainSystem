@@ -35,8 +35,8 @@
          3. 'fixed-nav'			  - Fixed navigation
          4. 'navbar-fixed'		  - Fixed navbar
      -->
- 
- <body class="navbar-fixed sidebar-nav fixed-nav">
+ @yield('modals')
+ <body class="navbar-fixed sidebar-nav fixed-nav" id="body">
      <header class="navbar">
          <div class="container-fluid">
              <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
@@ -104,12 +104,10 @@
                         
                      <a class="nav-link" href="{{route('FacultyMembers')}}"><i class="icon-docs"></i> أعضاء هيئة التدريس</a>
                      <a class="nav-link" href="{{route('SemestersPlanB')}}"><i class="icon-docs"></i>الخطة الدراسية</a>
-                     <a class="nav-link" href="{{route('StudentsMenu')}}"><i class="icon-docs"></i>الطلبة المستمرين</a>
+                     <a class="nav-link" href="{{route('StudentsMenu')}}"><i class="icon-docs"></i>طلبة القسم</a>
                      <a class="nav-link" href="{{route('Dropped')}}"><i class="icon-docs"></i>الطلبة المتعثرين</a>
-                     <a class="nav-link" href="{{route('FinalResults')}}"><i class="icon-docs"></i>الطلبة المنقطعيين</a>
                      <a class="nav-link" href="{{route('NewStudents')}}"><i class="icon-docs"></i>الطلبة المنسبين للقسم</a>
                      <a class="nav-link" href="{{route('Complaints')}}"><i class="icon-docs"></i>شكاوى الطلبة</a>
-                     <a class="nav-link" href="{{route('ClassesList')}}"><i class="icon-docs"></i>القاعات الدراسية</a>
                      <a class="nav-link" href="{{route('FinalResults')}}"><i class="icon-docs"></i> الاحصائيات العامة</a>
 
                     </li>
@@ -164,7 +162,7 @@
                           <a class="nav-link" href="{{route('SubjectsList')}}"><i class="icon-docs"></i>قائمة المقررات</a>
                           <a class="nav-link" href="{{route('SupervisionList')}}"><i class="icon-docs"></i>طلبة الاشراف</a>
                           <a class="nav-link" href="{{route('StudentsMovement')}}"><i class="icon-docs"></i>حالة طلبة الاشراف</a>
-                          <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>وضع خطة دراسية لطالب</a>
+                          <a class="nav-link" href="{{route('DroppedPaln')}}"><i class="icon-docs"></i>وضع خطة دراسية لطالب</a>
                           <a class="nav-link" href="{{route('SemestersPlanB')}}"><i class="icon-docs"></i>الخطة الدراسية للفصل الحالي</a>
                          </li>
                          
@@ -533,6 +531,8 @@
          </span>
       
      </footer>
+     @yield('page-js-script')
+
      <!-- Bootstrap and necessary plugins -->
      <script src="js/libs/jquery.min.js"></script>
      <script src="js/libs/tether.min.js"></script>
@@ -552,6 +552,9 @@
  
      <!-- Grunt watch plugin -->
      <script src="//localhost:35729/livereload.js"></script>
+
+     @yield('modals')
+ 
  </body>
  
  </html>
