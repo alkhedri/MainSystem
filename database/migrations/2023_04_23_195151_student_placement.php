@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('placement_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
+            $table->foreignId('student_id')->constrained('students');
            
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->foreignId('college_id')->constrained('colleges')->onDelete('cascade');
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('placement_requests');
     }
 };

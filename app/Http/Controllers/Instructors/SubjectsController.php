@@ -15,6 +15,7 @@ use App\Models\student_attendanceRecord;
 
 use App\Models\TimeTable;
 use App\Models\TimeTable_Room;
+use App\Models\ExamsTable;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -399,11 +400,11 @@ $subject_id = $request->subject_id;
 
     return back()->with('message', 'تم تعديل الجدول');
 }
-public function CreateClassTable(Request $request)
+  public function CreateClassTable(Request $request)
     {
 
 
-        $user_id = auth()->user()->id;
+         $user_id = auth()->user()->id;
          $department_id = Instructor::where('id',$user_id)->value('department_id');
 
 
@@ -412,6 +413,7 @@ public function CreateClassTable(Request $request)
          if (!is_null($check)) {
             return back()->with('message', 'الجدول موجود مسبقا');
          }else{
+
             for ($j = 0 ; $j < 6 ; $j++)
             for ($i = 0 ; $i < 4 ; $i++)
            TimeTable::insert(
@@ -426,19 +428,19 @@ public function CreateClassTable(Request $request)
            );
 
 
-           $day_id = TimeTable::where('department_id',$department_id);
+           $day_id = TimeTable::where('department_id', $department_id)->get();
 
-           foreach ($day_id as $day)
-           TimeTable_Room::insert(
-            [
-                'day_id' => $day->id,
-                'Stp' => NULL,
-                'Sp' => NULL,
-                'Tp' => NULL,
-                'Fp' => NULL,
-             ]
-        );
-
+            
+                foreach ($day_id as $day)
+                 TimeTable_Room::insert(
+                [
+                    'day_id' => $day->id,
+                    'Stp' => NULL,
+                    'Sp' => NULL,
+                    'Tp' => NULL,
+                    'Fp' => NULL,
+                 ]);
+           
 
          }
 
@@ -446,5 +448,74 @@ public function CreateClassTable(Request $request)
        
         return back()->with('message', 'تم إنشاء الجدول');;
 
+    } 
+
+
+    public function ExamsTableEditAction(Request $request)
+    {
+
+         $user_id = auth()->user()->id;
+         $department_id = Instructor::where('id',$user_id)->value('department_id');
+
+
+         ExamsTable::insert(
+                [
+                    'date' => $request->date,
+                    'F' => $request->first,
+                    'S' => $request->second,
+                    'department_id' => $department_id,
+                 ]);
+
+       
+        return back()->with('message', 'تم إنشاء الجدول');;
+
     }
+
+
+   
+
+    public function EditExamsTableActionFirst(Request $request)
+    {
+
+         $user_id = auth()->user()->id;
+         $department_id = Instructor::where('id',$user_id)->value('department_id');
+
+         ExamsTable::where('id', $request->id)->where('department_id',$department_id)
+         ->update([
+             'F' => NULL,
+          ]);
+     //  ExamsTable::where('id',$request->id)->where('department_id',$department_id)->delete();
+      
+         return back();
+
+    }
+
+    public function EditExamsTableActionSecond(Request $request)
+    {
+
+         $user_id = auth()->user()->id;
+         $department_id = Instructor::where('id',$user_id)->value('department_id');
+
+         ExamsTable::where('id', $request->id)->where('department_id',$department_id)
+         ->update([
+             'S' => NULL,
+          ]);
+     //  ExamsTable::where('id',$request->id)->where('department_id',$department_id)->delete();
+      
+         return back();
+
+    }
+    public function EditExamsTableActionDelete(Request $request)
+    {
+
+         $user_id = auth()->user()->id;
+         $department_id = Instructor::where('id',$user_id)->value('department_id');
+
+      
+       ExamsTable::where('date',$request->date)->where('department_id',$department_id)->delete();
+      
+         return back();
+
+    }
+    
 }

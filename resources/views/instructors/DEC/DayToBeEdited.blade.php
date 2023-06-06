@@ -51,7 +51,8 @@
                   
                         <select   style="width:130px; height:30px" name="FirstPeriod[]" >
                             <option  value="{{$item->Stp}}" Selected>{{ App\Models\subject::find($item->Stp)->arabic_name ?? 'None'}} </option>
-                             @foreach ($subjects as $subject)
+                            <option  value="" >None</option>
+                            @foreach ($subjects as $subject)
                             <option  value="{{$subject->id}}">{{$subject->arabic_name ?? 'None'  }}</option>
                             @endforeach
                         </select>
@@ -60,7 +61,7 @@
                         <div class="col-xs-3">
                         <select    style="width:100px; height:30px" name="FirstPeriodRoom[]"  id="">
                               <option  value="{{ App\Models\Timetable_Room::getStpRoomID($item->id) }}"  Selected>{{ App\Models\Timetable_Room::getStpRoomByDayID($item->id) }} </option>
-                                      
+                              <option  value="" >None</option>      
                               @foreach ($Rooms as $room)
                             <option  value="{{$room->id}}">{{$room->name ?? 'None'  }}</option>
                             @endforeach
@@ -91,7 +92,8 @@
                       
                             <select   style="width:130px; height:30px" name="SecondPeriod[]" >
                                 <option  value="{{$item->Sp}}" Selected>{{ App\Models\subject::find($item->Sp)->arabic_name ?? 'None'}} </option>
-                                 @foreach ($subjects as $subject)
+                                <option  value="" >None</option> 
+                                @foreach ($subjects as $subject)
                                 <option  value="{{$subject->id}}">{{$subject->arabic_name ?? 'None'}}</option>
                                 @endforeach
                             </select>
@@ -100,7 +102,7 @@
                             <div class="col-xs-3">
                             <select    style="width:100px; height:30px" name="SecondPeriodRoom[]"  id="">
                                   <option  value="{{ App\Models\Timetable_Room::getSpRoomID($item->id) }}"  Selected>{{ App\Models\Timetable_Room::getSpRoomByDayID($item->id) }} </option>
-                                          
+                                  <option  value="" >None</option>    
                                   @foreach ($Rooms as $room)
                                 <option  value="{{$room->id}}">{{$room->name ?? 'None'  }}</option>
                                 @endforeach
@@ -130,7 +132,8 @@
                           
                                 <select   style="width:130px; height:30px" name="ThirdPeriod[]" >
                                     <option  value="{{$item->Tp}}" Selected>{{ App\Models\subject::find($item->Tp)->arabic_name ?? 'None'}} </option>
-                                     @foreach ($subjects as $subject)
+                                    <option  value="" >None</option>
+                                    @foreach ($subjects as $subject)
                                     <option  value="{{$subject->id}}">{{$subject->arabic_name ?? 'None'}}</option>
                                 
                                     @endforeach
@@ -140,7 +143,7 @@
                                 <div class="col-xs-3">
                                 <select    style="width:100px; height:30px" name="ThirdPeriodRoom[]"  id="">
                                       <option  value="{{ App\Models\Timetable_Room::getTpRoomID($item->id) }}"  Selected>{{ App\Models\Timetable_Room::getTpRoomByDayID($item->id) }} </option>
-                                              
+                                      <option  value="" >None</option> 
                                       @foreach ($Rooms as $room)
                                     <option  value="{{$room->id}}">{{$room->name ?? 'None'  }}</option>
                                  
@@ -172,7 +175,9 @@
                               
                                     <select   style="width:130px; height:30px" name="ForthPeriod[]" >
                                         <option  value="{{$item->Fp}}" Selected>{{ App\Models\subject::find($item->Fp)->arabic_name ?? 'None'}} </option>
-                                         @foreach ($subjects as $subject)
+                                        <option  value="" >None</option>
+                                       
+                                        @foreach ($subjects as $subject)
                                         <option  value="{{$subject->id}}">{{$subject->arabic_name ?? 'None'}}</option>
                                         @endforeach
                                     </select>
@@ -181,7 +186,7 @@
                                     <div class="col-xs-3">
                                     <select    style="width:100px; height:30px" name="ForthPeriodRoom[]"  id="">
                                           <option  value="{{ App\Models\Timetable_Room::getFpRoomID($item->id) }}"  Selected>{{ App\Models\Timetable_Room::getFpRoomByDayID($item->id) }} </option>
-                                                  
+                                          <option  value="" >None</option>
                                           @foreach ($Rooms as $room)
                                         <option  value="{{$room->id}}">{{$room->name ?? 'None'  }}</option>
                                        

@@ -36,8 +36,20 @@ class RegisterController extends Controller
      * @var string
      */
    
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
+    public function redirectTo()
+    {
+        if ($this->guard()->user()->hasRole('instructor')) {
+            return '/inst';
+        }
+        else if ($this->guard()->user()->hasRole('college')) {
+            return '/test';
+        }   else if ($this->guard()->user()->hasRole('student')) {
+            return '/studentDashboard';
+        }
 
+        return '/test';
+    }
     /**
      * Create a new controller instance.
      *
@@ -45,8 +57,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['only' => 'guestAction']);
-        $this->middleware('guest');
+       // $this->middleware('guest', ['only' => 'guestAction']);
+       // $this->middleware('guest');
     }
 
 
@@ -105,30 +117,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+   
+
+
+if ($data['user_type'] != 'student' ){
+    $user =  User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+    ]);
+
+        Instructor::create([
+            'id'     =>   User::select('id')->max('id'), 
+            'nat_id'   =>   $data['natid'],
+            'arabic_name'   =>   $data['name'],
+            'english_name'   =>   $data['enname'],
+            'sex'   =>   $data['sex'],
+            'job_id'   =>   '111111',
+            'city_id'   =>   $data['city'],
+            'phone'   =>   $data['phone'],
+            
+            'department_id'   =>   $data['department'],
+            'college_id'   =>   $data['college'],
+
+        ]);
+
+        $user->addRole('Instructor');
+    }else{
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
-
-if ($data['user_type'] != 'student' ){
-        Instructor::create([
-            'id'     =>   User::select('id')->max('id'), 
-            'nat_id'   =>   $data['natid'],
-            'arabic_name'   =>   'Dayle',
-            'english_name'   =>   $data['enname'],
-            'sex'   =>   'Dayle',
-            'job_id'   =>   '1',
-            'city_id'   =>   '1',
-            'phone'   =>   'Dayle',
-            
-            'department_id'   =>   '1',
-            'college_id'   =>   '2',
-
-        ]);
-        $user->addRole('Instructor');
-    }else{
         Student::create([
             'id'     =>   User::select('id')->max('id'), 
             'nat_id'   =>   $data['natid'],
@@ -138,7 +158,6 @@ if ($data['user_type'] != 'student' ){
             'sex'   =>   $data['sex'],
             'city_id'   =>   $data['city'],
             'phone'   =>   $data['phone'],
-            
             'department_id'   =>   $data['department'],
             'college_id'   =>   $data['college'],
             'units'   =>   0,

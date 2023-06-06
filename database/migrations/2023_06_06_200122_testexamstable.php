@@ -11,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('enrollment_status', function (Blueprint $table) {
+        Schema::create('ExamsTable', function (Blueprint $table) {
             $table->id();
-    
-            $table->string('status');
-         
-    
-    
-            $table->timestamps();
-     
-     
-         
-        
+            $table->date('date');
+            $table->text('F');
+            $table->text('S');
+            $table->foreignId('department_id')->constrained('departments');
         });
     }
 
@@ -31,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enrollment_status');
+        //
     }
 };

@@ -24,7 +24,7 @@
 
     <div class="col-md-2">
  
-          <a class="btn btn-success btn-sm" href="{{route('NewSubject')}}"><i class="icon-docs"></i>إضافة مقرر</a>
+          <a class="btn btn-success" href="{{route('NewSubject')}}"><i class="icon-docs"></i>إضافة مقرر</a>
                         
     </div>
 </div> 

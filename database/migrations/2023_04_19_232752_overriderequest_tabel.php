@@ -23,12 +23,12 @@ return new class extends Migration
             $table->integer('final_mark');
              
          
-            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
-            $table->foreignId('college_id')->constrained('colleges')->onDelete('cascade');
+            $table->foreignId('department_id')->constrained('departments');
+            $table->foreignId('college_id')->constrained('colleges');
            
             $table->boolean('avaliablity');
             $table->boolean('required');
-            $table->foreignId('proffesor_id')->constrained('instructors')->onDelete('cascade');
+            $table->string('proffesor_id');
            
     
     
@@ -40,7 +40,7 @@ return new class extends Migration
         });
         Schema::create('override_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
+            $table->foreignId('student_id')->constrained('students');
            
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
            
@@ -61,6 +61,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+
+        
+        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('override_requests');
     }
 };

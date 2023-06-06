@@ -246,6 +246,67 @@ class ExaminationController extends Controller
         return view('Admins.ExaminationDepartment.views.Semesters.SemestersPlan',  compact( 'semesterplan'));
     }
 
+
+    public function create_SemesterPlan(){
+        $user_id = auth()->user()->id;
+        
+
+       
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $sem_id = College::where('id',$College_id)->value('current_semester');
+
+
+        $check = semesterplan::where('semester_id', $sem_id )->where('college_id', $College_id )->first();
+  
+        if (!is_null($check)) {
+           return back()->with('message', 'الخطة موجودة مسبقا');
+        }else{
+
+        semesterplan::insert([
+            
+            'renewalStarts' => NULL,
+            'renewalEnds' => NULL,
+            'SubjectStarts' => NULL,
+            'SubjectEnds' => NULL,
+
+            'StudntsMove' => NULL,
+            'semsStart' => NULL,
+            'semsEnds' => NULL,
+
+            'LastChanceAdd' => NULL,
+            'LastChanceDrop' => NULL,
+            'FirstMidsStarts' => NULL,
+            'FirstMidsEnds' => NULL,
+
+            'LastStop' => NULL,
+            'SecondMidsStarts' => NULL,
+
+            'SecondMidsEnds' => NULL,
+            'Lastlecture' => NULL,
+
+            'FinalsStarts' => NULL,
+            'FinalsEnds' => NULL,
+
+            'Results' => NULL,
+            'ReviewStarts' => NULL,
+            'ReviewEnds' => NULL,
+            
+            'CheckStarts' => NULL,
+            'CheckEnds' => NULL,
+            'NextSem' => NULL,
+
+
+            'college_id' => $College_id,
+            'semester_id' => $sem_id,
+
+
+         ]);
+        }
+        return back()->with('message', 'تم إنشاء الخطة الدراسية');
+     
+
+
+    }
     public function set_SemestersPlan(request $request)
     {
 
@@ -294,7 +355,8 @@ class ExaminationController extends Controller
 
          ]);
        
-        return Back();
+         return back()->with('message', 'تم تعديل الخطة بنجاح');
+     
     }
 
 

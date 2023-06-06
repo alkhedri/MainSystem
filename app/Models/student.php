@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
 class student extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         'id',

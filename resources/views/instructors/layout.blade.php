@@ -143,7 +143,7 @@
                           
                                 <a class="nav-link" href="{{route('ClassTable')}}"><i class="icon-user-follow"></i>جدول المحاضرات</a>
                            
-                                <a class="nav-link" href="{{route('DepartmentsDelete')}}"><i class="icon-user-follow"></i>جدول  الامتحانات</a>
+                                <a class="nav-link" href="{{route('ExamsTable')}}"><i class="icon-user-follow"></i>جدول  الامتحانات</a>
                   
                                 <a class="nav-link" href="{{route('DepartmentsDelete')}}"><i class="icon-user-follow"></i>نموذج  2</a>
                                </li>

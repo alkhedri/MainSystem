@@ -72,7 +72,7 @@
                                 <tr>
                                     <td> {{$loop->index + 1}}</td>
                                     <td> {{$student->arabic_name}}</td>
-                                    <td>{{$student->badge}}</td>
+                                    <td>{{$student->Badge}}</td>
                                     <td>
                                         <form></form>
                                         <form id="change-form{{$student->id}}" action="{{route('SupervisorUpdateAction')}}" method="post">

@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 class Instructor extends Model
 {
     use HasFactory;
- 
+    public $timestamps = false;
+
 
     protected $fillable = [
         'id',

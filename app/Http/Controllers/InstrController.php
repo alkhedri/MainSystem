@@ -16,7 +16,7 @@ use App\Models\room;
 
 use App\Models\TimeTable;
 
-
+use App\Models\ExamsTable;
 use Illuminate\Http\Request;
 
 class InstrController extends Controller
@@ -287,4 +287,35 @@ class InstrController extends Controller
         return view('instructors.Professor.DroppedPaln' , compact ('studentsList'));
  
     }
+
+    public function index_ExamsTable(Request $request)
+    {
+        
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+
+
+        $dates = ExamsTable::select('date')->groupBy('date')->where('department_id',$department_id)->get();
+        
+        $Department_subjects = subject::where('department_id',$department_id)->get();
+    
+
+        return view('instructors.DEC.ExamsTable' , compact('dates' , 'Department_subjects'));
+    }
+    public function index_EditExamsTable(Request $request)
+    {
+
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+
+
+        $dates = ExamsTable::select('date')->groupBy('date')->where('department_id',$department_id)->get();
+        
+        $Department_subjects = subject::where('department_id',$department_id)->get();
+    
+
+        return view('instructors.DEC.EditExamsTable' , compact('dates' , 'Department_subjects'));
+
+    }
+
 }

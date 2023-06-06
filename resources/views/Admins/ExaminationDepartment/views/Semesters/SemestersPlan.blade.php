@@ -18,14 +18,22 @@
  
     <div class="row">
         <div class="col-lg-10">
+            @if(Session::has('message'))
+            <div class="alert alert-primary" role="alert">
+               
+               {{Session::get('message')}} 
+              
+              </div>
+              @endif
+              <div style="display:flex;justify-content:end;width:100%; margin:10px">
+                <a   class="btn btn-primary" href="{{route('createSemesterPlan')}}">إنشاء خطة دراسية</a>
+
+              </div>
+
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-edit"></i>الخطة الدراسية
-                    <div class="card-actions">
-                        <a href="#" class="btn-setting"><i class="icon-settings"></i></a>
-                        <a href="#" class="btn-minimize"><i class="icon-arrow-up"></i></a>
-                        <a href="#" class="btn-close"><i class="icon-close"></i></a>
-                    </div>
+          
                 </div>
                 <div class="card-block">
                     @foreach ($semesterplan as $plan)

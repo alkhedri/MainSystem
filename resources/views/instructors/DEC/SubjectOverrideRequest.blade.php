@@ -58,7 +58,7 @@
                                 <span class="input-group-addon">اسم المقرر </span>
                               
                                 <select id="myInput1" onchange="myChangeFunction(this)"  name="selectedSubject" class="form-control" size="1">
-                                     
+                                    <option value="" selected disabled>قم باختيار مقرر</option>
                @foreach ($subjects as $subject)
                <option value="{{$subject->code}}">{{$subject->arabic_name}}</option>
                @endforeach
@@ -144,6 +144,7 @@
 
 <script>
     function myChangeFunction(input1) {
+     
       var input2 = document.getElementById('myInput2');
       input2.value = input1.value;
     }

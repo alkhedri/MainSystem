@@ -53,6 +53,8 @@ Route::get('/OverrideRequestDeny', 'App\Http\Controllers\OverrideActionsControll
 
 Route::get('/FinalResults', 'App\Http\Controllers\ExaminationController@index_FinalResults')->name('FinalResults');
 Route::get('/SemestersPlan', 'App\Http\Controllers\ExaminationController@index_SemestersPlan')->name('SemestersPlan');
+Route::get('/createSemesterPlan', 'App\Http\Controllers\ExaminationController@create_SemesterPlan')->name('createSemesterPlan');
+
 Route::post('/SetSemestersPlan', 'App\Http\Controllers\ExaminationController@set_SemestersPlan')->name('SetSemestersPlan');
 
 Route::get('/StudentsPlacement', 'App\Http\Controllers\ExaminationController@index_StudentsPlacement')->name('StudentsPlacement');
@@ -154,6 +156,14 @@ Route::get('/DayToBeEdited', 'App\Http\Controllers\InstrController@index_DayToBe
 
 Route::get('/CreateClassTable', 'App\Http\Controllers\Instructors\SubjectsController@CreateClassTable')->name('CreateClassTable');;
 Route::post('/ClassTableEditAction', 'App\Http\Controllers\Instructors\SubjectsController@ClassTableEditAction')->name('ClassTableEditAction');;
+
+Route::get('/ExamsTable', 'App\Http\Controllers\InstrController@index_ExamsTable')->name('ExamsTable');;
+Route::post('/ExamsTableEditAction', 'App\Http\Controllers\Instructors\SubjectsController@ExamsTableEditAction')->name('ExamsTableEditAction');;
+Route::get('/EditExamsTable', 'App\Http\Controllers\InstrController@index_EditExamsTable')->name('EditExamsTable');;
+Route::get('/EditExamsTableActionFirst', 'App\Http\Controllers\Instructors\SubjectsController@EditExamsTableActionFirst')->name('EditExamsTableActionFirst');;
+Route::get('/EditExamsTableActionSecond', 'App\Http\Controllers\Instructors\SubjectsController@EditExamsTableActionSecond')->name('EditExamsTableActionSecond');;
+Route::get('/EditExamsTableActionDelete', 'App\Http\Controllers\Instructors\SubjectsController@EditExamsTableActionDelete')->name('EditExamsTableActionDelete');;
+
 
 
 
