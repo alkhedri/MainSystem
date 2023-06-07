@@ -51,7 +51,7 @@
                                 <tr>
                                     <td> {{$loop->index +1}}</td>
                                     <td style="width: 280px"><strong>{{$student->arabic_name}}</strong></td>
-                                    <td style="width: 280px">{{$student->badge}}</td>
+                                    <td style="width: 280px">{{$student->Badge}}</td>
                      
                                   
                                     @if (App\Models\student_warning::CheckWarnings($student->id) == 0)
@@ -65,6 +65,7 @@
                                     <a href="{{route('StudentsProfile' , [ 'id' => $student->id ])}}" class="btn btn-primary btn-sm">عرض البيانات</a>
                                     <a href="{{route('Model2Template' , [ 'student_id' => $student->id ])}}" class="btn btn-secondary btn-sm">نموذج 2</a>
                                     <a href="{{route('Model2Template' , [ 'student_id' => $student->id ])}}" class="btn btn-warning btn-sm">سجل الانذارات</a>
+                                    <a href="{{route('StudentNotofyAlert' , [ 'student_id' => $student->id ])}}" class="btn btn-success btn-sm">إشعار</a>
                                   
                                 </td>
                                     

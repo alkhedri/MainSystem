@@ -12,6 +12,7 @@ use App\Models\student_warning;
 use App\Models\warning;
 use App\Models\Override_Request;
 use App\Models\subject;
+use App\Models\Notification;
 
 
 
@@ -139,4 +140,39 @@ class StudentsController extends Controller
 
  
     } 
+
+    public function StudentNotofyAlert(Request $request)
+    {
+ 
+     
+     $student_id =  student::where('id',$request->student_id)->value('Badge');
+     $professor_id = auth()->user()->id;
+ 
+        return view('instructors.Professor.StudentsNotify', compact('student_id' , 'professor_id'));
+    }
+
+    public function StudentNotofyAlertAction(Request $request)
+    {
+ 
+        $user_id = auth()->user()->id;
+        
+        $student_id =  student::where('Badge',$request->studnet_badge)->value('id');
+    
+
+        Notification::insert(
+            [
+             'sender_id' =>  $user_id ,
+             'reciver_id' => $student_id,
+             'title' => $request->title,
+             'message' =>$request->message,
+             'read' => 0,
+             'date' => date('Y-m-d')
+             
+          
+             ]
+        );
+        return redirect('SupervisionList');
+       
+   
+    }
 }

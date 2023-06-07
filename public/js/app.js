@@ -149,8 +149,16 @@ function init(url) {
 
 }
 
-
-
  
- 
- 
+  document.addEventListener("DOMContentLoaded", function(event) {
+	$(function() {
+		$(".lds-roller").fadeOut(400, function() {
+			  
+			$(".animate").fadeIn(400); 
+			
+		});
+	 
+			
+		 
+	}); 
+  });

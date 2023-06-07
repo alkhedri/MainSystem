@@ -113,7 +113,7 @@
                      
                           <a class="nav-link" href="{{route('studentDashboard')}}"><i class="icon-docs"></i>الرئيسية</a>
                           <a class="nav-link" href="{{route('currentSemSubs')}}"><i class="icon-docs"></i>  مقررات الفصل الحالي</a>
-                          <a class="nav-link" href="{{route('EditSubjects')}}"><i class="icon-docs"></i>تنزيل\اسقاط مقرر</a>
+                          <a class="nav-link" href="{{route('EditSubjects')}}"><i class="icon-docs"></i>إضافة/اسقاط مقرر</a>
                           
                           <a class="nav-link" href="{{route('SemestersPlanB')}}"><i class="icon-docs"></i>الخطة الدراسية للفصل الحالي</a>
                           <a class="nav-link" href="{{route('NotifyMenu')}}"><i class="icon-docs"></i>الاشعارات</a>

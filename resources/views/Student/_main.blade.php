@@ -5,8 +5,7 @@
 @section('breadcramp')
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
-    <li class="breadcrumb-item">الطالب</li>
-    <li class="breadcrumb-item"><a href="#">وضع خطة دراسية</a>
+ 
     </li>
      
  
@@ -21,17 +20,12 @@
       <div class="card card-inverse card-primary">
           <div class="card-block p-b-0">
               <div class="btn-group pull-left">
-                  <button type="button" class="btn btn-transparent active dropdown-toggle p-a-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="icon-settings"></i>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
+ 
               </div>
-              <h4 class="m-b-0">9.823</h4>
-              <p>الاشعارات</p>
+              <h6 class="m-b-0"> الاسم : {{ App\Models\Student::getNameById(Auth::user()->id)}}</h6>
+              <p class="m-b-0"> رقم القيد : {{ App\Models\Student::getBadgeById(Auth::user()->id)}}</p>
+              <p class="m-b-0">القسم الدراسي : {{ App\Models\Student::getDepNameById(Auth::user()->id)}}</p>
+   
           </div>
           <div class="chart-wrapper p-x-1" style="height:70px;"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
               <canvas id="card-chart1" class="chart" height="244" width="1112" style="display: block; width: 318px; height: 70px;"></canvas>
@@ -46,8 +40,12 @@
               <button type="button" class="btn btn-transparent active p-a-0 pull-left">
                   <i class="icon-location-pin"></i>
               </button>
-              <h4 class="m-b-0">9.823</h4>
-              <p>المهام</p>
+              <h4 class="m-b-0">{{$notificationsCount}}</h4>
+              <p>الإشعارات
+                -
+            [ {{$notificationsCountUnRead}} ]
+                <a style="color:white" href="{{route('NotifyMenu')}}">غير مقروء</a>
+              </p>
           </div>
           <div class="chart-wrapper p-x-1" style="height:70px;"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
               <canvas id="card-chart2" class="chart" height="244" width="1112" style="display: block; width: 318px; height: 70px;"></canvas>
@@ -69,8 +67,10 @@
                       <a class="dropdown-item" href="#">Something else here</a>
                   </div>
               </div>
-              <h4 class="m-b-0">9.823</h4>
-              <p>Members online</p>
+              <h4 class="m-b-0">{{$alertDates}}</h4>
+              <p>
+                <a style="color:white"  href="{{route('RequirementsMenu')}}">المهام</a>
+              </p>
           </div>
           <div class="chart-wrapper" style="height:70px;"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
               <canvas id="card-chart3" class="chart" height="244" width="1224" style="display: block; width: 350px; height: 70px;"></canvas>
@@ -93,7 +93,7 @@
                   </div>
               </div>
               <h4 class="m-b-0">9.823</h4>
-              <p>Members online</p>
+              <p>الإنذارات</p>
           </div>
           <div class="chart-wrapper p-x-1" style="height:70px;"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
               <canvas id="card-chart4" class="chart" height="244" width="1112" style="display: block; width: 318px; height: 70px;"></canvas>

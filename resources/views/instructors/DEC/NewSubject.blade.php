@@ -5,7 +5,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">منسق الدراسة و الامتحانات</li>
-    <li class="breadcrumb-item"><a href="#">المقررات</a>
+    <li class="breadcrumb-item"><a href="{{route('SubjectsMenu')}}">المقررات</a>
         <li class="breadcrumb-item"><a href="#">اضافة مقرر</a>
     </li>
      

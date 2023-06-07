@@ -15,37 +15,48 @@
 
 
 @section('content')
-
-<table class="table table-hover table-outline m-b-0 hidden-sm-down">
+<div class="alert alert-primary" role="alert">
+    قم بالضغط على عنوان الرسالة لعرض التفاصيل .
+  </div>
+<table class="table table-hover table-outline m-b-0">
     <thead class="thead-default">
         <tr>
-             <th>#</th>
-            <th class="text-xs-center">المرسل</th>
-            <th>الرسالة</th>
+             <th class="text-xs-left">#</th>
+            <th class="text-xs-left">المرسل</th>
+            <th class="text-xs-center">العنوان</th>
             
-            <th>التاريخ</th>
+            <th class="text-xs-center">التاريخ</th>
         </tr>
     </thead>
     <tbody>
+
+        @foreach ($notifications as $notification)
+            
+       
         <tr>
-      <td>1</td>
+      <td class="text-xs-left"> {{$loop->index + 1}}</td>
             <td>
-                <div>Yiorgos Avraamu</div>
-                <div class="small text-muted">
-                    <span>New</span>| Registered: Jan 1, 2015
+                <div style="text-align: right;"> 
+                {{ App\Models\Instructor::getInstructorsName($notification->sender_id)}}
+                </div>
+                <div class="small text-muted" style="text-align: right;">
+                    {{ App\Models\Instructor::getInstructorDepartment($notification->sender_id)}}
                 </div>
             </td>
             <td class="text-xs-center">
-                <img src="img/flags/USA.png" alt="USA" style="height:24px;">
+                <a href="{{route('ShowNotificationMessage' , ['id' => $notification->id])}}">   {{$notification->title}}</a>
+             
             </td>
      
         
-            <td>
-                <div class="small text-muted">Last login</div>
-                <strong>10 sec ago</strong>
+            <td class="text-xs-center">
+                 
+                {{$notification->date}} 
             </td>
         </tr>
-         
+        @endforeach
     </tbody>
 </table>
+
+{{$notifications->links()}}
 @endsection

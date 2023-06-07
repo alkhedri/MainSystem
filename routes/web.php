@@ -197,7 +197,10 @@ Route::get('/EditExamsTableActionDelete', 'App\Http\Controllers\Instructors\Subj
 
  Route::get('/DroppedPaln', 'App\Http\Controllers\InstrController@index_DroppedPaln')->name('DroppedPaln');;
 
+ Route::get('/StudentNotofyAlert', 'App\Http\Controllers\Instructors\StudentsController@StudentNotofyAlert')->name('StudentNotofyAlert');;
+ 
 
+ Route::post('/StudentNotofyAlertAction', 'App\Http\Controllers\Instructors\StudentsController@StudentNotofyAlertAction')->name('StudentNotofyAlertAction');;
  
 
  
@@ -207,9 +210,19 @@ Route::get('/EditExamsTableActionDelete', 'App\Http\Controllers\Instructors\Subj
     Route::group(['middleware' => ['role:student']], function() {
         Route::get('/studentDashboard', 'App\Http\Controllers\students\StudentController@index')->name('studentDashboard');
         Route::get('/CurrentSemesterSubjects', 'App\Http\Controllers\students\StudentController@show_currentSemSubs')->name('currentSemSubs');
+       
         Route::get('/EditSubjects', 'App\Http\Controllers\students\StudentController@show_EditSubjects')->name('EditSubjects');
+        Route::post('/AddSubject', 'App\Http\Controllers\students\StudentController@AddSubject')->name('AddSubject');
+        Route::get('/DropSubject', 'App\Http\Controllers\students\StudentController@DropSubject')->name('DropSubject');
+        
+        
         Route::get('/NotifyMenu', 'App\Http\Controllers\students\StudentController@show_NotifyMenu')->name('NotifyMenu');
-    
+        Route::get('/ShowNotificationMessage', 'App\Http\Controllers\students\StudentController@ShowNotificationMessage')->name('ShowNotificationMessage');
+       
+        Route::get('/RequirementsMenu', 'App\Http\Controllers\students\StudentController@RequirementsMenu')->name('RequirementsMenu');
+      
+          
+        
     });
 
 Auth::routes();

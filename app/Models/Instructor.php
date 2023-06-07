@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\user;
 use App\Models\city;
+use App\Models\department;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,15 @@ class Instructor extends Model
         $Instructorname = instructor::where('id', $id)->value('arabic_name');
     
         return  $Instructorname;
+  
+    }
+
+    public static function getInstructorDepartment($id){
+
+        $InstructorDepID = instructor::where('id', $id)->value('department_id');
+        $InstructorDep = department::where('id', $InstructorDepID)->value('arabic_name');
+    
+        return  $InstructorDep;
   
     }
     public static function getInstructorEmail($id){

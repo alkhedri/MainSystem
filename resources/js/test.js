@@ -23,3 +23,5 @@
        $('#edit-firstname').focus(); //Should appear after $('.register__form').show(); because if it's before that, the register form doesn't exist in the DOM
      });
       
+
+ 

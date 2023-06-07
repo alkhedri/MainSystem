@@ -66,7 +66,7 @@
                                 <tr>
                                     <td> {{$loop->index + 1}}</td>
                                     <td> {{$date->name}}</td>
-                                    <td> {{$date->req_date }}</td>
+                                    <td> {{$date->sent_date }}</td>
                                     <td> {{$date->due_date}}</td>
                                     <td> {{$date->details}}</td>
                                     <td>  

@@ -34,6 +34,8 @@ class NotificationsController extends Controller
              'title' => $request->title,
              'message' =>$request->message,
              'read' => 0,
+             'date' => date('Y-m-d')
+             
           
              ]
         );

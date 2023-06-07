@@ -212,6 +212,7 @@ $subject_id = $request->subject_id;
             [
              'name' => $request->name,
              'due_date' => $request->due,
+             'sent_date' => date('Y-m-d'),
              'details' => $request->details,
              'department_id' => $department_id,
              'subject_id' => $request->subject_id,
