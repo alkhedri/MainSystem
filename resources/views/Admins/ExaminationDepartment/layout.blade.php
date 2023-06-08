@@ -102,7 +102,7 @@
                         <li class="nav-item">
                         
                      <a class="nav-link" href="{{route('SemestersMenu')}}"><i class="icon-docs"></i>قائمة الفصول الدراسية</a>
-                     <a class="nav-link" href="{{route('SemestersPlan')}}"><i class="icon-docs"></i>الخطة الدراسية</a>
+                     <a class="nav-link" href="{{route('GetSemestersPlan')}}"><i class="icon-docs"></i>الخطة الدراسية</a>
                      <a class="nav-link" href="{{route('Request')}}"><i class="icon-docs"></i>طلبات التجاوز</a>
                      <a class="nav-link" href="{{route('FinalResults')}}"><i class="icon-docs"></i>النتيجة النهائية</a>
                     </li>

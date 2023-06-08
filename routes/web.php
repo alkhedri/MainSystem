@@ -52,7 +52,7 @@ Route::get('/OverrideRequestDeny', 'App\Http\Controllers\OverrideActionsControll
 
 
 Route::get('/FinalResults', 'App\Http\Controllers\ExaminationController@index_FinalResults')->name('FinalResults');
-Route::get('/SemestersPlan', 'App\Http\Controllers\ExaminationController@index_SemestersPlan')->name('SemestersPlan');
+Route::get('/GetSemestersPlan', 'App\Http\Controllers\ExaminationController@index_SemestersPlan')->name('GetSemestersPlan');
 Route::get('/createSemesterPlan', 'App\Http\Controllers\ExaminationController@create_SemesterPlan')->name('createSemesterPlan');
 
 Route::post('/SetSemestersPlan', 'App\Http\Controllers\ExaminationController@set_SemestersPlan')->name('SetSemestersPlan');
@@ -122,6 +122,9 @@ Route::get('/Dropped', 'App\Http\Controllers\InstrController@index_Dropped')->na
 Route::get('/NewStudents', 'App\Http\Controllers\InstrController@index_NewStudents')->name('NewStudents');;
  
 Route::get('/Complaints', 'App\Http\Controllers\InstrController@index_Complaints')->name('Complaints');;
+
+
+Route::get('/Stats', 'App\Http\Controllers\Instructors\StatsController@index')->name('Stats');;
 
 // EXAM Coordinator
 
@@ -222,6 +225,8 @@ Route::get('/EditExamsTableActionDelete', 'App\Http\Controllers\Instructors\Subj
         Route::get('/RequirementsMenu', 'App\Http\Controllers\students\StudentController@RequirementsMenu')->name('RequirementsMenu');
       
           
+        Route::get('/SemestersPlan', 'App\Http\Controllers\students\StudentController@SemestersPlan')->name('CurrentSemestersPlan');
+
         
     });
 

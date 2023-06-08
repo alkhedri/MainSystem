@@ -232,7 +232,7 @@
                             <div class="col-md-6">
                                   <select id="department" class="form-control @error('department') is-invalid @enderror" name="department">
                                     @foreach($departments as $id)
-                                    <option value="1">{{ $id->arabic_name }}</option>
+                                    <option value="{{ $id->id }}">{{ $id->arabic_name }}</option>
                                     @endforeach
                               
                                   </select>

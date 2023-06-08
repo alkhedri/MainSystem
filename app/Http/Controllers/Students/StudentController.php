@@ -10,6 +10,7 @@ use App\Models\subject_requirement;
 use App\Models\semester;
 use App\Models\notification;
 use App\Models\subject_date;
+use App\Models\semesterplan;
 
 
 
@@ -46,6 +47,31 @@ class StudentController extends Controller
 
         return view('Student._main' , compact('notificationsCount', 'notificationsCountUnRead' , 'alertDates'));
     }
+
+
+    public function SemestersPlan()
+    {
+        $user_id = auth()->user()->id;
+   
+      //  $user =  auth()->user();
+      
+         
+        //$user->givePermission('dec-read');
+       
+        $College_id = student::where('id',$user_id)->value('college_id');
+        $semester_id = College::where('id',$College_id)->value('current_semester');
+
+
+        $semesterplan =  semesterplan::all()->where('college_id',$College_id)->where('semester_id' , $semester_id);
+        $SEMESTER_NAME = Semester::where('id',$semester_id)->value('name');
+
+
+        return view('student._SemesterPlan' , compact('semesterplan' , 'SEMESTER_NAME'));
+    }
+
+
+
+
     public function show_currentSemSubs(Request $request)
     {
 
@@ -83,10 +109,45 @@ class StudentController extends Controller
         $college_id = department::where('id',$department_id)->value('college_id');
         $current_semester = college::where('id',$college_id)->value('current_semester');
 
+        $GSdepartment = department::where('code','GS')->value('id');
+
 
         $Student_subjects = student_mark::where('student_id',$user_id)->where('semester_id',$current_semester)->get();
-        $Department_subjects = subject::where('department_id',$department_id)->where('avaliablity','1')->get();
 
+
+        $Department_subjects = subject::where(function ($query) use ($department_id , $GSdepartment) {
+            $query->where('department_id',$department_id)
+                ->orWhere('department_id', $GSdepartment);
+        })->where('avaliablity','1')->get();
+        
+        
+
+        foreach ($Department_subjects as $key => $subject){
+
+            $requirements = subject_requirement::where('subject', $subject->id)->get();
+
+            foreach ($requirements as $req){
+
+            
+            $final = student_mark::where('student_id', $user_id )
+            ->where('subject_id', $req->requirement)->value('final');
+
+            $work = student_mark::where('student_id', $user_id )
+            ->where('subject_id', $req->requirement)->value('work');
+
+            if (($final + $work) < 50 )
+                 unset($Department_subjects[$key]);
+                // $Department_subjects->forget($subject);
+               // echo "<script>alert('$subject->arabic_name') </script> ";
+               
+         }
+
+     
+         
+    }
+                
+              
+     ///$collection->forget($key);
         
         return view('Student._EditSubjects' ,compact('Student_subjects' , 'Department_subjects') );
     }

@@ -59,4 +59,18 @@ class Instructor extends Model
         return  $InstructorCity;
   
     }
+    public static function getPosition($id){
+
+        $InstructorCity = city::where('id', $id)->value('name');
+
+
+        $user = User::find($id);
+         
+        if ($user->hasPermission('dec-read'))
+             return  'منسق الدراسة و الامتحانات';
+        elseif ($user->hasPermission('hod-read'))
+            return  'رئيس القسم';
+            else
+            return  'محاضر';
+    }
 }

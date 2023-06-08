@@ -85,11 +85,13 @@
                         <div class="controls">
                             <div class="input-prepend input-group">
                                
-                                <select id="select" name="select" class="form-control" size="1">
-                                    <option value="0">{{$department->hod}}</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
+                                <select id="select" name="hodchange" class="form-control" size="1">
+                                    <option value="0" disabled selected >{{$hoD}}</option>
+                                    @foreach ($staff as $prof)
+                                    <option value="{{$prof->id}}">{{$prof->arabic_name}}</option>
+                         
+                                    @endforeach
+                                 
                                 </select>
                                 
                             </div>
@@ -99,12 +101,8 @@
                         <label class="form-control-label" for="appendedInputButton">منسق الدراسة و الامتحانات</label>
                         <div class="controls">
                             <div class="input-group">
-                                <select id="select" name="select" class="form-control" size="1">
-                                    <option value="0">{{$department->dec}}</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                </select>
+                                <input id="appendedInput" class="form-control" size="16" type="text" value="{{$deC}}" name="code">
+                                
                          
                             </div>
                         </div>
@@ -114,12 +112,8 @@
                         <label class="form-control-label" for="appendedInputButton">منسق الجودة </label>
                         <div class="controls">
                             <div class="input-group">
-                                <select id="select" name="select" class="form-control" size="1">
-                                    <option value="0">{{$department->dec}}</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                </select>
+                                <input id="appendedInput" class="form-control" size="16" type="text" value="{{$dqC}}" name="code">
+                                
                          
                             </div>
                         </div>
@@ -129,12 +123,8 @@
                         <label class="form-control-label" for="appendedInputButton">منسق المشاريع</label>
                         <div class="controls">
                             <div class="input-group">
-                                <select id="select" name="select" class="form-control" size="1">
-                                    <option value="0">{{$department->dec}}</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                </select>
+                                <input id="appendedInput" class="form-control" size="16" type="text" value="{{$dpC}}" name="code">
+                                
                          
                             </div>
                         </div>

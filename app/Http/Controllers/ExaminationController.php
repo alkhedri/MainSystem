@@ -6,6 +6,7 @@ use App\Models\Semester;
 use App\Models\Instructor;
 use App\Models\student;
 
+use App\Models\User;
 use App\Models\Auth;
 use App\Models\College;
 use App\Models\semesterplan;
@@ -43,16 +44,43 @@ class ExaminationController extends Controller
     public function index_DepartmentsInfo(request $req)
     {
         $departments = Department::all()->where('id' , $req->id);
-    
-        return view('Admins.ExaminationDepartment.views.Departments.Info' ,  compact( 'departments'));
+        $staff = Instructor::where('department_id' , $req->id)->get();
+
+
+        $hofid = Department::where('id' , $req->id)->value('hod');
+        $deCid = Department::where('id' , $req->id)->value('dec');
+        $dqCid = Department::where('id' , $req->id)->value('dqc');
+        $dpCid = Department::where('id' , $req->id)->value('dpc');
+
+
+
+        $hoD = Instructor::where('id' , $hofid)->value('arabic_name');
+        
+        $deC = Instructor::where('id' , $deCid)->value('arabic_name');
+        
+        $dqC = Instructor::where('id' , $dqCid)->value('arabic_name');
+        $dpC = Instructor::where('id' , $dpCid)->value('arabic_name');
+        
+        return view('Admins.ExaminationDepartment.views.Departments.Info' ,  compact( 'departments' , 'staff' , 'hoD', 'deC', 'dqC', 'dpC'));
     }
 
     public function Update_DepartmentsInfo(Request $request)
     {
 
+
+             
+                //   TAKE HOD PERMISSIONS
+                $hofid = Department::where('id' , $request->id)->value('hod');
+       
+                $user = User::find($hofid);
+                $user->removePermission('hod-read');
+
+
+
         $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'code' => 'required',
+            'hodchange' =>  'required'
         ]);
       
       if ($request->image != NULL){
@@ -67,7 +95,7 @@ class ExaminationController extends Controller
             'code' => $request->code,
             
             'icon' => $imageName,
-           
+            'hod' => $request->hodchange,
             
          ]);
       }else {
@@ -78,14 +106,16 @@ class ExaminationController extends Controller
            
             'code' => $request->code,
             
-          
+            'hod' => $request->hodchange,
             
          ]);
       }
        
     
-  
-
+     //   GIVE HOD PERMISSIONS
+         $user = User::find($request->hodchange);
+         $user->givePermission('hod-read');
+       
  
 
         return back();

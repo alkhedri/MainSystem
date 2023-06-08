@@ -86,8 +86,10 @@
         <div class="list-group">
          
             <ul class="list-group list-group-flush list-group-item-light">
-                <li class="list-group-item">  الاسم بالكامل :   <span> - - - - - - </span></li>
-     
+                @foreach ($subjects as $subject)
+                    <li  class="list-group-item">{{$loop->index + 1}} - <strong> {{$subject->arabic_name }}   <span style="color:green"> [ {{$subject->code }} ] </span> </strong></li>
+                @endforeach
+              
               </ul>
         </div>
           </div>

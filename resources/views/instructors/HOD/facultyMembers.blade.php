@@ -59,6 +59,7 @@
                                     <th>#</th>
                                     <th>الاسم</th>
                                     <th>التخصص</th>
+                                    <th>الصفة</th>
                                     <th>الاجراء</th>
                                 </tr>
                             </thead>
@@ -71,10 +72,16 @@
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$instructor->arabic_name}}</td>
                                     <td>{{$instructor->specialization}}</td>
+                                    <td>
+                               
+                                        {{App\Models\instructor::getPosition($instructor->id) }}
+                                    </td>
                
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{route('InstructorProfile' , [ 'inst_id' => $instructor->id])}}">عرض البيانات</a>
                                         <button type="button" class="btn btn-danger btn-sm">حذف</button>
+ 
+
                                     </td>
                                 </tr>
                                 @endforeach
