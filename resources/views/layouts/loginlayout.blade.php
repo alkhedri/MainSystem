@@ -1,35 +1,25 @@
-<html lang="en" dir="rtl"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="CoreUI Bootstrap 4 Admin Template">
-    <meta name="author" content="Lukasz Holeczek">
-    <meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
-    <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
-    <title>النظام الإلكتروني - تسجيل الدخول</title>
-    <!-- Icons -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/simple-line-icons.css" rel="stylesheet">
-    <!-- Main styles for this application -->
-    <link href="dest/style.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Main styles for this application -->
-    <link href="dest/style.css" rel="stylesheet">
-</head>
+        <title>Laravel</title>
 
-<body class="">
-   
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/simple-line-icons.css" rel="stylesheet">
+        <!-- Styles -->
+        <link rel="stylesheet" href="dest/style.css">
+        <link rel="stylesheet" href="dest/css/style.css">
+        <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+        <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    </head>
+    <body class="is-boxed has-animations" style="font-family: 'tajawal'">
 @yield('LoginForm')
-
-
-    <!-- Bootstrap and necessary plugins -->
-    <script src="js/libs/jquery.min.js"></script>
-    <script src="js/libs/tether.min.js"></script>
-    <script src="js/libs/bootstrap.min.js"></script>
-
-    <!-- Grunt watch plugin -->
-    <script src="//localhost:35729/livereload.js"></script>
-
-
-
-</body></html>
+        <script src="dest/js/main.min.js"></script>
+    </body>
+</html>

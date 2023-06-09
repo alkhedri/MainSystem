@@ -14,13 +14,20 @@
 
 @section('content')
  
+<div class="row">
+    <a class="btn btn-primary" href="">طالب</a>
+    <hr>
+    <a class="btn btn-primary" href="">مقرر</a>
+</div>
+
+
 <canvas id="myChart" height="100px"></canvas>
+ 
 @endsection
 
 @section('page-js-script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
   
@@ -32,7 +39,8 @@
         labels: labels,
         datasets: [{
             label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            
+             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: users,
         }]
@@ -41,8 +49,20 @@
     const config = {
         type: 'bar',
         data: data,
-        options: {}
+        options: {
+        plugins: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    font: {
+                        size: 24
+                    }
+                }
+            }
+        }
+    }
     };
+    Chart.defaults.font.size = 16;
     const myChart = new Chart(
         document.getElementById('myChart'),
         config

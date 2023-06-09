@@ -165,12 +165,12 @@ class ExaminationController extends Controller
     //// Semesters Methods
     public function index_SemestersMenu()
     {
-        $Semesters = Semester::paginate(5);
-        $user_id = auth()->user()->id;
-        
+         $user_id = auth()->user()->id;
+      
 
         $College_id = Instructor::where('id', $user_id)->pluck('college_id');
-        
+        $Semesters = Semester::where('college_id', $College_id)->paginate(5);
+       
         $current_semester = College::where('id', $College_id)->pluck('current_semester');
        
         $semester_name = Semester::where('id',$current_semester)->value('name');

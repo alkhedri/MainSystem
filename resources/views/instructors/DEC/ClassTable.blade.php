@@ -26,6 +26,10 @@
     <a class="btn btn-primary" href="{{route('ClassTableEdit')}}" style="margin-left: 10px">تعديل</a>
  
     <a class="btn btn-success" href="{{route('CreateClassTable')}}">إنشاء</a>
+
+    <button  class="btn btn-primary"   onclick="printDiv()"> <i class="fa icon-printer
+      "></i>
+      طباعة</button>
   </div>
     <div class="card">
         <div class="card-header">
@@ -33,7 +37,7 @@
         </div>
         <div class="card-block">
               
-<table class="table  table-bordered" style="width:100%">
+<table class="table  table-bordered" style="width:100%" id="table" border='1' cellpadding='1'   >
     <tr>
       <th rowspan="2">المحاضرة  اليوم </th>
    
@@ -213,4 +217,21 @@
  
  
  
+@endsection
+
+
+@section('page-js-script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="text/javascript">
+  
+function printDiv( ) {
+  var divToPrint=document.getElementById("table");
+        newWin= window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+}
+</script>
 @endsection

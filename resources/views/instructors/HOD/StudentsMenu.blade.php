@@ -90,7 +90,9 @@
                                     
                                     <td>
                                         <a href="{{route('StudentsProfile' , [ 'id' => $student->id ])}}" class="btn btn-primary btn-sm">عرض البيانات</a>
+                                        <a href="{{route('StudentsStats' , [ 'id' => $student->id ])}}" class="btn btn-success btn-sm">الاحصائيات</a>
  
+                                        
                                     </td>
                                 </tr>
                                 @endforeach

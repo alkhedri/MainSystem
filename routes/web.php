@@ -125,6 +125,10 @@ Route::get('/Complaints', 'App\Http\Controllers\InstrController@index_Complaints
 
 
 Route::get('/Stats', 'App\Http\Controllers\Instructors\StatsController@index')->name('Stats');;
+Route::get('/StudentsStats', 'App\Http\Controllers\Instructors\StatsController@students')->name('StudentsStats');;
+Route::post('/StudentsStatsActionSemester', 'App\Http\Controllers\Instructors\StatsController@students_ActionSemester')->name('StudentsStatsActionSemester');;
+
+
 
 // EXAM Coordinator
 
