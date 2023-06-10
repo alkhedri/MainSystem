@@ -47,6 +47,7 @@
                                         <option value="1">الأعمال</option>
                                         <option value="2">الامتحان النهائي</option>
                                         <option value="3">المجموع</option>
+                                        <option value="4">الحضور</option>
                                     
                            
                                 </select>
@@ -71,6 +72,9 @@
 $stack = Session::get('stack');
 $data = Session::get('data');
 $max = Session::get('max');
+$title = Session::get('title');
+
+
 
 ?>
 
@@ -98,12 +102,13 @@ $max = Session::get('max');
     var users =  {{ Js::from($data) }};
     var name =  {{ Js::from($studentName) }};
     var maxvalue =  {{ Js::from($max) }};
+    var title =  {{ Js::from($title) }};
   
     
     const data = {
         labels: labels,
         datasets: [{
-           label: '  رسم بياني للطالب   ' + name,
+           label: title + " " + name,
             
              backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',

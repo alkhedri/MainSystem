@@ -115,8 +115,7 @@
                
           </div>
       </div>
-      <div class="chart-wrapper" style="height:300px;margin-top:40px;"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
-      
+   
       <div class="hidden-sm-up">
         <div style="overflow-x:auto;">
             <table>
@@ -151,17 +150,23 @@
                   <tr style="">
                       
                     <th rowspan="1"  style="text-align: center;vertical-align:middle"  >السبت</th>
-                    <td  >برمجة حاسوب</td>
-                     <td>8:30</td>
+                  
+                    
+                    <td> </td>
+                    <td>8:30</td>
+         
               
-                     <td>هيكلة بيانات</td>
-                      <td>10:00</td>
-            
-                       <td>مقرر</td>
-                       <td>قاعه</td>
-                 
-                         <td>مقرر</td>
-                         <td>قاعه</td>
+                    <td> </td>
+                     <td>10:00</td>
+              
+              
+                     <td> </td>
+                      <td>قاعه</td>
+          
+              
+                      <td> </td>
+                        <td>قاعه</td>
+                     
                      
                   </tr>
                   
@@ -224,6 +229,9 @@
             </table>
           </div>
       </div>
+
+    
+
 <table class="table hidden-sm-down" >
     <tr>
         <th rowspan="2"> اليوم / المحاضرة </th>
@@ -231,22 +239,22 @@
                   
     </tr>
    <tr>
-   <th colspan="2" style="text-align: center" > 
+   <th colspan="1" style="text-align: center" > 
     الاولى
    <br>
    [10:30 - 8:30]
 </th>
-    <th colspan="2" style="text-align: center">
+    <th colspan="1" style="text-align: center">
         الثانية
         <br>
         [12:30 - 10:30]
     </th>
-    <th colspan="2" style="text-align: center">
+    <th colspan="1" style="text-align: center">
         الثالثة
         <br>
         [02:30 - 12:30]
     </th>
-    <th colspan="2" style="text-align: center">
+    <th colspan="1" style="text-align: center">
         الرابعة
         <br>
         [04:30 - 02:30]
@@ -257,75 +265,39 @@
     <tr style="">
         
       <th rowspan="1"  style="text-align: center;vertical-align:middle"  >السبت</th>
-      <td  >برمجة حاسوب</td>
-       
-       <td  style="" >8:30</td>
-       <td>هيكلة بيانات</td>
-        <td>10:00</td>
-       
-         <td>مقرر</td>
-         <td>قاعه</td>
+      
+      
          
-           <td>مقرر</td>
-           <td>قاعه</td>
-         
+                
+                 
     </tr>
     
  
      <tr>
       <th rowspan="1" style="text-align: center;vertical-align:middle">الاحد</th>
-      <td>برمجة حاسوب</td>
      
-      <td>8:30</td>
-
-      <td>هيكلة بيانات</td>
-      
-       <td>8:30</td>
-
-        <td>مقرر</td>
-        <td>قاعه</td>
      
-
-          <td>مقرر</td>
-          <td>قاعه</td>
-          
     </tr>
  
           <tr>
       <th rowspan="1" style="text-align: center;vertical-align:middle">الاثنين</th>
-      <td>برمجة حاسوب</td>
-      <td>8:30</td>
-    
-
-      <td>هيكلة بيانات</td>
-       <td>10:00</td>
-        
-
-        <td>مقرر</td>
-        <td>قاعه</td>
-         
-         
-          <td>مقرر</td>
-          <td>قاعه</td>
+      
+      
           
     </tr>
     <tr>
         <th rowspan="1" style="text-align: center;vertical-align:middle">الثلاثاء</th>
-        <td>برمجة حاسوب</td>
-        <td>8:30</td>
-     
-  
-        <td>هيكلة بيانات</td>
-         <td>10:00</td>
         
-  
-          <td>مقرر</td>
-          <td>قاعه</td>
        
-           
-            <td>مقرر</td>
-            <td>قاعه</td>
-            
+      </tr>
+      <tr>
+        <th rowspan="1" style="text-align: center;vertical-align:middle">الإربعاء</th>
+        
+      </tr>
+      <tr>
+        <th rowspan="1" style="text-align: center;vertical-align:middle">الخميس</th>
+        
+        
       </tr>
   </table>
 </div>

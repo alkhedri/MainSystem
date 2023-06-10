@@ -207,7 +207,7 @@ body{
                         <li class="nav-item">
                         
                      <a class="nav-link" href="{{route('FacultyMembers')}}"><i class="icon-docs"></i> أعضاء هيئة التدريس</a>
-                     <a class="nav-link" href="{{route('SemestersPlanB')}}"><i class="icon-docs"></i>الخطة الدراسية</a>
+ 
                      <a class="nav-link" href="{{route('StudentsMenu')}}"><i class="icon-docs"></i>طلبة القسم</a>
                      <a class="nav-link" href="{{route('Dropped')}}"><i class="icon-docs"></i>الطلبة المتعثرين</a>
                      <a class="nav-link" href="{{route('NewStudents')}}"><i class="icon-docs"></i>الطلبة المنسبين للقسم</a>
@@ -230,8 +230,7 @@ body{
                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>الدراسة و الامتحانات</a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                            <a class="nav-link" href="{{route('SemestersPlanB')}}"><i class="icon-docs"></i>الخطة الدراسية</a>
-                
+                      
                               <a class="nav-link" href="{{route('SubjectsMenu')}}"><i class="icon-user-follow"></i>المقررات الدراسية</a>
                          
                       
@@ -245,12 +244,11 @@ body{
                     
                                 <a class="nav-link" href="{{route('OverrideRequest')}}"><i class="icon-user-follow"></i>طلب تنزيل مواد</a>
                           
-                                <a class="nav-link" href="{{route('ClassTable')}}"><i class="icon-user-follow"></i>جدول المحاضرات</a>
+                                <a class="nav-link" href="{{route('TimeTable')}}"><i class="icon-user-follow"></i>جدول المحاضرات</a>
                            
                                 <a class="nav-link" href="{{route('ExamsTable')}}"><i class="icon-user-follow"></i>جدول  الامتحانات</a>
                   
-                                <a class="nav-link" href="{{route('DepartmentsDelete')}}"><i class="icon-user-follow"></i>نموذج  2</a>
-                               </li>
+                                        </li>
                     </ul>
                         </li>
                         @endpermission
@@ -265,9 +263,8 @@ body{
                      
                           <a class="nav-link" href="{{route('SubjectsList')}}"><i class="icon-docs"></i>قائمة المقررات</a>
                           <a class="nav-link" href="{{route('SupervisionList')}}"><i class="icon-docs"></i>طلبة الاشراف</a>
-                          <a class="nav-link" href="{{route('StudentsMovement')}}"><i class="icon-docs"></i>حالة طلبة الاشراف</a>
-                          <a class="nav-link" href="{{route('DroppedPaln')}}"><i class="icon-docs"></i>وضع خطة دراسية لطالب</a>
-                          <a class="nav-link" href="{{route('SemestersPlanB')}}"><i class="icon-docs"></i>الخطة الدراسية للفصل الحالي</a>
+                            <a class="nav-link" href="{{route('DroppedPaln')}}"><i class="icon-docs"></i>وضع خطة دراسية لطالب</a>
+                          <a class="nav-link" href="{{route('SemestersPlanC')}}"><i class="icon-docs"></i>الخطة الدراسية للفصل الحالي</a>
                          </li>
                          
                          
@@ -639,7 +636,7 @@ body{
  
      <footer class="footer">
          <span class="text-left">
-             <a href="http://coreui.io">CoreUI</a> &copy; 2023 Mohammed .
+             &copy; 2023 Mohammed .
          </span>
       
      </footer>

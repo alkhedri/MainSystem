@@ -35,7 +35,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <strong>فائمة</strong> المقررات المتاحة
+                <strong>قائمة</strong> المقررات المتاحة
             </div>
             <div class="card-block">
                 <form action="{{route('AddSubject')}}" method="post" class="form-horizontal ">
@@ -145,5 +145,14 @@
                      
                     </div>
            
+                    <div class="alert alert-primary" role="alert">
+                        <p> إجمالي عدد الوحدات   : [ {{$units}} ]</p>
+                       <hr>
+                       
+                     </div>
 </div>
+
+ 
+ 
+
 @endsection

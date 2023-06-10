@@ -10,6 +10,7 @@ use DB;
 use App\Models\student;
 use App\Models\Semester;
 use App\Models\subject;
+use App\Models\student_attendanceRecord;
 
 class StatsController extends Controller
 {
@@ -86,22 +87,66 @@ public function students(Request $request){
     //$studentSubjects = student_mark::where('student_id' , $request->id)->where('semester_id' , $request->semester_id)->get();;
  
     $stack = array();
-
+   
 
      $max = 0 ;
     if( $request->selection == 1){
         $users = student_mark::where('student_id' , $request->id)->where('semester_id' ,  $request->semester_id)
         ->pluck('work', 'subject_id');
         $max = 40 ;
+        $title = 'الأعمال';
+
     }
      else if( $request->selection == 2){
         $users = student_mark::where('student_id' , $request->id)->where('semester_id' , $request->semester_id)
         ->pluck('final', 'subject_id');
         $max = 60 ;
+        $title = 'الإمتحان النهائي';
+
      }
-    else{
+    else if( $request->selection == 3){
         
-    }
+    }else if( $request->selection == 4){
+        $users = student_attendanceRecord::where('student_id' , $request->id)
+        ->pluck('status', 'subject_id');
+        $max = 12 ;
+        $title = 'سجل الحضور';
+
+        $counter = array();
+        $countervar = 0;
+        $labels = $users->keys();
+
+        foreach($labels as $std){
+            $student = student_attendanceRecord::where('subject_id' , $std)->where('student_id' , $request->id)->get();
+
+            foreach( $student as $count){
+                if ($count->status == 1)
+                $countervar++;
+            }
+            array_push($counter, $countervar);
+            $countervar = 0;
+        }
+
+
+       
+        $data = $counter;
+
+
+            foreach($labels as $std){
+                $student = subject::where('id' , $std)->value('arabic_name');
+                array_push($stack, $student);
+            }
+
+            return back()->with( [
+                'stack' => $stack, 
+                'data' => $data, 
+                'max' => $max, 
+                'title' => $title, 
+            
+                
+            ] );
+}
+     
    
 
 
@@ -120,7 +165,8 @@ public function students(Request $request){
         'stack' => $stack, 
         'data' => $data, 
         'max' => $max, 
-    
+        'title' => $title, 
+            
     
     ] );
           

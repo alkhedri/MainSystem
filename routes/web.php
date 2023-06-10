@@ -57,6 +57,11 @@ Route::get('/createSemesterPlan', 'App\Http\Controllers\ExaminationController@cr
 
 Route::post('/SetSemestersPlan', 'App\Http\Controllers\ExaminationController@set_SemestersPlan')->name('SetSemestersPlan');
 
+
+Route::get('/StudentAccount', 'App\Http\Controllers\ExaminationController@index_StudentAccount')->name('StudentAccount');
+Route::post('/CreateStudentAccount', 'App\Http\Controllers\ExaminationController@index_CreateStudentAccount')->name('CreateStudentAccount');
+
+
 Route::get('/StudentsPlacement', 'App\Http\Controllers\ExaminationController@index_StudentsPlacement')->name('StudentsPlacement');
 
 
@@ -90,12 +95,14 @@ Route::get('/StudentNotify', 'App\Http\Controllers\ExaminationController@index_S
 Route::post('/NotifyStudent', 'App\Http\Controllers\NotificationsController@action_NotifyStudent')->name('NotifyStudent');
 
  
+Route::get('/StudentDropAndAdd', 'App\Http\Controllers\ExaminationController@index_StudentDropAndAdd')->name('StudentDropAndAdd');
+Route::get('/StudentDropAndAddAction', 'App\Http\Controllers\ExaminationController@index_StudentDropAndAddAction')->name('StudentDropAndAddAction');
+ 
+
     //Route::get('/manage', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
 });
 
-
-Route::group(['middleware' => ['role:instructor']], function() {
-    Route::get('/inst', 'App\Http\Controllers\InstrController@index')->name('inst');
+Route::group(['middleware' => ['role:instructor', 'permission:hod-read']], function() {
 
 //----------  HEAD OF DEPARTMENT
 Route::get('/facultyMembers', 'App\Http\Controllers\InstrController@index_facultyMembers')->name('FacultyMembers');
@@ -106,8 +113,7 @@ Route::post('/InstructorSearch', 'App\Http\Controllers\Instructors\InstructorsMe
 
 
 
-Route::get('/SemestersPlanShow', 'App\Http\Controllers\InstrController@index_SemestersPlan')->name('SemestersPlanB');
-
+ 
 Route::get('/StudentsMenu', 'App\Http\Controllers\InstrController@index_StudentsMenu')->name('StudentsMenu');;
 Route::get('/StudentsProfile', 'App\Http\Controllers\Instructors\StudentsController@index_Profile')->name('StudentsProfile');;
 Route::get('/ActiveStudents', 'App\Http\Controllers\Instructors\StudentsController@Active_Students')->name('ActiveStudents');;
@@ -129,6 +135,9 @@ Route::get('/StudentsStats', 'App\Http\Controllers\Instructors\StatsController@s
 Route::post('/StudentsStatsActionSemester', 'App\Http\Controllers\Instructors\StatsController@students_ActionSemester')->name('StudentsStatsActionSemester');;
 
 
+});
+
+Route::group(['middleware' => ['role:instructor', 'permission:dec-read']], function() {
 
 // EXAM Coordinator
 
@@ -138,6 +147,10 @@ Route::get('/SubjectsDetails', 'App\Http\Controllers\InstrController@index_Subje
 Route::get('/NewSubject', 'App\Http\Controllers\InstrController@index_NewSubject')->name('NewSubject');
 Route::POST('/ActionInsertNewSubject', 'App\Http\Controllers\Instructors\SubjectsController@insert_newSubject')->name('ActionInsertNewSubject');
 Route::POST('/ActionUpdateSubject', 'App\Http\Controllers\Instructors\SubjectsController@Update_Subject')->name('ActionUpdateSubject');
+
+Route::get('/SubjectsProfessor', 'App\Http\Controllers\InstrController@index_SubjectsProfessor')->name('SubjectsProfessor');
+Route::POST('/SubjectsProfessorAction', 'App\Http\Controllers\Instructors\SubjectsController@Update_SubjectProfessor')->name('SubjectsProfessorAction');
+
 
 Route::get('/ActionDeleteSubject', 'App\Http\Controllers\Instructors\SubjectsController@Delete_Subject')->name('ActionDeleteSubject');
 Route::get('/ActionDeleteSubjectRequiremet', 'App\Http\Controllers\Instructors\SubjectsController@Delete_SubjectRequiremet')->name('ActionDeleteSubjectRequiremet');
@@ -157,12 +170,20 @@ Route::get('/OverrideRequest', 'App\Http\Controllers\InstrController@index_Overr
 Route::post('/OverrideRequestAction', 'App\Http\Controllers\Instructors\StudentsController@OverrideRequest')->name('OverrideRequestAction');;
 
 
-Route::get('/ClassTable', 'App\Http\Controllers\InstrController@index_ClassTable')->name('ClassTable');;
-Route::get('/ClassTableEdit', 'App\Http\Controllers\InstrController@index_ClassTableEdit')->name('ClassTableEdit');;
-Route::get('/DayToBeEdited', 'App\Http\Controllers\InstrController@index_DayToBeEdited')->name('DayToBeEdited');;
+Route::get('/TimeTable', 'App\Http\Controllers\InstrController@index_TimeTable')->name('TimeTable');;
+Route::get('/TimeTableEdit', 'App\Http\Controllers\InstrController@index_TimeTableEdit')->name('TimeTableEdit');;
 
-Route::get('/CreateClassTable', 'App\Http\Controllers\Instructors\SubjectsController@CreateClassTable')->name('CreateClassTable');;
-Route::post('/ClassTableEditAction', 'App\Http\Controllers\Instructors\SubjectsController@ClassTableEditAction')->name('ClassTableEditAction');;
+ Route::post('/TimeTableEditAction', 'App\Http\Controllers\Instructors\SubjectsController@TimeTableEditAction')->name('TimeTableEditAction');;
+ 
+ Route::get('/TimeTableDeleteAction', 'App\Http\Controllers\Instructors\SubjectsController@TimeTableDeleteAction')->name('TimeTableDeleteAction');;
+ 
+ Route::get('/TimeTableEditPeriod', 'App\Http\Controllers\InstrController@index_TimeTableEditPeriod')->name('TimeTableEditPeriod');;
+ 
+ Route::post('/TimeTableEditPeriodAction', 'App\Http\Controllers\Instructors\SubjectsController@TimeTableEditPeriodAction')->name('TimeTableEditPeriodAction');;
+ 
+
+
+
 
 Route::get('/ExamsTable', 'App\Http\Controllers\InstrController@index_ExamsTable')->name('ExamsTable');;
 Route::post('/ExamsTableEditAction', 'App\Http\Controllers\Instructors\SubjectsController@ExamsTableEditAction')->name('ExamsTableEditAction');;
@@ -171,10 +192,17 @@ Route::get('/EditExamsTableActionFirst', 'App\Http\Controllers\Instructors\Subje
 Route::get('/EditExamsTableActionSecond', 'App\Http\Controllers\Instructors\SubjectsController@EditExamsTableActionSecond')->name('EditExamsTableActionSecond');;
 Route::get('/EditExamsTableActionDelete', 'App\Http\Controllers\Instructors\SubjectsController@EditExamsTableActionDelete')->name('EditExamsTableActionDelete');;
 
+ 
+
+});
+
+Route::group(['middleware' => ['role:instructor']], function() {
+    Route::get('/inst', 'App\Http\Controllers\InstrController@index')->name('inst');
 
 
 
  // PROFESSORS
+ Route::get('/SemestersPlanShow', 'App\Http\Controllers\InstrController@index_SemestersPlan')->name('SemestersPlanC');
 
  Route::get('/SubjectsList', 'App\Http\Controllers\InstrController@index_SubjectsList')->name('SubjectsList');;
  Route::get('/marksRecord', 'App\Http\Controllers\Instructors\SubjectsController@marksRecord')->name('marksRecord');;
@@ -218,11 +246,7 @@ Route::get('/EditExamsTableActionDelete', 'App\Http\Controllers\Instructors\Subj
         Route::get('/studentDashboard', 'App\Http\Controllers\students\StudentController@index')->name('studentDashboard');
         Route::get('/CurrentSemesterSubjects', 'App\Http\Controllers\students\StudentController@show_currentSemSubs')->name('currentSemSubs');
        
-        Route::get('/EditSubjects', 'App\Http\Controllers\students\StudentController@show_EditSubjects')->name('EditSubjects');
-        Route::post('/AddSubject', 'App\Http\Controllers\students\StudentController@AddSubject')->name('AddSubject');
-        Route::get('/DropSubject', 'App\Http\Controllers\students\StudentController@DropSubject')->name('DropSubject');
-        
-        
+   
         Route::get('/NotifyMenu', 'App\Http\Controllers\students\StudentController@show_NotifyMenu')->name('NotifyMenu');
         Route::get('/ShowNotificationMessage', 'App\Http\Controllers\students\StudentController@ShowNotificationMessage')->name('ShowNotificationMessage');
        
@@ -234,6 +258,12 @@ Route::get('/EditExamsTableActionDelete', 'App\Http\Controllers\Instructors\Subj
         
     });
 
+    Route::group(['middleware' => ['role:student', 'permission:subjects-create']], function() {
+    Route::get('/EditSubjects', 'App\Http\Controllers\students\StudentController@show_EditSubjects')->name('EditSubjects');
+    Route::post('/AddSubject', 'App\Http\Controllers\students\StudentController@AddSubject')->name('AddSubject');
+    Route::get('/DropSubject', 'App\Http\Controllers\students\StudentController@DropSubject')->name('DropSubject');
+});
+    
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

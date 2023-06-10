@@ -32,7 +32,7 @@ class student extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = [
+   protected $fillable = [
         'id',
         'nat_id',
         'arabic_name',
@@ -45,8 +45,9 @@ class student extends Model
         'college_id',
         'units',
         'gpa',
-        'enrollment_status_id'
-        
+        'enrollment_status_id',
+        'Enrollment',
+        'birth',
     ];
 
     public static function getNameById($id){

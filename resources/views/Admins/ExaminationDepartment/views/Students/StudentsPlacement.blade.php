@@ -17,11 +17,11 @@
 @section('content')
 <div class="alert alert-success" role="alert">
     <h4 class="alert-heading">تفاصيل طلبة التنسيب</h4>
-    <p>موعد التنسيب <span> [ 14/3/2020] </span></p>
+    <p>موعد التنسيب <span> [  {{$date}}] </span></p>
     <hr>
      
-    <h4> العدد الاجمالي <span> [ 40 ]</span></h4>
-    <h4>   عدد الاقسام <span> [ 6 ]</span></h4>
+    <h4> العدد الاجمالي <span>[ {{ $requests->count()}} ]</span></h4>
+    <h4>   عدد الاقسام <span> [ {{$departments->count()}} ]</span></h4>
   </div>
  
  
@@ -62,7 +62,7 @@
                                
                                     <li>
                                         {{App\Models\department::getDepNameById($item->department_id)}} - 
-                                        <a class="btn btn-sm btn-primary" href="test">تنسيب</a>
+                                        <a class="btn btn-sm btn-primary" href="{{route('StudentsMovementActionDone' , ['newDepId' => $item->department_id , 'student_id' => $request->student_id])}}">تنسيب</a>
                                     </li>
                               
 <br>                                

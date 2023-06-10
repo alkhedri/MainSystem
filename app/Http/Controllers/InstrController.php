@@ -69,7 +69,7 @@ class InstrController extends Controller
      $SEMESTER_NAME = Semester::where('id',$semester_id)->value('name');
 
 
-        return view('instructors.HOD.SemestersPlan' , compact('semesterplan' , 'SEMESTER_NAME'));
+        return view('instructors.Professor.SemestersPlan' , compact('semesterplan' , 'SEMESTER_NAME'));
     }
 
     public function index_StudentsMenu()
@@ -166,6 +166,23 @@ class InstrController extends Controller
 
         return view('instructors.DEC.SubjectDetails' , compact('subjects' , 'requirements' ,'subject_Code' , 'instructors' , 'Department_subjects'));
     }
+    
+    public function index_SubjectsProfessor(Request $request)
+    {
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+        $college_id = Instructor::where('id',$user_id)->value('college_id');
+       
+        $subjects =  subject::all()->where('department_id',$department_id)->where('id' , $request->id);
+        $Department_subjects =  subject::all()->where('department_id',$department_id);
+        $subject_Code =  subject::where('id',$request->id)->value('code');
+      
+        $requirements =  subject_requirement::all()->where('subject',$request->id);
+        $instructors =  instructor::all()->where('college_id',$college_id);
+      
+
+       return view('instructors.DEC._CollegeProfs' , compact('subjects' , 'requirements' ,'subject_Code' , 'instructors' , 'Department_subjects'));
+    }
 
     public function index_NewSubject()
     {
@@ -196,58 +213,102 @@ class InstrController extends Controller
 
         return view('instructors.DEC.SubjectOverrideRequest' , compact('subjects' , 'department_id'));
     }
-    public function index_ClassTable()
+    public function index_TimeTable()
     {
-        
         $user_id = auth()->user()->id;
         $department_id = Instructor::where('id',$user_id)->value('department_id');
-  
-        $Saturday =  TimeTable::where('department_id',$department_id)->where('day',0)->get();
-        $Sunday =  TimeTable::where('department_id',$department_id)->where('day',1)->get();
-        $Monday =  TimeTable::where('department_id',$department_id)->where('day',2)->get();
-        $Tuesday =  TimeTable::where('department_id',$department_id)->where('day',3)->get();
-        $Wedensday =  TimeTable::where('department_id',$department_id)->where('day',4)->get();
-        $Thursday =  TimeTable::where('department_id',$department_id)->where('day',5)->get();
-       
 
-        return view('instructors.DEC.ClassTable', compact('Saturday' , 'Sunday' , 'Monday' , 'Tuesday' ,'Wedensday' , 'Thursday'));
-    }
-    public function index_ClassTableEdit()
-    {
-        
-        $user_id = auth()->user()->id;
-        $department_id = Instructor::where('id',$user_id)->value('department_id');
-  
-        $Saturday =  TimeTable::where('department_id',$department_id)->where('day',0)->get();
-        $Sunday =  TimeTable::where('department_id',$department_id)->where('day',1)->get();
-        $Monday =  TimeTable::where('department_id',$department_id)->where('day',2)->get();
-        $Tuesday =  TimeTable::where('department_id',$department_id)->where('day',3)->get();
-        $Wedensday =  TimeTable::where('department_id',$department_id)->where('day',4)->get();
-        $Thursday =  TimeTable::where('department_id',$department_id)->where('day',5)->get();
-       
-        $subjects =  subject::where('department_id',$department_id)->get();
-       
-        $Rooms =  Room::where('department_id',$department_id)->get();
-       
-
-        return view('instructors.DEC.EditClassTable', compact('Saturday' , 'Sunday' , 'Monday' , 'Tuesday' ,'Wedensday' , 'Thursday' , 'subjects' , 'Rooms'));
-    }
-    public function index_DayToBeEdited(Request $request)
-    {
-        
-        $user_id = auth()->user()->id;
-        $department_id = Instructor::where('id',$user_id)->value('department_id');
-  
-        $SelectedDay =  TimeTable::where('department_id',$department_id)->where('day',$request->day)->get();
+     
+        $Saturday = TimeTable::where('department_id',$department_id)->where('day', 0)->get();
+        $Sunday = TimeTable::where('department_id',$department_id)->where('day', 1)->get();
+        $Monday = TimeTable::where('department_id',$department_id)->where('day', 2)->get();
+        $Tuesday = TimeTable::where('department_id',$department_id)->where('day', 3)->get();
+        $Wedensday = TimeTable::where('department_id',$department_id)->where('day', 4)->get();
+        $Thursday = TimeTable::where('department_id',$department_id)->where('day', 5)->get();
+      
  
-        $subjects =  subject::where('department_id',$department_id)->get();
-       
-        $Rooms =  Room::where('department_id',$department_id)->get();
-       $day =  $request->day ;
-       
 
-        return view('instructors.DEC.DayToBeEdited', compact('SelectedDay'   , 'subjects' , 'Rooms' , 'day'));
+
+        $Department_subjects = subject::where('department_id',$department_id)->get();
+        $Department_Rooms = room::where('department_id',$department_id)->get();
+    $departmentName = department::where('id',$department_id)->value('arabic_name');
+        
+        return view('instructors.DEC.TimeTable' , compact(
+            'Saturday',
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wedensday',
+            'Thursday',
+            'Department_subjects',
+            'Department_Rooms',
+            'departmentName'
+        ));   
     }
+     
+
+    public function index_TimeTableEditPeriod(Request $request){
+      
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+
+     
+        $Department_subjects = subject::where('department_id',$department_id)->get();
+        $Department_Rooms = room::where('department_id',$department_id)->get();
+
+
+        $id = $request->id;
+        $period = $request->period;
+
+ 
+
+        return view('instructors.DEC.TimeTableEditSinglePeriod' , 
+        compact('Department_subjects' ,
+        'Department_Rooms',
+        'period',
+        'id',
+         
+        
+        ));
+
+    }
+    public function index_TimeTableEdit(Request $request)
+    {
+
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+      
+     
+ 
+        $Saturday = TimeTable::where('department_id',$department_id)->where('day', 0)->get();
+        $Sunday = TimeTable::where('department_id',$department_id)->where('day', 1)->get();
+        $Monday = TimeTable::where('department_id',$department_id)->where('day', 2)->get();
+        $Tuesday = TimeTable::where('department_id',$department_id)->where('day', 3)->get();
+        $Wedensday = TimeTable::where('department_id',$department_id)->where('day', 4)->get();
+        $Thursday = TimeTable::where('department_id',$department_id)->where('day', 5)->get();
+      
+ 
+
+
+
+
+        return view('instructors.DEC.EditClassTable' , compact(
+            'Saturday',
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wedensday',
+            'Thursday',
+          
+            
+        ));  
+       
+          
+
+    }
+      
+ 
+    
     ///////////////////////////////////////
 
     public function index_SubjectsList()

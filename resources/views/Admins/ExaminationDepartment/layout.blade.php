@@ -138,7 +138,7 @@
                          <ul class="nav-dropdown-items">
                              <li class="nav-item">
                              
-                          <a class="nav-link" href="{{route('registerTest')}}"><i class="icon-docs"></i>إضافة طالب</a>
+                          <a class="nav-link" href="{{route('StudentAccount')}}"><i class="icon-docs"></i>إضافة طالب</a>
                           <a class="nav-link" href="{{route('StudentsPlacement')}}"><i class="icon-docs"></i>تنسيب طالب إلى قسم</a>
                           <a class="nav-link" href="{{route('StudentsMovement')}}"><i class="icon-docs"></i>نقل طالب إلى قسم</a>
                           <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>تجديد القيد</a>
@@ -152,6 +152,21 @@
                      </ul>
                          </li>
            
+
+
+                       
+                           <li class="nav-item nav-dropdown">
+                              <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>صلاحيات الطلبة</a>
+                              <ul class="nav-dropdown-items">
+                                  <li class="nav-item">
+                                  
+                               <a class="nav-link" href="{{route('StudentDropAndAdd')}}"><i class="icon-docs"></i>تنزيل و اسقاط</a>
+                     
+                              </li>
+                              
+                              
+                          </ul>
+                              </li>
                  <!--<li class="nav-item nav-dropdown">
                      <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> ثبت کاربر جدید</a>
                      <ul class="nav-dropdown-items">
@@ -509,7 +524,7 @@
  
      <footer class="footer">
          <span class="text-left">
-             <a href="http://coreui.io">CoreUI</a> &copy; 2023 Mohammed .
+         &copy; 2023 Mohammed .
          </span>
       
      </footer>

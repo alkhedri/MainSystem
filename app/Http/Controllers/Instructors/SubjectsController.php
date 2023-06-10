@@ -311,6 +311,19 @@ $subject_id = $request->subject_id;
 
         return back()->with('message', 'تم تعديل البيانات ');;
     }
+    public function Update_SubjectProfessor(Request $request){
+ 
+    
+            subject::where('id', $request->id)
+            ->update([
+ 
+                'proffesor_id' => $request->professor_id,
+             ]);
+       
+   
+
+        return redirect()->route('SubjectsMenu');
+    }
 
     
     public function Delete_SubjectRequiremet(Request $request)
@@ -337,7 +350,7 @@ $subject_id = $request->subject_id;
             'Code'          => $request->code,
             'Units'         => $request->units,
             
-        ]);;
+        ]);
 
     }
     
@@ -354,103 +367,155 @@ $subject_id = $request->subject_id;
         return back()->with('message', 'تم تعديل البيانات ');;
     }
     
-    public function ClassTableEditAction(Request $request){
+    public function TimeTableEditAction(Request $request){
  
-        $FirstPeriod = $request->get('FirstPeriod');
-        $SecondPeriod = $request->get('SecondPeriod');
-        $ThirdPeriod = $request->get('ThirdPeriod');
-        $ForthPeriod = $request->get('ForthPeriod');
-
-        $FirstPeriodRoom = $request->get('FirstPeriodRoom');
-        $SecondPeriodRoom = $request->get('SecondPeriodRoom');
-        $ThirdPeriodRoom = $request->get('ThirdPeriodRoom');
-        $ForthPeriodRoom = $request->get('ForthPeriodRoom');
-        
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
 
 
-        $Roomids = $request->get('Roomids');
-        $ids = $request->get('ids');
-        //$SaturdayIDs =  TimeTable::where('day',0);
-        
-        //  if ($FirstPeriodRoom) {
-        //     return back()->with('message', $FirstPeriodRoom[1]);
-        //  }
-         
-        for ($i = 0 ; $i < 4 ; $i++)
-            TimeTable::where('day', $request->day)->where('id', $ids[$i])
-            ->update([
-                'Stp' => $FirstPeriod[$i],
-                'Sp' => $SecondPeriod[$i],
-                'Tp' => $ThirdPeriod[$i],
-                'Fp' => $ForthPeriod[$i],
-                
-
-             ]);
-
-
-             for ($i = 0 ; $i < 4 ; $i++)
-             TimeTable_Room::where('day_id', $ids[$i])
-             ->update([
-                 'Stp' => $FirstPeriodRoom[$i],
-                 'Sp' => $SecondPeriodRoom[$i],
-                 'Tp' => $ThirdPeriodRoom[$i],
-                 'Fp' => $ForthPeriodRoom[$i],
-                 
- 
-              ]);
-
-    return back()->with('message', 'تم تعديل الجدول');
-}
-  public function CreateClassTable(Request $request)
-    {
-
-
-         $user_id = auth()->user()->id;
-         $department_id = Instructor::where('id',$user_id)->value('department_id');
-
-
-         $check = TimeTable::where('department_id', $department_id )->first();
-  
-         if (!is_null($check)) {
-            return back()->with('message', 'الجدول موجود مسبقا');
-         }else{
-
-            for ($j = 0 ; $j < 6 ; $j++)
-            for ($i = 0 ; $i < 4 ; $i++)
-           TimeTable::insert(
+   if (!is_null($request->First) || !is_null($request->Second) || !is_null($request->Third) || !is_null($request->Forth) )
+        TimeTable::insert(
                [
+                   'day' => $request->Day,
+                   'Stp' => $request->First,
+                   'Sp' => $request->Second,
+                   'Tp' => $request->Third,
+                   'Fp' => $request->Forth,
                    'department_id' => $department_id,
-                   'day' => $j,
-                   'Stp' => NULL,
-                   'Sp' => NULL,
-                   'Tp' => NULL,
-                   'Fp' => NULL,
-                ]
-           );
+                ]);
+
+                TimeTable_Room::insert(
+                    [
+                        'day_id' => TimeTable::select('id')->max('id'),
+                        'Stp' => $request->FirstRoom,
+                        'Sp' => $request->SecondRoom,
+                        'Tp' => $request->ThirdRoom,
+                        'Fp' => $request->ForthRoom,
+                     ]);
+     
+
+    return back();
+} 
+
+public function TimeTableEditPeriodAction(Request $request){
+    $user_id = auth()->user()->id;
+    $department_id = Instructor::where('id',$user_id)->value('department_id');
 
 
-           $day_id = TimeTable::where('department_id', $department_id)->get();
+    if($request->period == 1){
+        TimeTable::where('id', $request->id)->where('department_id',$department_id)
+        ->update([
+        'Stp' => $request->Subject,
+          ]);
+          TimeTable_Room::where('day_id', $request->id)
+          ->update([
+          'Stp' => $request->Room,
+            ]);
 
-            
-                foreach ($day_id as $day)
-                 TimeTable_Room::insert(
-                [
-                    'day_id' => $day->id,
-                    'Stp' => NULL,
-                    'Sp' => NULL,
-                    'Tp' => NULL,
-                    'Fp' => NULL,
-                 ]);
-           
-
-         }
-
+    }
          
+            elseif($request->period == 2){
+                TimeTable::where('id', $request->id)->where('department_id',$department_id)
+                ->update([
+                    'Sp' => $request->Subject,
+                ]);
+                TimeTable_Room::where('day_id', $request->id)
+                ->update([
+                'Sp' => $request->Room,
+                  ]);
+            }
        
-        return back()->with('message', 'تم إنشاء الجدول');;
+            elseif($request->period == 3){
+                TimeTable::where('id', $request->id)->where('department_id',$department_id)
+                ->update([
+                    'Tp' => $request->Subject,
+                ]);
+                TimeTable_Room::where('day_id', $request->id)
+                ->update([
+                'Tp' => $request->Room,
+                  ]);
+            }
+      
+            elseif($request->period == 4){
+                TimeTable::where('id', $request->id)->where('department_id',$department_id)
+                ->update([
+                    'Fp' => $request->Subject,
+                ]);
+                TimeTable_Room::where('day_id', $request->id)
+                ->update([
+                'Fp' => $request->Room,
+                  ]);
+            }
+   
+    return redirect()->route('TimeTableEdit');
+}
 
-    } 
 
+public function TimeTableDeleteAction(Request $request)
+{
+
+     $user_id = auth()->user()->id;
+     $department_id = Instructor::where('id',$user_id)->value('department_id');
+
+  
+    // TimeTable::where('id',$request->id)->where('department_id',$department_id)->delete();
+
+    if($request->period == 1){
+        TimeTable::where('id', $request->id)->where('department_id',$department_id)
+        ->update([
+        'Stp' => NULL,
+          ]);
+          TimeTable_Room::where('day_id', $request->id)
+          ->update([
+          'Stp' => NULL,
+            ]);
+
+    }
+         
+            elseif($request->period == 2){
+                TimeTable::where('id', $request->id)->where('department_id',$department_id)
+                ->update([
+                    'Sp' => NULL,
+                ]);
+                TimeTable_Room::where('day_id', $request->id)
+                ->update([
+                'Sp' => NULL,
+                  ]);
+            }
+       
+            elseif($request->period == 3){
+                TimeTable::where('id', $request->id)->where('department_id',$department_id)
+                ->update([
+                    'Tp' => NULL,
+                ]);
+                TimeTable_Room::where('day_id', $request->id)
+                ->update([
+                'Tp' => NULL,
+                  ]);
+            }
+      
+            elseif($request->period == 4){
+                TimeTable::where('id', $request->id)->where('department_id',$department_id)
+                ->update([
+                    'Fp' => NULL,
+                ]);
+                TimeTable_Room::where('day_id', $request->id)
+                ->update([
+                'Fp' => NULL,
+                  ]);
+            }
+      
+
+            $check = TimeTable::where('id', $request->id)->where('department_id',$department_id)->value( 'Stp' , 'Sp' , 'Tp'  ,'Fp');
+            if(is_null($check)){
+                TimeTable_Room::where('day_id',$request->id)->delete();
+                TimeTable::where('id',$request->id)->where('department_id',$department_id)->delete();
+            }
+            
+
+     return back();
+
+}
 
     public function ExamsTableEditAction(Request $request)
     {
@@ -481,10 +546,16 @@ $subject_id = $request->subject_id;
          $user_id = auth()->user()->id;
          $department_id = Instructor::where('id',$user_id)->value('department_id');
 
-         ExamsTable::where('id', $request->id)->where('department_id',$department_id)
-         ->update([
-             'F' => NULL,
-          ]);
+         $secondCheck = ExamsTable::where('id',$request->id)->where('department_id',$department_id)->value('S');
+
+          if (is_null($secondCheck))
+          ExamsTable::where('id',$request->id)->where('department_id',$department_id)->delete();
+      
+          else
+            ExamsTable::where('id', $request->id)->where('department_id',$department_id)
+            ->update([
+                'F' => NULL,
+            ]);
      //  ExamsTable::where('id',$request->id)->where('department_id',$department_id)->delete();
       
          return back();
@@ -496,7 +567,11 @@ $subject_id = $request->subject_id;
 
          $user_id = auth()->user()->id;
          $department_id = Instructor::where('id',$user_id)->value('department_id');
+         $FirstCheck = ExamsTable::where('id',$request->id)->where('department_id',$department_id)->value('F');
 
+         if (is_null($FirstCheck))
+         ExamsTable::where('id',$request->id)->where('department_id',$department_id)->delete();
+         else
          ExamsTable::where('id', $request->id)->where('department_id',$department_id)
          ->update([
              'S' => NULL,
@@ -518,5 +593,7 @@ $subject_id = $request->subject_id;
          return back();
 
     }
+
+ 
     
 }

@@ -31,7 +31,7 @@
                 <div class="h5 text-info m-b-0 m-t-h">{{$department->arabic_name}}</div>
                 <div class="text-muted text-uppercase font-weight-bold font-xs">
                     
-                    {{App\Models\department::getSubjectsTottal($department->id) }} /  {{App\Models\department::getSubjectsTottal($department->id) }} 
+                    {{App\Models\department::getSubjectsDoneCount($department->id) }} /  {{App\Models\department::getSubjectsTottal($department->id) }} 
                 </div>
             </div>
            
@@ -46,12 +46,13 @@
                                  </div>
                             </div>
                             <div class="card-block collapse" id="collapseExample{{$department->id}}" aria-expanded="false" style="height: 0px;">
-                           <ul>
-                            <li>test 1</li>
-                            <li>test 1</li>
-                            <li>test 1</li>
-                            <li>test 1</li>
-                           </ul>
+                          
+                            @foreach (App\Models\department::getSubjectsNotDone($department->id)  as $item)
+                            <li> {{App\Models\subject::getSubjectName($item)}}   </li>
+                            
+                            @endforeach
+                        
+                          
                             </div>
                         </div>
                       

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>النظام الإلكتروني - قسم الحاسب الالى</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -55,7 +55,7 @@
                         <p class="hero-paragraph"> كلية الهندسة - جامعة صبراتة</p>
                       
                         <div class="hero-cta"><a class="button button-primary" href="{{route('login')}}">تسجيل الدخول</a>
-                            <a class="button" href="#">Get in touch</a></div>
+                            <a class="button" href="#">حول النظام</a></div>
                     </div>
                 </div>
            

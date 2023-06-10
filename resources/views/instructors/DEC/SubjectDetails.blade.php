@@ -145,7 +145,7 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 form-control-label" for="input-large">أستاذ المقرر</label>
                                         <div class="col-lg-6"> 
-                                            <Select id="input-large" name="professor_id" class="form-control input-lg" value="">
+                                            <Select id="input-large" name="professor_id" class="form-control" value="">
                                                 <option value="{{$subject->proffesor_id}}" selected hidden> {{ App\Models\instructor::getInstructorsName($subject->proffesor_id) }}</option>
                                               
                                              @foreach ($instructors as $instructor)
@@ -158,6 +158,8 @@
                                                </Select>  
                                          
                                         </div>
+
+                                          <a class=" btn btn-primary btn-sm" href="{{route('SubjectsProfessor', ['id' => $subject->id])}}">+</a>
                                     </div>
                                     <div class="form-actions" dir="ltr">
                                         <button type="submit" class="btn btn-primary">حفظ التغييرات</button>

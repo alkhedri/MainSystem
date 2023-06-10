@@ -20,6 +20,10 @@ namespace App\Models;
 use App\Models\student_mark;
 
 use App\Models\subject;
+use App\Models\college;
+use App\Models\instructor;
+
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -47,5 +51,66 @@ class department extends Model
         
     }
 
+    public static function getSubjectsNotDone($department_id){
+       
+
+        $total_subs_Done = subject::where('department_id', $department_id)->get();
+        
+        $user_id = auth()->user()->id;
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $current_semester = college::where('id', $College_id)->value('current_semester');
+ 
+
+        $subjectsNotDone = array();
+         
+            foreach( $total_subs_Done as $key => $subject)
+            {
+                $students = student_mark::where('subject_id', $subject->id)->where('semester_id' , $current_semester)->get();
+                    foreach($students as $student)
+                    if($student->work  == NULL || $student->final == NULL){
+                  
+                        array_push($subjectsNotDone , $subject->id);
+                        unset($total_subs_Done[$key]);
+                    }
+                       
+                        
+
+            }
+         
+        return   $subjectsNotDone ;
+        
+        
+    }
+    public static function getSubjectsDoneCount($department_id){
+       
+
+        $total_subs_Done = subject::where('department_id', $department_id)->get();
+        
+        $user_id = auth()->user()->id;
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $current_semester = college::where('id', $College_id)->value('current_semester');
+ 
+
+        $subjectsNotDone = array();
+         
+            foreach( $total_subs_Done as $key => $subject)
+            {
+                $students = student_mark::where('subject_id', $subject->id)->where('semester_id' , $current_semester)->get();
+                    foreach($students as $student)
+                    if($student->work  == NULL || $student->final == NULL){
+                  
+                        array_push($subjectsNotDone , $subject->id);
+                        unset($total_subs_Done[$key]);
+                    }
+                       
+                        
+
+            }
+           
+        return    $total_subs_Done->count();
+        
+        
+    }
+    
    
 }

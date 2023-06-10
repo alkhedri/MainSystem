@@ -1,5 +1,5 @@
 
-@extends('Admins.ExaminationDepartment.layout')
+@extends('instructors.layout')
 
 
 @section('breadcramp')

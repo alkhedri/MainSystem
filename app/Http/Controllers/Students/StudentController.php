@@ -11,6 +11,7 @@ use App\Models\semester;
 use App\Models\notification;
 use App\Models\subject_date;
 use App\Models\semesterplan;
+use App\Models\timetable;
 
 
 
@@ -45,7 +46,17 @@ class StudentController extends Controller
         }
     }
 
-        return view('Student._main' , compact('notificationsCount', 'notificationsCountUnRead' , 'alertDates'));
+ 
+ 
+
+        return view('Student._main' , compact(
+            'notificationsCount',
+             'notificationsCountUnRead' ,
+              'alertDates' ,
+
+               
+            
+            ));
     }
 
 
@@ -146,10 +157,18 @@ class StudentController extends Controller
          
     }
                 
-              
+    $units = 0;
+
+
+    foreach( $Student_subjects as $sub)
+    {
+        $subjectUnits = subject::where('id',$sub->subject_id)->value('units');
+       $units+= $subjectUnits;
+    }
+    
      ///$collection->forget($key);
         
-        return view('Student._EditSubjects' ,compact('Student_subjects' , 'Department_subjects') );
+        return view('Student._EditSubjects' ,compact('Student_subjects' , 'Department_subjects' , 'units') );
     }
     
     public function AddSubject(Request $request){

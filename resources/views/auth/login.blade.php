@@ -51,7 +51,7 @@
                                              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                              @error('email')
                                              <span class="invalid-feedback" role="alert">
-                                                 <strong>{{ $message }}</strong>
+                                                 <small>{{ $message }}</small>
                                              </span>
                                          @enderror
                                         </div>
@@ -62,7 +62,7 @@
                 
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                                    <small>{{ $message }}</small>
                                                 </span>
                                             @enderror  </div>
                                         <div class="row">

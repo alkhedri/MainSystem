@@ -61,4 +61,31 @@ class TimeTable_Room extends Model
   
           return $ROOMID;
       }
+
+
+
+      public static function getRoom($id , $period){
+        $sql;
+            switch($period){
+                   case 1 :
+                    $sql = 'Stp'  ;
+                    break;
+                    case 2 :
+                        $sql = 'Sp'  ;
+                        break;
+                        case 3 :
+                            $sql = 'Tp'  ;
+                            break;
+                            case 4 :
+                                $sql = 'Fp'  ;
+                                break;
+            }
+             
+           
+
+
+        $value = TimeTable_Room::where('day_id', $id)->value($sql);
+        return  ($value);
+  
+    }
 }

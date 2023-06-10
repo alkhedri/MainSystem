@@ -45,7 +45,7 @@ class RegisterController extends Controller
         else if ($this->guard()->user()->hasRole('college')) {
             return '/test';
         }   else if ($this->guard()->user()->hasRole('student')) {
-            return '/studentDashboard';
+           
         }
 
         return '/test';
@@ -100,9 +100,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'enname' => ['required', 'string', 'min:8', ],
-            'natid' => ['required', 'Numeric', 'min:8', ],
-            'Badge' => ['required', 'Numeric', 'digits_between:8,12', ],
+  
             
         ]); 
 
@@ -118,7 +116,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
    
-
+        // if ($validator->fails()) {
+        //     return view('view_name');
+        // } else {
+        //     return view('view_name');
+        // }
 
 if ($data['user_type'] != 'student' ){
     $user =  User::create([
@@ -144,30 +146,33 @@ if ($data['user_type'] != 'student' ){
 
         $user->addRole('Instructor');
     }else{
-        $user =  User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-        Student::create([
-            'id'     =>   User::select('id')->max('id'), 
-            'nat_id'   =>   $data['natid'],
-            'Badge'   =>   $data['Badge'],
-            'arabic_name'   =>   $data['name'],
-            'english_name'   =>   $data['enname'],
-            'sex'   =>   $data['sex'],
-            'city_id'   =>   $data['city'],
-            'phone'   =>   $data['phone'],
-            'department_id'   =>   $data['department'],
-            'college_id'   =>   $data['college'],
-            'units'   =>   0,
-            'gpa'   =>   0,
-            'enrollment_status_id'   =>   3,
+        // $user =  User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        // ]);
+        // $user->addRole('student');
+        // Student::create([
+        //     'id'     =>   User::select('id')->max('id'), 
+        //     'nat_id'   =>   $data['natid'],
+        //     'Badge'   =>   $data['Badge'],
+        //     'arabic_name'   =>   $data['name'],
+        //     'english_name'   =>   $data['enname'],
+        //     'sex'   =>   $data['sex'],
+        //     'city_id'   =>   $data['city'],
+        //     'phone'   =>   $data['phone'],
+        //     'department_id'   =>   $data['department'],
+        //     'college_id'   =>   $data['college'],
+        //     'units'   =>   0,
+        //     'gpa'   =>   0,
+        //     'enrollment_status_id'   =>   3,
+        //     'birth'   =>    $data['birth'],
+        //     'enrollment_date'   =>    $data['Enrollment'],
             
             
 
-        ]);
-        $user->addRole('student');
+        // ]);
+       
     }
 
     //    $user_id = User::select('id')->max('id');

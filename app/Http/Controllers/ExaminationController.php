@@ -14,13 +14,20 @@ use App\Models\override_request;
 use App\Models\placement_request;
 use App\Models\Notification;
 use App\Models\Room;
+ 
+use App\Models\City;
+ 
+use Illuminate\Support\Facades\Hash;
+
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Validator;
+
+use Laratrust\Models\Permission;
 class ExaminationController extends Controller
 {
-  
+   
 
     public function index()
     {
@@ -225,6 +232,85 @@ class ExaminationController extends Controller
         return back()->with('message', 'تم حذف القسم ');
         
     }
+    
+    public function index_StudentAccount()
+    {
+ 
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');;
+
+        $ids = City::all('name','id');
+        $departments = Department::where('college_id',$College_id)->get();
+      
+        return view ('Admins.ExaminationDepartment.views.Students.NewStudentAccount',  compact('ids' , 'departments'));
+ 
+
+    }
+    public function index_CreateStudentAccount(Request $request)
+    {
+
+
+        $user_id = auth()->user()->id;
+        
+
+        
+        $College_id = Instructor::where('id',$user_id)->value('college_id');;
+        
+
+  
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' =>  'required|string|min:8|confirmed',
+            'badge' => 'required|max:10|min:10|',
+        ]);
+
+
+     
+     
+        User::Insert(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+
+             ]
+        );
+   
+        Student::Insert(
+            [
+                'id' => User::select('id')->max('id'), 
+                'arabic_name' => $request->name,
+                'department_id' => $request->department_id,
+                'college_id' => $College_id,
+                'badge'  => $request->badge,
+          
+             ]
+        );
+
+        $x = User::select('id')->max('id');
+        $user = User::find($x);
+        $user->addRole('student');
+        $department = department::where('id',$request->department_id)->value('arabic_name');;
+        
+        return back()->with('data', [
+            'arabic_name' =>  $request->name,
+            'email' =>  $request->email,
+            'department'  => $department,
+          
+          
+
+            
+        ]);
+    
+
+       
+   
+    }
+
 
     
     public function index_Override()
@@ -252,7 +338,7 @@ class ExaminationController extends Controller
         
         $College_id = Instructor::where('id',$user_id)->value('college_id');
 
-        $departments = Department::all()->where('college_id', $College_id);
+        $departments = Department::where('college_id', $College_id)->get();
  
 
         return view('Admins.ExaminationDepartment.views.Semesters.FinalResults' ,  compact( 'departments'));
@@ -395,7 +481,16 @@ class ExaminationController extends Controller
     public function index_StudentsPlacement()
     {
 
+        $user_id = auth()->user()->id;
+        
 
+       
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+       
+        $departments = department::where('college_id',$College_id)->get();
+       
+        $date =  semesterplan::where('college_id',$College_id)->value('StudntsMove');
+       
         $requests =  placement_request::select('placement_requests.*' ,'students.gpa') 
         ->join('students', 'placement_requests.student_id', '=', 'students.id')
         ->groupBy('placement_requests.student_id')
@@ -408,7 +503,7 @@ class ExaminationController extends Controller
        // $requests = placement_request::get()->unique('student_id')->orderBy('gpa','asc')->toQuery()->paginate(20);
 
         
-        return view('Admins.ExaminationDepartment.views.Students.StudentsPlacement',  compact( 'requests'));
+        return view('Admins.ExaminationDepartment.views.Students.StudentsPlacement',  compact( 'requests' , 'date' , 'departments'));
     }
     public function index_StudentsMovement()
     {
@@ -465,4 +560,56 @@ class ExaminationController extends Controller
 
         return view('Admins.ExaminationDepartment.views.Departments.RoomsMenu' , compact('RoomsList' , 'departments'));
     }
+
+    public function index_StudentDropAndAdd()
+    {
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+
+        $students = student::where('college_id' , $College_id )->get();
+        $status = 0;
+           foreach( $students as $student){
+              $user = User::find($student->id);
+              if (is_null($user))
+              {}
+              else
+              if($user->isAbleTo('subjects-create'))
+               $status = 1;
+       }
+        return view('Admins.ExaminationDepartment.views.Students.DropAndAdd', compact('status'));
+    }
+    
+    public function index_StudentDropAndAddAction()
+    {
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+
+        $students = student::where('college_id' , $College_id )->get();
+
+        foreach( $students as $student){
+
+            $user = User::find($student->id);
+
+            if (is_null($user))
+
+            {}
+            
+            else{
+
+                if($user->hasPermission('subjects-create'))
+                   $user->removePermission('subjects-create');
+                 else
+                 $user->givePermission('subjects-create');
+                }
+        }
+         
+      
+       return back();
+      
+    }
+    
+
+    
 }

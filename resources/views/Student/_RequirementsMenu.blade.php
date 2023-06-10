@@ -40,16 +40,16 @@
        <tr>
         <td class="text-xs-left"> {{$loop->index + 1}}</td>
               <td class="text-xs-left">{{ App\Models\subject::getSubjectName($item->subject_id)}} </td>
-              <td class="text-xs-center"> {{ App\Models\subject_date::getName($item->subject_id)}} </td>
+              <td class="text-xs-center"> {{ App\Models\subject_date::getName($item->id)}} </td>
        
-              <td class="text-xs-center">{{ App\Models\subject_date::getDueDate($item->subject_id)}}  </td>
+              <td class="text-xs-center">{{ App\Models\subject_date::getDueDate($item->id)}}  </td>
   
-              <td class="text-xs-center">{{ App\Models\subject_date::getDate($item->subject_id)}} </td>
+              <td class="text-xs-center">{{ App\Models\subject_date::getDate($item->id)}} </td>
   
               
               <td class="text-xs-center">
                    
-                  {{ App\Models\subject_date::getDetails($subject->subject_id)}}
+                  {{ App\Models\subject_date::getDetails($item->id)}}
               </td>
           </tr>
        @endforeach
