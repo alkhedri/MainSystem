@@ -65,8 +65,8 @@
 
 <form action="{{route('marksRecordAction')}}" method="POST">
 @csrf
-<td><input type="text" class="form-control input-md bg-primary text-white font-weight-bold" name="work[]" value="{{$mark->work}}"></td>
-<td><input type="text"  class="form-control input-md bg-dark text-success font-weight-bold" name="final[]" value="{{$mark->final}}"></td>
+<td><input type="text" class="form-control input-md     font-weight-bold" name="work[]" value="{{$mark->work}}" style="width:150px; text-align:center"></td>
+<td><input type="text"  class="form-control input-md    font-weight-bold" name="final[]" value="{{$mark->final}}" style="width:150px; text-align:center"></td>
 <input type="hidden" name="ids[]" value="{{$mark->id}}">
 
                                 
@@ -76,7 +76,8 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-primary btn-sm">تعديل الكل</button>
+                       
+                        <button type="submit" class="pull-left btn btn-primary "> <i class="fa fa-floppy-o"></i>     حفظ  </button>
                     </form> 
                     </div>
                 </div>

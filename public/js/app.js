@@ -150,11 +150,11 @@ function init(url) {
 }
 
  
-  document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function(event) {
 	$(function() {
-		$(".lds-roller").fadeOut(400, function() {
+		$(".lds-roller").fadeOut(100, function() {
 			  
-			$(".animate").fadeIn(400); 
+			$(".animate").fadeIn(100); 
 			
 		});
 	 

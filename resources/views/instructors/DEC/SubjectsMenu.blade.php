@@ -24,7 +24,7 @@
 
     <div class="col-md-2">
  
-          <a class="btn btn-success" href="{{route('NewSubject')}}"><i class="icon-docs"></i>إضافة مقرر</a>
+          <a class="btn btn-success btn-md" href="{{route('NewSubject')}}"><i class="icon-docs"></i>      إضافة مقرر</a>
                         
     </div>
 </div> 
@@ -47,11 +47,11 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>المقرر</th>
-                                    <th>الرمز</th>
-                                    <th>الوحدات</th>
-                                    <th>الحالة</th>
-                                    <th>الاجراء</th>
+                                    <th  style="text-align: center">المقرر</th>
+                                    <th  style="text-align: center">الرمز</th>
+                                    <th  style="text-align: center">الوحدات</th>
+                                    <th  style="text-align: center">الحالة</th>
+                                    <th  style="text-align: center">الاجراء</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,12 +61,12 @@
                            
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$subject->arabic_name}}</td>
-                                        <td>{{$subject->code}}</td>
-                                        <td>{{$subject->units}}</td>
-                                        <td>
+                                    <td  style="text-align: center"> <strong>{{$subject->arabic_name}}</strong></td>
+                                        <td  style="text-align: center">{{$subject->code}}</td>
+                                        <td  style="text-align: center">{{$subject->units}}</td>
+                                        <td  style="text-align: center">
 
-                                            @if ($subject->avaliablity === 1)
+                                            @if ($subject->avaliablity == 1)
                                             <a class="btn btn-success btn-sm" href="{{route('ActionActiveSubject' , ['id' => $subject->id,'status' => 0  ])}}">متاح</a>
                                           
                                             @else
@@ -76,7 +76,7 @@
                                          
                                              
                                         </td>
-                                    <td>
+                                    <td  style="text-align: center">
                                         <a href="{{route('SubjectsDetails' ,['id' => $subject->id ])}}" class="btn btn-primary btn-sm">عرض</a>
                              
                                         <a class="btn btn-danger btn-sm" href="{{route('ActionDeleteSubject' , ['id' => $subject->id ])}}">حذف</a>

@@ -14,9 +14,9 @@
             <a href="{{route("marksRecord" , ['subject_id' => $subject_id])}}"> {{App\Models\subject::getSubjectName($subject_id) }}</a>
         </li>
 
-            <li class="breadcrumb-item">سجل الحضور</a>
+            <li class="breadcrumb-item"> <a href="{{route('attendanceRecord' , ['subject_id' => $subject_id])}}">سجل الحضور</a> </li>
         
-        <li class="breadcrumb-item"><a href="#"> </a>
+        <li class="breadcrumb-item"> 
             {{$recordDate}}
     </li>
      
@@ -31,7 +31,9 @@
 <div class="row" style="margin-bottom: 20px">
  
  
-
+<div class="alert alert-primary">
+    ملاحظة : خانة الحالة تقوم بعرض حالة الطالب في السجل في الوقت الحالي وبالضغط عليها يتم تغيير حالته.
+</div>
 
 </div> 
 <div class="row">
@@ -69,8 +71,8 @@
    
                                 <tr>
                                     <td> {{$loop->index + 1}}</td>
-                                     <td> {{App\Models\student::getNameById($student->student_id) }} </td>
-                                    <td>{{ $student->student_id}} </td>
+                                     <td><strong> {{App\Models\student::getNameById($student->student_id) }}</strong> </td>
+                                    <td>  {{App\Models\student::getBadgeById($student->student_id) }}</td>
                                 
                                     <td>
 
@@ -80,7 +82,7 @@
                                             'subject_id' => $subject_id,
                                             'date' => $student->date,
                                             'status' => 0,
-                                        ])}}" class="btn btn-success">حضور</a>
+                                        ])}}" class="btn btn-success"><strong>حضور</strong></a>
 
                                         @else
                                         <a href="{{route('AttendanceRecordActionUpdate' , [
@@ -88,7 +90,7 @@
                                             'subject_id' => $subject_id,
                                             'date' => $student->date,
                                             'status' => 1,
-                                        ])}}" class="btn btn-danger">غياب</a>
+                                        ])}}" class="btn btn-danger"><strong>غياب</strong></a>
                                     
                                     @endif
                                     </td>

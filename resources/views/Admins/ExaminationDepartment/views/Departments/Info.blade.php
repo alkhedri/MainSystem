@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">الاقسام الدراسية</li>
-    <li class="breadcrumb-item">قائمة الاقسام</li>
+    <li class="breadcrumb-item"><a href="{{route('DepartmentsMenu')}}">قائمة الأقسام</a>
     <li class="breadcrumb-item"><a href="#">بيانات القسم</a>
     </li>
      
@@ -101,7 +101,7 @@
                         <label class="form-control-label" for="appendedInputButton">منسق الدراسة و الامتحانات</label>
                         <div class="controls">
                             <div class="input-group">
-                                <input id="appendedInput" class="form-control" size="16" type="text" value="{{$deC}}" name="code">
+                                <input id="appendedInput" class="form-control" size="16" type="text" value="{{$deC}}" name="deC">
                                 
                          
                             </div>
@@ -112,7 +112,7 @@
                         <label class="form-control-label" for="appendedInputButton">منسق الجودة </label>
                         <div class="controls">
                             <div class="input-group">
-                                <input id="appendedInput" class="form-control" size="16" type="text" value="{{$dqC}}" name="code">
+                                <input id="appendedInput" class="form-control" size="16" type="text" value="{{$dqC}}" name="dqC">
                                 
                          
                             </div>
@@ -123,7 +123,7 @@
                         <label class="form-control-label" for="appendedInputButton">منسق المشاريع</label>
                         <div class="controls">
                             <div class="input-group">
-                                <input id="appendedInput" class="form-control" size="16" type="text" value="{{$dpC}}" name="code">
+                                <input id="appendedInput" class="form-control" size="16" type="text" value="{{$dpC}}" name="dpC">
                                 
                          
                             </div>

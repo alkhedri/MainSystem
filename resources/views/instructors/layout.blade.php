@@ -192,7 +192,7 @@ body{
          <nav class="sidebar-nav">
              <ul class="nav">
                  <li class="nav-item">
-                     <a class="nav-link" href=""><i class="icon-speedometer"></i> قائمة التحكم <span class="tag tag-info">جدید</span></a>
+                     <a class="nav-link" href=""><i class="icon-speedometer"></i> قائمة التحكم   </a>
                  </li>
  
 {{--                  
@@ -348,13 +348,13 @@ body{
              <div class="animated fadeIn">
 
                 <div style="width:100%;display:flex;justify-content:center;align-items:center">
-                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-              
+                    {{-- <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+               --}}
                 </div>
              
-                <div class="animate">
+                {{-- <div class="animate"> --}}
                     @yield('content')
-                </div>
+                {{-- </div> --}}
                    
 
             

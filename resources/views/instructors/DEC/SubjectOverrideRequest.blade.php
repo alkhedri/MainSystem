@@ -19,7 +19,7 @@
 
 <div class="row">
     
-    <div class="col-sm-8">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-header">
                 طلب تنزيل مقرر متجاوز

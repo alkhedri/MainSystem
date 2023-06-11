@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Room;
+use App\Models\room;
 use App\Models\Instructor;
-use App\Models\Department;
+use App\Models\department;
 
 class RoomsController extends Controller
 {

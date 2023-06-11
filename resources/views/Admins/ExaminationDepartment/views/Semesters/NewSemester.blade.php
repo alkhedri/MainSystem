@@ -6,8 +6,9 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item"><a href="#">الفصل الدراسي</a>
-    <li class="breadcrumb-item"><a href="#">قائمة الفصول الدراسية</a>
-    </li>
+    <li class="breadcrumb-item"><a href="{{route('SemestersMenu')}}">قائمة الفصول الدراسية</a></li>
+        <li class="breadcrumb-item">فصل جديد</li>
+    
      
  
 </ol>

@@ -11,12 +11,15 @@ use App\Models\semester;
 use App\Models\notification;
 use App\Models\subject_date;
 use App\Models\semesterplan;
-use App\Models\timetable;
+use App\Models\timeTable;
+use App\Models\placement_request;
+use App\Models\User;
 
 
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
@@ -75,9 +78,9 @@ class StudentController extends Controller
 
         $semesterplan =  semesterplan::all()->where('college_id',$College_id)->where('semester_id' , $semester_id);
         $SEMESTER_NAME = Semester::where('id',$semester_id)->value('name');
-
-
-        return view('student._SemesterPlan' , compact('semesterplan' , 'SEMESTER_NAME'));
+        
+      
+        return view('Student._SemesterPlan' , compact('semesterplan' , 'SEMESTER_NAME'));
     }
 
 
@@ -167,7 +170,9 @@ class StudentController extends Controller
     }
     
      ///$collection->forget($key);
-        
+     $title = 'سيتم اسقاط المقرر';
+     $text = "تأكيد اسقاط مقرر";
+     confirmDelete($title, $text);
         return view('Student._EditSubjects' ,compact('Student_subjects' , 'Department_subjects' , 'units') );
     }
     
@@ -226,6 +231,9 @@ class StudentController extends Controller
         $subjectName = subject::where('id',$request->subject_id)->value('Arabic_name');
 
         return back()->with('Success', $subjectName);
+       // return back()->Alert::success('Success Title', 'Success Message');
+
+       
          
     }
 
@@ -244,7 +252,7 @@ class StudentController extends Controller
         ->where('student_id', $user_id )
         ->where('semester_id', $current_semester )
         ->where('id', $request->subject_id)->delete();
-
+     
         return back()->with('Alert', 'تم إسقاط المقرر');
         
         
@@ -263,7 +271,7 @@ class StudentController extends Controller
         $notifications = notification::where('reciver_id',$user_id)->orderBy('id','DESC')->paginate(5);
 
         
-        return view('Student._NotifyMenu' , compact('notifications'));
+        return view('Student._notifyMenu' , compact('notifications'));
     }
 
 
@@ -305,7 +313,48 @@ class StudentController extends Controller
         return view('Student._RequirementsMenu' , compact('Student_subjects'));
     }
 
+    public function show_PlacementApplication()
+    {
+        $user_id = auth()->user()->id;
+        $department_id = student::where('id',$user_id)->value('department_id');
+        $college_id = department::where('id',$department_id)->value('college_id');
+      
+     
+        $departments = department::where('id', '!=', $department_id)->where('college_id',$college_id)->get();
+
+    
+        return view('Student._PlacementApplication' , compact('departments'));
+    }
+    public function PlacementApplicationAction(Request $request)
+    {
+        $user_id = auth()->user()->id;
+        $department_id = student::where('id',$user_id)->value('department_id');
+        $college_id = department::where('id',$department_id)->value('college_id');
+      
+        $applications = $request->get('applications');
+        $count_items = count($request->applications);
+
+        $departments = department::where('id', '!=', $department_id)->where('college_id',$college_id)->get();
+
+         for($i = 0 ;  $i < $count_items ; $i++)
+                placement_request::Insert(
+                    [
+                    'student_id' => $user_id,
+                    'department_id' => $applications[$i],
+                    'college_id' => $college_id,
+                    'praiority' => $i+1,
+                
+                    ]
+                );
 
 
+                $user = User::find($user_id);
+
+                        if($user->hasPermission('placements'))
+                         $user->removePermission('placements');
+
+        return redirect()->route('studentDashboard');
+    }
+    
     
 }

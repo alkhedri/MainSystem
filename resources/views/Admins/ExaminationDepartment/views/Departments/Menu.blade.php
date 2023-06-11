@@ -5,7 +5,7 @@
 @section('breadcramp')
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
-    <li class="breadcrumb-item"><a href="#">بيانات الطالب</a>
+    <li class="breadcrumb-item"><a href="{{route('DepartmentsMenu')}}">قائمة الأقسام</a>
     </li>
      
  
@@ -33,7 +33,7 @@
             <div class="card-block p-a-1 clearfix">
                 <i class="icon-book-open bg-info p-a-1 font-2xl m-r-1 pull-left"></i>
                 <div class="h5 text-info m-b-0 m-t-h">قسم  <span>{{$department->arabic_name  }}</span></div>
-                <div class="text-muted text-uppercase font-weight-bold font-xs">{{$department->code  }}</div>
+                <div class="text-muted text-uppercase font-weight-bold h6"><strong>{{$department->code  }}</strong></div>
             </div>
             <div class="card-footer p-x-1 p-y-h">
                 <div class=" text-center">

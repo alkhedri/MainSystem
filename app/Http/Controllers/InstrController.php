@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Instructor;
-use App\Models\City;
-use App\Models\Department;
-use App\Models\College;
+use App\Models\city;
+use App\Models\department;
+use App\Models\college;
 use App\Models\semesterplan;
 use App\Models\semester;
 use App\Models\student;
@@ -14,7 +14,7 @@ use App\Models\subject;
 use App\Models\subject_requirement;
 use App\Models\room;
 
-use App\Models\TimeTable;
+use App\Models\timeTable;
 
 use App\Models\ExamsTable;
 use Illuminate\Http\Request;
@@ -178,7 +178,7 @@ class InstrController extends Controller
         $subject_Code =  subject::where('id',$request->id)->value('code');
       
         $requirements =  subject_requirement::all()->where('subject',$request->id);
-        $instructors =  instructor::all()->where('college_id',$college_id);
+        $instructors =  instructor::all();
       
 
        return view('instructors.DEC._CollegeProfs' , compact('subjects' , 'requirements' ,'subject_Code' , 'instructors' , 'Department_subjects'));
@@ -219,12 +219,12 @@ class InstrController extends Controller
         $department_id = Instructor::where('id',$user_id)->value('department_id');
 
      
-        $Saturday = TimeTable::where('department_id',$department_id)->where('day', 0)->get();
-        $Sunday = TimeTable::where('department_id',$department_id)->where('day', 1)->get();
-        $Monday = TimeTable::where('department_id',$department_id)->where('day', 2)->get();
-        $Tuesday = TimeTable::where('department_id',$department_id)->where('day', 3)->get();
-        $Wedensday = TimeTable::where('department_id',$department_id)->where('day', 4)->get();
-        $Thursday = TimeTable::where('department_id',$department_id)->where('day', 5)->get();
+        $Saturday = timeTable::where('department_id',$department_id)->where('day', 0)->get();
+        $Sunday = timeTable::where('department_id',$department_id)->where('day', 1)->get();
+        $Monday = timeTable::where('department_id',$department_id)->where('day', 2)->get();
+        $Tuesday = timeTable::where('department_id',$department_id)->where('day', 3)->get();
+        $Wedensday = timeTable::where('department_id',$department_id)->where('day', 4)->get();
+        $Thursday = timeTable::where('department_id',$department_id)->where('day', 5)->get();
       
  
 
@@ -280,12 +280,12 @@ class InstrController extends Controller
       
      
  
-        $Saturday = TimeTable::where('department_id',$department_id)->where('day', 0)->get();
-        $Sunday = TimeTable::where('department_id',$department_id)->where('day', 1)->get();
-        $Monday = TimeTable::where('department_id',$department_id)->where('day', 2)->get();
-        $Tuesday = TimeTable::where('department_id',$department_id)->where('day', 3)->get();
-        $Wedensday = TimeTable::where('department_id',$department_id)->where('day', 4)->get();
-        $Thursday = TimeTable::where('department_id',$department_id)->where('day', 5)->get();
+        $Saturday = timeTable::where('department_id',$department_id)->where('day', 0)->get();
+        $Sunday = timeTable::where('department_id',$department_id)->where('day', 1)->get();
+        $Monday = timeTable::where('department_id',$department_id)->where('day', 2)->get();
+        $Tuesday = timeTable::where('department_id',$department_id)->where('day', 3)->get();
+        $Wedensday = timeTable::where('department_id',$department_id)->where('day', 4)->get();
+        $Thursday = timeTable::where('department_id',$department_id)->where('day', 5)->get();
       
  
 

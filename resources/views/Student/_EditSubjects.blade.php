@@ -24,12 +24,13 @@
  
   </div>
 @endif
+
 @if(Session::has('Success'))
 <div class="alert alert-success" role="alert">
     تم تنزيل مقرر 
     - 
          {{Session::get('Success')}} 
- 
+         
   </div>
 @endif
     <div class="col-md-6">
@@ -94,7 +95,7 @@
                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectCode($subject->subject_id)}} </td>
                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectUnits($subject->subject_id)}} </td>
                         <td  style="text-align: center;">
-                        <a href="{{route('DropSubject' , ['subject_id' =>  $subject->id])}}" class="btn btn-danger btn-sm">اسقاط</a>
+                        <a   href="{{route('DropSubject' , ['subject_id' =>  $subject->id])}}" class="btn btn-danger btn-sm"   >اسقاط</a>
                         </td>
                     </tr>
                     @endforeach
@@ -132,7 +133,7 @@
                                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectCode($subject->subject_id)}} </td>
                                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectUnits($subject->subject_id)}} </td>
                                         <td  style="text-align: center;">
-                                        <a href="{{route('DropSubject' , ['subject_id' =>  $subject->id])}}" class="btn btn-danger btn-sm">اسقاط</a>
+                                        <a   href="{{route('DropSubject' , ['subject_id' =>  $subject->id])}}" class="btn btn-danger btn-sm"  >اسقاط</a>
                                         </td>
                                     </tr>
                                     @endforeach

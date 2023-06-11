@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Auth;
-use App\Models\Notification;
+use App\Models\notification;
 use App\Models\department;
-use App\Models\Student;
+use App\Models\student;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller

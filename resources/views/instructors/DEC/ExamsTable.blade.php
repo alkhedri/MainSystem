@@ -85,24 +85,69 @@
       <a style="margin-right:20px" href="{{route('EditExamsTable')}}" class="btn btn-primary" >
         <strong>تعديل</strong>
     </a>
+
+    
+    <button  style="margin-right:20px"  class="btn btn-primary"   onclick="xxxx()"> <i class="fa icon-printer
+      "></i>
+      طباعة</button>
 </div>
 
-<table class="table  table-bordered" style="width:100%">
+<table class="table  table-bordered" style="width:100%" id="diagram">
     <tr>
-      <th rowspan="2">التاريخ</th>
+      <th rowspan="2" style="text-align: center;vertical-align:middle">التاريخ</th>
    
     
     </tr>
    <tr>
-   <td colspan="1" style="text-align: center">الفترة الاولى</td>
-    <td colspan="1" style="text-align: center">الفترة الثانية</td>
+   <td colspan="1" style="text-align: center">الفترة الاولى
+    
+    [09:00 - 12:00]
+  </td>
+    <td colspan="1" style="text-align: center">الفترة الثانية
+      
+      [12:00 - 03:00]
+    </td>
  
    
    </tr>
    
    @foreach ($dates as $date)
    <tr style="border-top:2px solid black">
-    <th rowspan="{{ App\Models\ExamsTable::getRows($date->date)}}"  style="text-align: center;vertical-align:middle"  >{{$date->date}}</th>
+    
+    <th rowspan="{{ App\Models\ExamsTable::getRows($date->date)}}"  style="text-align: center;vertical-align:middle"  >
+      @php
+      $day =  date('D', strtotime($date->date));
+      switch ($day ) {
+       case 'Sat':
+       $day = 'السبت';
+         break;
+         case 'Sun':
+       $day = 'الأحد';
+         break;
+         case 'Mon':
+       $day = 'الإثنين';
+         break;
+         case 'Tue':
+       $day = 'الثلاثاء';
+         break;
+         case 'Wed':
+       $day = 'الإربعاء';
+         break;
+       case 'Thu':
+       $day = 'الخميس';
+         break;
+       
+       default:
+         # code...
+         break;
+      }
+   @endphp
+
+   
+  [ {{$day}} ]  
+      {{$date->date}}
+
+    </th>
   
 
     @foreach (App\Models\ExamsTable::getSubs($date->date) as $item)
@@ -120,4 +165,57 @@
    
  
 </table>
+@endsection
+
+
+@section('page-js-script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+<script type="text/javascript">
+            var style = "<style>";
+                style = style + "table {width: 100%;font: 17px Calibri;}";
+                style = style + "table, th, td {border: solid 1px #DDD ; border-collapse: collapse;";
+                style = style + "padding: 2px 3px;text-align: center;}";
+                style = style + "</style>";
+function xxxx( ) {
+  var divToPrint=document.getElementById("diagram");
+        newWin= window.open("");
+        newWin.document.write(style);          //  add the style.
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+}
+ 
+//Create PDf from HTML...
+function CreatePDFfromHTML() {
+    var HTML_Width = $(".table-bordered").width();
+    var HTML_Height = $(".table-bordered").height();
+    var top_left_margin = 15;
+    var PDF_Width = HTML_Width + (top_left_margin * 2);
+    var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+    var canvas_image_width = HTML_Width;
+    var canvas_image_height = HTML_Height;
+
+    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+ 
+
+ 
+    document.getElementById('diagram').parentNode.style.overflow = 'visible';
+    html2canvas($(".table-bordered")[0]).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+        for (var i = 1; i <= totalPDFPages; i++) { 
+            pdf.addPage(PDF_Width, PDF_Height);
+            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+        }
+        pdf.save("Exams.pdf");
+        $(".html-content").hide();
+    });
+}
+</script>
+ 
 @endsection

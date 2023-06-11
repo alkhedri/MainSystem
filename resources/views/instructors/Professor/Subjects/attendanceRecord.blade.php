@@ -33,7 +33,12 @@
 @if(Session::has('exist'))
 <p class="alert {{ Session::get('alert-class', 'alert-danger') }}"> <strong>{{ Session::get('exist') }}</strong></p>
 @endif      
-          
+@if(Session::has('message'))
+<p class="alert {{ Session::get('alert-class', 'alert-danger') }}"> <strong>{{ Session::get('message') }}</strong></p>
+@endif      
+         
+
+
 <div class="row" style="margin-bottom: 20px">
 
     <div class="col-lg-9">
@@ -73,11 +78,11 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>التاريخ</th>
-                                    <th>الحضور</th>
+                                    <th style="text-align: center">التاريخ</th>
+                                    <th style="text-align: center">عدد الحضور</th>
                    
-                                    <th>الغياب</th>
-                                    <th>الاجراء</th>
+                                    <th style="text-align: center">عدد الغياب</th>
+                                    <th style="text-align: center">الاجراء</th>
                                     
          
                                 
@@ -89,25 +94,26 @@
    
                                 <tr>
                                     <td> {{$loop->index + 1}}</td>
-                                     <td class="font-weight-bold"> {{$records->date}} </td>
-                                    <td>
-                                        <p class="text-success font-weight-bold">
+                                     <td style="text-align: center"class="font-weight-bold"> {{$records->date}} </td>
+                                    <td style="text-align: center">
+                                        <p class="text-success font-weight-bold " style="text-align: center">
                                             {{App\Models\student_attendanceRecord::CountPresent($records->date ,$subject_id) }}
                                         </p>
                                         
-                                    </td>
+                                    </td >
                                
-                                    <td> 
+                                    <td style="text-align: center"> 
                                         <p class="text-danger font-weight-bold">
                                             
                                             {{App\Models\student_attendanceRecord::CountUpsent($records->date ,$subject_id) }}
                                         </p>
                                      
                                     </td>
-                                    <td>
+                                    <td style="text-align: center">
 
                                 
-                                       <a class="btn btn-primary" href="{{route('attendanceEdit' , ['date' => $records->date , 'subject_id' => $subject->id] )}}">عرض</a>
+                                        <a class="btn btn-primary" href="{{route('attendanceEdit' , ['date' => $records->date , 'subject_id' => $subject->id] )}}">عرض</a>
+                                        <a class="btn btn-danger" href="{{route('attendanceDelete' , ['date' => $records->date , 'subject_id' => $subject->id] )}}">حذف</a>
                                     
                                     </td>
                                  

@@ -66,8 +66,8 @@
                           @foreach ($students as $student)
                           <tr>
                             <td>{{$loop->index + 1}}</td>
-                            <td>{{$student->arabic_name}}</td>
-                            <td>{{$student->badge}}</td>
+                            <td><strong>{{$student->arabic_name}}</strong></td>
+                            <td>{{$student->Badge}}</td>
 
                            
                             <td> {{App\Models\department::getDepNameById($student->department_id)}} </td>

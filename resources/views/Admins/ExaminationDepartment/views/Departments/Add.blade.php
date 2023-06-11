@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">الاقسام الدراسية</li>
-    <li class="breadcrumb-item">قائمة الاقسام</li>
+    <li class="breadcrumb-item"><a href="{{route('DepartmentsMenu')}}">قائمة الأقسام</a>
     <li class="breadcrumb-item"><a href="#"> إضافة قسم جديد</a>
     </li>
      
@@ -77,15 +77,6 @@
     </div>
 
   
-<div class="col-4">
-    <div class="col-sm-6 col-lg-3">
-        <div class="card">
-            <div class="card-block">
-                <img src="img/University-Logo.png" class="img-avatar" alt="admin@bootstrapmaster.com" style="width: 300px; height:300px">
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+ 
  
 @endsection

@@ -93,7 +93,7 @@
          <nav class="sidebar-nav">
              <ul class="nav">
                  <li class="nav-item">
-                     <a class="nav-link" href=""><i class="icon-speedometer"></i> قائمة التحكم <span class="tag tag-info">جدید</span></a>
+                     <a class="nav-link" href=""><i class="icon-speedometer"></i> قائمة التحكم  </a>
                  </li>
  
 {{--                  
@@ -120,10 +120,13 @@
                           @permission('subjects-create')
                           <a class="nav-link" href="{{route('EditSubjects')}}"><i class="icon-docs"></i>إضافة/اسقاط مقرر</a>
                           @endpermission()
+                          @permission('placements')
+                          <a class="nav-link" href="{{route('PlacementApplication')}}"><i class="icon-docs"></i>طلب التنسيب للاقسام العلمية</a>
+                          @endpermission()
                           <a class="nav-link" href="{{route('CurrentSemestersPlan')}}"><i class="icon-docs"></i>الخطة الدراسية للفصل الحالي</a>
                           <a class="nav-link" href="{{route('NotifyMenu')}}"><i class="icon-docs"></i>الاشعارات</a>
-                       
                           
+                         
                         </li>
                          
                          
@@ -307,6 +310,7 @@
      <!-- Grunt watch plugin -->
      <script src="//localhost:35729/livereload.js"></script>
      @livewireScripts
+     @include('sweetalert::alert')
 
  </body>
  

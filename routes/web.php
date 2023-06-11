@@ -94,11 +94,17 @@ Route::get('/StudentNotify', 'App\Http\Controllers\ExaminationController@index_S
 
 Route::post('/NotifyStudent', 'App\Http\Controllers\NotificationsController@action_NotifyStudent')->name('NotifyStudent');
 
- 
+ ///////////////////PERMESSIONS////////////////////////////////
+
 Route::get('/StudentDropAndAdd', 'App\Http\Controllers\ExaminationController@index_StudentDropAndAdd')->name('StudentDropAndAdd');
 Route::get('/StudentDropAndAddAction', 'App\Http\Controllers\ExaminationController@index_StudentDropAndAddAction')->name('StudentDropAndAddAction');
  
+Route::get('/StudentDepartmentPlacement', 'App\Http\Controllers\ExaminationController@index_StudentDepartmentPlacement')->name('StudentDepartmentPlacement');
+Route::get('/StudentDepartmentPlacementAction', 'App\Http\Controllers\ExaminationController@index_StudentDepartmentPlacementAction')->name('StudentDepartmentPlacementAction');
+ 
 
+Route::get('/FinalResultsReleaseAction', 'App\Http\Controllers\ExaminationController@FinalResultsReleaseAction')->name('FinalResultsReleaseAction');
+ 
     //Route::get('/manage', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
 });
 
@@ -210,6 +216,7 @@ Route::group(['middleware' => ['role:instructor']], function() {
 
  Route::get('/attendanceRecord', 'App\Http\Controllers\Instructors\SubjectsController@attendanceRecord')->name('attendanceRecord');;
  Route::get('/attendanceEdit', 'App\Http\Controllers\Instructors\SubjectsController@attendance_EditRecord')->name('attendanceEdit');;
+ Route::get('/attendanceDelete', 'App\Http\Controllers\Instructors\SubjectsController@attendance_DeleteRecord')->name('attendanceDelete');;
  
  
  Route::get('/AttendanceRecordAction', 'App\Http\Controllers\Instructors\SubjectsController@AttendanceRecordAction')->name('AttendanceRecordAction');;
@@ -237,33 +244,38 @@ Route::group(['middleware' => ['role:instructor']], function() {
 
  Route::post('/StudentNotofyAlertAction', 'App\Http\Controllers\Instructors\StudentsController@StudentNotofyAlertAction')->name('StudentNotofyAlertAction');;
  
+ Route::get('/StudentsProfile', 'App\Http\Controllers\Instructors\StudentsController@index_Profile')->name('StudentsProfile');;
 
  
         //Route::get('/manage', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
     });
     
     Route::group(['middleware' => ['role:student']], function() {
-        Route::get('/studentDashboard', 'App\Http\Controllers\students\StudentController@index')->name('studentDashboard');
-        Route::get('/CurrentSemesterSubjects', 'App\Http\Controllers\students\StudentController@show_currentSemSubs')->name('currentSemSubs');
+        Route::get('/studentDashboard', 'App\Http\Controllers\Students\StudentController@index')->name('studentDashboard');
+        Route::get('/CurrentSemesterSubjects', 'App\Http\Controllers\Students\StudentController@show_currentSemSubs')->name('currentSemSubs');
        
    
-        Route::get('/NotifyMenu', 'App\Http\Controllers\students\StudentController@show_NotifyMenu')->name('NotifyMenu');
-        Route::get('/ShowNotificationMessage', 'App\Http\Controllers\students\StudentController@ShowNotificationMessage')->name('ShowNotificationMessage');
+        Route::get('/NotifyMenu', 'App\Http\Controllers\Students\StudentController@show_NotifyMenu')->name('NotifyMenu');
+        Route::get('/ShowNotificationMessage', 'App\Http\Controllers\Students\StudentController@ShowNotificationMessage')->name('ShowNotificationMessage');
        
-        Route::get('/RequirementsMenu', 'App\Http\Controllers\students\StudentController@RequirementsMenu')->name('RequirementsMenu');
+        Route::get('/RequirementsMenu', 'App\Http\Controllers\Students\StudentController@RequirementsMenu')->name('RequirementsMenu');
       
           
-        Route::get('/SemestersPlan', 'App\Http\Controllers\students\StudentController@SemestersPlan')->name('CurrentSemestersPlan');
+        Route::get('/SemestersPlan', 'App\Http\Controllers\Students\StudentController@SemestersPlan')->name('CurrentSemestersPlan');
 
         
     });
 
     Route::group(['middleware' => ['role:student', 'permission:subjects-create']], function() {
-    Route::get('/EditSubjects', 'App\Http\Controllers\students\StudentController@show_EditSubjects')->name('EditSubjects');
-    Route::post('/AddSubject', 'App\Http\Controllers\students\StudentController@AddSubject')->name('AddSubject');
-    Route::get('/DropSubject', 'App\Http\Controllers\students\StudentController@DropSubject')->name('DropSubject');
+    Route::get('/EditSubjects', 'App\Http\Controllers\Students\StudentController@show_EditSubjects')->name('EditSubjects');
+    Route::post('/AddSubject', 'App\Http\Controllers\Students\StudentController@AddSubject')->name('AddSubject');
+    Route::get('/DropSubject', 'App\Http\Controllers\Students\StudentController@DropSubject')->name('DropSubject');
 });
     
+Route::group(['middleware' => ['role:student', 'permission:placements']], function() {
+    Route::get('/PlacementApplication', 'App\Http\Controllers\Students\StudentController@show_PlacementApplication')->name('PlacementApplication');
+    Route::post('/PlacementApplicationAction', 'App\Http\Controllers\Students\StudentController@PlacementApplicationAction')->name('PlacementApplicationAction');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

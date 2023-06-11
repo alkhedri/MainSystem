@@ -15,11 +15,17 @@
 
 @section('content')
 
-<div class="row">
-  
+<div class="row" style="margin: 20px">
+    @if($status == 1)
+    <a class="btn btn-danger " href="{{route('FinalResultsReleaseAction')}}">إلغاء الإعلان عن النتيجة النهائية </a>
+
+    @else
+    <a class="btn btn-success " href="{{route('FinalResultsReleaseAction')}}">الإعلان عن النتيجة النهائية</a>
+
+    @endif
 </div>
  
-
+ 
 @foreach ($departments as $department)
     
 
@@ -38,9 +44,10 @@
                  <div class="card-footer p-x-1 p-y-h">
                     <div class=" text-center">
                     
+                        @if (  App\Models\department::getSubjectsTottal($department->id) > App\Models\department::getSubjectsDoneCount($department->id) )
                         <div class="card card-default">
                             <div class="card-header">
-                                Card collapse
+                                المقررات الغير مكتملة
                                 <div class="card-actions">
                                     <a class="btn-maximize collapsed" data-toggle="collapse" href="#collapseExample{{$department->id}}" aria-expanded="false" aria-controls="collapseExample"><i class="icon-arrow-down"></i></a>
                                  </div>
@@ -55,7 +62,7 @@
                           
                             </div>
                         </div>
-                      
+                         @endif
                         </div>
                      </div>
 
@@ -64,4 +71,8 @@
         </div>
     </div>
     @endforeach
+
+ 
+     
+ 
 @endsection

@@ -27,12 +27,12 @@
             </div>
                              
                           
-            <div class="card-block">
+            <div class="card-block" style="text-align:center" >
                 <div class="centerize" style="margin-top 70px">
                <h4>{{$student->arabic_name}}</h4>
             </div>
             <div class="centerize"  >
-                <p>   <strong>{{App\Models\student::getDepNameById($student->id) }}</strong></p>
+                <p  >   <strong style="text-align:center" >{{App\Models\student::getDepNameById($student->id) }}</strong></p>
             </div>
                
                 <ul class="social mb-0 list-inline mt-3 centerize">
@@ -56,16 +56,25 @@
                                 @foreach ($profile as $student)
                                    
                           
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"> 
-                                        الاسم بالكامل :   <strong>{{$student->arabic_name}} </strong>
+                                <ul class="list-group list-group-flush " style="text-align: right">
+                                    <li class="list-group-item" > 
+                                        الاسم بالكامل :  
+                                     <strong >[ {{$student->arabic_name}} ]</strong> 
                                     </li>
-                                    <li class="list-group-item">البريدالالكتروني <strong>{{App\Models\student::getStudentEmail($student->id) }} </strong></li>
-                                    <li class="list-group-item">    رقم الهاتف <strong>{{$student->phone}} </strong></li>
-                                    <li class="list-group-item">الرقم الوطني : <strong> {{$student->nat_id}} </strong></li>
-                                    <li class="list-group-item">الصفة : <strong> {{$student->sex}} </strong></li>
-                                    <li class="list-group-item">تاريخ الميلاد :  <strong> {{$student->birth}} </strong></li>
-                                    <li class="list-group-item">سنة الالتحاق :  <strong> {{$student->enrollment}} </strong></li>
+                                    <li class="list-group-item">البريدالالكتروني 
+                                       :
+                                        <strong>[ {{App\Models\student::getStudentEmail($student->id) }} ]</strong> </li>
+                                    <li class="list-group-item">    رقم الهاتف 
+                                        :
+                                      <strong>[ {{$student->phone}} ] </strong> </li>
+                                    <li class="list-group-item">الرقم الوطني : 
+                                       <strong> {{$student->nat_id}} </strong> </li>
+                                    <li class="list-group-item">الصفة : 
+                                      <strong>[ {{$student->sex}} ]</strong> </li>
+                                    <li class="list-group-item">تاريخ الميلاد :  
+                                       <strong>[ {{$student->birth}} ]</strong> </li>
+                                    <li class="list-group-item">سنة الالتحاق :  
+                                      <strong>[ {{$student->enrollment_date}} ]</strong> </li>
                                   </ul>
                              
                                   @endforeach
@@ -104,7 +113,22 @@
             <ul class="list-group list-group-flush list-group-item-light">
                 @foreach ($Students_Subjects as $subject)
 
-                <li class="list-group-item"><span>{{$loop->index + 1 }}</span> - {{App\Models\subject::getSubjectName($subject) }}</li>
+                <li class="list-group-item">
+                    <span>{{$loop->index + 1 }}</span>
+                     - 
+                     {{App\Models\subject::getSubjectName($subject) }}
+                    
+                     @foreach ($profile as $student)
+                                   
+                     @if(App\Models\student_mark::checkDuplicate($subject , $student->id) > 1)
+                     <span class="tag tag-danger">
+                        -
+                        
+                        إعادة
+                     </span>
+                     @endif
+                     @endforeach
+                    </li>
      
                 @endforeach
                

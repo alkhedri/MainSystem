@@ -53,11 +53,22 @@
                 
                 </td>
                 <td  style="text-align: center;">
+                    @permission('final-result')
                      @if ($subject->final == NULL ) 
                      لم تحدد بعد  
                      @else
                    {{  $subject->final }}
                    @endif
+                   @endpermission
+                </td>
+                <td  style="text-align: center;">
+                    @permission('final-result')
+                     @if ($subject->final == NULL ) 
+                     لم تحدد بعد  
+                     @else
+                   {{  $subject->final + $subject->work }}
+                   @endif
+                   @endpermission
                 </td>
             </tr>
             @endforeach
@@ -82,6 +93,7 @@
                     <th style="text-align: center;">عدد الوحدات</th>
                     <th style="text-align: center;">درجة الاعمال</th>
                     <th style="text-align: center;">درجة الامتحان النهائي</th>
+                    <th style="text-align: center;">المجموع</th>
                  
                 </tr>
             </thead>
@@ -106,11 +118,22 @@
                     
                     </td>
                     <td  style="text-align: center;">
+                        @permission('final-result')
                          @if ($subject->final == NULL ) 
                          لم تحدد بعد  
                          @else
                        {{  $subject->final }}
                        @endif
+                       @endpermission
+                    </td>
+                    <td  style="text-align: center;">
+                        @permission('final-result')
+                         @if ($subject->final == NULL ) 
+                         لم تحدد بعد  
+                         @else
+                       {{  $subject->final + $subject->work }}
+                       @endif
+                       @endpermission
                     </td>
                 </tr>
                 @endforeach

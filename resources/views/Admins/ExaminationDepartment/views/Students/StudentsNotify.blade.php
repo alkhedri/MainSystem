@@ -112,7 +112,7 @@
                     <tr>
                  
                         <td>{{$loop->index}}</td>
-                        <td>{{App\Models\Student::getNameById($item->reciver_id)}}</td>
+                        <td><strong>{{App\Models\Student::getNameById($item->reciver_id)}}</strong></td>
                         <td>{{App\Models\Student::getBadgeById($item->reciver_id)}}</td>
                         <td>{{$item->title}}</td>
                         <td>{{$item->date}}</td>

@@ -1,21 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Department;
-use App\Models\Semester;
+use App\Models\department;
+use App\Models\semester;
 use App\Models\Instructor;
 use App\Models\student;
 
 use App\Models\User;
 use App\Models\Auth;
-use App\Models\College;
+use App\Models\college;
 use App\Models\semesterplan;
 use App\Models\override_request;
 use App\Models\placement_request;
-use App\Models\Notification;
-use App\Models\Room;
+use App\Models\notification;
+use App\Models\room;
  
-use App\Models\City;
+use App\Models\city;
  
 use Illuminate\Support\Facades\Hash;
 
@@ -77,9 +77,10 @@ class ExaminationController extends Controller
 
              
                 //   TAKE HOD PERMISSIONS
-                $hofid = Department::where('id' , $request->id)->value('hod');
+                $hofid = department::where('id' , $request->id)->value('hod');
        
                 $user = User::find($hofid);
+                if(!is_null($user))
                 $user->removePermission('hod-read');
 
 
@@ -87,14 +88,13 @@ class ExaminationController extends Controller
         $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'code' => 'required',
-            'hodchange' =>  'required'
         ]);
       
-      if ($request->image != NULL){
+      if (!is_null($request->image)){
         $imageName = time().'.'.$request->image->extension();  
        
         $request->image->move(public_path('depicon'), $imageName);
-        Department::where('id', $request->id)
+        department::where('id', $request->id)
         ->update([
             'english_name' => $request->english_name,
             'arabic_name' => $request->arabic_name,
@@ -106,7 +106,7 @@ class ExaminationController extends Controller
             
          ]);
       }else {
-        Department::where('id', $request->id)
+        department::where('id', $request->id)
         ->update([
             'english_name' => $request->english_name,
             'arabic_name' => $request->arabic_name,
@@ -121,6 +121,7 @@ class ExaminationController extends Controller
     
      //   GIVE HOD PERMISSIONS
          $user = User::find($request->hodchange);
+         if(!is_null($user))
          $user->givePermission('hod-read');
        
  
@@ -142,7 +143,7 @@ class ExaminationController extends Controller
         $College_id = Instructor::where('id',$user_id)->value('college_id');;
 
 
-        Department::insert(
+        department::insert(
             [
              'arabic_name' => $request->arabic_name,
              'english_name' =>$request->english_name,
@@ -157,13 +158,13 @@ class ExaminationController extends Controller
 
     public function index_DepartmetsDelete()
     {
-        $departments = Department::all();
+        $departments = department::all();
         return view('Admins.ExaminationDepartment.views.Departments.Delete',  compact( 'departments'));
     
     }
 
     public function delete_departments(Request $request){
-        Department::where('id',$request->id)->delete();
+        department::where('id',$request->id)->delete();
         return back()->with('message', 'تم حذف القسم ');
         
     }
@@ -176,12 +177,12 @@ class ExaminationController extends Controller
       
 
         $College_id = Instructor::where('id', $user_id)->pluck('college_id');
-        $Semesters = Semester::where('college_id', $College_id)->paginate(5);
+        $Semesters = semester::where('college_id', $College_id)->paginate(5);
        
-        $current_semester = College::where('id', $College_id)->pluck('current_semester');
+        $current_semester = college::where('id', $College_id)->pluck('current_semester');
        
-        $semester_name = Semester::where('id',$current_semester)->value('name');
-        $semester_id = Semester::where('id',$current_semester)->value('id');;
+        $semester_name = semester::where('id',$current_semester)->value('name');
+        $semester_id = semester::where('id',$current_semester)->value('id');;
         
 
         return view('Admins.ExaminationDepartment.views.Semesters.Menu' , compact('Semesters' , 'semester_name' ,'semester_id'));
@@ -194,7 +195,7 @@ class ExaminationController extends Controller
 
        
         $College_id = Instructor::where('id',$user_id)->value('college_id');
-        College::where('id', $College_id)
+        college::where('id', $College_id)
         ->update([
             'current_semester' => $request->id
          ]);
@@ -341,7 +342,17 @@ class ExaminationController extends Controller
         $departments = Department::where('college_id', $College_id)->get();
  
 
-        return view('Admins.ExaminationDepartment.views.Semesters.FinalResults' ,  compact( 'departments'));
+        $students = student::where('college_id' , $College_id )->get();
+        $status = 0;
+           foreach( $students as $student){
+              $user = User::find($student->id);
+              if (is_null($user))
+              {}
+              else
+              if($user->isAbleTo('final-result'))
+               $status = 1;
+           }
+        return view('Admins.ExaminationDepartment.views.Semesters.FinalResults' ,  compact( 'departments' , 'status'));
     }
 
 
@@ -609,7 +620,104 @@ class ExaminationController extends Controller
        return back();
       
     }
+    public function index_StudentDepartmentPlacement()
+    {
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $College_Req_Units = college::where('id',$College_id)->value('required_units');
+        $GS = department::where('code','GS')->value('id');
+
+        $students = student::where('college_id' , $College_id )
+        ->where('units' , '>=' , $College_Req_Units)
+        ->where('department_id' , $GS )
+        ->get();
+
+
+        $status = 0;
+           foreach( $students as $student){
+              $user = User::find($student->id);
+              if (is_null($user))
+              {}
+              else
+              if($user->isAbleTo('placements'))
+               $status = 1;
+       }
+
+       $count = $students->count();
+        return view('Admins.ExaminationDepartment.views.Students.StudentDepartmentPlacement', compact('status' , 'count'));
+    }
     
+    public function index_StudentDepartmentPlacementAction()
+    {
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+        $College_Req_Units = college::where('id',$College_id)->value('required_units');
+        $GS = department::where('code','GS')->value('id');
+
+
+        
+        $students = student::where('college_id' , $College_id )
+        ->where('units' , '>=' , $College_Req_Units)
+        ->where('department_id' , $GS )
+        ->get();
+
+        foreach( $students as $student){
+
+            $user = User::find($student->id);
+
+            if (is_null($user))
+
+            {}
+            
+            else{
+
+                if($user->hasPermission('placements'))
+                   $user->removePermission('placements');
+                 else
+                 $user->givePermission('placements');
+                }
+        }
+         
+      
+       return back();
+    }
+
+
+    public function FinalResultsReleaseAction()
+    {
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+  
+        
+        $students = student::where('college_id' , $College_id )->get();
+
+        foreach( $students as $student){
+
+            $user = User::find($student->id);
+
+            if (is_null($user))
+
+            {}
+            
+            else{
+
+                if($user->hasPermission('final-result'))
+                   $user->removePermission('final-result');
+                 else
+                 $user->givePermission('final-result');
+                }
+        }
+         
+      
+       return back();
+    }
+
+
+
+
 
     
 }

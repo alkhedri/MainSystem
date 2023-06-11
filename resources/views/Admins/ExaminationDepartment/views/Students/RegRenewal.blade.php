@@ -95,8 +95,8 @@
                     
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$student->arabic_name}}</td>
-                                    <td>{{$student->badge}}</td>
+                                    <td><strong>{{$student->arabic_name}}</strong></td>
+                                    <td>{{$student->Badge}}</td>
                                     <td>{{App\Models\department::getDepNameById($student->department_id)}} </td>
                                     <td> 
                                         @if ($student->enrollment_status_id == '1')
@@ -110,11 +110,11 @@
                                     </td>
                                     <td>
                                      
-                                        <a class="btn btn-success btn-sm" href="{{route('RenewalComplete' , ['id' => $student->id])}}">تجديد</a>
-                                      ------
-                                        <a class="btn btn-primary btn-sm" href="{{route('RenewalCancel' , ['id' => $student->id])}}">إلغاء</a>
-                                        ------
-                                        <a class="btn btn-danger btn-sm" href="{{route('RenewalStop' , ['id' => $student->id])}}">إيقاف</a>
+                                        <a class="btn btn-outline-success  " href="{{route('RenewalComplete' , ['id' => $student->id])}}"><strong>تجديد</strong></a>
+                                        
+                                        <a class="btn btn-outline-primary  " href="{{route('RenewalCancel' , ['id' => $student->id])}}"><strong>إلغاء</strong></a>
+                                  
+                                        <a class="btn btn-outline-danger  " href="{{route('RenewalStop' , ['id' => $student->id])}}"><strong>إيقاف</strong></a>
                                    
                                          
                                
@@ -126,7 +126,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        
+                        {{$students->links()}}
                     </div>
                 </div>
             </div>

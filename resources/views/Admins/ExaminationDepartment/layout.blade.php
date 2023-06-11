@@ -141,9 +141,9 @@
                           <a class="nav-link" href="{{route('StudentAccount')}}"><i class="icon-docs"></i>إضافة طالب</a>
                           <a class="nav-link" href="{{route('StudentsPlacement')}}"><i class="icon-docs"></i>تنسيب طالب إلى قسم</a>
                           <a class="nav-link" href="{{route('StudentsMovement')}}"><i class="icon-docs"></i>نقل طالب إلى قسم</a>
-                          <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>تجديد القيد</a>
-                          <a class="nav-link" href="{{route('StopEnrollment')}}"><i class="icon-docs"></i>إيقاف القيد</a>
-                          <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>عرض حالة طالب</a>
+                          <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>القيد الدراسي</a>
+                      
+                        
                           <a class="nav-link" href="{{route('StudentNotify')}}"><i class="icon-docs"></i>إخطار طالب</a>
                           <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>عرض الطلبة المتعثرين</a>
                          </li>
@@ -160,8 +160,11 @@
                               <ul class="nav-dropdown-items">
                                   <li class="nav-item">
                                   
-                               <a class="nav-link" href="{{route('StudentDropAndAdd')}}"><i class="icon-docs"></i>تنزيل و اسقاط</a>
+                                    <a class="nav-link" href="{{route('StudentDropAndAdd')}}"><i class="icon-docs"></i>تنزيل و اسقاط</a>
+                                    <a class="nav-link" href="{{route('StudentDepartmentPlacement')}}"><i class="icon-docs"></i>التنسيب للاقسام</a>
                      
+
+                               
                               </li>
                               
                               

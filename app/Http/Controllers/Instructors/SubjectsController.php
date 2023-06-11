@@ -13,7 +13,7 @@ use App\Models\subject_requirement;
 
 use App\Models\student_attendanceRecord;
 
-use App\Models\TimeTable;
+use App\Models\timeTable;
 use App\Models\TimeTable_Room;
 use App\Models\ExamsTable;
 
@@ -154,6 +154,19 @@ $subject_id = $request->subject_id;
         
        
     } 
+    public function attendance_DeleteRecord(Request $request)
+    {
+     
+        student_attendanceRecord::where('date', $request->date)->where('subject_id', $request->subject_id)->delete();
+ 
+    
+
+         return back()->with('message', 'تم حذف السجل ');
+        
+       
+    } 
+
+    
     public function Attendance_Search(Request $request)
     {
         $user_id = auth()->user()->id;

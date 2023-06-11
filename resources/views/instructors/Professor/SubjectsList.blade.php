@@ -26,11 +26,11 @@
             <div class="card-block p-a-1 clearfix">
                 <i class="icon-book-open bg-info p-a-1 font-2xl m-r-1 pull-left"></i>
                 <div class="h5 text-info m-b-0 m-t-h">{{$subject->arabic_name}}</div>
-                <div class="text-muted text-uppercase font-weight-bold font-xs">{{$subject->code}}</div>
+                <div class="text-uppercase font-weight-bold font-lg" style="margin-left: 10px">[  {{$subject->code}}  ]</div>
             </div>
             <div class="card-footer p-x-1 p-y-h">
                 <div class=" text-center">
-                    <a href="{{route("marksRecord" , ['subject_id' => $subject->id])}}" class="btn btn-secondary btn-block" data-toggle="tooltip" data-placement="right" title="عرض"><i class="icon-bubbles"> </i>
+                    <a href="{{route("marksRecord" , ['subject_id' => $subject->id])}}" class="btn btn-secondary btn-block" data-toggle="tooltip" data-placement="right" title="عرض"><i class="icon-magnifier-add"> </i>
                         عرض
                     </a>
                   

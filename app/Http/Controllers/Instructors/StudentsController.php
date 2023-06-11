@@ -10,9 +10,9 @@ use App\Models\student_mark;
 use App\Models\college;
 use App\Models\student_warning;
 use App\Models\warning;
-use App\Models\Override_Request;
+use App\Models\override_request;
 use App\Models\subject;
-use App\Models\Notification;
+use App\Models\notification;
 
 
 
@@ -35,8 +35,10 @@ class StudentsController extends Controller
 
     public function index_Profile(Request $request)
     {
-
-        $profile = student::where('id', $request->id)->get();
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+      
+        $profile = student::where('id', $request->id)->where('department_id', $department_id)->get();
 
 
         $user_id = auth()->user()->id;
@@ -101,7 +103,7 @@ class StudentsController extends Controller
     {
  
         $user_id = auth()->user()->id;
-        $department_id = Instructor::where('id',$user_id)->value('department_id');
+        $department_id = instructor::where('id',$user_id)->value('department_id');
         $instructors =  instructor::all()->where('department_id',$department_id);
         $students =  student::where('department_id',$department_id)->where('spv_id',$request->selectedSpv)->paginate(5);
        
@@ -111,7 +113,7 @@ class StudentsController extends Controller
     public function OverrideRequest(Request $request)
     {
         $user_id = auth()->user()->id;
-        $department_id = Instructor::where('id',$user_id)->value('department_id');
+        $department_id = instructor::where('id',$user_id)->value('department_id');
         $student_id = student::where('badge',$request->student_badge)->where('department_id',$department_id)->value('id');
         $subject_id = subject::where('code',$request->code)->where('department_id',$department_id)->value('id');
        
@@ -121,7 +123,7 @@ class StudentsController extends Controller
             'code' => 'required|max:7'
         ]);
  
-        Override_Request::insert(
+        override_Request::insert(
             [
              'student_id' => $student_id,
              'subject_id' => $subject_id,

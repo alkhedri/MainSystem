@@ -12,7 +12,7 @@ class regRenewalController extends Controller
     public function search_renewal(Request $request)
     {
 
-        $students = student::all()->where('badge' , $request->badge);
+        $students = student::all()->where('Badge' , $request->badge);
         return view('Admins.ExaminationDepartment.views.Students.RegRenewal' , compact('students'));
     }
 

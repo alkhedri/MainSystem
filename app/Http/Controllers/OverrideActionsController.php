@@ -6,7 +6,7 @@ use App\Models\student;
 use App\Models\student_mark;
 use App\Models\override_request;
  
-use App\Models\College;
+use App\Models\college;
 use Illuminate\Http\Request;
 
 class OverrideActionsController extends Controller

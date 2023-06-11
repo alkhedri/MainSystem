@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
  
 use App\Models\student_mark;
-use DB;
+ 
 use App\Models\student;
-use App\Models\Semester;
+use App\Models\semester;
 use App\Models\subject;
 use App\Models\student_attendanceRecord;
 

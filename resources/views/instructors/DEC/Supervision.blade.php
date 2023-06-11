@@ -71,7 +71,7 @@
                               
                                 <tr>
                                     <td> {{$loop->index + 1}}</td>
-                                    <td> {{$student->arabic_name}}</td>
+                                    <td> <strong>{{$student->arabic_name}}</strong></td>
                                     <td>{{$student->Badge}}</td>
                                     <td>
                                         <form></form>
