@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class timeTable extends Model
 {
     use HasFactory;
-    public $table = 'TimeTable';
+    public $table = 'timetable';
     public $timestamps = false;
 
     public static function getRows($day){

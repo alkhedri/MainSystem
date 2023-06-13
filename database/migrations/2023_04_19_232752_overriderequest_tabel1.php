@@ -23,8 +23,8 @@ return new class extends Migration
             $table->integer('final_mark');
              
          
-            $table->foreignId('department_id')->constrained('departments');
-            $table->foreignId('college_id')->constrained('colleges');
+            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');;;
+            $table->foreignId('college_id')->constrained('colleges')->onDelete('cascade');
            
             $table->boolean('avaliablity');
             $table->boolean('required');
@@ -40,7 +40,7 @@ return new class extends Migration
         });
         Schema::create('override_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
            
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
            

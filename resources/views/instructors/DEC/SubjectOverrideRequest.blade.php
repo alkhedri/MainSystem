@@ -98,7 +98,11 @@
     </div>
     
     <div class="col-sm-4">
-
+        @if(Session::has('meassegeError'))
+        <div class="alert alert-danger">
+          {{Session::get('meassegeError')}} 
+        </div>
+        @endif
         @if(Session::has('meassegeSent'))
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">تم تقديم الطلب بنجاح</h4>
@@ -111,8 +115,7 @@
                 
             </ul>
             <hr>
-            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-          </div>
+            </div>
  
 @endif
 @if ($errors->any()) 
@@ -127,8 +130,7 @@
         <ul>
        
         <hr>
-        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-      </div>
+       </div>
 </div>
 @endif
     </div>

@@ -53,7 +53,7 @@
                    
                         
                             <Select id="input-large" name="First" class="form-control input-lg" >
-                              <option value="" selected disabled></option>
+                              <option value="" selected ></option>
                                 @foreach ($Department_subjects as $subject)
                                 <option value="{{$subject->id}}">{{ $subject->arabic_name }}</option>
                                 @endforeach
@@ -65,7 +65,7 @@
                         <div class="col-lg-3">
                    
                         <Select id="input-large" name="FirstRoom" class="form-control input-lg" >
-                          <option value="" selected disabled></option>
+                          <option value="" selected ></option>
                             @foreach ($Department_Rooms as $Rooms)
                             <option value="{{$Rooms->id}}">{{ $Rooms->name }}</option>
                             @endforeach
@@ -82,7 +82,7 @@
                    
                         
                             <Select id="input-large" name="Second" class="form-control input-lg" >
-                              <option value="" selected disabled></option>
+                              <option value="" selected ></option>
                                 @foreach ($Department_subjects as $subject)
                                 <option value="{{$subject->id}}">{{ $subject->arabic_name }}</option>
                                 @endforeach
@@ -94,7 +94,7 @@
                         <div class="col-lg-3">
                    
                         <Select id="input-large" name="SecondRoom" class="form-control input-lg" >
-                          <option value="" selected disabled></option>
+                          <option value="" selected ></option>
                             @foreach ($Department_Rooms as $Rooms)
                             <option value="{{$Rooms->id}}">{{ $Rooms->name }}</option>
                             @endforeach
@@ -111,7 +111,7 @@
                    
                         
                             <Select id="input-large" name="Third" class="form-control input-lg" >
-                              <option value="" selected disabled></option>
+                              <option value="" selected ></option>
                                 @foreach ($Department_subjects as $subject)
                                 <option value="{{$subject->id}}">{{ $subject->arabic_name }}</option>
                                 @endforeach
@@ -123,7 +123,7 @@
                         <div class="col-lg-3">
                    
                         <Select id="input-large" name="ThirdRoom" class="form-control input-lg" >
-                          <option value="" selected disabled></option>
+                          <option value="" selected ></option>
                             @foreach ($Department_Rooms as $Rooms)
                             <option value="{{$Rooms->id}}">{{ $Rooms->name }}</option>
                             @endforeach
@@ -144,7 +144,7 @@
                    
                         
                             <Select id="input-large" name="Forth" class="form-control input-lg" >
-                              <option value="" selected disabled></option>
+                              <option value="" selected ></option>
                                 @foreach ($Department_subjects as $subject)
                                 <option value="{{$subject->id}}">{{ $subject->arabic_name }}</option>
                                 @endforeach
@@ -156,7 +156,7 @@
                         <div class="col-lg-3">
                    
                         <Select id="input-large" name="ForthRoom" class="form-control input-lg" >
-                          <option value="" selected disabled></option>
+                          <option value="" selected ></option>
                             @foreach ($Department_Rooms as $Rooms)
                             <option value="{{$Rooms->id}}">{{ $Rooms->name }}</option>
                             @endforeach

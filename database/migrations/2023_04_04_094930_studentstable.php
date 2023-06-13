@@ -31,8 +31,10 @@ return new class extends Migration
             $table->integer('gpa');
             $table->integer('enrollment_status_id');
            
-          
-          
+            $table->integer('DepartmentJoin_sem_id');
+           
+            
+            
 
         });
  

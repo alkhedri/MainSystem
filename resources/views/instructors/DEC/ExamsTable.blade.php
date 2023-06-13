@@ -42,7 +42,7 @@
                   <label for="exampleInputEmail1">الاولى</label>
                   
                   <Select id="input-large" name="first" class="form-control input-lg" >
-                    <option value="" selected disabled></option>
+                    <option value="" selected ></option>
                       @foreach ($Department_subjects as $subject)
                       <option value="{{$subject->id}}">{{ $subject->arabic_name }}</option>
                       @endforeach
@@ -55,7 +55,7 @@
                     <label for="exampleInputEmail1">الثانية</label>
                     
                     <Select id="input-large" name="second" class="form-control input-lg" >
-                        <option value="" selected disabled></option>
+                        <option value="" selected ></option>
                         @foreach ($Department_subjects as $subject)
                         <option value="{{$subject->id}}">{{ $subject->arabic_name }}</option>
                         @endforeach

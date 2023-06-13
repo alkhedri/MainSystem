@@ -14,11 +14,7 @@
 
 @section('content')
  
-<div class="row">
-    <a class="btn btn-primary" href="">طالب</a>
-    <hr>
-    <a class="btn btn-primary" href="">مقرر</a>
-</div>
+ 
 
 
 <canvas id="myChart" height="100px"></canvas>

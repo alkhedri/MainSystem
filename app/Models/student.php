@@ -17,7 +17,7 @@ GET INTERMETENT STUDENTS COUNT
 
 namespace App\Models;
 use App\Models\Auth;
-use App\Models\user;
+use App\Models\User;
 use App\Models\department;
 use App\Models\enrollment_status;
 use App\Models\student_mark;

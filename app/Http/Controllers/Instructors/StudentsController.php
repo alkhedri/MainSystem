@@ -112,17 +112,23 @@ class StudentsController extends Controller
     }
     public function OverrideRequest(Request $request)
     {
-        $user_id = auth()->user()->id;
-        $department_id = instructor::where('id',$user_id)->value('department_id');
-        $student_id = student::where('badge',$request->student_badge)->where('department_id',$department_id)->value('id');
-        $subject_id = subject::where('code',$request->code)->where('department_id',$department_id)->value('id');
-       
+
         $validated = $request->validate([
             'reason' => 'required|max:200',
             'student_badge' => 'required|numeric',
             'code' => 'required|max:7'
         ]);
- 
+
+        $user_id = auth()->user()->id;
+        $department_id = instructor::where('id',$user_id)->value('department_id');
+        $student_id = student::where('badge',$request->student_badge)->where('department_id',$department_id)->value('id');
+        $subject_id = subject::where('code',$request->code)->where('department_id',$department_id)->value('id');
+       
+
+         if (is_null($student_id) || is_null($subject_id))
+              return back()->with('meassegeError' , 'يوجد خطأ في البيانات المدخلة');
+
+
         override_Request::insert(
             [
              'student_id' => $student_id,

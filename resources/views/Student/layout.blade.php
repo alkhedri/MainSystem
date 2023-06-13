@@ -125,14 +125,23 @@
                           @endpermission()
                           <a class="nav-link" href="{{route('CurrentSemestersPlan')}}"><i class="icon-docs"></i>الخطة الدراسية للفصل الحالي</a>
                           <a class="nav-link" href="{{route('NotifyMenu')}}"><i class="icon-docs"></i>الاشعارات</a>
-                          
                          
+
+                  
                         </li>
                          
                          
                      </ul>
+                     
                          </li>
-                         
+                         <li class="nav-item nav-dropdown hidden-md-up">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();"><i class="icon-logout"></i>
+                             {{ __('خروج') }}
+                         </a>
+                          </li>
+
                  <!--<li class="nav-item nav-dropdown">
                      <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> ثبت کاربر جدید</a>
                      <ul class="nav-dropdown-items">

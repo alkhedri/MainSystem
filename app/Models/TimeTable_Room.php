@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use App\Models\Room;
+use App\Models\room;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class TimeTable_Room extends Model
 {
     use HasFactory;
-    public $table = 'TimeTable_Room';
+    public $table = 'timetable_room';
     public $timestamps = false;
 
     

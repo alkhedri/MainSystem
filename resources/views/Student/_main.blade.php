@@ -92,7 +92,7 @@
                       <a class="dropdown-item" href="#">Something else here</a>
                   </div>
               </div>
-              <h4 class="m-b-0">9.823</h4>
+              <h4 class="m-b-0">{{$alertsCount}}</h4>
               <p>الإنذارات</p>
           </div>
           <div class="chart-wrapper p-x-1" style="height:70px;"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
@@ -109,7 +109,7 @@
       <div class="row">
           <div class="col-xs-5">
               <h4 class="card-title">جدول المقررات</h4>
-              <div class="small text-muted" style="margin-top:-10px;">November 2015</div>
+              <div class="" style="margin-top:-10px;">{{$current_semester_name}}</div>
           </div>
           <div class="col-xs-7">
                

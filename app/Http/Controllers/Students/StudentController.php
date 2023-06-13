@@ -14,7 +14,7 @@ use App\Models\semesterplan;
 use App\Models\timeTable;
 use App\Models\placement_request;
 use App\Models\User;
-
+use App\Models\student_warning;
 
 
 use App\Http\Controllers\Controller;
@@ -31,13 +31,14 @@ class StudentController extends Controller
         $college_id = department::where('id',$department_id)->value('college_id');
         $current_semester = college::where('id',$college_id)->value('current_semester');
 
-        
+        $current_semester_name = semester::where('id',$current_semester)->value('name');
+
 
         $notificationsCount = notification::where('reciver_id',$user_id)->count();
         $notificationsCountUnRead = notification::where('reciver_id',$user_id)->where('read',0)->count();
         
 
-
+        $alertsCount = student_warning::where('student_id',$user_id)->count();
 
         $Student_subjects = student_mark::where('student_id',$user_id)->where('semester_id',$current_semester)->get();
          $alertDates = 0;
@@ -56,6 +57,8 @@ class StudentController extends Controller
             'notificationsCount',
              'notificationsCountUnRead' ,
               'alertDates' ,
+              'alertsCount',
+              'current_semester_name'
 
                
             

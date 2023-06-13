@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('student_marks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students');
-            $table->foreignId('subject_id')->constrained('subjects');
+            $table->foreignId('student_id')->constrained('students')->onDelete('cascade');;;
+            $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');;;
+            $table->foreignId('semester_id')->constrained('semesters')->onDelete('cascade');;;
+          
+            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');;;
+            $table->foreignId('college_id')->constrained('colleges')->onDelete('cascade');;;
             
-            $table->foreignId('department_id')->constrained('departments');
-            $table->foreignId('college_id')->constrained('colleges');
-           
             $table->integer('work');
             $table->integer('final');
              

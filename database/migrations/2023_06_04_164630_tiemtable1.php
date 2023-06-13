@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('TimeTable', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('department_id')->constrained('departments');
+            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');;;
             $table->integer('day');
             
-            $table->foreignId('Stp')->constrained('subjects');
-            $table->foreignId('Sp')->constrained('subjects');
-            $table->foreignId('Tp')->constrained('subjects');
-            $table->foreignId('Fp')->constrained('subjects');
+            $table->foreignId('Stp')->constrained('subjects')->onDelete('cascade');
+            $table->foreignId('Sp')->constrained('subjects')->onDelete('cascade');
+            $table->foreignId('Tp')->constrained('subjects')->onDelete('cascade');
+            $table->foreignId('Fp')->constrained('subjects')->onDelete('cascade');
             
           
 

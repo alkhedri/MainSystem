@@ -36,7 +36,7 @@ class SubjectsController extends Controller
         $marksData =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester_id)->paginate(5);;
    
 $subject_id = $request->subject_id;
-        return view('instructors.professor.subjects.marksRecord' , compact('subjects' , 'marksData' , 'subject_id'));
+        return view('instructors.Professor.Subjects.marksRecord' , compact('subjects' , 'marksData' , 'subject_id'));
          
     }
     
@@ -84,7 +84,7 @@ $subject_id = $request->subject_id;
         
        
         $subject_id = $request->subject_id;
-        return view('instructors.professor.subjects.attendanceRecord' , compact('subjects' , 'students' , 'subject_id' , 'recordsDates' , 'todaysdate' , 'Newstudents'));
+        return view('instructors.Professor.Subjects.attendanceRecord' , compact('subjects' , 'students' , 'subject_id' , 'recordsDates' , 'todaysdate' , 'Newstudents'));
          
     } 
 
@@ -101,7 +101,7 @@ $subject_id = $request->subject_id;
         $recordDate = $request->date;
 
 
-        return view('instructors.professor.subjects._attendanceEdit' , compact(  'students' , 'recordDate' ,'subject_id' ));
+        return view('instructors.Professor.Subjects._attendanceEdit' , compact(  'students' , 'recordDate' ,'subject_id' ));
          
     }
     public function AttendanceRecordAction(Request $request)
@@ -189,7 +189,7 @@ $subject_id = $request->subject_id;
         
          
          $todaysdate = date('Y-m-d');
-         return view('instructors.professor.subjects.attendanceRecord' , compact('subjects' , 'students' , 'subject_id' , 'recordsDates' , 'todaysdate' , 'Newstudents'));
+         return view('instructors.Professor.Subjects.attendanceRecord' , compact('subjects' , 'students' , 'subject_id' , 'recordsDates' , 'todaysdate' , 'Newstudents'));
     
     }
 
@@ -204,7 +204,7 @@ $subject_id = $request->subject_id;
         $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
        
         $subject_id = $request->subject_id;
-        return view('instructors.professor.subjects.examsDates' , compact('dates'  , 'subject_id'  , 'subjects'));
+        return view('instructors.Professor.Subjects.examsDates' , compact('dates'  , 'subject_id'  , 'subjects'));
          
     }
 

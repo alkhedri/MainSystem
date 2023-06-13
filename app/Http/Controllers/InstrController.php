@@ -52,7 +52,7 @@ class InstrController extends Controller
 
         $instructors = Instructor::where('department_id',$user_department_id)->paginate(5);
 
-        return view('instructors.HOD.FacultyMembers' , compact('instructors'));
+        return view('instructors.HOD.facultyMembers' , compact('instructors'));
     }
     
     public function index_SemestersPlan()

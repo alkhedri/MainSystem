@@ -97,6 +97,9 @@
     </div>
  
     <div class="col-lg-6">
+        
+
+
         @if(Session::has('subjectInserted'))
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">تم تسجيل المقرر بنجاح</h4>

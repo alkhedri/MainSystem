@@ -231,7 +231,7 @@ Route::group(['middleware' => ['role:instructor']], function() {
  Route::get('/examsDateDelete', 'App\Http\Controllers\Instructors\SubjectsController@examsDateAction_Delete')->name('examsDateDelete');;
  
  
- Route::get('/Model2Template', 'App\Http\Controllers\ModelsController@Model2TemplatePrint')->name('Model2Template');;
+ Route::get('/Model2Template', 'App\Http\Controllers\modelsController@Model2TemplatePrint')->name('Model2Template');;
  
  
  Route::get('/SupervisionList', 'App\Http\Controllers\InstrController@index_SupervisionList')->name('SupervisionList');;

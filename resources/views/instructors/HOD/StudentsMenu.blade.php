@@ -73,15 +73,18 @@
                                 <tr>
                                     <td> {{$loop->index + 1}}</td>
                                     <td> {{ $student->arabic_name}}</td>
-                                    <td> {{$student->badge}}</td>
+                                    <td> {{$student->Badge}}</td>
 
                                   
                                     @if ($student->enrollment_status_id == 1)
                                     <td>  <span class="tag tag-success">{{App\Models\student::getEnrollmentStatus($student->enrollment_status_id) }}</span></td>
                                    
-                                    @elseif($student->enrollment_status_id === 3)
+                                    @elseif($student->enrollment_status_id == 2)
                                             
-                                <td><span class="tag tag-danger">{{App\Models\student::getEnrollmentStatus($student->enrollment_status_id) }}</span></td>
+                                   <td><span class="tag tag-primary">{{App\Models\student::getEnrollmentStatus($student->enrollment_status_id) }} </span></td>
+                                   @elseif($student->enrollment_status_id == 3)
+                                            
+                                    <td><span class="tag tag-danger">{{App\Models\student::getEnrollmentStatus($student->enrollment_status_id) }}</span></td>
                                    
                                     @endif
                                     
