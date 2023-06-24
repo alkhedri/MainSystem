@@ -165,7 +165,15 @@ $subject_id = $request->subject_id;
         
        
     } 
+    public function Attendance_sheet(Request $request){
 
+        $students =  student_attendanceRecord::where('subject_id',$request->subject_id)->groupby('student_id')->get();
+        
+       $subject_id = $request->subject_id;
+        return view('instructors.Professor.Subjects.attendanceSheet' , compact('students' , 'subject_id'));
+         
+    }
+ 
     
     public function Attendance_Search(Request $request)
     {
@@ -260,7 +268,11 @@ $subject_id = $request->subject_id;
             'units' => 'required|numeric',
             'code' => 'required|max:7'
         ]);
- 
+
+        $checkExists = subject::where('code', $request->code)->first();
+        if (!is_null($checkExists))
+          return back()->with('Alert', 'هذا المقرر موجود مسبقا');
+
         subject::insert(
             [
              'code' => $request->code,
@@ -304,8 +316,10 @@ $subject_id = $request->subject_id;
 
     public function Update_Subject(Request $request){
         $validated = $request->validate([
-            'arabic_name' => 'required|max:30',
- 
+            'arabic_name' => 'required|max:40',
+            'english_name' => 'required|max:40',
+            'units' => 'required|max:1',
+            'code' => 'required|max:7',
         ]);
     
             subject::where('id', $request->id)
@@ -607,6 +621,7 @@ public function TimeTableDeleteAction(Request $request)
 
     }
 
- 
+
+
     
 }

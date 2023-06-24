@@ -10,7 +10,9 @@
     <link href="https://sis.sabu.edu.ly/sis//cssnew/assets/global/css/components-md-rtl.min.css" rel="stylesheet" id="style_components" type="text/css">
       <link href="https://sis.sabu.edu.ly/sis//cssnew/assets/layouts/layout3/css/layout-rtl.min.css" rel="stylesheet" type="text/css">
 
-
+     <!-- Icons -->
+     <link href="css/font-awesome.min.css" rel="stylesheet">
+     <link href="css/simple-line-icons.css" rel="stylesheet">
     
      <style>
         @font-face{
@@ -29,7 +31,9 @@
 
 <body dir="rtl" class="page-container-bg-solid page-md">
 
-
+    @php
+   $date =  date('Y-m-d');
+@endphp
 
 
 <div class="page-wrapper-row full-height">
@@ -46,7 +50,7 @@
                                             
                                         </h1>
                                         <br>
-                                        <button onclick="window.print()" class="btn btn-primary" style="width: 150px"><span class="glyphicon glyphicon-print"></span>طباعة النتيجة</button>
+                                        <button onclick="window.print()" class="btn btn-primary" style="width: 150px"><span class="fa icon-printer"></span>        طباعة النتيجة         </button>
 
                                     </div>
                                     
@@ -85,11 +89,12 @@
          <div class="col-xs-5 col-md-5">  إسم الطالب : <strong>  {{$student->arabic_name}} </strong><br>
            <br>القسم العام :          <strong>  {{App\Models\department::getDepNameById($student->department_id)}} </strong><br><br>
        </div>
-       <div class="col-xs-4 col-md-4"> رقم الطالب  : <strong>{{ $student->badge }}</strong><br>
+       <div class="col-xs-4 col-md-4"> رقم الطالب  : <strong>{{ $student->Badge }}</strong><br>
           <br>التخصص   : <strong> {{App\Models\department::getDepNameById($student->department_id)}}  </strong><br>
           <br>
     	</div>
          <div class="col-xs-3 col-md-3">القيد  : <strong>نظامي</strong><br>
+            <br>الفصل   : <strong> {{App\Models\student::StudentsSemestersCount($student->id)}}  </strong><br>
     	</div>
      </div>
      @endforeach   
@@ -174,10 +179,10 @@
              <td> <strong style="color: black;font-size: 15px">التاريخ  </strong> </td>
              </tr>
               <tr>
-             <td> 2023-05-13</td>
+             <td>   {{$date}}</td>
              <td>   </td>
              <td> </td>
-             <td>2023-05-13    </td>
+             <td> {{$date}}   </td>
              </tr>
          </tbody></table>
                                                                     </div>

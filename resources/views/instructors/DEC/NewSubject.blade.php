@@ -98,7 +98,12 @@
  
     <div class="col-lg-6">
         
+        @if(Session::has('Alert'))
 
+        <div class="alert alert-danger" role="alert">
+        {{Session::get('Alert')}}  
+    </div>
+        @endif
 
         @if(Session::has('subjectInserted'))
         <div class="alert alert-success" role="alert">
@@ -113,8 +118,7 @@
                 
             </ul>
             <hr>
-            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-          </div>
+            </div>
  
 @endif
 

@@ -224,6 +224,7 @@ Route::group(['middleware' => ['role:instructor']], function() {
  
 
  Route::post('/AttendanceSearch', 'App\Http\Controllers\Instructors\SubjectsController@Attendance_Search')->name('AttendanceSearch');;
+ Route::get('/AttendanceSheet', 'App\Http\Controllers\Instructors\SubjectsController@Attendance_sheet')->name('AttendanceSheet');;
  
  
  Route::get('/examsDate', 'App\Http\Controllers\Instructors\SubjectsController@examsDate')->name('examsDate');;

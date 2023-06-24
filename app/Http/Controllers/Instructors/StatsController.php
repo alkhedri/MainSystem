@@ -105,6 +105,49 @@ public function students(Request $request){
 
      }
     else if( $request->selection == 3){
+
+        $users = student_mark::where('student_id' , $request->id)->where('semester_id' , $request->semester_id)
+        ->pluck('final', 'subject_id');
+        $max = 100 ;
+        $title = 'نموذج 4';
+
+
+                $labels = $users->keys();
+               
+                $data = array();
+   
+
+                    foreach($labels as $std){
+                        $student = subject::where('id' , $std)->value('arabic_name');
+                        array_push($stack, $student);
+                    }
+
+
+                    foreach($labels as $std){
+                        $final = student_mark::where('student_id' , $request->id)
+                        ->where('semester_id' , $request->semester_id)
+                        ->where('subject_id' , $std)->value('final');
+
+                        $work = student_mark::where('student_id' , $request->id)
+                        ->where('semester_id' , $request->semester_id)
+                        ->where('subject_id' , $std)->value('work');
+
+                            $result = $final + $work;
+                        array_push($data, $result);
+                    }
+
+
+
+            return back()->with( [
+                'stack' => $stack, 
+                'data' => $data, 
+                'max' => $max, 
+                'title' => $title, 
+                    
+            
+            ] );
+
+
         
     }else if( $request->selection == 4){
         $users = student_attendanceRecord::where('student_id' , $request->id)

@@ -23,7 +23,7 @@
         <div class="card" style="">
      
             <div style="display:flex ; justify-content:center; margin-top 100px">
-                <img src="img/avatar.png" alt="" style="width : 180px ; height:180px ; margin-top 100px" class="">
+                <img src="img/avatar.png" alt="" style="width : 140px ; height:140px ; margin-top 100px" class="">
             </div>
                              
                           
@@ -31,8 +31,14 @@
                 <div class="centerize" style="margin-top 70px">
                <h4>{{$student->arabic_name}}</h4>
             </div>
-            <div class="centerize"  >
-                <p  >   <strong style="text-align:center" >{{App\Models\student::getDepNameById($student->id) }}</strong></p>
+            <div class=""  >
+                <p  >   <strong style="text-align:center" >القسم : {{App\Models\student::getDepNameById($student->id) }}</strong></p>
+           
+                <p  >   <strong style="text-align:center" > الفصل الدراسي : {{App\Models\student::StudentsSemestersCount($student->id) }}</strong></p>
+                <p  >   <strong style="text-align:center" > المعدل التراكمي : {{App\Models\student::getGpaById($student->id) }}%</strong></p>
+                <p  >   <strong style="text-align:center" > الوحدات المنجزة : [ {{App\Models\student::getUnitsDoneById($student->id) }} ]</strong></p>
+                <p  class="alert alert-info">   <strong style="text-align:center" > حالة القيد  : [ {{App\Models\student::getEnrollmentStatus($student->enrollment_status_id) }} ]</strong></p>
+           
             </div>
                
                 <ul class="social mb-0 list-inline mt-3 centerize">
@@ -61,6 +67,12 @@
                                         الاسم بالكامل :  
                                      <strong >[ {{$student->arabic_name}} ]</strong> 
                                     </li>
+                                    <li class="list-group-item" > 
+                                        الاسم بالكامل :  
+                                     <strong >[ {{$student->english_name}} ]</strong> 
+                                    </li>
+
+
                                     <li class="list-group-item">البريدالالكتروني 
                                        :
                                         <strong>[ {{App\Models\student::getStudentEmail($student->id) }} ]</strong> </li>
@@ -68,13 +80,17 @@
                                         :
                                       <strong>[ {{$student->phone}} ] </strong> </li>
                                     <li class="list-group-item">الرقم الوطني : 
-                                       <strong> {{$student->nat_id}} </strong> </li>
+                                       <strong> [ {{$student->nat_id}} ] </strong> </li>
                                     <li class="list-group-item">الصفة : 
                                       <strong>[ {{$student->sex}} ]</strong> </li>
                                     <li class="list-group-item">تاريخ الميلاد :  
                                        <strong>[ {{$student->birth}} ]</strong> </li>
-                                    <li class="list-group-item">سنة الالتحاق :  
-                                      <strong>[ {{$student->enrollment_date}} ]</strong> </li>
+                                       <li class="list-group-item">سنة الالتحاق :  
+                                        <strong>[ {{$student->enrollment_date}} ]</strong> </li>
+                                        <li class="list-group-item">   المشرف :  
+                                            <strong>[ {{App\Models\student::getStudentSpv($student->spv_id) }} ]</strong> </li>
+        
+                                            
                                   </ul>
                              
                                   @endforeach

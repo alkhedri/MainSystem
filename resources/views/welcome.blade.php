@@ -12,8 +12,94 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="dest/css/style.css">
+ 
         <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
         <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+
+        <style>
+            .fade-in-text {
+ 
+  animation: fadeIn 5s;
+  -webkit-animation: fadeIn 5s;
+  -moz-animation: fadeIn 5s;
+  -o-animation: fadeIn 5s;
+            }
+  .mainlogoDesktop{
+                           display: block;
+                margin-top: 10px;
+     margin-left: 100px;
+           animation: fadeIn 5s; 
+                       margin-left: 140px;
+  }
+     
+       .mainlogo{
+   display: none;
+                    }
+                @media only screen and (max-width: 740px) {
+                      .mainlogoDesktop{
+    display: none;
+  }
+               .mainlogo{
+                              display: block;
+                       position: absolute;
+                            animation: fadeIn 5s; 
+                       top : 15vh;
+                       left: 26vw;
+                     
+                       margin-left: 0;
+                       z-index : 999999;
+                    }
+                    
+   
+}
+
+@media only screen and (max-width: 414px) {
+                      .mainlogoDesktop{
+    display: none;
+  }
+               .mainlogo{
+                              display: block;
+                       position: absolute;
+                            animation: fadeIn 5s; 
+                       top : 15vh;
+                       left: 24vw;
+                     
+                       margin-left: 0;
+                       z-index : 999999;
+                    }
+                    
+   
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-moz-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-o-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-ms-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+        </style>
     </head>
     <body class="is-boxed has-animations" style="font-family: 'tajawal'">
         <div class="body-wrap">
@@ -23,17 +109,18 @@
                         <div class="brand header-brand">
                             <h1 class="m-0">
                                 <a href="#">
-                                   
-                                </a>
+                                  </a>
                             </h1>
                         </div>
                     </div>
                 </div>
             </header>
-        <section class="hero" >
-           
+      
                 <div class="hero-inner" >
-             
+                    <div class="mainlogo">
+                        <img src="img\University-Logo.png" alt="" style="width: 200px;height:200px;">
+                    
+                    </div>
                     <div class="hero-figure anime-element">
                         <svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
                             <rect width="528" height="396" style="fill:transparent;" />
@@ -49,17 +136,21 @@
                         <div class="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
                         <div class="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
                     </div>
-                    <div class="hero-copy" style="text-align: right; margin-right:50px">
-                        <h1 class="hero-title mt-0">النظام الإلكتروني</h1>
-                        <h2 class="hero-paragraph"> قسم هندسة الحاسب الألى وتقنية المعلومات</h2>
-                        <p class="hero-paragraph"> كلية الهندسة - جامعة صبراتة</p>
-                      
-                        <div class="hero-cta"><a class="button button-primary" href="{{route('login')}}">تسجيل الدخول</a>
+                    <div class="hero-copy" style="text-align: center;">
+                        <div class="mainlogoDesktop">
+                            <img src="img\University-Logo.png" alt="" style="width: 200px;height:200px;">
+                        
+                        </div>
+                       
+                        <h1 class="hero-title  mt-0 fade-in-text">النظام الإلكتروني</h1>
+                        <h2 style="margin-top: 0px" class="hero-paragraph fade-in-text" fade-in-text>جامعة صبراتة</h2>
+                  
+                        <div style="margin-top: 50px"  class="hero-cta fade-in-text"><a class="button button-primary" href="{{route('login')}}">تسجيل الدخول</a>
                             <a class="button" href="#">حول النظام</a></div>
                     </div>
                 </div>
            
-        </section>
+      
         <script src="dest/js/main.min.js"></script>
     </body>
 </html>

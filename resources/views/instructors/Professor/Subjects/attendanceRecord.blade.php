@@ -41,7 +41,7 @@
 
 <div class="row" style="margin-bottom: 20px">
 
-    <div class="col-lg-9">
+    <div class="col-lg-8">
 
  
     <a href="{{route('marksRecord' , ['subject_id' => $subject_id])}}" class="btn btn-primary btn-md"><i class="icon-layers"></i>  تعديل الدرجات</a>
@@ -49,12 +49,15 @@
     <a href="{{route('examsDate' , ['subject_id' => $subject_id])}}" class="btn btn-primary btn-md"><i class="icon-calendar"></i>  مواعيد الامتحانات</a>
 </div>
 
-    <div class="col-lg-3">
-        
-        <a class="btn btn-primary" href="{{route('AttendanceRecordAction', ['subject_id' => $subject_id])}}">إضافة سجل جديد [تاريخ اليوم]</a>
-   
+    <div class="col-lg-2"  >
+        <a style="padding-left: 5px"class="btn btn-primary" href="{{route('AttendanceRecordAction', ['subject_id' => $subject_id])}}">إضافة سجل جديد [تاريخ اليوم]</a>
+ 
     </div>
-   
+    <div class="col-lg-2">
+         
+        <a class="btn btn-primary" href="{{route('AttendanceSheet', ['subject_id' => $subject_id])}}">طباعة السجل</a>
+
+    </div>
 
 
 </div> 

@@ -76,7 +76,7 @@
                                 
                                     <td>
 
-                                @if($student->status === 1)
+                                @if($student->status == 1)
                                         <a href="{{route('AttendanceRecordActionUpdate' , [
                                             'student_id' => $student->student_id,
                                             'subject_id' => $subject_id,

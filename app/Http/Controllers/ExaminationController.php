@@ -269,7 +269,31 @@ class ExaminationController extends Controller
             'badge' => 'required|max:10|min:10|',
         ]);
 
+        $students = student::where('college_id' , $College_id )->get();
 
+        $placementPermission = 0;
+        $ResultPermission = 0;
+        $subjectsPermission= 0;
+        
+        foreach( $students as $student){
+
+            $user = User::find($student->id);
+
+            if (is_null($user))
+
+            {}
+            
+            else{
+
+                if($user->hasPermission('placements'))
+                $placementPermission = 1;
+                if($user->hasPermission('final-result'))
+                $ResultPermission = 1;
+                if($user->hasPermission('subjects-create'))
+                $subjectsPermission= 1;
+                 
+                }
+        }
      
      
         User::Insert(
@@ -288,6 +312,9 @@ class ExaminationController extends Controller
                 'department_id' => $request->department_id,
                 'college_id' => $College_id,
                 'badge'  => $request->badge,
+                'enrollment_status_id' => 3,
+
+                
           
              ]
         );
@@ -296,7 +323,15 @@ class ExaminationController extends Controller
         $user = User::find($x);
         $user->addRole('student');
         $department = department::where('id',$request->department_id)->value('arabic_name');;
-        
+
+        if ($placementPermission == 1)
+        $user->givePermission('student');
+        if ($ResultPermission == 1)
+        $user->givePermission('final-result');
+        if ($subjectsPermission == 1)
+        $user->givePermission('subjects-create');
+
+      
         return back()->with('data', [
             'arabic_name' =>  $request->name,
             'email' =>  $request->email,

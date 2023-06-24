@@ -15,7 +15,7 @@ class InstructorsMenuController extends Controller
 
         $instructors = instructor::where('arabic_name', 'like', '%' . $request->inst_name . '%')->get();
         
-        return view('instructors.HOD.FacultyMembers' , compact('instructors'));
+        return view('instructors.HOD.facultyMembers' , compact('instructors'));
     }
 
 

@@ -3,23 +3,12 @@
 @section('LoginForm')
 
 <div class="body-wrap">
-    <header class="site-header">
-        <div class="container">
-            <div class="site-header-inner">
-                <div class="brand header-brand">
-                    <h1 class="m-0">
-                        <a href="#">
-                           
-                        </a>
-                    </h1>
-                </div>
-            </div>
-        </div>
-    </header>
-<section class="hero" >
-   
-        <div class="hero-inner" >
      
+        <div class="hero-inner" >
+            <div class="mainlogo">
+                <img src="img\University-Logo.png" alt="" style="width: 200px;height:200px;">
+            
+            </div>
             <div class="hero-figure anime-element">
                 <svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
                     <rect width="528" height="396" style="fill:transparent;" />
@@ -36,12 +25,15 @@
                 <div class="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
             </div>
             <div class="hero-copy" >
-             
+           
                 <div class="container">
 
                                 <div class="pricing-table-inner is-revealing">
-
-                                        <form method="POST" action="{{ route('login') }}" style="text-align: right" dir="rtl">
+                                    <div class="mainlogoDesktop">
+                                        <img src="img\University-Logo.png" alt="" style="width: 200px;height:200px;">
+                                    
+                                    </div>
+                                        <form method="POST" action="{{ route('login') }}" style="text-align: center" dir="rtl">
                                             @csrf
                                         <h1>تسجيل الدخول</h1>
                                         <p class="text-muted">لوحة تسجيل الدخول للنظام الإلكتروني</p>
@@ -66,14 +58,17 @@
                                                 </span>
                                             @enderror  </div>
                                         <div class="row">
-                                            <div class="col-xs-6">
-                                                <button type="submit" class="button button-primary button-shadow button-block" style="width:200px">
+                                            <div class="col-xs-6 text-align:center">
+                                                <button type="submit" class="button button-primary button-shadow" style=" ">
                                                     {{ __('دخول') }}
                                                 </button>
                 
                                         
                                             </div>
-                                            <div class="col-xs-6 text-xs-right">
+                                            <br> 
+                                            <br> 
+                                      
+                                            <div class="">
                                                 @if (Route::has('password.request'))
                                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                                     {{ __('نسيت كلمة المرور ؟') }}
@@ -91,7 +86,6 @@
                         </div>
                     </div>
                 </div>
-</section>
  
  
 @endsection

@@ -5,8 +5,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">رئيس القسم</li>
-    <li class="breadcrumb-item">الاحصائيات</li>
-    <li class="breadcrumb-item">الطلبة</li>
+    <li class="breadcrumb-item"><a href="{{route('StudentsStats')}}"></a> الاحصائيات </li>
     <li class="breadcrumb-item">{{$studentName}}</li>
    
     
@@ -79,8 +78,13 @@ $title = Session::get('title');
 ?>
 
 @isset($stack)
-<canvas id="myChart" height="100px"></canvas>
+<div class="container" style="width: 70vw">
+    <canvas id="myChart" height="100px" style="font-family: Tajawal">
+
+    </canvas>
  
+</div>
+
 <button class="btn btn-primary" onclick="printCanvas()">
     <i class="fa icon-printer
     "></i>
@@ -110,7 +114,7 @@ $title = Session::get('title');
         datasets: [{
            label: title + " " + name,
             
-             backgroundColor: 'rgb(255, 99, 132)',
+             backgroundColor: 'rgb(17, 127, 173)',
             borderColor: 'rgb(255, 99, 132)',
             data: users,
         }]
@@ -133,7 +137,9 @@ $title = Session::get('title');
                 labels: {
                     // This more specific font property overrides the global property
                     font: {
-                        size: 24
+                        size: 20,
+                        family : 'Tajawal'
+                        
                     }
                 }
             }

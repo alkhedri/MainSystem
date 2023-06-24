@@ -89,7 +89,7 @@
          <nav class="sidebar-nav">
              <ul class="nav">
                  <li class="nav-item">
-                     <a class="nav-link" href=""><i class="icon-speedometer"></i> قائمة التحكم <span class="tag tag-info">جدید</span></a>
+                     <a class="nav-link" href=""><i class="icon-speedometer"></i> قائمة التحكم </a>
                  </li>
  
                  

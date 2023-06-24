@@ -6,9 +6,9 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">منسق الدراسة و الامتحانات</li>
-    <li class="breadcrumb-item"><a href="#">المقررات</a>
-        <li class="breadcrumb-item"><a href="#">طلب تجاوز</a>
-    </li>
+    <li class="breadcrumb-item"> المقررات   </li>
+        <li class="breadcrumb-item"><a href="#">طلب تجاوز</a>   </li>
+ 
      
  
 </ol>
@@ -83,14 +83,14 @@
                     <div class="form-group">
                         <div class="input-group">
                             <label class="input-group-addon">السبب</label>
-                            <textarea id="textarea-input" name="reason" rows="5" class="form-control" placeholder="                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat nemo saepe quibusdam repudiandae in eius possimus nulla molestias tenetur nostrum neque, unde earum necessitatibus, praesentium officiis adipisci quidem maxime iusto!"></textarea>
+                            <textarea id="textarea-input" name="reason" rows="5" class="form-control" placeholder="السبب "></textarea>
                                 <span class="input-group-addon"><i class="fa fa-envelope"></i>
                             </span>
                         </div>
                     </div>
 
                     <div class="form-group form-actions" dir="ltr">
-                        <button type="submit" class="btn btn-sm btn-primary">تقديم</button>
+                        <button type="submit" class="btn  btn-primary">تقديم</button>
                     </div>
                 </form>
             </div>

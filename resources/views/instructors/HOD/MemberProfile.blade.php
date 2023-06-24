@@ -87,7 +87,7 @@
          
             <ul class="list-group list-group-flush list-group-item-light">
                 @foreach ($subjects as $subject)
-                    <li  class="list-group-item">{{$loop->index + 1}} - <strong> {{$subject->arabic_name }}   <span style="color:green"> [ {{$subject->code }} ] </span> </strong></li>
+                    <li  class="list-group-item">{{$loop->index + 1}}  <strong> {{$subject->arabic_name }} </strong>   <strong> <span style="color:green"> [ {{$subject->code }} ] </span> </strong></li>
                 @endforeach
               
               </ul>

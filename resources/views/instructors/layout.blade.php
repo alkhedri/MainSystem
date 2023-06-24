@@ -227,7 +227,14 @@ body{
                      @permission('dec-read')
            
                       <li class="nav-item nav-dropdown">
-                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>الدراسة و الامتحانات</a>
+                        <a class="nav-link nav-dropdown-toggle" href="#"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 9h16"></path>
+                            <path d="M4 15h16"></path>
+                            <path d="M10 3 8 21"></path>
+                            <path d="m16 3-2 18"></path>
+                          </svg>
+                            الدراسة و الامتحانات
+                        </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
                       
@@ -256,12 +263,19 @@ body{
                        الطلبة
                       </li> --}}
                       <li class="nav-item nav-dropdown">
-                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>هيئة التدريس</a>
+                         <a class="nav-link nav-dropdown-toggle" href="#"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 9h16"></path>
+                            <path d="M4 15h16"></path>
+                            <path d="M10 3 8 21"></path>
+                            <path d="m16 3-2 18"></path>
+                          </svg>
+                            هيئة التدريس</a>
                          <ul class="nav-dropdown-items">
                              <li class="nav-item">
                              
                      
-                          <a class="nav-link" href="{{route('SubjectsList')}}"><i class="icon-docs"></i>قائمة المقررات</a>
+                          <a class="nav-link" href="{{route('SubjectsList')}}"><i class="icon-docs"></i>
+                            قائمة المقررات</a>
                           <a class="nav-link" href="{{route('SupervisionList')}}"><i class="icon-docs"></i>طلبة الاشراف</a>
                             <a class="nav-link" href="{{route('DroppedPaln')}}"><i class="icon-docs"></i>وضع خطة دراسية لطالب</a>
                           <a class="nav-link" href="{{route('SemestersPlanC')}}"><i class="icon-docs"></i>الخطة الدراسية للفصل الحالي</a>

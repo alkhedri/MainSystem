@@ -95,8 +95,8 @@ class StudentsController extends Controller
         ->update([
             'spv_id' => $request->spvid,
          ]);
-   
-        return  back();
+         return redirect()->route('Supervision');
+        
     }
 
     public function Supervisor_Search(Request $request)
@@ -161,6 +161,11 @@ class StudentsController extends Controller
 
     public function StudentNotofyAlertAction(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'message' => 'required',
+        ]);
+
  
         $user_id = auth()->user()->id;
         

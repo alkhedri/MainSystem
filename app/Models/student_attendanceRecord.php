@@ -30,4 +30,16 @@ class student_attendanceRecord extends Model
         $Upsent = student_attendanceRecord::where('date', $date)->where('subject_id', $id)->where('status', 0)->get();   
         return  $Upsent->count();  
     }
+
+ 
+    public static function CheckStatusSheet($id  ,$subject_id){
+
+
+        $status = student_attendanceRecord::where('student_id', $id)->where('subject_id', $subject_id)->get();
+    
+    
+        return $status ;
+     
+    }
+
 }

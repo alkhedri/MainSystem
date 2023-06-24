@@ -206,17 +206,36 @@
         </div>
         <div class="card-block">
               
-<table class="table  table-bordered" style="width:100%" id="table" border='1' cellpadding='1'   >
+<table class="table  table-bordered" style="width:100%" id="table"     >
     <tr>
-      <th rowspan="2">المحاضرة  اليوم </th>
+      <th rowspan="2" style="text-align: center">
+        المحاضرة
+        <hr>
+        اليوم \  التوقيت</th>
    
     
     </tr>
    <tr>
-   <td colspan="3" style="text-align: center">الاولى</td>
-    <td colspan="3" style="text-align: center">الثانية</td>
-    <td colspan="3" style="text-align: center">الثالثة</td>
-    <td colspan="3" style="text-align: center">الرابعة</td>
+   <td colspan="2" style="text-align: center">
+    الاولى
+    <hr>
+    [08:00 - 10:00]
+  </td>
+    <td colspan="2" style="text-align: center">
+      الثانية
+      <hr>
+      [10:00 - 12:00]
+    </td>
+    <td colspan="2" style="text-align: center">
+      الثالثة
+      <hr>
+    [12:00 - 02:00]
+    </td>
+    <td colspan="2" style="text-align: center">
+      الرابعة
+      <hr>
+      [02:00 - 04:00]
+    </td>
    
    </tr>
    
@@ -227,20 +246,20 @@
      
 
     @foreach ($Saturday as $item)
-     <tr class="alert-primary">
-        <td>{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+     <tr>
+        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+    
 
-        <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
-        <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
-        <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-         <td>TIME</td>
+        <td class="alert-success">{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+        
+        <td class="alert-danger">{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+        <td class="alert-danger">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+      
+        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+        
      </tr>
      @endforeach
             
@@ -251,20 +270,20 @@
     </tr> 
 
     @foreach ($Sunday as $item)
-     <tr class="alert-success text-white">
+     <tr >
  
-        <td>{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+      
         <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
         <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+ 
         <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
         <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+   
         <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
         <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+      
        
      </tr>
      @endforeach
@@ -276,19 +295,19 @@
       </tr>
       
       @foreach ($Monday as $item)
-     <tr class="alert-danger">
-        <td>{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+     <tr >
+        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+   
         <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
         <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+        
         <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
         <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+      
         <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
         <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+  
     </tr>
      @endforeach
     
@@ -300,19 +319,19 @@
       </tr>
       
       @foreach ($Tuesday as $item)
-     <tr class="alert-warning">
-        <td>{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+     <tr >
+        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+      
         <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
         <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+         
         <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
         <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+     
         <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
         <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+     
      </tr>
      @endforeach
     
@@ -324,18 +343,18 @@
       
       @foreach ($Wedensday as $item)
      <tr>
-        <td>{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+      
         <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
         <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+ 
         <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
         <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+      
         <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
         <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+       
      </tr>
      @endforeach
     
@@ -346,19 +365,19 @@
      </tr>
      
      @foreach ($Thursday as $item)
-     <tr class="alert-info">
-        <td>{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+     <tr >
+        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+       
         <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
         <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+    
         <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
         <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+   
         <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
         <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-        <td>TIME</td>
+        
      </tr>
      @endforeach
       
@@ -370,7 +389,6 @@
 
    
 </div>
- 
  
  
  

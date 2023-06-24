@@ -23,7 +23,7 @@
                 <strong>بحث</strong> طالب
             </div>
             <div class="card-block">
-                <form action="" method="post" class="form-horizontal ">
+                <form action="" method=" " class="form-horizontal ">
                     <div class="form-group row">
                         <div class="col-md-6">
                             <div class="input-group">

@@ -315,9 +315,9 @@ class InstrController extends Controller
     {
         $user_id = auth()->user()->id;
  
-        $subjects =  subject::where('proffesor_id',$user_id)->paginate(5);;
+        $subjects =  subject::where('proffesor_id',$user_id)->get();
    
-
+           
         return view('instructors.Professor.SubjectsList' , compact('subjects'));
     }
     public function index_SupervisionList()

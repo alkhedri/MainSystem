@@ -34,7 +34,7 @@ class modelsController extends Controller
     $unitsCount += $units;
   }
 
-        return view('instructors.professor.Model2template' , compact('studentData' , 'studentSubjects' , 'unitsCount'));
+        return view('instructors.Professor.Model2template' , compact('studentData' , 'studentSubjects' , 'unitsCount'));
          
     }
 }

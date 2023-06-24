@@ -70,7 +70,8 @@ class student extends Model
 
 
      public static function getUnitsDoneById($id){
-       
+        $units =  student::where('id', $id)->value('units'); 
+        return $units;
      }
 
     public static function count_all()

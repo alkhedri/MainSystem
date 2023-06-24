@@ -191,7 +191,17 @@ class StudentController extends Controller
         ->where('semester_id', $current_semester )
         ->where('subject_id', $request->subject_id)->first();
   
-       
+        $Student_subjects = student_mark::where('department_id', $department_id )
+        ->where('student_id', $user_id )
+        ->where('semester_id', $current_semester )->get();
+
+        $UnitsCount = 0;
+        foreach($Student_subjects as $subject){
+            $Subjectunits = subject::where('id', $subject->subject_id)->value('units');
+
+            $UnitsCount =  $UnitsCount +  $Subjectunits;
+        }
+
                     $requirements = subject_requirement::where('subject', $request->subject_id)->get();
                     $checkLegit = 0;
                     foreach ($requirements as $req){
@@ -219,6 +229,8 @@ class StudentController extends Controller
             return back()->with('Alert', 'المقرر موجود مسبقا');
             else if($checkLegit > 0)
             return back()->with('Alert', 'هذا المقرر غير متوفر');
+            else if ($UnitsCount >= 18)
+            return back()->with('Alert', 'لقد تجاوزت عدد الوحدات المسموح به');
             
         student_mark::Insert(
             [

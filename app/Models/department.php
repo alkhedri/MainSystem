@@ -21,7 +21,7 @@ use App\Models\student_mark;
 
 use App\Models\subject;
 use App\Models\college;
-use App\Models\instructor;
+use App\Models\Instructor;
 
 
 
@@ -112,5 +112,7 @@ class department extends Model
         
     }
     
+
+
    
 }

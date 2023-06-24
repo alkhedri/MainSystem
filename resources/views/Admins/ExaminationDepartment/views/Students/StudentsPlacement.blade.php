@@ -15,13 +15,27 @@
 
 
 @section('content')
-<div class="alert alert-success" role="alert">
-    <h4 class="alert-heading">تفاصيل طلبة التنسيب</h4>
-    <p>موعد التنسيب <span> [  {{$date}}] </span></p>
+<div class="alert alert-primary" role="alert">
+
+    <p> <i class="icon-calendar"></i> موعد التنسيب <span>
+        @isset($date)
+        [ {{$date}} ]
+        @else
+     [ لم يحدد بعد ]
+        @endisset
+       
+         </span></p>
+
+    <p>    <i class="icon-people"></i>  عدد الطلبة المستهدفين :    <span>[ {{ $requests->count()}} ]</span></p>
+ 
     <hr>
-     
-    <h4> العدد الاجمالي <span>[ {{ $requests->count()}} ]</span></h4>
-    <h4>   عدد الاقسام <span> [ {{$departments->count()}} ]</span></h4>
+   
+    <p> <i class="icon-badge"></i> سيتم عرض كل طالب مع الاقسام التي ادخلها حسب الرغبة</span></p>
+    <p> <i class="icon-badge"></i>  ترتيب الطلبة حسب المعدل التراكمي</span></p>
+    <p> <i class="icon-badge"></i>   سيتم ادراج المقررات المطلوبه لكل قسم امام اسم القسم</span></p>
+    <p> <i class="icon-badge"></i>    المقررات التي انجزها الطالب باللون الاخضر والغير منجزة باللون الاحمر</span></p>
+ 
+
   </div>
  
  
@@ -63,6 +77,21 @@
                                     <li>
                                         {{App\Models\department::getDepNameById($item->department_id)}} - 
                                         <a class="btn btn-sm btn-primary" href="{{route('StudentsMovementActionDone' , ['newDepId' => $item->department_id , 'student_id' => $request->student_id])}}">تنسيب</a>
+                                  -
+
+                                
+                                  @foreach (App\Models\department_demand::getDemandedSubjects($item->department_id)  as $subject)
+                               
+                                           @if (App\Models\student_mark::checkIfPassed($subject->subject_id ,$request->student_id) == 0 )
+                                         
+                                         <strong class="tag tag-danger"> [ {{App\Models\subject::getSubjectName($subject->subject_id)}} ] </strong> 
+                                           
+                                           
+                                           @else 
+                                           <strong class="tag tag-success"> [ {{App\Models\subject::getSubjectName($subject->subject_id)}} ] </strong> 
+                                           
+                                           @endif
+                                  @endforeach
                                     </li>
                               
 <br>                                

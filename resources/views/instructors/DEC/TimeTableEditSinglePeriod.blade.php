@@ -9,7 +9,7 @@
     <li class="breadcrumb-item"><a href="{{route('TimeTable')}}"> جدول المحاضرات</a>   </li>
     <li class="breadcrumb-item">تعديل جدول المحاضرات   </li>
   
-    <li class="breadcrumb-item">{{ App\Models\subject::getSubjectName(App\Models\TimeTable::getPeriod($id, $period))}}</li>
+    <li class="breadcrumb-item">{{ App\Models\subject::getSubjectName(App\Models\timeTable::getPeriod($id, $period))}}</li>
 
 
 

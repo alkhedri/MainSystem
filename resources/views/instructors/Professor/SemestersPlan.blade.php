@@ -16,15 +16,15 @@
 
 @section('content')
  
+ 
     <div class="row">
         <div class="col-lg-10">
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-edit"></i>الخطة الدراسية <strong>[{{$SEMESTER_NAME}}]</strong>
                     <div class="card-actions">
-                        <a href="#" class="btn-setting"><i class="icon-settings"></i></a>
-                        <a href="#" class="btn-minimize"><i class="icon-arrow-up"></i></a>
-                        <a href="#" class="btn-close"><i class="icon-close"></i></a>
+     
+                        <a href=" "   onclick="CreatePDFfromHTML()" ><i class="fa icon-printer"></i></a>
                     </div>
                 </div>
                 <div class="card-block">
@@ -32,10 +32,10 @@
                         @foreach ($semesterplan as $plan)
                         
                                         <div class="form-group row">
-                                            <label class="col-lg-3 form-control-label" for="input-small">تجديد القيد :</label>
+                                            <label class="col-lg-3 form-control-label input-md" for="input-small">تجديد القيد :</label>
                                             <div class="col-lg-3">
                                                 <strong>
-                                                <input type="text" id="input-small" name="renewalStarts" class="form-control input-md" value="{{$plan->renewalStarts}}">
+                                                <input type="text" id="input-small" name="renewalStarts" class="form-control" value="{{$plan->renewalStarts}}">
                                             </strong>
                                         </div>
                                             <div class="col-lg-3">
@@ -208,3 +208,51 @@
  
  
 @endsection
+
+
+@section('page-js-script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+<script type="text/javascript">
+            var style = "<style>";
+                style = style + "table {width: 100%;font: 17px Calibri;}";
+                style = style + "table, th, td {border: solid 1px #DDD ; border-collapse: collapse;";
+                style = style + "padding: 2px 3px;text-align: center;}";
+                style = style + "</style>";
+function xxxx( ) {
+  var divToPrint=document.getElementById("table");
+        newWin= window.open("");
+        newWin.document.write(style);          //  add the style.
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+}
+ 
+//Create PDf from HTML...
+function CreatePDFfromHTML() {
+    var HTML_Width = $(".card").width();
+    var HTML_Height = $(".card").height();
+    var top_left_margin = 15;
+    var PDF_Width = HTML_Width + (top_left_margin * 2);
+    var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+    var canvas_image_width = HTML_Width;
+    var canvas_image_height = HTML_Height;
+
+    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+    html2canvas($(".card")[0]).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+        for (var i = 1; i <= totalPDFPages; i++) { 
+            pdf.addPage(PDF_Width, PDF_Height);
+            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+        }
+        pdf.save("SemesterPaln.pdf");
+        $(".html-content").hide();
+    });
+}
+</script>
