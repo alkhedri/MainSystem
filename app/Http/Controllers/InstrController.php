@@ -148,7 +148,9 @@ class InstrController extends Controller
         
         $subjects =  subject::where('department_id',$department_id)->paginate(5);;
    
-
+        $title = 'حذف مقرر';
+        $text = "هل أنت متأكد من حذ هذا القرر ؟";
+        confirmDelete($title, $text);
         return view('instructors.DEC.SubjectsMenu' , compact('subjects'));
     }
     public function index_SubjectDetails(Request $request)

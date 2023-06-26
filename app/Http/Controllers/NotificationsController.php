@@ -9,12 +9,26 @@ use App\Models\notification;
 use App\Models\department;
 use App\Models\student;
 use Illuminate\Http\Request;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class NotificationsController extends Controller
 {
     public function action_NotifyStudent(Request $request)
     {
 
+
+
+        $request->validate([
+          
+            'reciver_id' => 'required',
+            'message' =>  'required',
+          
+        ]);
+        if($validator->fails()) {
+          
+            return Redirect::back()->with('success', 'Done!');
+      
+        }
+        
         $user_id = auth()->user()->id;
 
         $student_id = student::where('badge',$request->studnet_badge)->value('id');

@@ -56,6 +56,11 @@
                                 <span>[ {{App\Models\student::count_inter()}} ]</span>
                             </a>
                             
+                            <a class="btn btn btn-info" href="{{route('RegRenewalStopped')}}">
+                                <i class="fa fa-dot-circle-o"></i>
+                                المتوقفين  
+                                <span>[ {{App\Models\student::count_stopped()}} ]</span>
+                            </a>
                         </div>
                   
         </div>

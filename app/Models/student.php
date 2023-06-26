@@ -97,6 +97,17 @@ class student extends Model
         return  $students->count();
     }
 
+    public static function count_stopped()
+    {
+
+        $user_id = auth()->user()->id;
+        $College_id = Instructor::where('id',$user_id)->value('college_id');;
+        $students = student::all()->where('college_id' , $College_id)->where('enrollment_status_id' , 2);
+
+
+        return  $students->count();
+    }
+
     public static function getStudentSpv($id){
         $spvName= Instructor::where('id', $id)->value('arabic_name');
     

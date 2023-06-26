@@ -22,8 +22,8 @@ Route::get('/', function () {
 
  Route::group(['middleware' => ['role:college']], function() {
  
-
-Route::get('/test', 'App\Http\Controllers\ExaminationController@index')->name('test');;
+Route::get('/autocomplete-search', 'App\Http\Controllers\ExaminationController@autocompleteSearch');
+Route::get('/test', 'App\Http\Controllers\ExaminationController@index')->name('test');
 
 Route::get('/Departments', 'App\Http\Controllers\ExaminationController@index_DepartmetsMenu')->name('DepartmentsMenu');
 Route::get('/DepartmentsInfo', 'App\Http\Controllers\ExaminationController@index_DepartmentsInfo')->name('DepartmentsInfo');
@@ -41,7 +41,7 @@ Route::get('/CurrentSemesterActivate', 'App\Http\Controllers\ExaminationControll
 
 Route::get('/NewSemester', 'App\Http\Controllers\ExaminationController@index_NewSemester')->name('NewSemester');
 Route::post('/AddSemesters', 'App\Http\Controllers\ExaminationController@add_Semester')->name('AddSemesters');
-Route::get('/SemestersDeleteAction', 'App\Http\Controllers\ExaminationController@delete_Semester')->name('SemestersDeleteAction');
+Route::delete('/SemestersDeleteAction', 'App\Http\Controllers\ExaminationController@delete_Semester')->name('SemestersDeleteAction');
 
 
 Route::get('/Request', 'App\Http\Controllers\ExaminationController@index_Override')->name('Request');
@@ -74,6 +74,9 @@ Route::get('/StudentsMovementActionDone', 'App\Http\Controllers\student_movement
 Route::get('/RegRenewal', 'App\Http\Controllers\ExaminationController@index_RegRenewal')->name('RegRenewal');
 Route::post('/StudentsRenewalSearch', 'App\Http\Controllers\regRenewalController@search_renewal')->name('StudentsRenewalSearch');
 Route::get('/RegRenewalIntermettent', 'App\Http\Controllers\regRenewalController@show_inter')->name('RegRenewalIntermettent');
+Route::get('/RegRenewalStopped', 'App\Http\Controllers\regRenewalController@show_stopped')->name('RegRenewalStopped');
+
+
 Route::get('/RenewalComplete', 'App\Http\Controllers\regRenewalController@action_complete')->name('RenewalComplete');
 Route::get('/RenewalCancel', 'App\Http\Controllers\regRenewalController@action_cancel')->name('RenewalCancel');
 Route::get('/RenewalStop', 'App\Http\Controllers\regRenewalController@action_stop')->name('RenewalStop');
@@ -158,7 +161,7 @@ Route::get('/SubjectsProfessor', 'App\Http\Controllers\InstrController@index_Sub
 Route::POST('/SubjectsProfessorAction', 'App\Http\Controllers\Instructors\SubjectsController@Update_SubjectProfessor')->name('SubjectsProfessorAction');
 
 
-Route::get('/ActionDeleteSubject', 'App\Http\Controllers\Instructors\SubjectsController@Delete_Subject')->name('ActionDeleteSubject');
+Route::delete('/ActionDeleteSubject', 'App\Http\Controllers\Instructors\SubjectsController@Delete_Subject')->name('ActionDeleteSubject');
 Route::get('/ActionDeleteSubjectRequiremet', 'App\Http\Controllers\Instructors\SubjectsController@Delete_SubjectRequiremet')->name('ActionDeleteSubjectRequiremet');
 Route::POST('/ActionInsertNewSubjectRequiremet', 'App\Http\Controllers\Instructors\SubjectsController@insert_newSubjectRequiremet')->name('ActionInsertNewSubjectRequiremet');
 

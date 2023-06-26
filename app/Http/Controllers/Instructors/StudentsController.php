@@ -90,13 +90,19 @@ class StudentsController extends Controller
 
     public function SupervisorUpdateAction(Request $request)
     {
+        $user_id = auth()->user()->id;
  
-        student::where('id', $request->id)
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+    
+ 
+        student::where('id', $request->id)->where('department_id' , $department_id)
         ->update([
             'spv_id' => $request->spvid,
          ]);
+
+
          return redirect()->route('Supervision');
-        
+    
     }
 
     public function Supervisor_Search(Request $request)

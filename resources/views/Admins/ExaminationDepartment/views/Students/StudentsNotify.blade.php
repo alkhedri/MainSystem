@@ -15,7 +15,7 @@
 
 
 @section('content')
-
+ 
 <div class="row">
     
     <div class="col-sm-8">
@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">رقم القيد</span>
-                        <input type="text" id="username3" name="studnet_badge" class="form-control">
+                        <input type="text" id="studnet_badge" name="studnet_badge" class="typeahead form-control" data-provide="typeahead" autocomplete="off">
                         <span class="input-group-addon"><i class="fa fa-user"></i>
                         </span>
                     </div>
@@ -46,14 +46,14 @@
                 <div class="form-group">
                     <div class="input-group">
                         <label class="input-group-addon">الرسالة</label>
-                        <textarea id="textarea-input" name="message" rows="5" class="form-control" placeholder="                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat nemo saepe quibusdam repudiandae in eius possimus nulla molestias tenetur nostrum neque, unde earum necessitatibus, praesentium officiis adipisci quidem maxime iusto!"></textarea>
+                        <textarea id="textarea-input" name="message" rows="5" class="form-control">  </textarea>
                             <span class="input-group-addon"><i class="fa fa-envelope"></i>
                         </span>
                     </div>
                 </div>
 
                 <div class="form-group form-actions" dir="ltr">
-                    <button type="submit" class="btn btn-sm btn-primary">اشعار</button>
+                    <button type="submit" class="btn  btn-primary">اشعار</button>
                 </div>
             </form>
         </div>
@@ -111,9 +111,9 @@
                     @foreach ($notificationsList as $item)
                     <tr>
                  
-                        <td>{{$loop->index}}</td>
-                        <td><strong>{{App\Models\Student::getNameById($item->reciver_id)}}</strong></td>
-                        <td>{{App\Models\Student::getBadgeById($item->reciver_id)}}</td>
+                        <td>{{$loop->index + 1}}</td>
+                        <td><strong>{{App\Models\student::getNameById($item->reciver_id)}}</strong></td>
+                        <td>{{App\Models\student::getBadgeById($item->reciver_id)}}</td>
                         <td>{{$item->title}}</td>
                         <td>{{$item->date}}</td>
                         
@@ -136,4 +136,24 @@
   
 <!--/col-->
  
+@endsection
+
+@section('js-scripts')
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js">
+</script>
+<script type="text/javascript">
+    var route = "{{ url('autocomplete-search') }}";
+    $('input.typeahead').typeahead({
+        source: function (query, process) {
+            return $.get(route, {
+                sb: query
+            }, function (data) {
+                return process(data);
+            });
+        }
+
+  
+    });
+</script>
 @endsection

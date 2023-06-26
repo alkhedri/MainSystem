@@ -23,11 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-edit"></i> إضافة المقرر
-                    <div class="card-actions">
-                        <a href="#" class="btn-setting"><i class="icon-settings"></i></a>
-                        <a href="#" class="btn-minimize"><i class="icon-arrow-up"></i></a>
-                        <a href="#" class="btn-close"><i class="icon-close"></i></a>
-                    </div>
+     
                 </div>
                 <div class="card-block">
                                 <form action="{{route('ActionInsertNewSubject')}}" method="post" class="form-horizontal ">
@@ -61,7 +57,7 @@
                                        <Select id="input-large" name="units" class="form-control input-lg" placeholder=".input-lg">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        <option  selected value="3">3</option>
                                         <option value="4">4</option>
                                        </Select>
                                         </div>
@@ -82,13 +78,13 @@
                                             <Select id="input-large" name="work_hours" class="form-control input-lg" placeholder=".input-lg">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                <option   value="3">3</option>
                                                 <option value="4">4</option>
                                            </Select> </div>
                                     </div>
                                     <div class="form-actions" dir="ltr">
                                         <button type="submit" class="btn btn-primary">إضافة</button>
-                                        <button type="button" class="btn btn-default">Cancel</button>
+                                     
                                     </div>
                                 </form>
                             </div>

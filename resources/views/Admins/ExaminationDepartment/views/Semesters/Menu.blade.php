@@ -20,7 +20,7 @@
     <div class="col-lg-6">
         <div class="alert alert-info" role="alert">
              
-            <p> الفصل الدراسي الحالي - [{{$semester_name}}]  </p>
+            <p> الفصل الدراسي الحالي - <strong>[{{$semester_name}}] </strong>  </p>
             <hr>
             <p class="mb-0"> ملاحظة : لتعيين فصل دراسي للوقت الحالي من جدول الفصول نضغط على تعيين</p>
           </div>
@@ -58,7 +58,7 @@
                      
                                 @if ($semester_id == $semester->id)
                                          
-                                <a class="btn btn-outline-success btn-sm" href="{{ route('CurrentSemesterActivate') }}"
+                                <a class="btn btn-success btn-sm" href=""
                    >
                                  {{ __('الفصل الحالي') }}
                              </a>
@@ -76,7 +76,7 @@
                             </td>
 
                             <td>
-                                <a class="btn btn-outline-danger btn-sm" href="{{route('SemestersDeleteAction' , ['id' => $semester->id])}}"
+                                <a data-confirm-delete="true" class="btn btn-outline-danger btn-sm" href="{{route('SemestersDeleteAction' , ['id' => $semester->id])}}"
                                     >    {{ __('حذف') }}
                                 </a>
                             </td>

@@ -20,9 +20,18 @@ class regRenewalController extends Controller
     public function show_inter(Request $request)
     {
 
-        $students = student::all()->where('enrollment_status_id' , 3);
+        $students = student::where('enrollment_status_id' , 3)->paginate(5);
         return view('Admins.ExaminationDepartment.views.Students.RegRenewal' , compact('students'));
     }
+    public function show_stopped(Request $request)
+    {
+
+        $students = student::where('enrollment_status_id' , 2)->paginate(5);
+        return view('Admins.ExaminationDepartment.views.Students.RegRenewal' , compact('students'));
+    }
+
+
+    
 
     public function action_complete(Request $request)
     {

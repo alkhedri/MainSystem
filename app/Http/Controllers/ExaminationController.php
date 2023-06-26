@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use Laratrust\Models\Permission;
 class ExaminationController extends Controller
@@ -88,6 +89,9 @@ class ExaminationController extends Controller
         $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'code' => 'required',
+            'arabic_name' => 'required',
+          
+
         ]);
       
       if (!is_null($request->image)){
@@ -136,6 +140,14 @@ class ExaminationController extends Controller
     public function Add_Departments(Request $request)
     {
 
+
+        
+        $request->validate([
+            'arabic_name' => 'required',
+            'code' => 'required',
+        
+
+        ]);
         $user_id = auth()->user()->id;
         
 
@@ -184,7 +196,9 @@ class ExaminationController extends Controller
         $semester_name = semester::where('id',$current_semester)->value('name');
         $semester_id = semester::where('id',$current_semester)->value('id');;
         
-
+        $title = 'حذف فصل دراسي';
+        $text = "هل أنت متأكد من حذ هذا الفصل ؟";
+        confirmDelete($title, $text);
         return view('Admins.ExaminationDepartment.views.Semesters.Menu' , compact('Semesters' , 'semester_name' ,'semester_id'));
     }
 
@@ -209,7 +223,11 @@ class ExaminationController extends Controller
     }
     public function add_Semester(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+      
 
+        ]);
         $user_id = auth()->user()->id;
         
 
@@ -586,7 +604,7 @@ class ExaminationController extends Controller
         $user_id = auth()->user()->id;
         $notificationsList = Notification::where('sender_id',$user_id)->orderBy('id','DESC')->paginate(5);
          
-
+        Alert::error('Error Title', 'Error Message');
         return view('Admins.ExaminationDepartment.views.Students.StudentsNotify' , compact('notificationsList'));
     }
 
@@ -752,7 +770,21 @@ class ExaminationController extends Controller
 
 
 
+    public function autocompleteSearch(Request $request)
+    {
 
+
+        // $data =  student::where('Badge', 'like', "%{$request->sb}%")
+        // ->pluck('english_name');
+   
+          $query = $request->get('sb');
+          $filterResult = student::where('Badge', 'LIKE', '%'. $query. '%')->pluck('Badge');
+
+
+        return response()->json($filterResult);
+
+        
+    } 
 
     
 }

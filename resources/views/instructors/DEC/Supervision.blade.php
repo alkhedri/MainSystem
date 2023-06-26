@@ -88,7 +88,7 @@
                                         </td>
                                      
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{route('SupervisorUpdateAction')}}"
+                                        <a class="btn btn-primary" href="{{route('SupervisorUpdateAction')}}"
                                         onclick="event.preventDefault();
                                                       document.getElementById('change-form{{$student->id}}').submit();">
                                          {{ __('تغيير') }}

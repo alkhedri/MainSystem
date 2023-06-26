@@ -47,8 +47,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i>
                                 </span>
-                                <input type="text" id="email2" name="year" class="form-control" placeholder="السنة">
-                             
+                                  <input type="number" name="year" class="form-control" min="1992" max="2099" step="1" value="2023"  placeholder="السنة"/>
                             </div>
                         </div>
                  

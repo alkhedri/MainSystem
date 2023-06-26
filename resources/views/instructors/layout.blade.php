@@ -5,6 +5,7 @@
  * Copyright (c) 2016 creativeLabs Łukasz Holeczek
  * @license MIT
  -->
+
  <!DOCTYPE html>
  <html lang="LY-fa" dir="rtl">
  
@@ -367,6 +368,7 @@ body{
                 </div>
              
                 {{-- <div class="animate"> --}}
+                    @include('sweetalert::alert')
                     @yield('content')
                 {{-- </div> --}}
                    
@@ -673,8 +675,6 @@ body{
      <!-- Custom scripts required by this view -->
      <script src="js/views/main.js"></script>
  
-     <!-- Grunt watch plugin -->
-     <script src="//localhost:35729/livereload.js"></script>
   
      @yield('modals')
 

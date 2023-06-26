@@ -76,8 +76,8 @@ class department extends Model
                         
 
             }
-         
-        return   $subjectsNotDone ;
+            $result = array_unique($subjectsNotDone);
+        return   $result ;
         
         
     }

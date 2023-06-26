@@ -97,13 +97,38 @@
                    الفصول الدراسية
                  </li>
                  <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>إدارة فصل دراسي</a>
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-folder-alt"></i>
+                        إدارة فصل دراسي
+                    </a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
                         
-                     <a class="nav-link" href="{{route('SemestersMenu')}}"><i class="icon-docs"></i>قائمة الفصول الدراسية</a>
-                     <a class="nav-link" href="{{route('GetSemestersPlan')}}"><i class="icon-docs"></i>الخطة الدراسية</a>
-                     <a class="nav-link" href="{{route('Request')}}"><i class="icon-docs"></i>طلبات التجاوز</a>
+                     <a class="nav-link" href="{{route('SemestersMenu')}}"><i ><svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.5 6.75H21"></path>
+                        <path d="M7.5 12H21"></path>
+                        <path d="M7.5 17.25H21"></path>
+                        <path d="M3.75 7.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path>
+                        <path d="M3.75 12.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path>
+                        <path d="M3.75 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path>
+                      </svg></i>قائمة الفصول الدراسية</a>
+                     <a class="nav-link" href="{{route('GetSemestersPlan')}}"><i ><svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.25 19.493V3.375a1.128 1.128 0 0 0-1.125-1.125H3.375A1.128 1.128 0 0 0 2.25 3.375v16.5a1.88 1.88 0 0 0 1.875 1.875H19.5"></path>
+                        <path d="M19.5 21.75a2.25 2.25 0 0 1-2.25-2.25V6h3.375a1.125 1.125 0 0 1 1.125 1.125V19.5a2.25 2.25 0 0 1-2.25 2.25Z"></path>
+                        <path d="M11.25 6h3"></path>
+                        <path d="M11.25 9h3"></path>
+                        <path d="M5.25 12h9"></path>
+                        <path d="M5.25 15h9"></path>
+                        <path d="M5.25 18h9"></path>
+                        <path fill="currentColor" stroke="none" d="M8.25 9.75h-3A.75.75 0 0 1 4.5 9V6a.75.75 0 0 1 .75-.75h3A.75.75 0 0 1 9 6v3a.75.75 0 0 1-.75.75Z"></path>
+                      </svg></i>الخطة الدراسية</a>
+                     <a class="nav-link" href="{{route('Request')}}"><i ><svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 21.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"></path>
+                        <path d="M6 6.75v10.5"></path>
+                        <path d="m13.5 7.5-3-3 3-3"></path>
+                        <path d="M6 6.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"></path>
+                        <path d="M18 21.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"></path>
+                        <path d="M11.25 4.5h3.938A2.812 2.812 0 0 1 18 7.313v9.937"></path>
+                      </svg></i>طلبات التجاوز</a>
                      <a class="nav-link" href="{{route('FinalResults')}}"><i class="icon-docs"></i>النتيجة النهائية</a>
                     </li>
            
@@ -115,16 +140,35 @@
                         الأقسام الدراسية
                      </li>
                       <li class="nav-item nav-dropdown">
-                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>إدارة قسم دراسي</a>
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-folder-alt"></i>إدارة قسم دراسي</a>
                         <ul class="nav-dropdown-items">
                              <li class="nav-item">
-                              <a class="nav-link" href="{{route('DepartmentsMenu')}}"><i class="icon-user-follow"></i>قائمة الأقسام</a>
+                              <a class="nav-link" href="{{route('DepartmentsMenu')}}"><i ><svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.5 6.75H21"></path>
+                                <path d="M7.5 12H21"></path>
+                                <path d="M7.5 17.25H21"></path>
+                                <path d="M3.75 7.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path>
+                                <path d="M3.75 12.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path>
+                                <path d="M3.75 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path>
+                              </svg></i>قائمة الأقسام</a>
                              </li>
                              <li class="nav-item">
-                                <a class="nav-link" href="{{route('Rooms')}}"><i class="icon-user-follow"></i>القاعات الدراسية</a>
+                                <a class="nav-link" href="{{route('Rooms')}}"><i ><svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.5 9 12 3l10.5 6L12 15 1.5 9Z"></path>
+                                    <path d="M5.25 11.25v6L12 21l6.75-3.75v-6"></path>
+                                    <path d="M22.5 17.25V9"></path>
+                                    <path d="M12 15v6"></path>
+                                  </svg></i>القاعات الدراسية</a>
                                </li>
                             <li class="nav-item">
-                             <a class="nav-link" href="{{route('DepartmentsDelete')}}"><i class="icon-user-follow"></i>حذف قسم دراسي</a>
+                             <a class="nav-link" href="{{route('DepartmentsDelete')}}"><i ><svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m5.25 5.25.938 15c.044.867.675 1.5 1.5 1.5h8.625c.828 0 1.447-.633 1.5-1.5l.937-15"></path>
+                                <path d="M3.75 5.25h16.5"></path>
+                                <path d="M9 5.25V3.375a1.122 1.122 0 0 1 1.125-1.125h3.75A1.121 1.121 0 0 1 15 3.375V5.25"></path>
+                                <path d="M12 8.25v10.5"></path>
+                                <path d="M8.625 8.25 9 18.75"></path>
+                                <path d="M15.375 8.25 15 18.75"></path>
+                              </svg></i>حذف قسم دراسي</a>
                             </li>
     
                     </ul>
@@ -134,18 +178,35 @@
                        الطلبة
                       </li>
                       <li class="nav-item nav-dropdown">
-                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>إدارة الطلبة</a>
+                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-people"></i>إدارة الطلبة</a>
                          <ul class="nav-dropdown-items">
                              <li class="nav-item">
                              
-                          <a class="nav-link" href="{{route('StudentAccount')}}"><i class="icon-docs"></i>إضافة طالب</a>
+                          <a class="nav-link" href="{{route('StudentAccount')}}"><i>
+                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.625 6.75c-.184 2.478-2.063 4.5-4.125 4.5-2.063 0-3.945-2.021-4.125-4.5-.188-2.578 1.64-4.5 4.125-4.5 2.484 0 4.312 1.969 4.125 4.5Z"></path>
+                                <path d="M13.5 14.25c-4.078 0-8.217 2.25-8.983 6.497-.093.512.198 1.003.734 1.003h16.5c.536 0 .825-.491.733-1.003-.766-4.247-4.905-6.497-8.984-6.497Z"></path>
+                                <path d="M4.125 8.25v5.25"></path>
+                                <path d="M6.75 10.875H1.5"></path>
+                              </svg></i>إضافة طالب</a>
                           <a class="nav-link" href="{{route('StudentsPlacement')}}"><i class="icon-docs"></i>تنسيب طالب إلى قسم</a>
-                          <a class="nav-link" href="{{route('StudentsMovement')}}"><i class="icon-docs"></i>نقل طالب إلى قسم</a>
+                          <a class="nav-link" href="{{route('StudentsMovement')}}"><i>
+                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.25 5.25 12 1.5l3.75 3.75"></path>
+                                <path d="M12 1.5v21"></path>
+                                <path d="M8.25 18.75 12 22.5l3.75-3.75"></path>
+                                <path d="M18.75 8.25 22.5 12l-3.75 3.75"></path>
+                                <path d="M5.25 8.25 1.5 12l3.75 3.75"></path>
+                                <path d="M1.5 12h21"></path>
+                              </svg></i>نقل طالب إلى قسم</a>
                           <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>القيد الدراسي</a>
                       
                         
-                          <a class="nav-link" href="{{route('StudentNotify')}}"><i class="icon-docs"></i>إخطار طالب</a>
-                          <a class="nav-link" href="{{route('RegRenewal')}}"><i class="icon-docs"></i>عرض الطلبة المتعثرين</a>
+                          <a class="nav-link" href="{{route('StudentNotify')}}"><i><svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.047 16.473c-1.204-1.473-2.053-2.223-2.053-6.285 0-3.72-1.9-5.044-3.463-5.688a.835.835 0 0 1-.466-.495C13.79 3.072 13.022 2.25 12 2.25s-1.791.823-2.063 1.756a.827.827 0 0 1-.466.494c-1.565.645-3.463 1.965-3.463 5.688-.002 4.062-.852 4.812-2.056 6.285-.499.61-.062 1.527.81 1.527h14.48c.867 0 1.301-.92.805-1.527Z"></path>
+                            <path d="M15 18v.75a3 3 0 0 1-6 0V18"></path>
+                          </svg></i>إخطار طالب</a>
+                          <a class="nav-link" href="{{route('RegRenewal')}}"><i class="fa fa-bar-chart"></i>عرض الطلبة المتعثرين</a>
                          </li>
                          
                          
@@ -156,12 +217,12 @@
 
                        
                            <li class="nav-item nav-dropdown">
-                              <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>صلاحيات الطلبة</a>
+                              <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-lock"></i>صلاحيات الطلبة</a>
                               <ul class="nav-dropdown-items">
                                   <li class="nav-item">
                                   
-                                    <a class="nav-link" href="{{route('StudentDropAndAdd')}}"><i class="icon-docs"></i>تنزيل و اسقاط</a>
-                                    <a class="nav-link" href="{{route('StudentDepartmentPlacement')}}"><i class="icon-docs"></i>التنسيب للاقسام</a>
+                                    <a class="nav-link" href="{{route('StudentDropAndAdd')}}"><i class="icon-note"></i>تنزيل و اسقاط</a>
+                                    <a class="nav-link" href="{{route('StudentDepartmentPlacement')}}"><i class="icon-star"></i>التنسيب للاقسام</a>
                      
 
                                
@@ -245,7 +306,7 @@
          <div class="container-fluid">
  
              <div class="animated fadeIn">
-                
+                @include('sweetalert::alert')
                     @yield('content')
 
             
@@ -531,6 +592,8 @@
          </span>
       
      </footer>
+
+     @yield('js-scripts')
      <!-- Bootstrap and necessary plugins -->
      <script src="js/libs/jquery.min.js"></script>
      <script src="js/libs/tether.min.js"></script>
@@ -548,8 +611,7 @@
      <!-- Custom scripts required by this view -->
      <script src="js/views/main.js"></script>
  
-     <!-- Grunt watch plugin -->
-     <script src="//localhost:35729/livereload.js"></script>
+ 
  </body>
  
  </html>
