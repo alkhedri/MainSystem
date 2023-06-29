@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('Subject_Dates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('due_date');
-            $table->date('sent_date');
+            $table->date('due_date')->nullable();
+            $table->date('sent_date')->nullable();
 
             
-            $table->date('details');
+            $table->date('details')->nullable();
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             

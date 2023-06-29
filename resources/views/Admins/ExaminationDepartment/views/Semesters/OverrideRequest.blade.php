@@ -58,8 +58,6 @@
                                         <a  class="btn btn-success btn-sm" href="{{ route('OverrideRequestAccept' , ['request_id' => $request->id ,'student_id' => $request->student_id , 'subject_id' => $request->subject_id]) }}">قبول</a>
                                         <a  class="btn btn-danger btn-sm" href="{{ route('OverrideRequestDeny' , ['request_id' => $request->id]) }}">رفض</a>
                                          
-                                        <button type="button" class="btn btn-danger btn-sm">رفض</button>
-                                        <button type="button" class="btn btn-primary btn-sm">التفاصيل</button>
                                     </td>
                                 </tr>
                                 @endforeach

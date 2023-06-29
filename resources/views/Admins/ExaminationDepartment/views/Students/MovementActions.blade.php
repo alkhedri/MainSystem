@@ -6,8 +6,12 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">الطلبة</li>
-    <li class="breadcrumb-item"><a href="#">نقل طالب</a>
-    </li>
+    <li class="breadcrumb-item"><a href="{{route('StudentsMovement')}}">نقل الطلبة</a>  </li>
+    <li class="breadcrumb-item">نقل طالب  </li>
+    <li class="breadcrumb-item">   {{App\Models\student::GetNameById($student_id)}}</li>
+
+ 
+  
      
  
 </ol>
@@ -17,24 +21,10 @@
 @section('content')
 
 <div class="row">
-    <div class="col-8">
-        <div class="card">
-            <div class="card-header">
-                <strong>اسم </strong> الطالب
-            </div>
-            <div class="card-block">
-                  <div class="form-group row">
+ 
                     @if(Session::has('message'))
                     <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('message') }}</p>
                     @endif
-                        <div class="col-md-6">
-                        
-                                {{App\Models\student::GetNameById($student_id)}}
-                                
-                        </div>
-                    
-                    </div>
-    </div>
    
  
 </div> 
@@ -74,21 +64,7 @@
                                
                             </tbody>
                         </table>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
+                   {{$departments->links()}}
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');;
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');;
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->boolean('status');
             
 

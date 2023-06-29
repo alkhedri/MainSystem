@@ -22,8 +22,10 @@
         <h4 class="alert-heading">ملاحظات هامة</h4>
         <p>بمجرد تمكين الصلاحيات سيتم منح الإذن للطلبة المستهدفين بتقديم طلبات التنسيب للاقسام العلمية</p>
         <hr>
-        <p class="mb-0">يسمح لكل طالب بتقديم طلب واحد فقط ! وبمجرد تقديمه للطلب سيتم سحب صلاحية طلب التنسيب منه بشكل تلقائي</p>
-      </div>
+        <p class="mb-0"><i class=" fa fa-star"></i>    يسمح لكل طالب بتقديم طلب واحد فقط ! وبمجرد تقديمه للطلب سيتم سحب صلاحية طلب التنسيب منه بشكل تلقائي</p>
+         <p class="mb-0"><i class=" fa fa-star"></i>   لن يتم تفعيل التنسيب في حالة أن الطلبة المستهدفين صفر !</p>
+      
+    </div>
     <div class="card">
         <div class="card-header">
             <i class="fa fa-align-justify"></i> صلاحيات الطلبة
@@ -33,8 +35,9 @@
                 <thead>
                     <tr>
                          
-                        <th>الحالة</th>
-                        <th>الاجراء</th>
+                        <th style="width: 400px">الحالة</th>
+                        <th  > </th>
+                        <th style="width: 200px">الاجراء</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,8 +50,8 @@
                     منع  الطلبة من   طلب التنسيب للأقسام العلمية
 
                     @endif
-          
-
+                    <td>
+                </td>
                         </td>
                 <td>
                     @if($status == 1)
@@ -62,7 +65,23 @@
                        </td>
             </tr>
 
-         
+         <tr>
+            <td>
+                الوحدات المطلوبة :
+            </td>
+            <td>
+                <form action="{{route('CollegeRequiredUnitsChangeAction')}}" method="post" id="cahnge-form">
+                    @csrf
+                        <input type="text" value="{{$College_Req_Units}}" name="units" id="" class="form-control" style="width: 80px; text-align:center">
+                 </form>
+                    </td>
+            <td>
+                <a class="btn btn-primary" href=""    onclick="event.preventDefault();
+                document.getElementById('cahnge-form').submit();">تغيير</a>
+            
+                
+            </td>
+         </tr>
                    
                 </tbody>
             </table>

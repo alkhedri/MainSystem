@@ -60,8 +60,8 @@
                           
                  
                     </div>
-                    <button class="btn btn-primary" type="submit">  <i class="fa fa-dot-circle-o"></i>
-                        إضافة  </button>
+                    <button class="btn btn-primary" type="submit">  <i class="icon-plus"></i>
+                        إضافة       </button>
                  </div>
     </div> 
 
@@ -95,7 +95,10 @@
                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectCode($subject->subject_id)}} </td>
                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectUnits($subject->subject_id)}} </td>
                         <td  style="text-align: center;">
-                        <a   href="{{route('DropSubject' , ['subject_id' =>  $subject->id])}}" class="btn btn-danger btn-sm"   >اسقاط</a>
+                        <a  data-confirm-delete="true" href="{{route('DropSubject' , ['subject_id' =>  $subject->id])}}" class="btn btn-danger btn-sm 
+                            "   >
+                            <i class="icon-close"></i>
+                            اسقاط</a>
                         </td>
                     </tr>
                     @endforeach
@@ -118,7 +121,7 @@
                                 <thead>
                                     <tr >
                                         <th style="width: 10px">#</th>
-                                        <th  style="text-align: right;" >اسم المقرر</th>
+                                        <th  style="text-align: center;" >اسم المقرر</th>
                                         <th  style="text-align: center;">رمز المقرر</th>
                                         <th  style="text-align: center;"> عدد الوحدات</th>
                                         <th  style="text-align: center;">الإجراء</th>
@@ -129,11 +132,13 @@
                                     @foreach ($Student_subjects as $subject)
                                     <tr>
                                         <td style="width: 10px">{{$loop->index + 1}}</td>
-                                        <td  style="text-align: right;">{{ App\Models\subject::getSubjectName($subject->subject_id)}} </td>
+                                        <td  style="text-align: center;"> <strong>{{ App\Models\subject::getSubjectName($subject->subject_id)}}</strong> </td>
                                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectCode($subject->subject_id)}} </td>
                                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectUnits($subject->subject_id)}} </td>
                                         <td  style="text-align: center;">
-                                        <a   href="{{route('DropSubject' , ['subject_id' =>  $subject->id])}}" class="btn btn-danger btn-sm"  >اسقاط</a>
+                                        <a  data-confirm-delete="true" href="{{route('DropSubject' , ['subject_id' =>  $subject->id])}}" class="btn btn-danger btn-sm"  >
+                                            <i class="icon-close"></i>
+                                            اسقاط      </a>
                                         </td>
                                     </tr>
                                     @endforeach

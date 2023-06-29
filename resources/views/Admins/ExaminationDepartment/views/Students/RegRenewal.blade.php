@@ -27,11 +27,15 @@
                     <form class="form-horizontal" action="{{ route('StudentsRenewalSearch') }} " method="post">
                         
                         @csrf
+                        <input type="radio" id="inline-radio1" name="searchBy" value="Badge" checked> 
+                    <label for="inline-radio1">رقم القيد </label> 
+                    <input type="radio" id="inline-radio2" name="searchBy" value="arabic_name">
+                    <label for="inline-radio2">الاسم </label> 
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <div class="input-group">
                                     
-                                    <input type="text" id="input1-group2" name="badge" class="form-control" placeholder="رقم القيد">
+                                    <input type="text" id="input1-group2" name="badge" class="typeahead form-control" placeholder=" " autocomplete="off">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn btn-success"><i class="fa fa-dot-circle-o"></i> بحث</button>
@@ -143,4 +147,25 @@
  
  
  
+@endsection
+
+@section('js-scripts')
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha512-HWlJyU4ut5HkEj0QsK/IxBCY55n5ZpskyjVlAoV9Z7XQwwkqXoYdCIC93/htL3Gu5H3R4an/S0h2NXfbZk3g7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js" integrity="sha512-P2Z/b+j031xZuS/nr8Re8dMwx6pNIexgJ7YqcFWKIqCdbjynk4kuX/GrqpQWEcI94PRCyfbUQrjRcWMi7btb0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" charset="utf-8">
+    var route = "{{ url('autocomplete-search') }}";
+    $('input.typeahead').typeahead({
+        source: function (query, process) {
+            return $.get(route, {
+                sb: query,
+                
+            }, function (data) {
+                return process(data);
+            });
+        }
+
+  
+    });
+</script>
 @endsection

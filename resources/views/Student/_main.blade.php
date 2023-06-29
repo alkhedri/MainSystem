@@ -126,7 +126,7 @@
                 </tr>
                <tr>
                <th colspan="2" style="text-align: center" > 
-                الاولى
+                الاولىssss
                <br>
                [10:30 - 8:30]
             </th>
@@ -231,75 +231,203 @@
       </div>
 
     
-
-<table class="table hidden-sm-down" >
-    <tr>
-        <th rowspan="2"> اليوم / المحاضرة </th>
-                 
-                  
-    </tr>
-   <tr>
-   <th colspan="1" style="text-align: center" > 
-    الاولى
-   <br>
-   [10:30 - 8:30]
-</th>
-    <th colspan="1" style="text-align: center">
-        الثانية
-        <br>
-        [12:30 - 10:30]
-    </th>
-    <th colspan="1" style="text-align: center">
-        الثالثة
-        <br>
-        [02:30 - 12:30]
-    </th>
-    <th colspan="1" style="text-align: center">
-        الرابعة
-        <br>
-        [04:30 - 02:30]
-    </th>
-   
-   </tr>
-   
-    <tr style="">
         
-      <th rowspan="1"  style="text-align: center;vertical-align:middle"  >السبت</th>
-      
-      
+      <table class="table  table-bordered hidden-sm-down" style="width:100%" id="table"     >
+        <tr>
+            <th rowspan="2" style="text-align: center">
+              المحاضرة
+              <hr>
+              اليوم \  التوقيت</th>
          
-                
-                 
-    </tr>
-    
- 
-     <tr>
-      <th rowspan="1" style="text-align: center;vertical-align:middle">الاحد</th>
-     
-     
-    </tr>
- 
-          <tr>
-      <th rowspan="1" style="text-align: center;vertical-align:middle">الاثنين</th>
-      
-      
           
-    </tr>
-    <tr>
-        <th rowspan="1" style="text-align: center;vertical-align:middle">الثلاثاء</th>
-        
+          </tr>
+         <tr>
+         <td colspan="2" style="text-align: center">
+          الاولى
+          <hr>
+          [08:00 - 10:00]
+        </td>
+          <td colspan="2" style="text-align: center">
+            الثانية
+            <hr>
+            [10:00 - 12:00]
+          </td>
+          <td colspan="2" style="text-align: center">
+            الثالثة
+            <hr>
+          [12:00 - 02:00]
+          </td>
+          <td colspan="2" style="text-align: center">
+            الرابعة
+            <hr>
+            [02:00 - 04:00]
+          </td>
+         
+         </tr>
+         
+          <tr style="border-top:2px solid black">
+              
+            <th rowspan="{{App\Models\TimeTable::getRowsStd(0)}}"  style="text-align: center;vertical-align:middle"  >السبت</th>
+          </tr>
+           
+      
+          @foreach ($Saturday as $item)
+           <tr>
+            
+              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+              @if($item->Stp == NULL)
+              <td class="alert-info"> </td>
+              @else
+              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+              @endif
+             
+      
+              <td class="alert-success">{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+              @if($item->Sp == NULL)
+              <td class="alert-success"> </td>
+              @else
+              <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+              @endif
+
+
+              <td class="alert-danger">{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+              @if($item->Tp == NULL)
+              <td class="alert-danger"> </td>
+              @else
+              <td class="alert-danger">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+              @endif
+
+
+              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+              @if($item->Fp == NULL)
+              <td class="alert-info"> </td>
+              @else
+              <td class="alert-info">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+              @endif
+           </tr>
+           @endforeach
+                  
+                
+          
+           <tr>
+            <th rowspan="{{App\Models\TimeTable::getRowsStd(1)}}" style="text-align: center;vertical-align:middle">الاحد</th>
+          </tr> 
+      
+          @foreach ($Sunday as $item)
+           <tr >
        
-      </tr>
-      <tr>
-        <th rowspan="1" style="text-align: center;vertical-align:middle">الإربعاء</th>
+              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+            
+              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+       
+              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+         
+              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+            
+             
+           </tr>
+           @endforeach
+           
+           <tr>
+          
+              <th rowspan="{{App\Models\TimeTable::getRowsStd(2)}}" style="text-align: center;vertical-align:middle">الاثنين</th>
+             
+            </tr>
+            
+            @foreach ($Monday as $item)
+           <tr >
+              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+         
+              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+              
+              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+            
+              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
         
-      </tr>
-      <tr>
-        <th rowspan="1" style="text-align: center;vertical-align:middle">الخميس</th>
-        
-        
-      </tr>
-  </table>
+          </tr>
+           @endforeach
+          
+             <tr>
+            
+          
+              <th rowspan="{{App\Models\TimeTable::getRowsStd(3)}}" style="text-align: center;vertical-align:middle">الثلاثاء</th>
+               
+            </tr>
+            
+            @foreach ($Tuesday as $item)
+           <tr >
+              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+            
+              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+               
+              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+           
+              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+           
+           </tr>
+           @endforeach
+          
+             <tr>
+            
+              <th rowspan="{{App\Models\TimeTable::getRowsStd(4)}}" style="text-align: center;vertical-align:middle">الاربعاء</th>
+               
+            </tr>
+            
+            @foreach ($Wedensday as $item)
+           <tr>
+              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+            
+              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+       
+              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+            
+              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+             
+           </tr>
+           @endforeach
+          
+             <tr>
+            
+             <th rowspan="{{App\Models\TimeTable::getRowsStd(5)}}" style="text-align: center;vertical-align:middle">الخميس</th>
+             
+           </tr>
+           
+           @foreach ($Thursday as $item)
+           <tr >
+              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+             
+              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+          
+              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+         
+              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+              
+           </tr>
+           @endforeach
+            
+          
+        </table>
+ 
 </div>
  
   <div class="card-footer">
@@ -307,3 +435,6 @@
   </div>
 </div>
 @endsection
+
+
+

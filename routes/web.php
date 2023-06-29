@@ -21,8 +21,17 @@ Route::get('/', function () {
  Route::get('/reg', 'App\Http\Controllers\InstrController@students')->name('registerTest');;
 
  Route::group(['middleware' => ['role:college']], function() {
- 
-Route::get('/autocomplete-search', 'App\Http\Controllers\ExaminationController@autocompleteSearch');
+
+
+  //////////////////////////// AUTO COMPLETE TYPEAHEAD  ////////////////////////////
+Route::get('/autocomplete-search', 'App\Http\Controllers\typeaheadController@autocompleteSearch');
+
+Route::get('/Movement_autocomplete-search', 'App\Http\Controllers\typeaheadController@Movement_autocompleteSearch');
+ //////////////////////////// //////////////////////////// ////////////////////////////
+
+
+
+
 Route::get('/test', 'App\Http\Controllers\ExaminationController@index')->name('test');
 
 Route::get('/Departments', 'App\Http\Controllers\ExaminationController@index_DepartmetsMenu')->name('DepartmentsMenu');
@@ -32,7 +41,7 @@ Route::get('/NewDepartments', 'App\Http\Controllers\ExaminationController@New_De
 Route::post('/AddDepartments', 'App\Http\Controllers\ExaminationController@Add_Departments')->name('AddDepartments');
 
 Route::get('/DepartmentsDelete', 'App\Http\Controllers\ExaminationController@index_DepartmetsDelete')->name('DepartmentsDelete');
-Route::get('/DepartmentsDeleteAction', 'App\Http\Controllers\ExaminationController@delete_Departments')->name('DepartmentsDeleteAction');
+Route::delete('/DepartmentsDeleteAction', 'App\Http\Controllers\ExaminationController@delete_Departments')->name('DepartmentsDeleteAction');
 
 
 Route::get('/Semesters', 'App\Http\Controllers\ExaminationController@index_SemestersMenu')->name('SemestersMenu');
@@ -85,7 +94,7 @@ Route::get('/RenewalStop', 'App\Http\Controllers\regRenewalController@action_sto
 Route::get('/Rooms', 'App\Http\Controllers\ExaminationController@index_Rooms')->name('Rooms');;
 
 Route::post('/RoomsActionAdd', 'App\Http\Controllers\RoomsController@add_Room')->name('RoomsActionAdd');;
-Route::get('/RoomsActionRemove', 'App\Http\Controllers\RoomsController@Remove_Room')->name('RoomsActionRemove');;
+Route::delete('/RoomsActionRemove', 'App\Http\Controllers\RoomsController@Remove_Room')->name('RoomsActionRemove');;
 Route::POST('/RoomsDepartment', 'App\Http\Controllers\RoomsController@Search_Rooms')->name('RoomsDepartment');;
 
 
@@ -104,7 +113,10 @@ Route::get('/StudentDropAndAddAction', 'App\Http\Controllers\ExaminationControll
  
 Route::get('/StudentDepartmentPlacement', 'App\Http\Controllers\ExaminationController@index_StudentDepartmentPlacement')->name('StudentDepartmentPlacement');
 Route::get('/StudentDepartmentPlacementAction', 'App\Http\Controllers\ExaminationController@index_StudentDepartmentPlacementAction')->name('StudentDepartmentPlacementAction');
+Route::post('/CollegeRequiredUnitsChangeAction', 'App\Http\Controllers\ExaminationController@CollegeRequiredUnitsChangeAction')->name('CollegeRequiredUnitsChangeAction');
  
+
+
 
 Route::get('/FinalResultsReleaseAction', 'App\Http\Controllers\ExaminationController@FinalResultsReleaseAction')->name('FinalResultsReleaseAction');
  
@@ -257,8 +269,11 @@ Route::group(['middleware' => ['role:instructor']], function() {
     Route::group(['middleware' => ['role:student']], function() {
         Route::get('/studentDashboard', 'App\Http\Controllers\Students\StudentController@index')->name('studentDashboard');
         Route::get('/CurrentSemesterSubjects', 'App\Http\Controllers\Students\StudentController@show_currentSemSubs')->name('currentSemSubs');
+        Route::get('/OldSemesterSubjects', 'App\Http\Controllers\Students\StudentController@show_oldSemSubs')->name('oldSemSubs');
+        Route::post('/OldSemesterSubjects', 'App\Http\Controllers\Students\StudentController@oldSemData')->name('getSemData');
        
-   
+        
+
         Route::get('/NotifyMenu', 'App\Http\Controllers\Students\StudentController@show_NotifyMenu')->name('NotifyMenu');
         Route::get('/ShowNotificationMessage', 'App\Http\Controllers\Students\StudentController@ShowNotificationMessage')->name('ShowNotificationMessage');
        
@@ -273,7 +288,7 @@ Route::group(['middleware' => ['role:instructor']], function() {
     Route::group(['middleware' => ['role:student', 'permission:subjects-create']], function() {
     Route::get('/EditSubjects', 'App\Http\Controllers\Students\StudentController@show_EditSubjects')->name('EditSubjects');
     Route::post('/AddSubject', 'App\Http\Controllers\Students\StudentController@AddSubject')->name('AddSubject');
-    Route::get('/DropSubject', 'App\Http\Controllers\Students\StudentController@DropSubject')->name('DropSubject');
+    Route::delete('/DropSubject', 'App\Http\Controllers\Students\StudentController@DropSubject')->name('DropSubject');
 });
     
 Route::group(['middleware' => ['role:student', 'permission:placements']], function() {

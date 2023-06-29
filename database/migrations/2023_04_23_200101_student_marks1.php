@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');;;
             $table->foreignId('college_id')->constrained('colleges')->onDelete('cascade');;;
             
-            $table->integer('work');
-            $table->integer('final');
+            $table->integer('work')->nullable();
+            $table->integer('final')->nullable();
              
     
     

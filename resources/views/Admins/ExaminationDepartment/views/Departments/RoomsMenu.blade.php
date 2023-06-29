@@ -139,7 +139,7 @@
                                 </td>
                                     <td>
                                              
-                                                <a class="btn btn-danger btn-sm" href="{{route('RoomsActionRemove' , ['Room_id' => $Room->id])}}">حذف</a>
+                                                <a data-confirm-delete="true"  class="btn btn-danger btn-sm" href="{{route('RoomsActionRemove' , ['Room_id' => $Room->id])}}">حذف</a>
                                     </td>
                                 </tr>
                                 @endforeach

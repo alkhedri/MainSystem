@@ -64,12 +64,14 @@ class ExaminationController extends Controller
 
         $hoD = Instructor::where('id' , $hofid)->value('arabic_name');
         
+      
+        
         $deC = Instructor::where('id' , $deCid)->value('arabic_name');
         
         $dqC = Instructor::where('id' , $dqCid)->value('arabic_name');
         $dpC = Instructor::where('id' , $dpCid)->value('arabic_name');
         
-        return view('Admins.ExaminationDepartment.views.Departments.Info' ,  compact( 'departments' , 'staff' , 'hoD', 'deC', 'dqC', 'dpC'));
+        return view('Admins.ExaminationDepartment.views.Departments.Info' ,  compact( 'departments' , 'staff' , 'hoD', 'deC', 'dqC', 'dpC' , 'hofid'));
     }
 
     public function Update_DepartmentsInfo(Request $request)
@@ -144,6 +146,7 @@ class ExaminationController extends Controller
         
         $request->validate([
             'arabic_name' => 'required',
+            'english_name' => 'required',
             'code' => 'required',
         
 
@@ -170,7 +173,18 @@ class ExaminationController extends Controller
 
     public function index_DepartmetsDelete()
     {
-        $departments = department::all();
+
+        $user_id = auth()->user()->id;
+      
+
+        $College_id = Instructor::where('id', $user_id)->pluck('college_id');
+        
+        $departments = department::where('college_id' , $College_id)->get();
+
+            
+        $title = 'حذف قسم دراسي';
+        $text = "هل أنت متأكد من حذ هذا القسم ؟";
+        confirmDelete($title, $text);
         return view('Admins.ExaminationDepartment.views.Departments.Delete',  compact( 'departments'));
     
     }
@@ -224,7 +238,7 @@ class ExaminationController extends Controller
     public function add_Semester(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'seassion' => 'required',
       
 
         ]);
@@ -343,7 +357,7 @@ class ExaminationController extends Controller
         $department = department::where('id',$request->department_id)->value('arabic_name');;
 
         if ($placementPermission == 1)
-        $user->givePermission('student');
+        $user->givePermission('placements');
         if ($ResultPermission == 1)
         $user->givePermission('final-result');
         if ($subjectsPermission == 1)
@@ -604,7 +618,7 @@ class ExaminationController extends Controller
         $user_id = auth()->user()->id;
         $notificationsList = Notification::where('sender_id',$user_id)->orderBy('id','DESC')->paginate(5);
          
-        Alert::error('Error Title', 'Error Message');
+        
         return view('Admins.ExaminationDepartment.views.Students.StudentsNotify' , compact('notificationsList'));
     }
 
@@ -620,7 +634,9 @@ class ExaminationController extends Controller
         $departments = Department::where('college_id' , $College_id)->get();
 
          $RoomsList = Room::where('College_id',$College_id)->paginate(5);
-         
+         $title = 'حذف قاعة ';
+         $text = "هل أنت متأكد من حذ هذه القاعة ؟";
+         confirmDelete($title, $text);
 
         return view('Admins.ExaminationDepartment.views.Departments.RoomsMenu' , compact('RoomsList' , 'departments'));
     }
@@ -697,8 +713,11 @@ class ExaminationController extends Controller
                $status = 1;
        }
 
+
+
+      
        $count = $students->count();
-        return view('Admins.ExaminationDepartment.views.Students.StudentDepartmentPlacement', compact('status' , 'count'));
+        return view('Admins.ExaminationDepartment.views.Students.StudentDepartmentPlacement', compact('status' , 'count' , 'College_Req_Units'));
     }
     
     public function index_StudentDepartmentPlacementAction()
@@ -737,6 +756,22 @@ class ExaminationController extends Controller
        return back();
     }
 
+    public function CollegeRequiredUnitsChangeAction(Request $request){
+
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+       
+        college::where('id', $College_id)
+        ->update([
+            'required_units' => $request->units,
+            
+         ]);
+
+         return back();
+   
+    }
+    
 
     public function FinalResultsReleaseAction()
     {
@@ -770,21 +805,7 @@ class ExaminationController extends Controller
 
 
 
-    public function autocompleteSearch(Request $request)
-    {
 
-
-        // $data =  student::where('Badge', 'like', "%{$request->sb}%")
-        // ->pluck('english_name');
-   
-          $query = $request->get('sb');
-          $filterResult = student::where('Badge', 'LIKE', '%'. $query. '%')->pluck('Badge');
-
-
-        return response()->json($filterResult);
-
-        
-    } 
 
     
 }

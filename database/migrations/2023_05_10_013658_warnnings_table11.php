@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('min_units_warn');
             $table->integer('min_units_suspend');
     
-            $table->string('info');
+            $table->string('info')->nullable();
 
 
         

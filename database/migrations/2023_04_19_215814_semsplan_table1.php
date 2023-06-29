@@ -18,46 +18,46 @@ return new class extends Migration
        
         $table->foreignId('semester_id')->constrained('semesters')->onDelete('cascade');
        
-        $table->date('renewalStarts');
-         $table->date('renewalEnds');
-         $table->date('SubjectStarts');
-          $table->date('SubjectEnds');
-         $table->date('StudntsMove');
-         $table->date('semsStart');
-         $table->date('semsEnds');
+        $table->date('renewalStarts')->nullable();
+         $table->date('renewalEnds')->nullable();
+         $table->date('SubjectStarts')->nullable();
+          $table->date('SubjectEnds')->nullable();
+         $table->date('StudntsMove')->nullable();
+         $table->date('semsStart')->nullable();
+         $table->date('semsEnds')->nullable();
 
 
-         $table->date('LastChanceAdd');
-         $table->date('LastChanceDrop');
+         $table->date('LastChanceAdd')->nullable();
+         $table->date('LastChanceDrop')->nullable();
 
 
-         $table->date('FirstMidsStarts');
-         $table->date('FirstMidsEnds');
+         $table->date('FirstMidsStarts')->nullable();
+         $table->date('FirstMidsEnds')->nullable();
 
-         $table->date('LastStop');
+         $table->date('LastStop')->nullable();
         
 
-         $table->date('SecondMidsStarts');
-         $table->date('SecondMidsEnds');
+         $table->date('SecondMidsStarts')->nullable();
+         $table->date('SecondMidsEnds')->nullable();
 
-         $table->date('LastLecture');
+         $table->date('LastLecture')->nullable();
         
 
-         $table->date('FinalsStarts');
-         $table->date('FinalsEnds');
+         $table->date('FinalsStarts')->nullable();
+         $table->date('FinalsEnds')->nullable();
 
 
 
-         $table->date('Results');
+         $table->date('Results')->nullable();
 
 
-         $table->date('ReviewStarts');
-         $table->date('ReviewEnds');
+         $table->date('ReviewStarts')->nullable();
+         $table->date('ReviewEnds')->nullable();
 
-         $table->date('CheckStarts');
-         $table->date('CheckEnds');
+         $table->date('CheckStarts')->nullable();
+         $table->date('CheckEnds')->nullable();
 
-         $table->date('NextSem');
+         $table->date('NextSem')->nullable();
 
 
         $table->timestamps();

@@ -11,40 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->id();
-            $table->string('code');
-            $table->string('arabic_name');
-            $table->string('english_name');
-            $table->integer('units');
-            $table->integer('cousre_hours');
-            $table->integer('work_housrs');
-            $table->integer('work_mark');
-            $table->integer('final_mark');
-             
-         
-            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');;;
-            $table->foreignId('college_id')->constrained('colleges')->onDelete('cascade');
-           
-            $table->boolean('avaliablity');
-            $table->boolean('required');
-            $table->string('proffesor_id');
-           
-    
-    
-            $table->timestamps();
-     
-     
-        
-        
-        });
+       
         Schema::create('override_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
            
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
            
-            $table->string('message');
+            $table->string('message')->nullable();
              
     
     

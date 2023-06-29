@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->foreignId('college_id')->constrained('colleges')->onDelete('cascade');
            
-            $table->integer('praiority');
+            $table->integer('praiority')->nullable();
              
     
     

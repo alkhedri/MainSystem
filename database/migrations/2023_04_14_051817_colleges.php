@@ -15,6 +15,8 @@ return new class extends Migration
         Schema::create('semesters', function (Blueprint $table) {
             $table->id();    
             $table->string('name');
+            $table->string('college_id');
+         
             $table->timestamps();
     
        });
@@ -40,16 +42,16 @@ return new class extends Migration
          $table->string('arabic_name');
          $table->string('english_name');
          $table->foreignId('college_id')->constrained('colleges')->onDelete('cascade');
-         $table->string('hod');
-         $table->string('dec');
-         $table->string('dqc');
-         $table->string('dpc');
-         $table->string('icon');
-         $table->longtext('message');
-         $table->integer('students_no');
-         $table->integer('graduated_no');
-         $table->integer('instructors_no');
-         $table->integer('demanded_no');
+         $table->string('hod')->nullable();
+         $table->string('dec')->nullable();
+         $table->string('dqc')->nullable();
+         $table->string('dpc')->nullable();
+         $table->string('icon')->nullable();
+         $table->longtext('message')->nullable();
+         $table->integer('students_no')->nullable();
+         $table->integer('graduated_no')->nullable();
+         $table->integer('instructors_no')->nullable();
+         $table->integer('demanded_no')->nullable();
         $table->timestamps();
  
  
@@ -61,7 +63,7 @@ return new class extends Migration
 
     Schema::create('cities', function (Blueprint $table) {
         $table->id();
-         $table->string('name');
+         $table->string('name')->nullable();
         $table->timestamps();  
     });
     }

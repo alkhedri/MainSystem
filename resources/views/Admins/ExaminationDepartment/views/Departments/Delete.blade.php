@@ -22,9 +22,12 @@
     @if(Session::has('message'))
 <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('message') }}</p>
 @endif
+<div class="col-md-8">
+
+
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Striped Table
+                <i class="fa fa-align-justify"></i> قائمة الأقسام
             </div>
             <div class="card-block">
                 <table class="table table-striped">
@@ -44,7 +47,7 @@
                             <td>{{$loop->index + 1 }}</td>
                             <td>{{$department->arabic_name}}</td>
                             <td>
-                                <a href="{{route('DepartmentsDeleteAction' , ['id' => $department->id])}}" class="btn btn-danger" >حذف</a>
+                                <a data-confirm-delete="true" href="{{route('DepartmentsDeleteAction' , ['id' => $department->id])}}" class="btn btn-danger" >حذف</a>
                             </td>
                         
                         </tr>
@@ -55,6 +58,7 @@
               
         </div>
     </div>
+</div>
 </div>
  
  

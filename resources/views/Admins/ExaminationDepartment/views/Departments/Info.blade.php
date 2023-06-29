@@ -29,11 +29,7 @@
                 <strong>قسم</strong> 
                 <span> [   {{$department->arabic_name}}
                     ] </span>
-                <div class="card-actions">
-                    <a href="#" class="btn-setting"><i class="icon-settings"></i></a>
-                    <a href="#" class="btn-minimize"><i class="icon-arrow-up"></i></a>
-                    <a href="#" class="btn-close"><i class="icon-close"></i></a>
-                </div>
+        
             </div>
             <div class="card-block">
                 <form class="form-horizontal" action="{{ route('DepartmentsUpdate') }} " method="POST" enctype="multipart/form-data">
@@ -86,7 +82,7 @@
                             <div class="input-prepend input-group">
                                
                                 <select id="select" name="hodchange" class="form-control" size="1">
-                                    <option value="0" disabled selected >{{$hoD}}</option>
+                                    <option value="{{$hofid}}"  selected >{{$hoD}}</option>
                                     @foreach ($staff as $prof)
                                     <option value="{{$prof->id}}">{{$prof->arabic_name}}</option>
                          

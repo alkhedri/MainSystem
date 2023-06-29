@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('message');
+            $table->string('title')->nullable();
+            $table->string('message')->nullable();
             $table->foreignId('semester_id')->constrained('semesters')->onDelete('cascade');
             $table->foreignId('college_id')->constrained('colleges')->onDelete('cascade');
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');

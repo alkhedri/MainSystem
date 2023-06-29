@@ -9,7 +9,8 @@
  <html lang="LY-fa" dir="rtl">
  
  <head>
-     <meta charset="utf-8">
+     
+     <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
      <meta name="description" content="CoreUI Bootstrap 4 Admin Template">
@@ -206,7 +207,7 @@
                             <path d="M20.047 16.473c-1.204-1.473-2.053-2.223-2.053-6.285 0-3.72-1.9-5.044-3.463-5.688a.835.835 0 0 1-.466-.495C13.79 3.072 13.022 2.25 12 2.25s-1.791.823-2.063 1.756a.827.827 0 0 1-.466.494c-1.565.645-3.463 1.965-3.463 5.688-.002 4.062-.852 4.812-2.056 6.285-.499.61-.062 1.527.81 1.527h14.48c.867 0 1.301-.92.805-1.527Z"></path>
                             <path d="M15 18v.75a3 3 0 0 1-6 0V18"></path>
                           </svg></i>إخطار طالب</a>
-                          <a class="nav-link" href="{{route('RegRenewal')}}"><i class="fa fa-bar-chart"></i>عرض الطلبة المتعثرين</a>
+                          <a class="nav-link" href="#"><i class="fa fa-bar-chart"></i>عرض الطلبة المتعثرين</a>
                          </li>
                          
                          
@@ -594,6 +595,9 @@
      </footer>
 
      @yield('js-scripts')
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js">
+</script>
      <!-- Bootstrap and necessary plugins -->
      <script src="js/libs/jquery.min.js"></script>
      <script src="js/libs/tether.min.js"></script>

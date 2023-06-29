@@ -42,4 +42,21 @@ class student_mark extends Model
 
         
     }
+
+    public static function checkIfHasSubject($subject_id){
+        $user_id = auth()->user()->id;
+      
+        $subject = student_mark::where('subject_id' , $subject_id)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get();
+      
+        if ($subject->count() > 0)
+        return 1;
+        else
+        return 0;
+
+        
+    }
+
+
+    
+ 
 }

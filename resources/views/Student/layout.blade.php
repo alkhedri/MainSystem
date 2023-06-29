@@ -109,22 +109,29 @@
                        الطلبة
                       </li> --}}
                       <li class="nav-item nav-dropdown">
-                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>الطالب</a>
+                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-user
+                            "></i>الطالب</a>
                          <ul class="nav-dropdown-items">
                              <li class="nav-item">
                              
                      
-                          <a class="nav-link" href="{{route('studentDashboard')}}"><i class="icon-docs"></i>الرئيسية</a>
-                          <a class="nav-link" href="{{route('currentSemSubs')}}"><i class="icon-docs"></i>  مقررات الفصل الحالي</a>
+                          <a class="nav-link" href="{{route('studentDashboard')}}"><i class="icon-home
+                            "></i>الرئيسية</a>
+                          <a class="nav-link" href="{{route('currentSemSubs')}}"><i class="icon-book-open"></i>  مقررات الفصل الحالي</a>
+                          <a class="nav-link" href="{{route('oldSemSubs')}}"><i class="icon-loop"></i>الفصول السابقة</a>
                           
                           @permission('subjects-create')
-                          <a class="nav-link" href="{{route('EditSubjects')}}"><i class="icon-docs"></i>إضافة/اسقاط مقرر</a>
+                          <a class="nav-link" href="{{route('EditSubjects')}}"><i class="icon-pencil
+                            "></i>إضافة/اسقاط مقرر</a>
                           @endpermission()
                           @permission('placements')
-                          <a class="nav-link" href="{{route('PlacementApplication')}}"><i class="icon-docs"></i>طلب التنسيب للاقسام العلمية</a>
+                          <a class="nav-link" href="{{route('PlacementApplication')}}"><i class="icon-directions
+                            "></i>طلب التنسيب للاقسام العلمية</a>
                           @endpermission()
-                          <a class="nav-link" href="{{route('CurrentSemestersPlan')}}"><i class="icon-docs"></i>الخطة الدراسية للفصل الحالي</a>
-                          <a class="nav-link" href="{{route('NotifyMenu')}}"><i class="icon-docs"></i>الاشعارات</a>
+                          <a class="nav-link" href="{{route('CurrentSemestersPlan')}}"><i class="icon-map
+                            "></i>الخطة الدراسية للفصل الحالي</a>
+                          <a class="nav-link" href="{{route('NotifyMenu')}}"><i class="icon-bell
+                            "></i>الاشعارات</a>
                          
 
                   
@@ -317,8 +324,7 @@
      <script src="js/views/main.js"></script>
  
      <!-- Grunt watch plugin -->
-     <script src="//localhost:35729/livereload.js"></script>
-     @livewireScripts
+
      @include('sweetalert::alert')
 
  </body>

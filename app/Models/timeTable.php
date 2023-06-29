@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\Models\Instructor;
+use App\Models\student;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,12 +19,29 @@ class timeTable extends Model
     
       
         $department_id = Instructor::where('id',$user_id)->value('department_id');
-
+      
         $rows = TimeTable::where('department_id', $department_id)->where('day', $day)->get();
     
         return  ($rows->count() + 1);
   
     }
+    public static function getRowsStd($day){
+        $user_id = auth()->user()->id;
+    
+      
+        $department_id = student::where('id',$user_id)->value('department_id');
+      
+        $rows = TimeTable::where('department_id', $department_id)->where('day', $day)->get();
+    
+     
+
+
+
+
+        return  ($rows->count() + 1);
+  
+    }
+
     public static function getPeriod($id , $period){
         $sql;
             switch($period){

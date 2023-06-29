@@ -15,7 +15,11 @@
 
 
 @section('content')
- 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong >بيانات غير مكتملة</strong> الرجاء ادخال جميع الحقول 
+</div>
+@endif
 <div class="row">
     
     <div class="col-sm-8">
@@ -33,15 +37,25 @@
                         <span class="input-group-addon"><i class="fa fa-user"></i>
                         </span>
                     </div>
+                    @error('studnet_badge')
+                    <span class="invalid-feedback tag tag-danger" role="alert">
+                         {{ $message }} 
+                    </span>
+                @enderror 
                 </div>
             
                 <div class="form-group">
                     <div class="input-group">
                         <label class="input-group-addon">العنوان</label>
-                        <input type="text" id="username3" name="title" class="form-control">
+                        <input type="text" id="title" name="title" class="form-control">
                               <span class="input-group-addon"><i class="fa fa-envelope"></i>
                         </span>
                     </div>
+                    @error('title')
+                    <span class="invalid-feedback tag tag-danger" role="alert">
+                         {{ $message }} 
+                    </span>
+                @enderror 
                 </div>
                 <div class="form-group">
                     <div class="input-group">
@@ -50,6 +64,11 @@
                             <span class="input-group-addon"><i class="fa fa-envelope"></i>
                         </span>
                     </div>
+                    @error('message')
+                    <span class="invalid-feedback tag tag-danger" role="alert">
+                         {{ $message }} 
+                    </span>
+                @enderror 
                 </div>
 
                 <div class="form-group form-actions" dir="ltr">

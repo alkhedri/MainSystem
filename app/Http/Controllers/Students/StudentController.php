@@ -51,14 +51,51 @@ class StudentController extends Controller
     }
 
  
- 
+       $Saturday = timeTable::where('department_id',$department_id)->where('day', 0)->get();
+        $Sunday = timeTable::where('department_id',$department_id)->where('day', 1)->get();
+        $Monday = timeTable::where('department_id',$department_id)->where('day', 2)->get();
+        $Tuesday = timeTable::where('department_id',$department_id)->where('day', 3)->get();
+        $Wedensday = timeTable::where('department_id',$department_id)->where('day', 4)->get();
+        $Thursday = timeTable::where('department_id',$department_id)->where('day', 5)->get();
+       
+         
+        foreach($Saturday as $day){
+         
+            $subject = student_mark::where('subject_id' , $day->Stp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+             if ($subject == 0)
+                unset($day->Stp);
+            
+                $subject = student_mark::where('subject_id' , $day->Sp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                if ($subject == 0)
+                   unset($day->Sp);
+
+                   $subject = student_mark::where('subject_id' , $day->Tp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                   if ($subject == 0)
+                      unset($day->Tp);
+
+                      $subject = student_mark::where('subject_id' , $day->Fp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                      if ($subject == 0)
+                         unset($day->Fp);
+              
+          }
+
+
+       
+  
 
         return view('Student._main' , compact(
             'notificationsCount',
              'notificationsCountUnRead' ,
               'alertDates' ,
               'alertsCount',
-              'current_semester_name'
+              'current_semester_name',
+              'Saturday',
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wedensday',
+            'Thursday',
+            'user_id'
 
                
             
@@ -115,6 +152,46 @@ class StudentController extends Controller
     }
 
 
+    public function show_oldSemSubs(Request $request)
+    {
+
+        $user_id = auth()->user()->id;
+
+        $Semesters = student_mark::where('student_id',$user_id)
+        ->groupBy('semester_id')
+        ->get();
+       
+
+
+        return view('Student.oldSems._PrevSemesters' , compact('Semesters'));
+    }
+
+    public function oldSemData(request $request){
+        $user_id = auth()->user()->id;
+        $department_id = student::where('id',$user_id)->value('department_id');
+
+        $college_id = department::where('id',$department_id)->value('college_id');
+        
+
+        $Student_subjects = student_mark::where('student_id',$user_id)->where('semester_id',$request->semester_id)->get();
+ 
+        $units = 0;
+
+        
+        $Semesters = student_mark::where('student_id',$user_id)
+        ->groupBy('semester_id')
+        ->get();
+       
+        foreach( $Student_subjects as $sub)
+        {
+            $subjectUnits = subject::where('id',$sub->subject_id)->value('units');
+           $units+= $subjectUnits;
+        }
+
+        $Selected_Semester_id = $request->semester_id;
+        return view('Student.oldSems._PrevSemesters' , compact('Student_subjects' , 'units' , 'Semesters' , 'Selected_Semester_id'));
+   
+    }
 
 
     
@@ -137,30 +214,43 @@ class StudentController extends Controller
                 ->orWhere('department_id', $GSdepartment);
         })->where('avaliablity','1')->get();
         
-        
-
+        ///---- CHECK IF ALREADY PASSED 
         foreach ($Department_subjects as $key => $subject){
 
-            $requirements = subject_requirement::where('subject', $subject->id)->get();
+             
 
+                $final = student_mark::where('student_id', $user_id )
+                ->where('subject_id', $subject->id)->value('final');
+
+                $work = student_mark::where('student_id', $user_id )
+                ->where('subject_id', $subject->id)->value('work');
+
+                    if (($final + $work) > 49 )
+                        unset($Department_subjects[$key]);
+                        // $Department_subjects->forget($subject);
+                    // echo "<script>alert('$subject->arabic_name') </script> ";
+               
+                 
+    }
+
+        ///---- CHECK IF REQUIRED ACHIVED
+        foreach ($Department_subjects as $key => $subject){
+     
+            $requirements = subject_requirement::where('subject', $subject->id)->get();
             foreach ($requirements as $req){
 
-            
-            $final = student_mark::where('student_id', $user_id )
-            ->where('subject_id', $req->requirement)->value('final');
+                $final = student_mark::where('student_id', $user_id )
+                ->where('subject_id', $req->requirement)->value('final');
 
-            $work = student_mark::where('student_id', $user_id )
-            ->where('subject_id', $req->requirement)->value('work');
+                $work = student_mark::where('student_id', $user_id )
+                ->where('subject_id', $req->requirement)->value('work');
 
-            if (($final + $work) < 50 )
-                 unset($Department_subjects[$key]);
-                // $Department_subjects->forget($subject);
-               // echo "<script>alert('$subject->arabic_name') </script> ";
+                    if (($final + $work) < 50 )
+                        unset($Department_subjects[$key]);
+                        // $Department_subjects->forget($subject);
+                    // echo "<script>alert('$subject->arabic_name') </script> ";
                
-         }
-
-     
-         
+                 }   
     }
                 
     $units = 0;
@@ -372,4 +462,36 @@ class StudentController extends Controller
     }
     
     
+    public function TimeTable()
+    {
+        $user_id = auth()->user()->id;
+        $department_id = Instructor::where('id',$user_id)->value('department_id');
+
+     
+        $Saturday = timeTable::where('department_id',$department_id)->where('day', 0)->get();
+        $Sunday = timeTable::where('department_id',$department_id)->where('day', 1)->get();
+        $Monday = timeTable::where('department_id',$department_id)->where('day', 2)->get();
+        $Tuesday = timeTable::where('department_id',$department_id)->where('day', 3)->get();
+        $Wedensday = timeTable::where('department_id',$department_id)->where('day', 4)->get();
+        $Thursday = timeTable::where('department_id',$department_id)->where('day', 5)->get();
+      
+ 
+
+
+        $Department_subjects = subject::where('department_id',$department_id)->get();
+        $Department_Rooms = room::where('department_id',$department_id)->get();
+        $departmentName = department::where('id',$department_id)->value('arabic_name');
+        
+        return view('instructors.DEC.TimeTable' , compact(
+            'Saturday',
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wedensday',
+            'Thursday',
+            'Department_subjects',
+            'Department_Rooms',
+            'departmentName'
+        ));   
+    }
 }
