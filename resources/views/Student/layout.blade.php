@@ -16,7 +16,7 @@
      <meta name="author" content="Lukasz Holeczek">
      <meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
      <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
-     <title>منظومة الدراسة و الامتحانات - لوحة تحكم الطالب</title>
+     <title>نظام الدراسة و الامتحانات - لوحة تحكم الطالب</title>
      <!-- Icons -->
      <link href="css/font-awesome.min.css" rel="stylesheet">
      <link href="css/simple-line-icons.css" rel="stylesheet">
@@ -25,7 +25,8 @@
           <!-- CHAT styles for this application -->
           <link href="css/studentCards.css" rel="stylesheet">
           <link href="css/MobileTable.css" rel="stylesheet">
-          @livewireStyles
+         
+    
  </head>
  <!-- BODY options, add following classes to body to change options
          1. 'compact-nav'     	  - Switch sidebar to minified version (width 50px)
@@ -36,8 +37,9 @@
          3. 'fixed-nav'			  - Fixed navigation
          4. 'navbar-fixed'		  - Fixed navbar
      -->
- 
+   
  <body class="navbar-fixed sidebar-nav fixed-nav">
+    
      <header class="navbar">
          <div class="container-fluid">
             
@@ -62,7 +64,7 @@
                  <li class="nav-item">
                      <a class="nav-link aside-toggle" href="#"><i class="icon-bell"></i><span class="tag tag-pill tag-danger">
                         
-                        {{ App\Models\notification::unRead() }}
+               {{ App\Models\notification::unRead() }}
                     </span></a>
                  </li>
               
@@ -117,10 +119,12 @@
                      
                           <a class="nav-link" href="{{route('studentDashboard')}}"><i class="icon-home
                             "></i>الرئيسية</a>
+                            <a class="nav-link" href="{{route('studentProfile')}}"><i class="icon-home
+                                "></i>الملف الشخصي</a>
                           <a class="nav-link" href="{{route('currentSemSubs')}}"><i class="icon-book-open"></i>  مقررات الفصل الحالي</a>
                           <a class="nav-link" href="{{route('oldSemSubs')}}"><i class="icon-loop"></i>الفصول السابقة</a>
                           
-                          @permission('subjects-create')
+                          @permission('subjects-delete')
                           <a class="nav-link" href="{{route('EditSubjects')}}"><i class="icon-pencil
                             "></i>إضافة/اسقاط مقرر</a>
                           @endpermission()
@@ -130,10 +134,26 @@
                           @endpermission()
                           <a class="nav-link" href="{{route('CurrentSemestersPlan')}}"><i class="icon-map
                             "></i>الخطة الدراسية للفصل الحالي</a>
-                          <a class="nav-link" href="{{route('NotifyMenu')}}"><i class="icon-bell
-                            "></i>الاشعارات</a>
-                         
+                            <a class="nav-link" href="{{route('NotifyMenu')}}"><i class="icon-bell
+                                "></i>
+                                
+                                الاشعارات
+<span class="tag tag-danger">
+      {{ App\Models\notification::unRead() }}  
 
+</span>
+                               
+                            </a>
+                                <a class="nav-link" href="{{route('RequirementsMenu')}}"><i class="icon-notebook
+                                    "></i>
+                                    المهام
+                                    <span class="tag tag-danger">
+                                        {{ App\Models\subject_date::datesCount() }}  
+                                  
+                                  </span>
+                                </a>
+                                     
+                            
                   
                         </li>
                          
@@ -217,14 +237,14 @@
      </div>
      <!-- Main content -->
      <main class="main">
- 
+        
          <!-- Breadcrumb -->
 @yield('breadcramp')
- 
+@include('notify::components.notify')
          <div class="container-fluid">
- 
+           
              <div class="animated fadeIn">
-                
+               
                     @yield('content')
 
             
@@ -306,6 +326,8 @@
          </span>
       
      </footer>
+
+
      <!-- Bootstrap and necessary plugins -->
      <script src="js/libs/jquery.min.js"></script>
      <script src="js/libs/tether.min.js"></script>
@@ -326,7 +348,8 @@
      <!-- Grunt watch plugin -->
 
      @include('sweetalert::alert')
-
+     @notifyJs
+  
  </body>
  
  </html>

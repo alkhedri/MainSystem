@@ -25,7 +25,9 @@ class StudentsController extends Controller
 
         $College_id = Instructor::where('id',$user_id)->value('college_id');
         $department_id = Instructor::where('id',$user_id)->value('department_id');
-        $students =  student::where('college_id',$College_id)->where('department_id' , $department_id)->where('arabic_name', 'like', '%' . $request->student_name . '%')->paginate(5);;
+
+        
+        $students =  student::where('college_id',$College_id)->where('department_id' , $department_id)->where($request->searchBy, 'like', '%' . $request->student_name . '%')->paginate(5);;
  
         $count = $students->count();
         return view('instructors.HOD.StudentsMenu' , compact('students' , 'count'));
@@ -48,9 +50,10 @@ class StudentsController extends Controller
 
         $Students_Subjects = student_mark::where('student_id', $request->id)->where('semester_id', $current_Semester)->pluck('subject_id');
         $Students_warnings = student_warning::where('student_id', $request->id)->pluck('warning_id');
- 
-    
-        return view('instructors.HOD.StudentProfile' , compact('profile' , 'Students_Subjects' , 'Students_warnings'));
+        $student_arabic_name = student::where('id', $request->id)->where('department_id', $department_id)->value('arabic_name');
+
+        
+        return view('instructors.HOD.StudentProfile' , compact('profile' , 'Students_Subjects' , 'Students_warnings' , 'student_arabic_name'));
     }
 
     public function Active_Students()
@@ -111,9 +114,13 @@ class StudentsController extends Controller
         $user_id = auth()->user()->id;
         $department_id = instructor::where('id',$user_id)->value('department_id');
         $instructors =  instructor::all()->where('department_id',$department_id);
-        $students =  student::where('department_id',$department_id)->where('spv_id',$request->selectedSpv)->paginate(5);
-       
 
+
+       if ($request->selectedSpv == 0)
+       $students =  student::where('department_id',$department_id)->where('spv_id',NULL)->paginate(5);
+       else
+        $students =  student::where('department_id',$department_id)->where('spv_id',$request->selectedSpv)->paginate(5);
+        
         return view('instructors.DEC.Supervision' ,compact('instructors' , 'students'));
     }
     public function OverrideRequest(Request $request)
@@ -154,7 +161,60 @@ class StudentsController extends Controller
 
  
     } 
+    
 
+     
+    public function NotifyAll(Request $request)
+
+    {
+        $user_id = auth()->user()->id;
+        $college_id =  Instructor::where('id',$user_id)->value('college_id');
+        $current_semester =  college::where('id',$college_id)->value('current_semester');
+    
+        $studentsCount =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester)->get()->count();
+    
+        $subject_id = $request->subject_id;
+        return view('instructors.Professor.notifyAll', compact('subject_id' , 'studentsCount'));
+
+    }
+    public function NotofyAllAction(Request $request)
+
+    {
+        $request->validate([
+            'title' => 'required',
+            'message' => 'required',
+            'subject_id' => 'required',
+        ]);
+
+ 
+        $user_id = auth()->user()->id;
+        $college_id =  Instructor::where('id',$user_id)->value('college_id');
+        $current_semester =  college::where('id',$college_id)->value('current_semester');
+    
+        $students =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester)->get();
+    
+        foreach($students as $student){
+                            Notification::insert(
+                                [
+                                'sender_id' =>  $user_id ,
+                                'reciver_id' => $student->student_id,
+                                'title' => $request->title,
+                                'message' =>$request->message,
+                                'read' => 0,
+                                'date' => date('Y-m-d')
+
+                                ]
+                            );
+                        }
+     
+      
+        return back()->with('message', 'تم ارسال الاشعار بنجاح ');;
+
+    }
+
+
+
+    
     public function StudentNotofyAlert(Request $request)
     {
  

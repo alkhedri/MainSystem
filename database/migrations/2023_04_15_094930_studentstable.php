@@ -21,13 +21,14 @@ return new class extends Migration
 
             $table->string('Badge')->nullable();
             $table->integer('city_id')->nullable();
-
+            $table->integer('enrollment_date')->nullable();
+           
             $table->integer('phone')->nullable();
             $table->integer('department_id')->constrained('departments')->onDelete('cascade');
 
             $table->integer('college_id')->constrained('colleges')->onDelete('cascade');
             $table->integer('units')->nullable();
-
+       
             $table->integer('gpa')->nullable();
             $table->integer('enrollment_status_id')->nullable();
            

@@ -116,7 +116,7 @@
 
                                 
                                         <a class="btn btn-primary" href="{{route('attendanceEdit' , ['date' => $records->date , 'subject_id' => $subject->id] )}}">عرض</a>
-                                        <a class="btn btn-danger" href="{{route('attendanceDelete' , ['date' => $records->date , 'subject_id' => $subject->id] )}}">حذف</a>
+                                        <a data-confirm-delete="true" class="btn btn-danger" href="{{route('attendanceDelete' , ['date' => $records->date , 'subject_id' => $subject->id] )}}">حذف</a>
                                     
                                     </td>
                                  

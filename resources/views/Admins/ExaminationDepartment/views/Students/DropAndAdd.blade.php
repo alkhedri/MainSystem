@@ -36,29 +36,51 @@
               
               <tr>
                 <td>
-                    @if($status == 1)
-                    تم تمكين الطلبة من تنزيل و اسقاط المقررات
+                    @if($AddStatus == 1)
+                    تم تمكين الطلبة من تنزيل  المقررات
 
                     @else
-                    منع  الطلبة من تنزيل و اسقاط المقررات
+                    منع  الطلبة من تنزيل المقررات
 
                     @endif
           
 
                         </td>
                 <td>
-                    @if($status == 1)
-                    <a class="btn btn-danger  " href="{{route('StudentDropAndAddAction')}}">إلغاء التمكين </a>
+                    @if($AddStatus == 1)
+                    <a class="btn btn-danger  " href="{{route('StudentDropAndAddActionAdd')}}">إلغاء التمكين </a>
      
                     @else
-                    <a class="btn btn-success  " href="{{route('StudentDropAndAddAction')}}">تمكين</a>
+                    <a class="btn btn-success  " href="{{route('StudentDropAndAddActionAdd')}}">تمكين</a>
      
                     @endif
                  
                        </td>
             </tr>
 
-         
+            <tr>
+                <td>
+                    @if($DropStatus == 1)
+                    تم تمكين الطلبة من  اسقاط المقررات
+
+                    @else
+                    منع  الطلبة من  اسقاط المقررات
+
+                    @endif
+          
+
+                        </td>
+                <td>
+                    @if($DropStatus == 1)
+                    <a class="btn btn-danger  " href="{{route('StudentDropAndAddActionDrop')}}">إلغاء التمكين </a>
+     
+                    @else
+                    <a class="btn btn-success  " href="{{route('StudentDropAndAddActionDrop')}}">تمكين</a>
+     
+                    @endif
+                 
+                       </td>
+            </tr>
                    
                 </tbody>
             </table>

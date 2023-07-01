@@ -14,7 +14,7 @@
 
 
 @section('content')
-
+ 
 <div class="row" style="margin-bottom: 10px">
     
     <div class="col-md-10">

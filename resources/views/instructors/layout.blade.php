@@ -17,7 +17,7 @@
      <meta name="author" content="Lukasz Holeczek">
      <meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
      <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
-     <title>منظومة الدراسة و الامتحانات - لوحة تحكم الاستاذ</title>
+     <title>نظام الدراسة و الامتحانات - لوحة تحكم الاستاذ</title>
      <!-- Icons -->
      <link href="css/font-awesome.min.css" rel="stylesheet">
      <link href="css/simple-line-icons.css" rel="stylesheet">
@@ -239,22 +239,25 @@ body{
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
                       
-                              <a class="nav-link" href="{{route('SubjectsMenu')}}"><i class="icon-user-follow"></i>المقررات الدراسية</a>
+                              <a class="nav-link" href="{{route('SubjectsMenu')}}"><i class="icon-docs
+                                "></i>المقررات الدراسية</a>
                          
                       
                        
        
-                      
-                             <a class="nav-link" href="{{route('Supervision')}}"><i class="icon-user-follow"></i>الاشراف</a>
+                                <a class="nav-link" href="{{route('StudentsMenu')}}"><i class="icon-docs"></i>طلبة القسم</a>
+                             <a class="nav-link" href="{{route('Supervision')}}"><i class="icon-star
+                                "></i>الاشراف</a>
                          
                      
                                 <a class="nav-link" href="{{route('Dropped')}}"><i class="icon-user-follow"></i>الطلبة المتعثرين</a>
                     
-                                <a class="nav-link" href="{{route('OverrideRequest')}}"><i class="icon-user-follow"></i>طلب تنزيل مواد</a>
+                                <a class="nav-link" href="{{route('OverrideRequest')}}"><i class="icon-speech
+                                    "></i>طلب تنزيل مواد</a>
                           
-                                <a class="nav-link" href="{{route('TimeTable')}}"><i class="icon-user-follow"></i>جدول المحاضرات</a>
+                                <a class="nav-link" href="{{route('TimeTable')}}"><i class="icon-grid"></i>جدول المحاضرات</a>
                            
-                                <a class="nav-link" href="{{route('ExamsTable')}}"><i class="icon-user-follow"></i>جدول  الامتحانات</a>
+                                <a class="nav-link" href="{{route('ExamsTable')}}"><i class="icon-grid"></i>جدول  الامتحانات</a>
                   
                                         </li>
                     </ul>
@@ -275,11 +278,14 @@ body{
                              <li class="nav-item">
                              
                      
-                          <a class="nav-link" href="{{route('SubjectsList')}}"><i class="icon-docs"></i>
+                          <a class="nav-link" href="{{route('SubjectsList')}}"><i class="icon-docs
+                            "></i>
                             قائمة المقررات</a>
-                          <a class="nav-link" href="{{route('SupervisionList')}}"><i class="icon-docs"></i>طلبة الاشراف</a>
+                          <a class="nav-link" href="{{route('SupervisionList')}}"><i class="icon-people
+                            "></i>طلبة الاشراف</a>
                             <a class="nav-link" href="{{route('DroppedPaln')}}"><i class="icon-docs"></i>وضع خطة دراسية لطالب</a>
-                          <a class="nav-link" href="{{route('SemestersPlanC')}}"><i class="icon-docs"></i>الخطة الدراسية للفصل الحالي</a>
+                          <a class="nav-link" href="{{route('SemestersPlanC')}}"><i class="icon-map
+                            "></i>الخطة الدراسية    </a>
                          </li>
                          
                          

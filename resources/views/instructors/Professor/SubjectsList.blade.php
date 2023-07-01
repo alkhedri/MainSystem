@@ -45,7 +45,9 @@
                 <a href="{{route("marksRecord" , ['subject_id' => $subject->id])}}" class="btn btn-secondary btn-block" data-toggle="tooltip" data-placement="right" title="عرض"><i class="icon-magnifier-add"> </i>
                     عرض
                 </a>
-              
+                <a href="{{route("NotifyAll" , ['subject_id' => $subject->id])}}" class="btn btn-secondary btn-block" data-toggle="tooltip" data-placement="right" title="عرض"><i class="fa fa-bolt "> </i>
+                    إخطار الطلبة
+                </a>
                 </div>
              </div>
     </div>

@@ -82,7 +82,9 @@ class StudentController extends Controller
 
        
   
-
+         
+          toastr()->info('لديك عدد [ '.$notificationsCountUnRead.' ] اشعارات غير مقروءة');
+     
         return view('Student._main' , compact(
             'notificationsCount',
              'notificationsCountUnRead' ,
@@ -101,7 +103,42 @@ class StudentController extends Controller
             
             ));
     }
+    public function profile(Request $request){
+        $user_id = auth()->user()->id;
+        $department_id = student::where('id',$user_id)->value('department_id');
+      
+        $profile = student::where('id', $user_id)->where('department_id', $department_id)->get();
+ 
+        $College_id = student::where('id',$user_id)->value('college_id');
 
+        $current_Semester = college::where('id',$College_id)->value('current_semester');
+
+        $Students_Subjects = student_mark::where('student_id', $request->id)->where('semester_id', $current_Semester)->pluck('subject_id');
+        $Students_warnings = student_warning::where('student_id', $request->id)->pluck('warning_id');
+        $student_arabic_name = student::where('id', $request->id)->where('department_id', $department_id)->value('arabic_name');
+
+        
+ 
+        return view('Student.profile._myProfile', compact('profile' , 'Students_Subjects' , 'Students_warnings' , 'student_arabic_name'));
+    }
+
+    public function profile_Edit(Request $request){
+        $user_id = auth()->user()->id;
+       
+        $validated = $request->validate([
+ 
+            'phone' => 'numeric',
+        ]);
+
+        student::where('id', $user_id)
+        ->update([
+            'phone' =>  $request->phone,
+            'birth' => $request->birth,
+            'sex' => $request->sex,
+
+         ]);
+        return back();
+    }
 
     public function SemestersPlan()
     {
@@ -280,6 +317,12 @@ class StudentController extends Controller
         ->where('student_id', $user_id )
         ->where('semester_id', $current_semester )
         ->where('subject_id', $request->subject_id)->first();
+
+        $checkAvalibility = subject::where('department_id', $department_id )
+        ->where('id', $request->subject_id)
+        ->value('avaliablity');
+
+        
   
         $Student_subjects = student_mark::where('department_id', $department_id )
         ->where('student_id', $user_id )
@@ -321,6 +364,10 @@ class StudentController extends Controller
             return back()->with('Alert', 'هذا المقرر غير متوفر');
             else if ($UnitsCount >= 18)
             return back()->with('Alert', 'لقد تجاوزت عدد الوحدات المسموح به');
+            else if ($checkAvalibility == 0)
+            return back()->with('Alert', 'غير مسموح بتنزيل هذا المقرر');
+            
+            
             
         student_mark::Insert(
             [

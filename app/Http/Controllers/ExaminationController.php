@@ -225,7 +225,7 @@ class ExaminationController extends Controller
         $College_id = Instructor::where('id',$user_id)->value('college_id');
         college::where('id', $College_id)
         ->update([
-            'current_semester' => $request->id
+            'current_semester' => $request->sem_id
          ]);
 
         return back();
@@ -305,8 +305,8 @@ class ExaminationController extends Controller
 
         $placementPermission = 0;
         $ResultPermission = 0;
-        $subjectsPermission= 0;
-        
+        $subjectsAddPermission= 0;
+        $subjectsDropPermission = 0;
         foreach( $students as $student){
 
             $user = User::find($student->id);
@@ -322,8 +322,9 @@ class ExaminationController extends Controller
                 if($user->hasPermission('final-result'))
                 $ResultPermission = 1;
                 if($user->hasPermission('subjects-create'))
-                $subjectsPermission= 1;
-                 
+                $subjectsAddPermission= 1;
+                if($user->hasPermission('subjects-delete'))
+                $subjectsDropPermission= 1;
                 }
         }
      
@@ -360,8 +361,13 @@ class ExaminationController extends Controller
         $user->givePermission('placements');
         if ($ResultPermission == 1)
         $user->givePermission('final-result');
-        if ($subjectsPermission == 1)
+        if ($subjectsAddPermission == 1)
         $user->givePermission('subjects-create');
+        if ($subjectsDropPermission == 1)
+        $user->givePermission('subjects-delete');
+
+
+        
 
       
         return back()->with('data', [
@@ -648,19 +654,30 @@ class ExaminationController extends Controller
         $College_id = Instructor::where('id',$user_id)->value('college_id');
 
         $students = student::where('college_id' , $College_id )->get();
-        $status = 0;
+
+
+        $AddStatus = 0;
            foreach( $students as $student){
               $user = User::find($student->id);
               if (is_null($user))
               {}
               else
               if($user->isAbleTo('subjects-create'))
-               $status = 1;
+               $AddStatus = 1;
+           }
+               $DropStatus = 0;
+               foreach( $students as $student){
+                  $user = User::find($student->id);
+                  if (is_null($user))
+                  {}
+                  else
+                  if($user->isAbleTo('subjects-delete'))
+                   $DropStatus = 1;
        }
-        return view('Admins.ExaminationDepartment.views.Students.DropAndAdd', compact('status'));
+        return view('Admins.ExaminationDepartment.views.Students.DropAndAdd', compact('AddStatus' , 'DropStatus'));
     }
     
-    public function index_StudentDropAndAddAction()
+    public function index_StudentAddAction()
     {
         $user_id = auth()->user()->id;
 
@@ -682,6 +699,35 @@ class ExaminationController extends Controller
                    $user->removePermission('subjects-create');
                  else
                  $user->givePermission('subjects-create');
+                }
+        }
+         
+      
+       return back();
+      
+    }
+    public function index_StudentDropAction()
+    {
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+
+        $students = student::where('college_id' , $College_id )->get();
+
+        foreach( $students as $student){
+
+            $user = User::find($student->id);
+
+            if (is_null($user))
+
+            {}
+            
+            else{
+
+                if($user->hasPermission('subjects-delete'))
+                   $user->removePermission('subjects-delete');
+                 else
+                 $user->givePermission('subjects-delete');
                 }
         }
          

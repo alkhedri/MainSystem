@@ -42,4 +42,18 @@ class student_attendanceRecord extends Model
      
     }
 
+    public static function AttendanceSheetPresentCount($id  ,$subject_id){
+        $present = student_attendanceRecord::where('student_id', $id)->where('subject_id', $subject_id)->where('status', 1)->get();
+        $all = student_attendanceRecord::where('student_id', $id)->where('subject_id', $subject_id)->get();
+
+        
+        return round(($present->count() /  $all->count()) * 100) ;
+    }
+
+    public static function AttendanceSheetAllCount($id  ,$subject_id){
+    
+        
+        return $all->count() ;
+    }
+
 }

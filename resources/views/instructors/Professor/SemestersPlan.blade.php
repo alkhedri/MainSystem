@@ -15,17 +15,20 @@
 
 
 @section('content')
- 
+<div  style="display:flex;justify-content:end; margin:10px;">
+  
+    <button  class="btn btn-primary"   onclick="CreatePDFfromHTML()"> <i class="fa icon-printer
+      "></i>
+      طباعة</button>
+
+  </div>
  
     <div class="row">
         <div class="col-lg-10">
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-edit"></i>الخطة الدراسية <strong>[{{$SEMESTER_NAME}}]</strong>
-                    <div class="card-actions">
-     
-                        <a href=" "   onclick="CreatePDFfromHTML()" ><i class="fa icon-printer"></i></a>
-                    </div>
+           
                 </div>
                 <div class="card-block">
                     <div class="card-block">
@@ -66,16 +69,16 @@
                                         </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-3 form-control-label" for="input-large">بداية الدراسة</label>
-                                            <div class="col-lg-6">
+                                            <label class="col-lg-3 form-control-label" for="input-large">بداية و نهاية الدراسة</label>
+                                            <div class="col-lg-3">
                                                 <strong>
                                                 <input type="text" id="input-large" name="semsStart" class="form-control input-lg" value="{{$plan->semsStart}}">
                                             </strong>
                                         </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 form-control-label" for="input-large">نهاية الدراسة</label>
-                                            <div class="col-lg-6">
+                                      
+                                        
+                                        
+                                            <div class="col-lg-3">
                                             <strong>
                                                 <input type="text" id="input-large" name="semsEnds" class="form-control input-lg" value="{{$plan->semsEnds}}">
                                             </strong>

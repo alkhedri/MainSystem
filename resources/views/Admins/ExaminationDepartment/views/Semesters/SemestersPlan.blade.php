@@ -66,14 +66,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">بداية الدراسة</label>
-                                        <div class="col-lg-6">
+                                        <label class="col-lg-3 form-control-label" for="input-large">بداية و نهاية الدراسة</label>
+                                        <div class="col-lg-3">
                                             <input type="date" id="input-large" name="semsStart" class="form-control input-lg" value="{{$plan->semsStart}}">
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">نهاية الدراسة</label>
-                                        <div class="col-lg-6">
+                                 
+                                
+                                         <div class="col-lg-3">
                                             <input type="date" id="input-large" name="semsEnds" class="form-control input-lg" value="{{$plan->semsEnds}}">
                                         </div>
                                     </div>
@@ -161,7 +160,7 @@
                                     <div class="form-actions" dir="ltr">
                                         
                                         <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
-                                        <button type="button" class="btn btn-default">Cancel</button>
+                                        
                                     </div>
                                 </form>
                                 @endforeach

@@ -44,7 +44,7 @@
                                         <h1>نموذج حضور وغياب مقرر دراسى                                          
                                         </h1>
                                         <br>
-                                         <button onclick="window.print()" class="btn btn-primary" style="width: 150px"><span class="glyphicon glyphicon-print"></span>طباعة  </button>
+                                         <button onclick="window.print()" class="btn btn-primary" style="width: 150px"><i class="icon-print"></i>طباعة  </button>
                                     </div>
                                     
                                 </div>
@@ -68,15 +68,15 @@
                            </div>
                      <div class="col-md-12 col-sm-12">
                          <div class="col-xs-4 col-md-4 text-left"><img src="https://sis.sabu.edu.ly/sis//17.jpg" style="width: 60px;height: 60px"> 
-                          <br> الكلية :الهندسة صبراته                
-                  <br> القسم :هندسة الحاسب الآلي وتقنية المعلومات 
+                          <br> الكلية :  {{$college_name}}                
+                  <br> القسم :        {{$department_name}} 
                          
-                         <br> اسم المقرر : البرمجة الموجهة نحو الاهداف            </div><br>
+                         <br> اسم المقرر :       {{ App\Models\subject::getSubjectName($subject_id)}}            </div><br>
                       
                          <div class="col-xs-4 col-md-4 text-center">وزارة التعليم العالي والبحث العلمي <br>        كـــــــشف   حضور وغياب  لمقـــرار دراســـى <br><br> رقم المقرر:CET360 </div>
                          <div class="col-xs-4 col-md-4 text-center"></div><br><br><br>
                       
-                         <div class="col-xs-4 col-md-4 text-right">الفصل الدراسى:   ربيع..2023  <br>  </div>
+                         <div class="col-xs-4 col-md-4 text-right">الفصل الدراسى:     {{$semester_name}}  <br>  </div>
                        
                       <br><br><br><br> <br><br> <hr>
                                                          
@@ -88,6 +88,7 @@
                     <th>ر.م</th>
                     <th style="text-align:center">   رقم القيد </th>
                     <th style="text-align:center"><span class=" font-green sbold ">اسم الطالب </span></th>
+                    <th style="text-align:center">نسبة الحضور</th>
                     <th style="text-align:center">1 </th>
                         <th style="text-align:center">2 </th>
 <th style="text-align:center">3 </th>
@@ -129,14 +130,20 @@
                        
                                     <tr>
 
-                                <td> 1</td>
+                                <td>{{$loop->index + 1}}</td>
 <td> {{ App\Models\student::getBadgeById($student->student_id)}}</td>
                 <td>
                     <span class=" font-green sbold ">{{ App\Models\student::getNameById($student->student_id)}}</span>
                 </td>
+                <td>
+                    {{App\Models\student_attendanceRecord::AttendanceSheetPresentCount($student->student_id , $subject_id)}}
+                 %
+
+                    
+                </td>
                 @foreach (App\Models\student_attendanceRecord::CheckStatusSheet($student->student_id , $subject_id) as $item)
             
-
+                  
                 @if ($item->status == 1)
                 <td>P</td>
                 @else

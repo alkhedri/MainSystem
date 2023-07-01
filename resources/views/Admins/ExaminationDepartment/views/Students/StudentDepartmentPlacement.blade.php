@@ -20,12 +20,18 @@
 <div class="col-md-6">
     <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">ملاحظات هامة</h4>
-        <p>بمجرد تمكين الصلاحيات سيتم منح الإذن للطلبة المستهدفين بتقديم طلبات التنسيب للاقسام العلمية</p>
+        <strong> <p>بمجرد تمكين الصلاحيات سيتم منح الإذن للطلبة المستهدفين بتقديم طلبات التنسيب للاقسام العلمية</p></strong>
         <hr>
-        <p class="mb-0"><i class=" fa fa-star"></i>    يسمح لكل طالب بتقديم طلب واحد فقط ! وبمجرد تقديمه للطلب سيتم سحب صلاحية طلب التنسيب منه بشكل تلقائي</p>
-         <p class="mb-0"><i class=" fa fa-star"></i>   لن يتم تفعيل التنسيب في حالة أن الطلبة المستهدفين صفر !</p>
+        <strong><p class="mb-0"><i class=" fa fa-star"></i>    يسمح لكل طالب بتقديم طلب واحد فقط ! وبمجرد تقديمه للطلب سيتم سحب صلاحية طلب التنسيب منه بشكل تلقائي</p></strong>
+        <strong> <p class="mb-0"><i class=" fa fa-star"></i>   لن يتم تفعيل التنسيب في حالة أن الطلبة المستهدفين صفر !</p></strong>
       
     </div>
+ 
+
+
+</div>
+
+<div class="col-md-6">
     <div class="card">
         <div class="card-header">
             <i class="fa fa-align-justify"></i> صلاحيات الطلبة
@@ -58,7 +64,7 @@
                     <a class="btn btn-danger " href="{{route('StudentDepartmentPlacementAction')}}">إلغاء التمكين </a>
      
                     @else
-                    <a class="btn btn-success  " href="{{route('StudentDepartmentPlacementAction')}}">تمكين</a>
+   <a class="btn btn-success  " href="{{route('StudentDepartmentPlacementAction')}}">تمكين</a>
      
                     @endif
                  
@@ -95,8 +101,6 @@
 <!--/col-->
 </div>
 </div>
-
-
 
 
 </div>

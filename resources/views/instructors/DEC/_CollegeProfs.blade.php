@@ -52,7 +52,7 @@
     <li class="breadcrumb-item">منسق الدراسة و الامتحانات</li>
     <li class="breadcrumb-item"><a href="{{route('SubjectsMenu')}}">المقررات</a>
         <li class="breadcrumb-item"> تفاصيل  مقرر</li>
-        <li class="breadcrumb-item">{{$subject_Code}}</li>
+        <li class="breadcrumb-item"><a href="{{url()->previous();}}"> {{$subject_Code}}</a></li>
         <li class="breadcrumb-item">أستاذ خارج القسم</li>
        
     </li>

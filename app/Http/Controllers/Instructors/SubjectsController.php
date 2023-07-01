@@ -6,7 +6,8 @@ use App\Models\student;
 use App\Models\Instructor;
 use App\Models\student_mark;
 use App\Models\college;
-
+use App\Models\semester;
+use App\Models\department;
 use App\Models\subject;
 use App\Models\subject_date;
 use App\Models\subject_requirement;
@@ -39,6 +40,24 @@ $subject_id = $request->subject_id;
         return view('instructors.Professor.Subjects.marksRecord' , compact('subjects' , 'marksData' , 'subject_id'));
          
     }
+
+    public function marksRecordEdit(Request $request)
+    {
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+       
+        $current_semester_id = College::where('id',$College_id)->value('current_semester');
+
+
+        $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
+        $marksData =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester_id)->paginate(5);;
+   
+$subject_id = $request->subject_id;
+        return view('instructors.Professor.Subjects.marksRecordEdit' , compact('subjects' , 'marksData' , 'subject_id'));
+         
+    }
+    
     
     public function marksRecordAction(Request $request)
     {
@@ -84,6 +103,10 @@ $subject_id = $request->subject_id;
         
        
         $subject_id = $request->subject_id;
+
+        $title = 'حذف سجل الحضور';
+        $text = "هل أنت متأكد من حذ هذا السجل ؟";
+        confirmDelete($title, $text);
         return view('instructors.Professor.Subjects.attendanceRecord' , compact('subjects' , 'students' , 'subject_id' , 'recordsDates' , 'todaysdate' , 'Newstudents'));
          
     } 
@@ -170,7 +193,28 @@ $subject_id = $request->subject_id;
         $students =  student_attendanceRecord::where('subject_id',$request->subject_id)->groupby('student_id')->get();
         
        $subject_id = $request->subject_id;
-        return view('instructors.Professor.Subjects.attendanceSheet' , compact('students' , 'subject_id'));
+
+       $user_id = auth()->user()->id;
+
+       $College_id = Instructor::where('id',$user_id)->value('college_id');
+       $college_name = college::where('id',$College_id)->value('arabic_name');
+      
+       $department_id = Instructor::where('id',$user_id)->value('department_id');
+      
+       $department_name = department::where('id',$department_id)->value('arabic_name');
+       $current_semester_id = College::where('id',$College_id)->value('current_semester');
+       $semester_name = semester::where('id',$current_semester_id)->value('name');
+       
+        
+        return view('instructors.Professor.Subjects.attendanceSheet' ,
+         compact(
+            'students' ,
+            'subject_id',
+            'college_name',
+            'department_name',
+            'semester_name'
+        
+        ));
          
     }
  
@@ -320,6 +364,10 @@ $subject_id = $request->subject_id;
             'english_name' => 'required|max:40',
             'units' => 'required|max:1',
             'code' => 'required|max:7',
+            'work' => 'required|numeric',
+            'final' => 'required|numeric',
+
+
         ]);
     
             subject::where('id', $request->id)
@@ -331,6 +379,8 @@ $subject_id = $request->subject_id;
 
                 'course_hours' => $request->course_hours,
                 'work_hours' => $request->work_hours,
+                'work_mark' => $request->work,
+                'final_mark' => $request->final,
                 'proffesor_id' => $request->professor_id,
              ]);
        

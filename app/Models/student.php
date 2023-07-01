@@ -59,7 +59,7 @@ class student extends Model
     }
 
     public static function getBadgeById($id){
-        $badge =  student::where('id', $id)->value('badge'); 
+        $badge =  student::where('id', $id)->value('Badge'); 
          return $badge;
      }
 

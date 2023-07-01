@@ -54,7 +54,7 @@
                                 <tr>
                                     <td> {{$loop->index + 1 }}</td>
                                     <td> {{$student->arabic_name}}</td>
-                                    <td>{{$student->badge}}</td>
+                                    <td>{{$student->Badge}}</td>
                                     <td> {{App\Models\student::StudentsSemestersCount($student->id)}}</td>
                                     <td>{{$student->gpa}} %</td>
                                     <td>

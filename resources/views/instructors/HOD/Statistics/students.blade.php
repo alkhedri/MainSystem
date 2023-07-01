@@ -84,11 +84,7 @@ $title = Session::get('title');
     </canvas>
  
 </div>
-
-<button class="btn btn-primary" onclick="printCanvas()">
-    <i class="fa icon-printer
-    "></i>
-    طباعة</button>
+ 
 @endisset
 
 
@@ -152,30 +148,11 @@ $title = Session::get('title');
         config
     );
  
-
-
-    function printCanvas()  
-{  
-    const dataUrl = document.getElementById('myChart').toDataURL(); 
-
-let windowContent = '<!DOCTYPE html>';
-windowContent += '<html>';
-windowContent += '<head><title>"' + '  رسم بياني للطالب   ' + name + '"</title></head>';
-windowContent += '<body>';
-windowContent += '<img src="' + dataUrl + '">';
-windowContent += '</body>';
-windowContent += '</html>';
-
-const printWin = window.open('', '', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
-printWin.document.open();
-printWin.document.write(windowContent); 
-
-printWin.document.addEventListener('load', function() {
-    printWin.focus();
-    printWin.print();
-    printWin.document.close();
-    printWin.close();            
-}, true);
-}
+    
 </script>
+
+
+ 
+
+ 
 @endsection

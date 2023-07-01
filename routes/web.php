@@ -20,13 +20,22 @@ Route::get('/', function () {
  ///////////////////////////////////////////////////////////////////
  Route::get('/reg', 'App\Http\Controllers\InstrController@students')->name('registerTest');;
 
- Route::group(['middleware' => ['role:college']], function() {
+ Route::group(['middleware' => ['role:college|instructor']], function() {
 
 
   //////////////////////////// AUTO COMPLETE TYPEAHEAD  ////////////////////////////
-Route::get('/autocomplete-search', 'App\Http\Controllers\typeaheadController@autocompleteSearch');
+  Route::get('/autocomplete-search', 'App\Http\Controllers\typeaheadController@autocompleteSearch');
 
-Route::get('/Movement_autocomplete-search', 'App\Http\Controllers\typeaheadController@Movement_autocompleteSearch');
+  Route::get('/Movement_autocomplete-search', 'App\Http\Controllers\typeaheadController@Movement_autocompleteSearch');
+  Route::get('/Department_autocomplete-search', 'App\Http\Controllers\typeaheadController@department_autocompleteSearch');
+
+
+  
+ });
+
+ Route::group(['middleware' => ['role:college']], function() {
+
+
  //////////////////////////// //////////////////////////// ////////////////////////////
 
 
@@ -45,7 +54,7 @@ Route::delete('/DepartmentsDeleteAction', 'App\Http\Controllers\ExaminationContr
 
 
 Route::get('/Semesters', 'App\Http\Controllers\ExaminationController@index_SemestersMenu')->name('SemestersMenu');
-Route::get('/CurrentSemesterActivate', 'App\Http\Controllers\ExaminationController@CurrentSemesterActivate')->name('CurrentSemesterActivate');
+Route::post('/CurrentSemesterActivate', 'App\Http\Controllers\ExaminationController@CurrentSemesterActivate')->name('CurrentSemesterActivate');
 
 
 Route::get('/NewSemester', 'App\Http\Controllers\ExaminationController@index_NewSemester')->name('NewSemester');
@@ -109,7 +118,8 @@ Route::post('/NotifyStudent', 'App\Http\Controllers\NotificationsController@acti
  ///////////////////PERMESSIONS////////////////////////////////
 
 Route::get('/StudentDropAndAdd', 'App\Http\Controllers\ExaminationController@index_StudentDropAndAdd')->name('StudentDropAndAdd');
-Route::get('/StudentDropAndAddAction', 'App\Http\Controllers\ExaminationController@index_StudentDropAndAddAction')->name('StudentDropAndAddAction');
+Route::get('/StudentDropAndAddActionAdd', 'App\Http\Controllers\ExaminationController@index_StudentAddAction')->name('StudentDropAndAddActionAdd');
+Route::get('/StudentDropAndAddActionDrop', 'App\Http\Controllers\ExaminationController@index_StudentDropAction')->name('StudentDropAndAddActionDrop');
  
 Route::get('/StudentDepartmentPlacement', 'App\Http\Controllers\ExaminationController@index_StudentDepartmentPlacement')->name('StudentDepartmentPlacement');
 Route::get('/StudentDepartmentPlacementAction', 'App\Http\Controllers\ExaminationController@index_StudentDepartmentPlacementAction')->name('StudentDepartmentPlacementAction');
@@ -134,14 +144,6 @@ Route::post('/InstructorSearch', 'App\Http\Controllers\Instructors\InstructorsMe
 
 
 
- 
-Route::get('/StudentsMenu', 'App\Http\Controllers\InstrController@index_StudentsMenu')->name('StudentsMenu');;
-Route::get('/StudentsProfile', 'App\Http\Controllers\Instructors\StudentsController@index_Profile')->name('StudentsProfile');;
-Route::get('/ActiveStudents', 'App\Http\Controllers\Instructors\StudentsController@Active_Students')->name('ActiveStudents');;
-Route::get('/notActiveStudents', 'App\Http\Controllers\Instructors\StudentsController@notActive_Students')->name('notActiveStudents');;
-Route::post('/SearchStudent', 'App\Http\Controllers\Instructors\StudentsController@search_student')->name('SearchStudent');;
-
-
 
 
 
@@ -151,13 +153,26 @@ Route::get('/NewStudents', 'App\Http\Controllers\InstrController@index_NewStuden
 Route::get('/Complaints', 'App\Http\Controllers\InstrController@index_Complaints')->name('Complaints');;
 
 
-Route::get('/Stats', 'App\Http\Controllers\Instructors\StatsController@index')->name('Stats');;
-Route::get('/StudentsStats', 'App\Http\Controllers\Instructors\StatsController@students')->name('StudentsStats');;
-Route::post('/StudentsStatsActionSemester', 'App\Http\Controllers\Instructors\StatsController@students_ActionSemester')->name('StudentsStatsActionSemester');;
-
 
 });
+Route::group(['middleware' => ['role:instructor', 'permission:dec-read|hod-read']], function() {
 
+
+
+ 
+    Route::get('/StudentsMenu', 'App\Http\Controllers\InstrController@index_StudentsMenu')->name('StudentsMenu');;
+    Route::get('/StudentsProfile', 'App\Http\Controllers\Instructors\StudentsController@index_Profile')->name('StudentsProfile');;
+    Route::get('/ActiveStudents', 'App\Http\Controllers\Instructors\StudentsController@Active_Students')->name('ActiveStudents');;
+    Route::get('/notActiveStudents', 'App\Http\Controllers\Instructors\StudentsController@notActive_Students')->name('notActiveStudents');;
+    Route::post('/SearchStudent', 'App\Http\Controllers\Instructors\StudentsController@search_student')->name('SearchStudent');;
+    
+
+    Route::get('/Stats', 'App\Http\Controllers\Instructors\StatsController@index')->name('Stats');;
+    Route::get('/StudentsStats', 'App\Http\Controllers\Instructors\StatsController@students')->name('StudentsStats');;
+    Route::post('/StudentsStatsActionSemester', 'App\Http\Controllers\Instructors\StatsController@students_ActionSemester')->name('StudentsStatsActionSemester');;
+  
+
+});
 Route::group(['middleware' => ['role:instructor', 'permission:dec-read']], function() {
 
 // EXAM Coordinator
@@ -227,11 +242,15 @@ Route::group(['middleware' => ['role:instructor']], function() {
 
  Route::get('/SubjectsList', 'App\Http\Controllers\InstrController@index_SubjectsList')->name('SubjectsList');;
  Route::get('/marksRecord', 'App\Http\Controllers\Instructors\SubjectsController@marksRecord')->name('marksRecord');;
+ Route::get('/marksRecordEdit', 'App\Http\Controllers\Instructors\SubjectsController@marksRecordEdit')->name('marksRecordEdit');;
+
+
+ 
  Route::post('/marksRecordAction', 'App\Http\Controllers\Instructors\SubjectsController@marksRecordAction')->name('marksRecordAction');;
 
  Route::get('/attendanceRecord', 'App\Http\Controllers\Instructors\SubjectsController@attendanceRecord')->name('attendanceRecord');;
  Route::get('/attendanceEdit', 'App\Http\Controllers\Instructors\SubjectsController@attendance_EditRecord')->name('attendanceEdit');;
- Route::get('/attendanceDelete', 'App\Http\Controllers\Instructors\SubjectsController@attendance_DeleteRecord')->name('attendanceDelete');;
+ Route::delete('/attendanceDelete', 'App\Http\Controllers\Instructors\SubjectsController@attendance_DeleteRecord')->name('attendanceDelete');;
  
  
  Route::get('/AttendanceRecordAction', 'App\Http\Controllers\Instructors\SubjectsController@AttendanceRecordAction')->name('AttendanceRecordAction');;
@@ -260,6 +279,12 @@ Route::group(['middleware' => ['role:instructor']], function() {
 
  Route::post('/StudentNotofyAlertAction', 'App\Http\Controllers\Instructors\StudentsController@StudentNotofyAlertAction')->name('StudentNotofyAlertAction');;
  
+
+ Route::get('/NotifyAll', 'App\Http\Controllers\Instructors\StudentsController@NotifyAll')->name('NotifyAll');;
+ 
+ Route::post('/NotifyAllAction', 'App\Http\Controllers\Instructors\StudentsController@NotofyAllAction')->name('NotifyAllAction');;
+ 
+
  Route::get('/StudentsProfile', 'App\Http\Controllers\Instructors\StudentsController@index_Profile')->name('StudentsProfile');;
 
  
@@ -268,6 +293,11 @@ Route::group(['middleware' => ['role:instructor']], function() {
     
     Route::group(['middleware' => ['role:student']], function() {
         Route::get('/studentDashboard', 'App\Http\Controllers\Students\StudentController@index')->name('studentDashboard');
+        Route::get('/studentProfile', 'App\Http\Controllers\Students\StudentController@profile')->name('studentProfile');
+        Route::post('/EditProfile', 'App\Http\Controllers\Students\StudentController@profile_Edit')->name('EditProfile');
+      
+      
+        
         Route::get('/CurrentSemesterSubjects', 'App\Http\Controllers\Students\StudentController@show_currentSemSubs')->name('currentSemSubs');
         Route::get('/OldSemesterSubjects', 'App\Http\Controllers\Students\StudentController@show_oldSemSubs')->name('oldSemSubs');
         Route::post('/OldSemesterSubjects', 'App\Http\Controllers\Students\StudentController@oldSemData')->name('getSemData');
@@ -285,7 +315,7 @@ Route::group(['middleware' => ['role:instructor']], function() {
         
     });
 
-    Route::group(['middleware' => ['role:student', 'permission:subjects-create']], function() {
+    Route::group(['middleware' => ['role:student', 'permission:subjects-delete']], function() {
     Route::get('/EditSubjects', 'App\Http\Controllers\Students\StudentController@show_EditSubjects')->name('EditSubjects');
     Route::post('/AddSubject', 'App\Http\Controllers\Students\StudentController@AddSubject')->name('AddSubject');
     Route::delete('/DropSubject', 'App\Http\Controllers\Students\StudentController@DropSubject')->name('DropSubject');

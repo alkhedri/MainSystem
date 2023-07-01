@@ -49,7 +49,7 @@
                                 <tr>
                                     <td>{{ App\Models\student::getDepNameByID($request->student_id) }}</td>
                                     <td>{{ App\Models\student::getNameByID($request->student_id) }}</td>
-                                    <td>Admin</td>
+                                    <td>{{ App\Models\student::getBadgeById($request->student_id) }}</td>
                                     <td>{{App\Models\subject::getSubjectName($request->subject_id) }}</td>
                                     <td>{{App\Models\subject::getSubjectCode($request->subject_id) }}</td>
                                     <td>{{App\Models\subject::getSubjectUnits($request->subject_id) }}</td>

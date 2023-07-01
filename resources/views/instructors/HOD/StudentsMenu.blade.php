@@ -25,11 +25,15 @@
             <div class="card-block">
                 <form action="{{route('SearchStudent')}}" method="post" class="form-horizontal ">
                     @csrf
+                    <input type="radio" id="inline-radio1" name="searchBy" value="Badge" checked onclick="changeplaceholder('رقم القيد')"> 
+                    <label for="inline-radio1">رقم القيد </label> 
+                    <input type="radio" id="inline-radio2" name="searchBy" value="arabic_name"  onclick="changeplaceholder('الإسم')">
+                    <label for="inline-radio2">الاسم </label> 
                     <div class="form-group row">
                         <div class="col-md-6">
                             <div class="input-group">
                        
-                                <input type="text" id="input1-group2" name="student_name" class="form-control" placeholder="رقم القيد">
+                                <input type="text" id="input1-group2" name="student_name" class="typeahead form-control" placeholder="رقم القيد" data-provide="typeahead" autocomplete="off">
                             </div>
                         </div>
                         <button type="submit" class="btn btn btn-success"><i class="fa fa-dot-circle-o"></i> بحث</button>
@@ -113,4 +117,33 @@
  
  
  
+@endsection
+
+@section('page-js-script')
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha512-HWlJyU4ut5HkEj0QsK/IxBCY55n5ZpskyjVlAoV9Z7XQwwkqXoYdCIC93/htL3Gu5H3R4an/S0h2NXfbZk3g7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js" integrity="sha512-P2Z/b+j031xZuS/nr8Re8dMwx6pNIexgJ7YqcFWKIqCdbjynk4kuX/GrqpQWEcI94PRCyfbUQrjRcWMi7btb0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" charset="utf-8">
+    var route = "{{ url('Department_autocomplete-search') }}";
+    $('input.typeahead').typeahead({
+        source: function (query, process) {
+            return $.get(route, {
+                sb: query,
+                
+            }, function (data) {
+                return process(data);
+            });
+        }
+
+  
+    });
+
+
+    let changeplaceholder = function(string){
+        const element = document.getElementById("input1-group2");
+        element.placeholder = string ;
+    }
+   
+
+</script>
 @endsection

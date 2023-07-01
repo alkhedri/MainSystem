@@ -33,6 +33,7 @@
          
   </div>
 @endif
+@permission('subjects-create')
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
@@ -70,7 +71,7 @@
 </div>
       
 
-
+@endpermission
 
 
  <div class="hidden-sm-up">
@@ -95,6 +96,7 @@
                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectCode($subject->subject_id)}} </td>
                         <td  style="text-align: center;">{{ App\Models\subject::getSubjectUnits($subject->subject_id)}} </td>
                         <td  style="text-align: center;">
+                            
                         <a  data-confirm-delete="true" href="{{route('DropSubject' , ['subject_id' =>  $subject->id])}}" class="btn btn-danger btn-sm 
                             "   >
                             <i class="icon-close"></i>

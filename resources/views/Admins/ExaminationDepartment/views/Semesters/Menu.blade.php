@@ -12,21 +12,56 @@
  
 </ol>
 @endsection
+@section('modals')
 
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">تأكيد إجراء تغيير الفصل الحالي</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('CurrentSemesterActivate') }}" method="POST">
+                @csrf
+                <label for="">سيتم تغيير الفصل الدراسي الحالي </label>
+                <p>عند تغيير الفصل الدراسي سيتم تفعيل الاتي : </p>
+                <ul>
+                    <li>1 ----- </li>
+                    <li>2 ----- </li>
+                    <li>3 ----- </li>
+                    <li>4 ----- </li>
+                </ul>
+                <input id="sem_id" name="sem_id"  type="hidden">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+          <button type="submit" class="btn btn-primary">تمكين التغيير</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>      
+</div>
+@endsection
 
 @section('content')
 
 <div class="row">
     <div class="col-lg-6">
-        <div class="alert alert-info" role="alert">
+        <div class="alert alert-primary" role="alert">
              
-            <p> الفصل الدراسي الحالي - <strong>[{{$semester_name}}] </strong>  </p>
+            <p> الفصل الدراسي الحالي - <strong>[ {{$semester_name}} ] </strong>  </p>
             <hr>
-            <p class="mb-0"> ملاحظة : لتعيين فصل دراسي للوقت الحالي من جدول الفصول نضغط على تعيين</p>
+            <a class="btn btn-primary btn-lg btn-block" href="{{route('NewSemester')}}"> 
+                إضافة فصل دراسي جديد
+             </a>
           </div>
         
            
-            <a class="btn btn-info btn-lg btn-block" href="{{route('NewSemester')}}"><u>إضافة فصل دراسي جديد</u></a>
+          
       
     </div>
     <div class="col-lg-6">
@@ -64,11 +99,10 @@
                              </a>
                         
                                    @else
-                                   <a class="btn btn-outline-danger btn-sm" href="{{ route('CurrentSemesterActivate' , ['id' => $semester->id]) }}"
-                             >
-                                    {{ __('تعيين') }}
-                                </a>  
-                                          
+                       
+                                <button type="button" class="btn btn-danger btn-sm semesterid" data-id={{$semester->id}} data-toggle="modal" data-target="#exampleModal" style="margin-left: 10px">
+                                    {{ __('تعيين كفصل حالي') }}
+                                  </button>   
                                 @endif
                        
                             
@@ -97,4 +131,18 @@
  
  
  
+@endsection
+
+@section('js-scripts')
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript">
+
+ 
+$(document).on('click','.semesterid',function(){
+         let id = $(this).attr('data-id');
+         $('#sem_id').val(id);
+    });
+
+</script>
+
 @endsection

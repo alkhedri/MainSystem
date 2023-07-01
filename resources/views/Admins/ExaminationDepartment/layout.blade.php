@@ -303,11 +303,12 @@
  
          <!-- Breadcrumb -->
 @yield('breadcramp')
- 
+@yield('modals')
          <div class="container-fluid">
  
              <div class="animated fadeIn">
                 @include('sweetalert::alert')
+              
                     @yield('content')
 
             

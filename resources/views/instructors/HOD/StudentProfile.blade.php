@@ -1,13 +1,14 @@
 
 @extends('instructors.layout')
-@foreach ($profile as $student)
-                
+             
 @section('breadcramp')
 <ol class="breadcrumb">
     <li class="breadcrumb-item">الرئيسية</li>
     <li class="breadcrumb-item">رئيس القسم</li>
+    <li class="breadcrumb-item"><a href=" {{ url()->previous() }}">طلبة القسم</a></li>
+   
     <li class="breadcrumb-item">بيانات طالب</li>
-        <li class="breadcrumb-item"><a href="#"> {{$student->arabic_name}}</a></li>
+        <li class="breadcrumb-item"><a href="#"> {{$student_arabic_name}}</a></li>
      
  
 </ol>
@@ -19,7 +20,7 @@
 
 <div class="row">
 
-    <div class="col-sm-3">
+    <div class="col-sm-4">
         <div class="card" style="">
      
             <div style="display:flex ; justify-content:center; margin-top 100px">
@@ -29,9 +30,11 @@
                           
             <div class="card-block" style="text-align:center" >
                 <div class="centerize" style="margin-top 70px">
-               <h4>{{$student->arabic_name}}</h4>
+               <h4> {{$student_arabic_name}}</h4>
             </div>
             <div class=""  >
+                @foreach ($profile as $student)
+   
                 <p  >   <strong style="text-align:center" >القسم : {{App\Models\student::getDepNameById($student->id) }}</strong></p>
            
                 <p  >   <strong style="text-align:center" > الفصل الدراسي : {{App\Models\student::StudentsSemestersCount($student->id) }}</strong></p>
@@ -54,7 +57,7 @@
     </div>
 
 
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <div class="card" style="border-radius: 10px">
                  
                             <div class="card-block">
@@ -86,7 +89,7 @@
                                     <li class="list-group-item">تاريخ الميلاد :  
                                        <strong>[ {{$student->birth}} ]</strong> </li>
                                        <li class="list-group-item">سنة الالتحاق :  
-                                        <strong>[ {{$student->enrollment_date}} ]</strong> </li>
+                                        <strong>[ {{App\Models\semester::getName($student->enrollment_date) }} ]</strong> </li>
                                         <li class="list-group-item">   المشرف :  
                                             <strong>[ {{App\Models\student::getStudentSpv($student->spv_id) }} ]</strong> </li>
         

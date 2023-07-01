@@ -64,7 +64,7 @@
 @section('content')
 @if(Session::has('message'))
 <div class="alert alert-primary" role="alert">
-    <p>{{Session::get('message')}}</p>
+   {{Session::get('message')}} 
 
    </div>
 
@@ -99,13 +99,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">رمز المقرر</label>
+                                        <label class="col-lg-4 form-control-label" for="input-large">رمز المقرر</label>
                                         <div class="col-lg-6">
                                             <input type="text" id="input-large" name="code" class="form-control input-lg" value="{{$subject->code}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">عدد الوحدات</label>
+                                        <label class="col-lg-4 form-control-label" for="input-large">عدد الوحدات</label>
                                         <div class="col-lg-6">
                                                 
                                        <Select id="input-large" name="units" class="form-control input-lg" placeholder=".input-lg">
@@ -117,7 +117,19 @@
                                        </Select> </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">ساعات النظري</label>
+                                        <label class="col-lg-4 form-control-label" for="input-large">درجة الأعمال</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="input-large" name="work" class="form-control input-lg" value="{{$subject->work_mark}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 form-control-label" for="input-large">درجة الإمتحان </label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="input-large" name="final" class="form-control input-lg" value="{{$subject->final_mark}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 form-control-label" for="input-large">ساعات النظري</label>
                                         <div class="col-lg-6">
                                             
                                             <Select id="input-large" name="course_hours" class="form-control input-lg" placeholder=".input-lg">
@@ -130,7 +142,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">ساعات العملي</label>
+                                        <label class="col-lg-4 form-control-label" for="input-large">ساعات العملي</label>
                                         <div class="col-lg-6"> 
                                              
                                             <Select id="input-large" name="work_hours" class="form-control input-lg" placeholder=".input-lg">
@@ -143,7 +155,7 @@
                                             </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-3 form-control-label" for="input-large">أستاذ المقرر</label>
+                                        <label class="col-lg-4 form-control-label" for="input-large">أستاذ المقرر</label>
                                         <div class="col-lg-6"> 
                                             <Select id="input-large" name="professor_id" class="form-control" value="">
                                                 <option value="{{$subject->proffesor_id}}" selected hidden> {{ App\Models\instructor::getInstructorsName($subject->proffesor_id) }}</option>

@@ -47,10 +47,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>الطالب</th>
-                                    <th>رقم القيد</th>
-                                    <th>الاعمال</th>
-                                    <th>الامتحان النهائي</th>
+                                    <th style="text-align: right"  >الطالب</th>
+                                    <th style="text-align: center"  >رقم القيد</th>
+                                    <th style="text-align: center"  >الاعمال</th>
+                                    <th style="text-align: center"  >الامتحان النهائي</th>
                          
                                 </tr>
                             </thead>
@@ -60,14 +60,23 @@
    
                                 <tr>
                                     <td> {{$loop->index + 1}}</td>
-                                    <td> {{App\Models\student::getNameById($mark->student_id) }} </td>
-                                    <td>{{App\Models\student::getBadgeById($mark->student_id) }}</td>
+                                    <td style="text-align: right" > <strong> {{App\Models\student::getNameById($mark->student_id) }} </strong></td>
+                                    <td  style="text-align: center" ><strong>{{App\Models\student::getBadgeById($mark->student_id) }}</strong></td>
+                                    @if ($mark->work == NULL)
+                                    <td style="color:rgb(159, 28, 28);text-align: center">لم تحدد بعد </td>  
+                                    @else
+                                    <td  style="text-align: center"  > <strong>{{$mark->work}}</strong></td>
+                                    @endif
+                                    @if ($mark->final == NULL)
+                                    <td style="color:rgb(159, 28, 28);text-align: center">لم تحدد بعد </td>  
+                                    @else
+                                    <td  style="text-align: center"   ><strong>{{$mark->final}}</strong></td>
+                                    @endif
+                                        
 
-<form action="{{route('marksRecordAction')}}" method="POST">
-@csrf
-<td><input type="text" class="form-control input-md     font-weight-bold" name="work[]" value="{{$mark->work}}" style="width:150px; text-align:center"></td>
-<td><input type="text"  class="form-control input-md    font-weight-bold" name="final[]" value="{{$mark->final}}" style="width:150px; text-align:center"></td>
-<input type="hidden" name="ids[]" value="{{$mark->id}}">
+
+                                        
+ 
 
                                 
                
@@ -76,8 +85,14 @@
                                 @endforeach
                             </tbody>
                         </table>
+                           
+                        <a   style="margin-right : 10px" class="pull-left btn btn-info "href="{{route('marksRecordEdit' , ['subject_id' => $subject_id])}}"><i class="fa fa-bullhorn"></i>        إشعار</a>
+                  
                        
-                        <button type="submit" class="pull-left btn btn-primary "> <i class="fa fa-floppy-o"></i>     حفظ  </button>
+                        <a   class="pull-left btn btn-primary "href="{{route('marksRecordEdit' , ['subject_id' => $subject_id])}}"><i class="fa fa-edit"></i>        تعديل</a>
+                  
+
+                        
                     </form> 
                     </div>
                 </div>

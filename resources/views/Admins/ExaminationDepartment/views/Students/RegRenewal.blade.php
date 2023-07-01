@@ -27,11 +27,11 @@
                     <form class="form-horizontal" action="{{ route('StudentsRenewalSearch') }} " method="post">
                         
                         @csrf
-                        <input type="radio" id="inline-radio1" name="searchBy" value="Badge" checked> 
-                    <label for="inline-radio1">رقم القيد </label> 
-                    <input type="radio" id="inline-radio2" name="searchBy" value="arabic_name">
-                    <label for="inline-radio2">الاسم </label> 
-                        <div class="form-group row">
+                        <input type="radio" id="inline-radio1" name="searchBy" value="Badge" checked onclick="changeplaceholder('رقم القيد')"> 
+                        <label for="inline-radio1">رقم القيد </label> 
+                        <input type="radio" id="inline-radio2" name="searchBy" value="arabic_name"  onclick="changeplaceholder('الإسم')">
+                        <label for="inline-radio2">الاسم </label> 
+                             <div class="form-group row">
                             <div class="col-md-6">
                                 <div class="input-group">
                                     
@@ -167,5 +167,13 @@
 
   
     });
+
+
+    
+    let changeplaceholder = function(string){
+        const element = document.getElementById("input1-group2");
+        element.placeholder = string ;
+    }
+   
 </script>
 @endsection

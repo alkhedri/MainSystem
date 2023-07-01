@@ -58,10 +58,25 @@ class subject_date extends Model
         $college_id = student::where('id', $user_id)->value('college_id');
         $current = college::where('id', $college_id)->value('current_semester');
         $student_subjects = student_mark::where('student_id', $user_id)->where('semester_id', $current)->get();
-    
 
-
-     
         return $student_subjects;
     }
+
+    public static function datesCount(){
+      $user_id = auth()->user()->id;
+      $college_id = student::where('id', $user_id)->value('college_id');
+      $current = college::where('id', $college_id)->value('current_semester');
+      $student_subjects = student_mark::where('student_id', $user_id)->where('semester_id', $current)->get();
+
+     $allCount = 0;
+      foreach($student_subjects as $subject){
+        $dates = subject_date::where('subject_id', $subject->subject_id)->get();
+        if ($dates->count() > 0)
+        $allCount += $dates->count();
+      }
+        
+  
+   
+      return $allCount;
+  }
     }

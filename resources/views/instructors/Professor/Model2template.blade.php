@@ -120,7 +120,9 @@
                                                                                 <td>  {{App\Models\subject::getSubjectCode($subject->subject_id)}}</td>
                                                                                 <td>  {{App\Models\subject::getSubjectUnits($subject->subject_id)}}</td>
                                                                                 
-                                                                                <td>1</td>
+                                                                                <td>    @if(App\Models\student_mark::checkDuplicate($subject->subject_id , $student_id) > 1)
+                                                                                    <span  >إعادة</span>
+                                                                                    @endif</td>
                                                                             </tr> 
                                                                             @endforeach<tr>
                                                                             
