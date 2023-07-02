@@ -15,6 +15,7 @@
      <meta name="description" content="CoreUI Bootstrap 4 Admin Template">
      <meta name="author" content="Lukasz Holeczek">
      <meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
+    
      <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
      <title>نظام الدراسة و الامتحانات - لوحة تحكم الطالب</title>
      <!-- Icons -->
@@ -240,7 +241,7 @@
         
          <!-- Breadcrumb -->
 @yield('breadcramp')
-@include('notify::components.notify')
+ 
          <div class="container-fluid">
            
              <div class="animated fadeIn">
@@ -329,6 +330,7 @@
 
 
      <!-- Bootstrap and necessary plugins -->
+    
      <script src="js/libs/jquery.min.js"></script>
      <script src="js/libs/tether.min.js"></script>
      <script src="js/libs/bootstrap.min.js"></script>
@@ -348,7 +350,7 @@
      <!-- Grunt watch plugin -->
 
      @include('sweetalert::alert')
-     @notifyJs
+     
   
  </body>
  

@@ -1,7 +1,7 @@
 
 @extends('instructors.layout')
  
-@foreach ($subjects as $subject)
+ 
  
 @section('breadcramp')
 <ol class="breadcrumb">
@@ -9,7 +9,10 @@
     <li class="breadcrumb-item">عضو هيئة التدريس</li>
     <li class="breadcrumb-item">قائمة المقررات</a></li>
 
-        <li class="breadcrumb-item"><a href="{{route('marksRecord' , ['subject_id' => $subject_id])}}">{{$subject->arabic_name}}</a></li>
+        <li class="breadcrumb-item"><a href="{{route('marksRecord' , ['subject_id' => $subject_id])}}">
+            {{App\Models\subject::getSubjectName($subject_id) }}
+        
+        </a></li>
         <li class="breadcrumb-item">تعديل درجات مقرر</li>
 
     
@@ -85,4 +88,11 @@
 
         
 @endsection
-@endforeach
+ 
+
+@section('page-js-script')
+ 
+
+ 
+@endsection
+ 

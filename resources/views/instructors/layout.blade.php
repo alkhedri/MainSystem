@@ -27,7 +27,11 @@
           <link href="css/profile.css" rel="stylesheet">
   
           <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@200;300;400;500&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Kodchasan:ital,wght@0,300;1,200;1,300&family=Montserrat:ital,wght@0,200;0,300;0,800;1,200;1,300;1,400;1,500;1,600;1,700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playball&family=Poppins:ital,wght@0,100;0,200;0,300;0,800;0,900;1,100;1,200;1,300&family=Roboto+Condensed:wght@300;400;700&family=Roboto+Mono:ital,wght@0,100;1,100&family=Roboto:ital,wght@0,100;0,300;1,100&family=Rubik+Beastly&family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
- </head>
+ 
+ 
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+          <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+        </head>
 
  <style>
 
@@ -137,7 +141,7 @@ body{
          3. 'fixed-nav'			  - Fixed navigation
          4. 'navbar-fixed'		  - Fixed navbar
      -->
- @yield('modals')
+ 
  <body class="navbar-fixed sidebar-nav fixed-nav content background-image" id="body">
    
    
@@ -663,7 +667,7 @@ body{
       
      </footer>
      @yield('page-js-script')
-
+     <script src="sweetalert2.all.min.js"></script>
      <!-- Bootstrap and necessary plugins -->
      <script src="js/libs/jquery.min.js"></script>
      <script src="js/libs/tether.min.js"></script>

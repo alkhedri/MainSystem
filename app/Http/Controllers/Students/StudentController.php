@@ -82,8 +82,8 @@ class StudentController extends Controller
 
        
   
-         
-          toastr()->info('لديك عدد [ '.$notificationsCountUnRead.' ] اشعارات غير مقروءة');
+          toast('لديك عدد [ '.$notificationsCountUnRead.' ] اشعار غير مقروء', 'info');
+      
      
         return view('Student._main' , compact(
             'notificationsCount',

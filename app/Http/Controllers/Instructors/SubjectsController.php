@@ -11,7 +11,7 @@ use App\Models\department;
 use App\Models\subject;
 use App\Models\subject_date;
 use App\Models\subject_requirement;
-
+use App\Models\notification;
 use App\Models\student_attendanceRecord;
 
 use App\Models\timeTable;
@@ -20,6 +20,7 @@ use App\Models\ExamsTable;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectsController extends Controller
 {
@@ -36,10 +37,15 @@ class SubjectsController extends Controller
         $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
         $marksData =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester_id)->paginate(5);;
    
-$subject_id = $request->subject_id;
+        $subject_id = $request->subject_id;
         return view('instructors.Professor.Subjects.marksRecord' , compact('subjects' , 'marksData' , 'subject_id'));
          
     }
+
+
+
+
+    
 
     public function marksRecordEdit(Request $request)
     {
@@ -53,7 +59,7 @@ $subject_id = $request->subject_id;
         $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
         $marksData =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester_id)->paginate(5);;
    
-$subject_id = $request->subject_id;
+     $subject_id = $request->subject_id;
         return view('instructors.Professor.Subjects.marksRecordEdit' , compact('subjects' , 'marksData' , 'subject_id'));
          
     }
@@ -61,14 +67,40 @@ $subject_id = $request->subject_id;
     
     public function marksRecordAction(Request $request)
     {
- 
+        $user_id = auth()->user()->id;
+
         $count_items = count($request->ids);
         $final = $request->get('final');
         $work = $request->get('work');
         $ids = $request->get('ids');
 
+        $subject_id =  student_mark::where('id',$ids[0])->value('subject_id');
+
+        $subject_professor =  subject::where('id',$subject_id)->value('proffesor_id');
+
+        $subjectWorkLimit =  subject::where('id',$subject_id)->value('work_mark');
+       
+        $subjectFinalLimit =  subject::where('id',$subject_id)->value('final_mark');
+       
         for($i = 0; $i<$count_items; $i++)
         {
+           
+ 
+            if ($subjectWorkLimit < $work[$i] || $subjectFinalLimit < $final[$i])
+            {
+                toast('البيانات المدخلة غير صحيحة','warning');
+                return back();
+            }
+            elseif (0 > $work[$i] || 0 > $final[$i])
+            {
+                toast('لايمكن أن تكون الدرجات بالسالب !','warning');
+                return back();
+            }
+            elseif ($subject_professor != $user_id)
+            {
+                
+            }
+            else{
             student_mark::where('id', $ids[$i])
             ->update([
                 'work' => $work[$i],
@@ -76,8 +108,11 @@ $subject_id = $request->subject_id;
                 
              ]);
        
-            }
-   
+            }}
+           
+            
+           
+            toast('تم رفع الدرجات بنجاح!','success');
 
         return back();
        
@@ -172,7 +207,7 @@ $subject_id = $request->subject_id;
          ]);
 
     
-
+          
          return back();
         
        
@@ -284,7 +319,7 @@ $subject_id = $request->subject_id;
              
              ]
         );
-
+        toast('تم إضافة المهمة بنجاح!','success');
         return back();
        
     }
@@ -671,7 +706,59 @@ public function TimeTableDeleteAction(Request $request)
 
     }
 
+    public function NotifyEach(Request $request)
+    {
+        $user_id = auth()->user()->id;
+
+        $College_id = Instructor::where('id',$user_id)->value('college_id');
+       
+        $current_semester_id = College::where('id',$College_id)->value('current_semester');
 
 
+        $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
+        $subjectStudents =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester_id)->paginate(5);;
+   
+        $subject_id = $request->subject_id;
+        return view('instructors.Professor.Subjects.notifyEach' , compact('subjects' , 'subjectStudents' , 'subject_id'));
+         
+    }
+
+public function NotifyEachAction(Request $request){
+    $count_items = count($request->ids);
+    $work = $request->get('work');
+    $ids = $request->get('ids');
+    $user_id = auth()->user()->id;
+    for($i = 0; $i<$count_items; $i++)
+    {
+
+        
+         if ($work[$i] == NULL) {
+           
+         } else {
+            notification::insert(
+            [
+             'sender_id' =>  $user_id ,
+             'reciver_id' => $ids[$i],
+             'title' => $request->title,
+             'message' =>$work[$i],
+             'read' => 0,
+             'date' => date('Y-m-d')
+             
+          
+             ]
+        );
+        }
+    }
+
+
+    return back()->with([
+        'ids' => $ids,
+        'marks' => $work,
+        
+    ]);
+    
+    //return redirect('SupervisionList');
+   
+}
     
 }

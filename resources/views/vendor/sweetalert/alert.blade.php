@@ -35,5 +35,9 @@
         @if (Session::has('alert.config'))
             Swal.fire({!! Session::pull('alert.config') !!});
         @endif
+
+        @if (Session::has('alert.success'))
+            Swal.fire({!! Session::pull('alert.success') !!});
+        @endif
     </script>
 @endif

@@ -21,7 +21,7 @@ class notification extends Model
 
     public static function getUnRead(){
         $user_id = auth()->user()->id;
-        $notifications = notification::where('reciver_id', $user_id)->where('read', 0)->get();
+        $notifications = notification::where('reciver_id', $user_id)->where('read', 0)->orderBy('id','DESC')->get();
     
      
         return $notifications;

@@ -32,13 +32,13 @@ class NotificationsController extends Controller
         
         $user_id = auth()->user()->id;
 
-        $student_id = student::where('badge',$request->studnet_badge)->value('id');
+        $student_id = student::where('Badge',$request->studnet_badge)->value('id');
 
 
 
         
-        $studnet_name = student::where('badge',$request->studnet_badge)->value('arabic_name');
-        $studnet_department_id = student::where('badge',$request->studnet_badge)->value('department_id');
+        $studnet_name = student::where('Badge',$request->studnet_badge)->value('arabic_name');
+        $studnet_department_id = student::where('Badge',$request->studnet_badge)->value('department_id');
         $studnet_department = department::where('id',$studnet_department_id)->value('arabic_name');
        
 

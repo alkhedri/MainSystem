@@ -80,9 +80,8 @@ $title = Session::get('title');
 @isset($stack)
 <div class="container" style="width: 70vw">
     <canvas id="myChart" height="100px" style="font-family: Tajawal">
-
-    </canvas>
- 
+       </canvas>
+        
 </div>
  
 @endisset
@@ -93,7 +92,7 @@ $title = Session::get('title');
 @section('page-js-script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+ 
 <script type="text/javascript">
   
 
@@ -110,8 +109,11 @@ $title = Session::get('title');
         datasets: [{
            label: title + " " + name,
             
-             backgroundColor: 'rgb(17, 127, 173)',
-            borderColor: 'rgb(255, 99, 132)',
+              
+           backgroundColor : 'rgba(41,171,236,0.5)',
+                borderColor : 'rgba(151,187,205,0.8)',
+                highlightFill : 'rgba(151,187,205,0.75)',
+                highlightStroke : 'rgba(151,187,205,1)',
             data: users,
         }]
     };

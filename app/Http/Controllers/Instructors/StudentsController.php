@@ -171,9 +171,13 @@ class StudentsController extends Controller
         $college_id =  Instructor::where('id',$user_id)->value('college_id');
         $current_semester =  college::where('id',$college_id)->value('current_semester');
     
-        $studentsCount =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester)->get()->count();
-    
-        $subject_id = $request->subject_id;
+     
+       
+        $subject_id =  subject::where('id',$request->subject_id)->where('proffesor_id',$user_id)->value('id');
+        $studentsCount =  student_mark::where('subject_id',$subject_id)->where('semester_id',$current_semester)->get()->count();
+       
+
+         
         return view('instructors.Professor.notifyAll', compact('subject_id' , 'studentsCount'));
 
     }

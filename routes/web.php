@@ -248,6 +248,11 @@ Route::group(['middleware' => ['role:instructor']], function() {
  
  Route::post('/marksRecordAction', 'App\Http\Controllers\Instructors\SubjectsController@marksRecordAction')->name('marksRecordAction');;
 
+ Route::get('/NotifyEach', 'App\Http\Controllers\Instructors\SubjectsController@NotifyEach')->name('NotifyEach');;
+ Route::post('/NotifyEachAction', 'App\Http\Controllers\Instructors\SubjectsController@NotifyEachAction')->name('NotifyEachAction');;
+
+
+ 
  Route::get('/attendanceRecord', 'App\Http\Controllers\Instructors\SubjectsController@attendanceRecord')->name('attendanceRecord');;
  Route::get('/attendanceEdit', 'App\Http\Controllers\Instructors\SubjectsController@attendance_EditRecord')->name('attendanceEdit');;
  Route::delete('/attendanceDelete', 'App\Http\Controllers\Instructors\SubjectsController@attendance_DeleteRecord')->name('attendanceDelete');;

@@ -158,13 +158,17 @@ class InstrController extends Controller
         $user_id = auth()->user()->id;
          $department_id = Instructor::where('id',$user_id)->value('department_id');
         
-         $subjects =  subject::all()->where('department_id',$department_id)->where('id' , $request->id);
+         $subjects =  subject::where('department_id',$department_id)->where('id' , $request->id)->get();
          $Department_subjects =  subject::all()->where('department_id',$department_id);
          $subject_Code =  subject::where('id',$request->id)->value('code');
        
          $requirements =  subject_requirement::all()->where('subject',$request->id);
          $instructors =  instructor::all()->where('department_id',$department_id);
        
+         $subject_id =  subject::where('department_id',$department_id)->where('id' , $request->id)->value('id');
+        
+         if ($subject_id != $request->id)
+         abort(404);
 
         return view('instructors.DEC.SubjectDetails' , compact('subjects' , 'requirements' ,'subject_Code' , 'instructors' , 'Department_subjects'));
     }

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
  
 use App\Models\student_mark;
+use App\Models\Instructor;
  
+
 use App\Models\student;
 use App\Models\semester;
 use App\Models\subject;
@@ -19,24 +21,6 @@ class StatsController extends Controller
         {
             
             
-          
-            //     $requirements = student_marks::where('subject', 3)->get();
-    
-            //     foreach ($requirements as $req){
-    
-                
-            //     $final = student_mark::where('student_id', $user_id )
-            //     ->where('subject_id', $req->requirement)->value('final');
-    
-            //     $work = student_mark::where('student_id', $user_id )
-            //     ->where('subject_id', $req->requirement)->value('work');
-    
-            //     if (($final + $work) < 50 )
-            //      {
-            //         array_push($stack, "apple",);
-            //      }
-                   
-            //  }
             $stack = array();
             $users = student_mark::where('subject_id' , 5)
             ->pluck('final', 'student_id');
@@ -62,8 +46,12 @@ class StatsController extends Controller
 
 public function students(Request $request){
 
-     
-    $studentName = student::where('id' , $request->id)->value('arabic_name');
+
+    
+    $user_id = auth()->user()->id;
+    $department =  Instructor::where('id',$user_id)->value('department_id');
+   
+    $studentName = student::where('id' , $request->id)->where('department_id' , $department)->value('arabic_name');
                  
     $Semesters = student_mark::where('student_id' , $request->id)->groupBy('semester_id')->get();;
     
@@ -73,8 +61,12 @@ public function students(Request $request){
         $StudentSemesters = semester::where('id' , $semester->semester_id)->get();
     
     }
-    $student_id =$request->id;
- 
+
+    $student_id = student::where('id' , $request->id)->where('department_id' , $department)->value('id');
+  
+
+     if ($student_id != $request->id)
+     abort(404);
 
     return view('instructors.HOD.Statistics.students', compact('studentName' , 'Semesters' , 'student_id'  ));
              

@@ -73,7 +73,7 @@
                          
                          <br> اسم المقرر :       {{ App\Models\subject::getSubjectName($subject_id)}}            </div><br>
                       
-                         <div class="col-xs-4 col-md-4 text-center">وزارة التعليم العالي والبحث العلمي <br>        كـــــــشف   حضور وغياب  لمقـــرار دراســـى <br><br> رقم المقرر:CET360 </div>
+                         <div class="col-xs-4 col-md-4 text-center">وزارة التعليم العالي والبحث العلمي <br>        كـــــــشف   حضور وغياب  لمقـــرار دراســـى <br><br> رقم المقرر:{{ App\Models\subject::getSubjectCode($subject_id)}}  </div>
                          <div class="col-xs-4 col-md-4 text-center"></div><br><br><br>
                       
                          <div class="col-xs-4 col-md-4 text-right">الفصل الدراسى:     {{$semester_name}}  <br>  </div>

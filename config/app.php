@@ -195,11 +195,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
-        Yoeunes\Toastr\ToastrServiceProvider::class,
-
-
-
+       
+     
         
     ],
 

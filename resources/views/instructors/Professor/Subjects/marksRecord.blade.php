@@ -86,8 +86,8 @@
                             </tbody>
                         </table>
                            
-                        <a   style="margin-right : 10px" class="pull-left btn btn-info "href="{{route('marksRecordEdit' , ['subject_id' => $subject_id])}}"><i class="fa fa-bullhorn"></i>        إشعار</a>
-                  
+                        <a   style="margin-right : 10px" class="pull-left btn btn-success "href="{{route('NotifyEach' , ['subject_id' => $subject_id])}}"><i class="fa fa-bullhorn"></i>        إشعار بالدرجات</a>
+    
                        
                         <a   class="pull-left btn btn-primary "href="{{route('marksRecordEdit' , ['subject_id' => $subject_id])}}"><i class="fa fa-edit"></i>        تعديل</a>
                   
