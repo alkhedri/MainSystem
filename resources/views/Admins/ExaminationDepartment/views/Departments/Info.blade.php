@@ -1,4 +1,5 @@
 
+
 @extends('Admins.ExaminationDepartment.layout')
 
 
@@ -142,8 +143,14 @@
 <div class="col-4">
     <div class="col-sm-6 col-lg-3">
         <div class="card">
-            <div class="card-block">
-                <img src="depicon/{{$department->icon}}" class="img-avatar" alt="admin@bootstrapmaster.com" style="width: 300px; height:300px">
+            <div class="card-header">
+               
+                <i class="icon-picture"></i>
+                <strong>شعار القسم</strong> 
+             
+            </div>
+                <div class="card-block" style="display: flex; justify-content : center">
+                <img src="depicon/{{$department->icon}}" class="img-avatar" alt="الشعار" style="width: 300px; height:300px">
             </div>
         </div>
     </div>
@@ -151,3 +158,4 @@
 </div>
 @endforeach
 @endsection
+

@@ -29,14 +29,15 @@ class LoginController extends Controller
    // protected $redirectTo = RouteServiceProvider::HOME;
         public function redirectTo()
         {
-            if ($this->guard()->user()->hasRole('instructor')) {
+            if ($this->guard()->user()->hasRole('instructor')) 
                 return '/inst';
-            }
-            else if ($this->guard()->user()->hasRole('college')) {
+            else if ($this->guard()->user()->hasRole('college')) 
                 return '/test';
-            }   else if ($this->guard()->user()->hasRole('student')) {
+                else if ($this->guard()->user()->hasRole('Admin')) 
+                return '/Dashboard';
+            else if ($this->guard()->user()->hasRole('student')) 
                 return '/studentDashboard';
-            }
+            
 
             return '/test';
         }

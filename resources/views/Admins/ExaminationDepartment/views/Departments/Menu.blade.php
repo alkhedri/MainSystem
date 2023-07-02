@@ -31,7 +31,11 @@
     <div class="col-xs-6 col-lg-3">
         <div class="card">
             <div class="card-block p-a-1 clearfix">
-                <i class="icon-book-open bg-info p-a-1 font-2xl m-r-1 pull-left"></i>
+                <i class=" pull-left">
+                    <img src="depicon/{{$department->icon}}" class="img-avatar" alt="الشعار" style="width: 90px; height:90px">
+               
+
+                </i>
                 <div class="h5 text-info m-b-0 m-t-h">قسم  <span>{{$department->arabic_name  }}</span></div>
                 <div class="text-muted text-uppercase font-weight-bold h6"><strong>{{$department->code  }}</strong></div>
             </div>

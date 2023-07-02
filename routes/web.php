@@ -17,6 +17,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+ Route::group(['middleware' => ['role:Admin']], function() {
+
+    Route::get('/Dashboard', 'App\Http\Controllers\SystemAdmin\mainController@index')->name('AdminDashboard');;
+
+    /// ---- COLLEGES 
+        
+    Route::get('/Colleges', 'App\Http\Controllers\SystemAdmin\mainController@CollegesMenu')->name('CollegesMenu');
+    Route::get('/CollegeInfo', 'App\Http\Controllers\SystemAdmin\mainController@CollegeInfo')->name('CollegeInfo');
+    Route::post('/CollegeUpdate', 'App\Http\Controllers\SystemAdmin\mainController@Update_CollegeInfo')->name('CollegeUpdate');
+    Route::get('/CollegeDean', 'App\Http\Controllers\SystemAdmin\mainController@CollegeDean')->name('CollegeDean');
+    Route::get('/set_CollegeDean', 'App\Http\Controllers\SystemAdmin\mainController@set_CollegeDean')->name('set_CollegeDean');
+    Route::post('/serach_CollegeDean', 'App\Http\Controllers\SystemAdmin\mainController@serach_CollegeDean')->name('serach_CollegeDean');
+    Route::get('/NewCollege', 'App\Http\Controllers\SystemAdmin\mainController@New_College')->name('NewCollege');
+    Route::post('/NewCollegeActionAdd', 'App\Http\Controllers\SystemAdmin\mainController@NewCollegeActionAdd')->name('NewCollegeActionAdd');
+   
+    
+
+    
+ });
+
+
+
+
  ///////////////////////////////////////////////////////////////////
  Route::get('/reg', 'App\Http\Controllers\InstrController@students')->name('registerTest');;
 

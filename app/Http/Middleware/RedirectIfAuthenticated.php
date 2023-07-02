@@ -26,6 +26,8 @@ class RedirectIfAuthenticated
                  return redirect(route('inst'));
                  else if (Auth::guard($guard)->user()->hasRole('college')) 
                 return redirect(route('test'));
+                else if (Auth::guard($guard)->user()->hasRole('Admin')) 
+                return redirect(route('AdminDashboard'));
                   else if (Auth::guard($guard)->user()->hasRole('student'))
                 return redirect(route('studentDashboard'));
             }

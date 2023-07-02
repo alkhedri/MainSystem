@@ -46,12 +46,12 @@ class ExaminationController extends Controller
         
         $College_id = Instructor::where('id',$user_id)->value('college_id');
 
-        $departments = Department::all()->where('college_id', $College_id);
+        $departments = Department::where('college_id', $College_id)->get();
         return view('Admins.ExaminationDepartment.views.Departments.Menu',  compact( 'departments'));
     }
     public function index_DepartmentsInfo(request $req)
     {
-        $departments = Department::all()->where('id' , $req->id);
+        $departments = Department::where('id' , $req->id)->get();
         $staff = Instructor::where('department_id' , $req->id)->get();
 
 
