@@ -45,7 +45,8 @@
          <div class="container-fluid">
             
              <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
-             <a class="navbar-brand" href="#"></a>
+             <img src="/img/{{App\Models\system::getDashlogo()}}" class="img-avatar" alt="الشعار" style="width: 120px; height:50px">
+           
              <ul class="nav navbar-nav hidden-md-down">
                  <li class="nav-item">
                      <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>

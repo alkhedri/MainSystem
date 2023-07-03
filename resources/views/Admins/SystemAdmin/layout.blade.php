@@ -13,12 +13,12 @@
      <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
      <title>لوحة تحكم مدير النظام</title>
      <!-- Icons -->
-     <link href="css/font-awesome.min.css" rel="stylesheet">
-     <link href="css/simple-line-icons.css" rel="stylesheet">
+     <link href="/css/font-awesome.min.css" rel="stylesheet">
+     <link href="/css/simple-line-icons.css" rel="stylesheet">
      <!-- Main styles for this application -->
-     <link href="dest/style.css" rel="stylesheet">
+     <link href="/dest/style.css" rel="stylesheet">
           <!-- CHAT styles for this application -->
-          <link href="css/chat.css" rel="stylesheet">
+          <link href="/css/chat.css" rel="stylesheet">
   
  </head>
  <!-- BODY options, add following classes to body to change options
@@ -34,8 +34,9 @@
  <body class="navbar-fixed sidebar-nav fixed-nav">
      <header class="navbar">
          <div class="container-fluid">
+            
              <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
-             <a class="navbar-brand" href="#"></a>
+             <img src="/img/{{App\Models\system::getDashlogo()}}" class="img-avatar" alt="الشعار" style="width: 120px; height:50px">
              <ul class="nav navbar-nav hidden-md-down">
                  <li class="nav-item">
                      <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>
@@ -58,7 +59,7 @@
              
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                         <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                         <img src="/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
                          <span class="hidden-md-down">{{ Auth::user()->name }}</span>
                      </a>
                      <div class="dropdown-menu dropdown-menu-right">
@@ -93,7 +94,7 @@
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
                           <a class="nav-link" href="{{route('CollegesMenu')}}"><i class="icon-size-fullscreen"></i>عرض الكل</a>
-                          <a class="nav-link" href="{{route('StudentDepartmentPlacement')}}"><i class="icon-close"></i>حذف</a>
+                          <a class="nav-link" href="{{route('CollegeDelete')}}"><i class="icon-close"></i>حذف</a>
                          </li>
                        </ul>
                     </li>
@@ -101,10 +102,8 @@
                               <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-lock"></i>الأدوار و الصلاحيات</a>
                               <ul class="nav-dropdown-items">
                                   <li class="nav-item">
-                                    <a class="nav-link" href="{{route('StudentDropAndAdd')}}"><i class="icon-people"></i>المستخدمين</a>
-                                    <a class="nav-link" href="{{route('StudentDepartmentPlacement')}}"><i class="icon-key"></i>الأدوار</a>
-                                    <a class="nav-link" href="{{route('StudentDepartmentPlacement')}}"><i class="icon-magic-wand"></i>الصلاحيات</a>
-                                   </li>
+                                    <a class="nav-link" href="{{route('SystemUsers')}}"><i class="icon-people"></i>المستخدمين</a>
+                                        </li>
                                  </ul>
                               </li>
 
@@ -112,8 +111,8 @@
                                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-gears "></i>إعدادات النظام</a>
                                 <ul class="nav-dropdown-items">
                                     <li class="nav-item">
-                                      <a class="nav-link" href="{{route('StudentDropAndAdd')}}"><i class="icon-screen-desktop"></i>أيقونات النظام</a>
-                                      <a class="nav-link" href="{{route('StudentDepartmentPlacement')}}"><i class="icon-pencil"></i>النصوص</a>
+                                      <a class="nav-link" href="{{route('SystemIcons')}}"><i class="icon-screen-desktop"></i>أيقونات النظام</a>
+                                      <a class="nav-link" href="{{route('SystemText')}}"><i class="icon-pencil"></i>النصوص</a>
                                      </li>
                                    </ul>
                                 </li>
@@ -424,21 +423,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js">
 </script>
      <!-- Bootstrap and necessary plugins -->
-     <script src="js/libs/jquery.min.js"></script>
-     <script src="js/libs/tether.min.js"></script>
-     <script src="js/libs/bootstrap.min.js"></script>
-     <script src="js/libs/pace.min.js"></script>
+     <script src="/js/libs/jquery.min.js"></script>
+     <script src="/js/libs/tether.min.js"></script>
+     <script src="/js/libs/bootstrap.min.js"></script>
+     <script src="/js/libs/pace.min.js"></script>
  
      <!-- Plugins and scripts required by all views -->
-     <script src="js/libs/Chart.min.js"></script>
+     <script src="/js/libs/Chart.min.js"></script>
  
      <!-- CoreUI main scripts -->
  
-     <script src="js/app.js"></script>
+     <script src="/js/app.js"></script>
  
      <!-- Plugins and scripts required by this views -->
      <!-- Custom scripts required by this view -->
-     <script src="js/views/main.js"></script>
+     <script src="/js/views/main.js"></script>
  
  
  </body>

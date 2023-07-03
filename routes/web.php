@@ -25,16 +25,29 @@ Route::get('/', function () {
     /// ---- COLLEGES 
         
     Route::get('/Colleges', 'App\Http\Controllers\SystemAdmin\mainController@CollegesMenu')->name('CollegesMenu');
-    Route::get('/CollegeInfo', 'App\Http\Controllers\SystemAdmin\mainController@CollegeInfo')->name('CollegeInfo');
+    Route::get('Colleges/CollegeInfo', 'App\Http\Controllers\SystemAdmin\mainController@CollegeInfo')->name('CollegeInfo');
     Route::post('/CollegeUpdate', 'App\Http\Controllers\SystemAdmin\mainController@Update_CollegeInfo')->name('CollegeUpdate');
     Route::get('/CollegeDean', 'App\Http\Controllers\SystemAdmin\mainController@CollegeDean')->name('CollegeDean');
     Route::get('/set_CollegeDean', 'App\Http\Controllers\SystemAdmin\mainController@set_CollegeDean')->name('set_CollegeDean');
     Route::post('/serach_CollegeDean', 'App\Http\Controllers\SystemAdmin\mainController@serach_CollegeDean')->name('serach_CollegeDean');
     Route::get('/NewCollege', 'App\Http\Controllers\SystemAdmin\mainController@New_College')->name('NewCollege');
     Route::post('/NewCollegeActionAdd', 'App\Http\Controllers\SystemAdmin\mainController@NewCollegeActionAdd')->name('NewCollegeActionAdd');
-   
+    Route::get('/CollegeDelete', 'App\Http\Controllers\SystemAdmin\mainController@CollegeDelete')->name('CollegeDelete');
+    Route::delete('/deleteCollegeAction', 'App\Http\Controllers\SystemAdmin\mainController@delete_College')->name('deleteCollegeAction');
     
-
+    /// ---- System Users
+    Route::get('/Users', 'App\Http\Controllers\SystemAdmin\usersController@indexUsers')->name('SystemUsers');
+    Route::post('/Users/serach', 'App\Http\Controllers\SystemAdmin\usersController@serach_Users')->name('serach_Users');
+    Route::get('/Users/RolesAndPermissions', 'App\Http\Controllers\SystemAdmin\usersController@indexRolesAndPermissions')->name('RolesAndPermissions');
+    Route::post('/Users/ChangeRole', 'App\Http\Controllers\SystemAdmin\usersController@ChangeRoleAction')->name('ChangeRole');
+    
+    /// ---- System Settings
+    Route::get('/Settings/Icons', 'App\Http\Controllers\SystemAdmin\settingsController@indexIcons')->name('SystemIcons');
+    Route::post('/Settings/Icons/ChangeMainLogo', 'App\Http\Controllers\SystemAdmin\settingsController@ChangeSystemLogo')->name('UpdateMainLogos');
+    Route::post('/Settings/Icons/ChangeDashBoardLogo', 'App\Http\Controllers\SystemAdmin\settingsController@ChangeDashBoardLogo')->name('UpdateDashBaordLogos');
+    Route::get('/Settings/Text', 'App\Http\Controllers\SystemAdmin\settingsController@indexText')->name('SystemText');
+    Route::post('/Settings/Text/ChangeText', 'App\Http\Controllers\SystemAdmin\settingsController@ChangeText')->name('UpdateText');
+    
     
  });
 

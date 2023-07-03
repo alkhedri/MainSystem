@@ -118,9 +118,8 @@
       
                 <div class="hero-inner" >
                     <div class="mainlogo">
-                        <img src="img\University-Logo.png" alt="" style="width: 200px;height:200px;">
-                    
-                    </div>
+                   
+                           </div>
                     <div class="hero-figure anime-element">
                         <svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
                             <rect width="528" height="396" style="fill:transparent;" />
@@ -138,12 +137,15 @@
                     </div>
                     <div class="hero-copy" style="text-align: center;">
                         <div class="mainlogoDesktop">
-                            <img src="img\University-Logo.png" alt="" style="width: 200px;height:200px;">
-                        
+                     
+                            <img src="img\{{App\Models\system::getMainlogo()}}" class="img-avatar"  alt="" style="width: 200px;height:200px;">
+            
                         </div>
                        
                         <h1 class="hero-title  mt-0 fade-in-text">النظام الإلكتروني</h1>
-                        <h2 style="margin-top: 0px" class="hero-paragraph fade-in-text" fade-in-text>جامعة صبراتة</h2>
+                        <h2 style="margin-top: 0px" class="hero-paragraph fade-in-text" fade-in-text>
+                            {{App\Models\system::getWelcomeText()}}
+                        </h2>
                   
                         <div style="margin-top: 50px"  class="hero-cta fade-in-text"><a class="button button-primary" href="{{route('login')}}">تسجيل الدخول</a>
                             <a class="button" href="#">حول النظام</a></div>

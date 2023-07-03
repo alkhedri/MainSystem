@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Instructor;
+use App\Models\student;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laratrust\Contracts\LaratrustUser;
 use Laratrust\Traits\HasRolesAndPermissions;
@@ -44,4 +45,13 @@ class User extends Authenticatable implements LaratrustUser
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public static function getWho($id){
+        
+        if (Instructor::find($id))
+        return "أستاذ";
+        else if (student::find($id))
+        return "طالب";
+    }
 }

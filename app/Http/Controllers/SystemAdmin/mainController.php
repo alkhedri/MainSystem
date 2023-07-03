@@ -150,4 +150,24 @@ class mainController extends Controller
 
         return \Redirect::route('CollegesMenu');
     }
+
+
+    public function CollegeDelete()
+    {
+
+        $Colleges = college::all();
+ 
+            
+        $title = 'حذف كلية ';
+        $text = "هل أنت متأكد من حذ هذه اللية ؟";
+        confirmDelete($title, $text);
+        return view('Admins.SystemAdmin.views.Colleges._Delete',  compact( 'Colleges'));
+    
+    }
+    public function delete_College(Request $request){
+        college::where('id',$request->id)->delete();
+        toast('تم حذف الكلية بنجاح!','danger');
+        return back();
+        
+    }
 }
