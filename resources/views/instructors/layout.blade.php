@@ -1,10 +1,4 @@
-<!--
- * CoreUI - Open Source Bootstrap Admin Template
- * @version v1.0.0-alpha.2
- * @link http://coreui.io
- * Copyright (c) 2016 creativeLabs Łukasz Holeczek
- * @license MIT
- -->
+ 
 
  <!DOCTYPE html>
  <html lang="LY-fa" dir="rtl">
@@ -13,18 +7,18 @@
      <meta charset="utf-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <meta name="description" content="CoreUI Bootstrap 4 Admin Template">
-     <meta name="author" content="Lukasz Holeczek">
-     <meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
+     <meta name="description" content="Online System">
+     <meta name="author" content="Mohammed Al-khuDari">
+     <meta name="keyword" content="Ali 0ushah">
      <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
      <title>نظام الدراسة و الامتحانات - لوحة تحكم الاستاذ</title>
      <!-- Icons -->
-     <link href="css/font-awesome.min.css" rel="stylesheet">
-     <link href="css/simple-line-icons.css" rel="stylesheet">
+     <link href="/css/font-awesome.min.css" rel="stylesheet">
+     <link href="/css/simple-line-icons.css" rel="stylesheet">
      <!-- Main styles for this application -->
-     <link href="dest/style.css" rel="stylesheet">
+     <link href="/dest/style.css" rel="stylesheet">
           <!-- CHAT styles for this application -->
-          <link href="css/profile.css" rel="stylesheet">
+          <link href="/css/profile.css" rel="stylesheet">
   
           <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@200;300;400;500&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Kodchasan:ital,wght@0,300;1,200;1,300&family=Montserrat:ital,wght@0,200;0,300;0,800;1,200;1,300;1,400;1,500;1,600;1,700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playball&family=Poppins:ital,wght@0,100;0,200;0,300;0,800;0,900;1,100;1,200;1,300&family=Roboto+Condensed:wght@300;400;700&family=Roboto+Mono:ital,wght@0,100;1,100&family=Roboto:ital,wght@0,100;0,300;1,100&family=Rubik+Beastly&family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
  
@@ -36,11 +30,11 @@
  <style>
 
 body{
-      /* background-image: url(img/19276.jpg);
-        background-size: cover;
-     
-        z-index: -999; */
-    }
+
+    background-image:  url('/svg/{{App\Models\system::background()}}') ;
+
+    
+}
 
  
  .animate{
@@ -132,15 +126,6 @@ body{
 }
 
  </style>
- <!-- BODY options, add following classes to body to change options
-         1. 'compact-nav'     	  - Switch sidebar to minified version (width 50px)
-         2. 'sidebar-nav'		  - Navigation on the left
-             2.1. 'sidebar-off-canvas'	- Off-Canvas
-                 2.1.1 'sidebar-off-canvas-push'	- Off-Canvas which move content
-                 2.1.2 'sidebar-off-canvas-with-shadow'	- Add shadow to body elements
-         3. 'fixed-nav'			  - Fixed navigation
-         4. 'navbar-fixed'		  - Fixed navbar
-     -->
  
  <body class="navbar-fixed sidebar-nav fixed-nav content background-image" id="body">
    
@@ -149,22 +134,13 @@ body{
     <header class="navbar">
          <div class="container-fluid">
              <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
-             <img src="/img/{{App\Models\system::getDashlogo()}}" class="img-avatar" alt="الشعار" style="width: 120px; height:50px">
-           
+             <img class="navbar-brand" src="/img/{{App\Models\system::getDashlogo()}}" class=""  alt="الشعار" style="width: 125px; height:58px">
              <ul class="nav navbar-nav hidden-md-down">
                  <li class="nav-item">
                      <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>
                  </li>
  
-                 <!--<li class="nav-item p-x-1">
-                     <a class="nav-link" href="#">داشبورد</a>
-                 </li>
-                 <li class="nav-item p-x-1">
-                     <a class="nav-link" href="#">Users</a>
-                 </li>
-                 <li class="nav-item p-x-1">
-                     <a class="nav-link" href="#">Settings</a>
-                 </li>-->
+ 
              </ul>
              <ul class="nav navbar-nav pull-left hidden-md-down">
                  <li class="nav-item">
@@ -173,7 +149,7 @@ body{
               
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                         <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                         <img src="/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
                          <span class="hidden-md-down">  {{ Auth::user()->name }} </span>
                      </a>
                      <div class="dropdown-menu dropdown-menu-right">
@@ -297,69 +273,7 @@ body{
                      </ul>
                          </li>
              
-                 <!--<li class="nav-item nav-dropdown">
-                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> ثبت کاربر جدید</a>
-                     <ul class="nav-dropdown-items">
-                         <li class="nav-item">
-                             <a class="nav-link" href="components-buttons.html"><i class="icon-puzzle"></i> لیست کاربران</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="components-social-buttons.html"><i class="icon-puzzle"></i> Social Buttons</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="components-cards.html"><i class="icon-puzzle"></i> Cards</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="components-forms.html"><i class="icon-puzzle"></i> Forms</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="components-switches.html"><i class="icon-puzzle"></i> Switches</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="components-tables.html"><i class="icon-puzzle"></i> Tables</a>
-                         </li>
-                     </ul>
-                 </li>-->
- 
-                 <!--<li class="nav-item nav-dropdown">
-                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Icons</a>
-                     <ul class="nav-dropdown-items">
-                         <li class="nav-item">
-                             <a class="nav-link" href="icons-font-awesome.html"><i class="icon-star"></i> Font Awesome</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="icons-simple-line-icons.html"><i class="icon-star"></i> Simple Line Icons</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Widgets <span class="tag tag-info">NEW</span></a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="charts.html"><i class="icon-pie-chart"></i> Charts</a>
-                 </li>-->
-                 <!--<li class="divider"></li>
-                 <li class="nav-title">
-                     Extras
-                 </li>
-                 <li class="nav-item nav-dropdown">
-                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Pages</a>
-                     <ul class="nav-dropdown-items">
-                         <li class="nav-item">
-                             <a class="nav-link" href="pages-login.html" target="_top"><i class="icon-star"></i> Login</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="pages-register.html" target="_top"><i class="icon-star"></i> Register</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="pages-404.html" target="_top"><i class="icon-star"></i> Error 404</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link" href="pages-500.html" target="_top"><i class="icon-star"></i> Error 500</a>
-                         </li>
-                     </ul>
-                 </li>-->
- 
+         
              </ul>
          </nav>
      </div>
@@ -417,10 +331,10 @@ body{
                          <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
                      </div>
                      <div>Meeting with
-                         <strong>Lucas</strong>
+                         <strong>Mohammed</strong>
                      </div>
                      <small class="text-muted m-r-1"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
-                     <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
+                     <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Sabratha, LY</small>
                  </div>
                  <hr class="m-x-1 m-y-0">
                  <div class="callout callout-info m-a-0 p-y-1">
@@ -428,7 +342,7 @@ body{
                          <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
                      </div>
                      <div>Skype with
-                         <strong>Megan</strong>
+                         <strong>Ali</strong>
                      </div>
                      <small class="text-muted m-r-1"><i class="icon-calendar"></i>&nbsp; 4 - 5pm</small>
                      <small class="text-muted"><i class="icon-social-skype"></i>&nbsp; On-line</small>
@@ -444,7 +358,7 @@ body{
                          <strong>deadline</strong>
                      </div>
                      <small class="text-muted m-r-1"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
-                     <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
+                     <small class="text-muted"><i class="icon-home"></i>&nbsp;CET HQ</small>
                      <div class="avatars-stack m-t-h">
                          <div class="avatar avatar-xs">
                              <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
@@ -512,7 +426,7 @@ body{
                          </div>
                      </div>
                      <div>
-                         <small class="text-muted">Lukasz Holeczek</small>
+                         <small class="text-muted">Mohammed Khudari</small>
                          <small class="text-muted pull-left m-t-q">1:52 PM</small>
                      </div>
                      <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
@@ -527,7 +441,7 @@ body{
                          </div>
                      </div>
                      <div>
-                         <small class="text-muted">Lukasz Holeczek</small>
+                         <small class="text-muted">Ali Oushah</small>
                          <small class="text-muted pull-left m-t-q">1:52 PM</small>
                      </div>
                      <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
@@ -542,7 +456,7 @@ body{
                          </div>
                      </div>
                      <div>
-                         <small class="text-muted">Lukasz Holeczek</small>
+                         <small class="text-muted">Jhon Dow</small>
                          <small class="text-muted pull-right m-t-q">1:52 PM</small>
                      </div>
                      <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
@@ -670,21 +584,21 @@ body{
      @yield('page-js-script')
      <script src="sweetalert2.all.min.js"></script>
      <!-- Bootstrap and necessary plugins -->
-     <script src="js/libs/jquery.min.js"></script>
-     <script src="js/libs/tether.min.js"></script>
-     <script src="js/libs/bootstrap.min.js"></script>
-     <script src="js/libs/pace.min.js"></script>
+     <script src="/js/libs/jquery.min.js"></script>
+     <script src="/js/libs/tether.min.js"></script>
+     <script src="/js/libs/bootstrap.min.js"></script>
+     <script src="/js/libs/pace.min.js"></script>
  
      <!-- Plugins and scripts required by all views -->
-     <script src="js/libs/Chart.min.js"></script>
+     <script src="/js/libs/Chart.min.js"></script>
  
      <!-- CoreUI main scripts -->
  
-     <script src="js/app.js"></script>
+     <script src="/js/app.js"></script>
  
      <!-- Plugins and scripts required by this views -->
      <!-- Custom scripts required by this view -->
-     <script src="js/views/main.js"></script>
+     <script src="/js/views/main.js"></script>
  
   
      @yield('modals')

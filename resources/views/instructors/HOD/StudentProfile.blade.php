@@ -24,7 +24,7 @@
         <div class="card" style="">
      
             <div style="display:flex ; justify-content:center; margin-top 100px">
-                <img src="img/avatar.png" alt="" style="width : 140px ; height:140px ; margin-top 100px" class="">
+                <img src="/img/avatar.png" alt="" style="width : 140px ; height:140px ; margin-top 100px" class="">
             </div>
                              
                           

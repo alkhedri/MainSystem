@@ -22,7 +22,7 @@
         <div class="card" style="">
      
             <div style="display:flex ; justify-content:center; margin-top 70px">
-                <img src="img/University-Logo.png" alt="" style="width : 200px ; height:220px ; margin-top 70px" class="">
+                <img src="/img/avatar.png" alt="" style="width : 200px ; height:200px ; margin-top 70px" class="">
             </div>
             @foreach ($profile as $instructor)
                                    
@@ -32,9 +32,14 @@
                <h4>{{$instructor->arabic_name}}</h4>
             </div>
             <div class="centerize"  >
-                <p> التخصص : <strong>{{$instructor->specialization}}</strong></p>
-            </div>
+                <p> التخصص : <strong>{{$instructor->specialization}}</strong></p> <br>
                
+            </div>
+            <div class="centerize"  >
+                <p> الرقم الجامعي : <strong>{{$instructor->job_id}}</strong></p> 
+                
+            </div>
+        
                 <ul class="social mb-0 list-inline mt-3 centerize">
                     <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
                     <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
@@ -87,7 +92,14 @@
          
             <ul class="list-group list-group-flush list-group-item-light">
                 @foreach ($subjects as $subject)
-                    <li  class="list-group-item">{{$loop->index + 1}}  <strong> {{$subject->arabic_name }} </strong>   <strong> <span style="color:green"> [ {{$subject->code }} ] </span> </strong></li>
+                    <li  class="list-group-item">{{$loop->index + 1}} 
+                         <strong> - [ {{$subject->arabic_name }} ]</strong>  
+
+                      
+                            <strong> <span style="color:green"> [ {{$subject->code }} ] </span> 
+                            </strong>
+                       
+                       </li>
                 @endforeach
               
               </ul>

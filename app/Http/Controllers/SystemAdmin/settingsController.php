@@ -90,4 +90,29 @@ class settingsController extends Controller
     }
 
     
+
+    public function indexBackground(){
+       
+        $SystemBackground =  system::where('id' , 1)->value('background');
+    
+        return view('Admins.SystemAdmin.views.Settings._background' , compact('SystemBackground'));
+    }
+
+    public function ChangeBackground(Request $request){
+        
+
+        $request->validate([
+            'background' => 'required',
+
+        ]);
+        system::where('id', 1)
+        ->update([
+            'background' => $request->background,
+         ]);
+
+     
+ 
+      toast('تم تعديل الخلفية بنجاح!','success');
+        return back();
+    }
 }

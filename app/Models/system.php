@@ -21,7 +21,9 @@ class system extends Model
     public static function getWelcomeText(){
         return    system::where('id' , 1)->value('welcomeText');
     }
-
+    public static function background(){
+        return    system::where('id' , 1)->value('background');
+    }
 
     
            

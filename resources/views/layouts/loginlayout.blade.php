@@ -3,7 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="description" content="Online System">
+        <meta name="author" content="Mohammed Al-khuDari">
+        <meta name="keyword" content="Ali 0ushah">
         <title>النظام الإلكتروني - قسم الحاسب الالى</title>
 
         <!-- Fonts -->
@@ -21,14 +23,14 @@
         <style>
               .mainlogoDesktop{
                 margin-top: 10px;
-     margin-left: 100px;
+     margin-left: 120px;
   }
          .mainlogo{
             display: none;
            
                 }
                  button{
-                    width: 390px;
+                    width: 435px;
                 }
             @media only screen and (max-width: 844px) {
   .mainlogoDesktop{
