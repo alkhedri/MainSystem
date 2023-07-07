@@ -20,12 +20,15 @@ class student_mark extends Model
         return $check->count();
     }
 
-    public static function StudentsCount($subject_id){
+    public static function StudentsCount($subject_id , $group_id){
         $user_id = auth()->user()->id;
         $College_id = Instructor::where('id',$user_id)->value('college_id');
         $current_semester = college::where('id', $College_id)->value('current_semester');
  
-        $count = student_mark::where('subject_id' , $subject_id)->where('semester_id' ,$current_semester)->get();
+        $count = student_mark::where('subject_id' , $subject_id)
+        ->where('subject_group' ,$group_id)
+        ->where('semester_id' ,$current_semester)
+        ->get();
 
         return $count->count();
     }
@@ -46,7 +49,10 @@ class student_mark extends Model
     public static function checkIfHasSubject($subject_id){
         $user_id = auth()->user()->id;
       
-        $subject = student_mark::where('subject_id' , $subject_id)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get();
+        $subject = student_mark::where('subject_id' , $subject_id)
+        ->where('student_id' ,$user_id)
+        ->where('semester_id' ,$current_semester)
+        ->get();
       
         if ($subject->count() > 0)
         return 1;
@@ -56,7 +62,23 @@ class student_mark extends Model
         
     }
 
+    public static function checkSubjectGroup($subject_id){
+        $user_id = auth()->user()->id;
+        $College_id = student::where('id',$user_id)->value('college_id');
+        $current_semester = college::where('id', $College_id)->value('current_semester');
 
+        
+        $subject = student_mark::where('subject_id' , 4)
+        ->where('student_id' ,$user_id)
+        ->where('semester_id' ,$current_semester)
+        ->value('subject_group');
+      
+        
+        return $subject;
+       
+
+        
+    }
     
  
 }

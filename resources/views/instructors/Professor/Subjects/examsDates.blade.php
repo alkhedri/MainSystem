@@ -22,10 +22,10 @@
                  
 <div class="row" style="margin-bottom: 20px">
 
-    <a href="{{route('marksRecord' , ['subject_id' => $subject_id])}}" class="btn btn-primary btn-md"><i class="icon-layers"></i>  تعديل الدرجات</a>
-    <a href="{{route('attendanceRecord' , ['subject_id' => $subject_id])}}" class="btn btn-primary btn-md"><i class="icon-people"></i>  سجل الحضور</a>
-    <a href="{{route('examsDate' , ['subject_id' => $subject_id])}}" class="btn btn-success btn-md"><i class="icon-calendar"></i>  مواعيد الامتحانات</a>
-    
+  <a href="{{route('marksRecord' , ['subject_id' => $subject_id , 'group_id' => $group_id])}}" class="btn btn-primary btn-md"><i class="icon-layers"></i>  تعديل الدرجات</a>
+  <a href="{{route('attendanceRecord' , ['subject_id' => $subject_id , 'group_id' => $group_id])}}" class="btn btn-primary btn-md"><i class="icon-people"></i>  سجل الحضور</a>
+  <a href="{{route('examsDate' , ['subject_id' => $subject_id , 'group_id' => $group_id])}}" class="btn btn-success btn-md"><i class="icon-calendar"></i>  مواعيد الامتحانات</a>
+  
     
 
 
@@ -70,7 +70,7 @@
                                     <td> {{$date->due_date}}</td>
                                     <td> {{$date->details}}</td>
                                     <td>  
-                                        <a class="btn btn-danger btn-sm" href="{{route('examsDateDelete' , ['id' => $date->id])}}">حذف</a>
+                                        <a data-confirm-delete="true" class="btn btn-danger btn-sm" href="{{route('examsDateDelete' , ['id' => $date->id , 'group_id' => $group_id])}}">حذف</a>
                                      
                                     </td>
                                 
@@ -80,7 +80,7 @@
                         </table>
                         
                  <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#exampleModal">
     إضافة موعد جديد
   </button>
   
@@ -127,7 +127,7 @@
                         <textarea class="form-control" name="details" rows="3"></textarea>
                       </div>
                   
-               
+                         <input type="hidden" name="group_id" id="" value="{{$group_id}}">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>

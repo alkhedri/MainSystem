@@ -32,7 +32,7 @@
                 <div class="form-group row">
                     <label  class="col-lg-3" for="exampleInputEmail1">اليوم</label>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                    
                     <Select id="input-large" name="Day" class="form-control input-lg" >
                     <option value="0" selected>السبت</option>
@@ -49,23 +49,37 @@
                 <div class="form-group row">
                     <label class="col-lg-3" for="exampleInputEmail1">المحاضرة الاولى</label>
                   
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                    
                         
-                            <Select id="input-large" name="First" class="form-control input-lg" >
-                              <option value="" selected ></option>
+                            <Select id="myop" name="First" class="form-control input-lg" >
+                              <option value="" selected disabled></option>
                                 @foreach ($Department_subjects as $subject)
                                 <option value="{{$subject->id}}">{{ $subject->arabic_name }}</option>
                                 @endforeach
                             </Select>
                      
                         </div>
-                 
-
+                        @if ($groupsCheck == 1)
+                        <div class="col-lg-2">
+                   
+                          <Select id="my-select" name="FirstGroup" class="form-control input-lg" >
+                            <option value="" selected disabled></option>
+                            <option value="0">A</option>
+                            <option value="1">B</option>
+                            <option value="2">C</option>
+                            <option value="3">D</option>
+                            <option value="4">E</option>
+                            <option value="5">F</option>
+                            <option value="6">G</option>
+                               
+                          </Select>
+                      </div>
+@endif
                         <div class="col-lg-3">
                    
                         <Select id="input-large" name="FirstRoom" class="form-control input-lg" >
-                          <option value="" selected ></option>
+                          <option value="" selected disabled >القاعة</option>
                             @foreach ($Department_Rooms as $Rooms)
                             <option value="{{$Rooms->id}}">{{ $Rooms->name }}</option>
                             @endforeach
@@ -78,7 +92,7 @@
                 <div class="form-group row">
                     <label class="col-lg-3" for="exampleInputEmail1">المحاضرة الثانية</label>
                   
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                    
                         
                             <Select id="input-large" name="Second" class="form-control input-lg" >
@@ -89,12 +103,26 @@
                             </Select>
                      
                         </div>
-                 
-
+                        @if ($groupsCheck == 1)
+    <div class="col-lg-2">
+                   
+                        <Select id="input-large" name="SecondGroup" class="form-control input-lg" >
+                          <option value="" selected disabled></option>
+                          <option value="0">A</option>
+                          <option value="1">B</option>
+                          <option value="2">C</option>
+                          <option value="3">D</option>
+                          <option value="4">E</option>
+                          <option value="5">F</option>
+                          <option value="6">G</option>
+                             
+                        </Select>
+                    </div>
+                    @endif
                         <div class="col-lg-3">
                    
                         <Select id="input-large" name="SecondRoom" class="form-control input-lg" >
-                          <option value="" selected ></option>
+                          <option value="" selected  disabled>القاعة</option>
                             @foreach ($Department_Rooms as $Rooms)
                             <option value="{{$Rooms->id}}">{{ $Rooms->name }}</option>
                             @endforeach
@@ -107,7 +135,7 @@
                 <div class="form-group row">
                     <label class="col-lg-3" for="exampleInputEmail1">المحاضرة الثالثة</label>
                   
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                    
                         
                             <Select id="input-large" name="Third" class="form-control input-lg" >
@@ -118,12 +146,26 @@
                             </Select>
                      
                         </div>
-                 
-
+                        @if ($groupsCheck == 1)
+                        <div class="col-lg-2">
+                   
+                          <Select id="input-large" name="ThirdGroup" class="form-control input-lg" >
+                            <option value="" selected disabled></option>
+                            <option value="0">A</option>
+                            <option value="1">B</option>
+                            <option value="2">C</option>
+                            <option value="3">D</option>
+                            <option value="4">E</option>
+                            <option value="5">F</option>
+                            <option value="6">G</option>
+                               
+                          </Select>
+                      </div>
+                      @endif
                         <div class="col-lg-3">
                    
                         <Select id="input-large" name="ThirdRoom" class="form-control input-lg" >
-                          <option value="" selected ></option>
+                          <option value="" selected  disabled>القاعة</option>
                             @foreach ($Department_Rooms as $Rooms)
                             <option value="{{$Rooms->id}}">{{ $Rooms->name }}</option>
                             @endforeach
@@ -140,7 +182,7 @@
                   
                     </div>
                
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                    
                         
                             <Select id="input-large" name="Forth" class="form-control input-lg" >
@@ -151,12 +193,26 @@
                             </Select>
                      
                         </div>
-                 
-
+                        @if ($groupsCheck == 1)
+                        <div class="col-lg-2">
+                   
+                          <Select id="input-large" name="ForthGroup" class="form-control input-lg" >
+                            <option value="" selected disabled></option>
+                            <option value="0">A</option>
+                            <option value="1">B</option>
+                            <option value="2">C</option>
+                            <option value="3">D</option>
+                            <option value="4">E</option>
+                            <option value="5">F</option>
+                            <option value="6">G</option>
+                               
+                          </Select>
+                      </div>
+                      @endif
                         <div class="col-lg-3">
                    
                         <Select id="input-large" name="ForthRoom" class="form-control input-lg" >
-                          <option value="" selected ></option>
+                          <option value="" selected  disabled>القاعة</option>
                             @foreach ($Department_Rooms as $Rooms)
                             <option value="{{$Rooms->id}}">{{ $Rooms->name }}</option>
                             @endforeach
@@ -216,23 +272,45 @@
     
     </tr>
    <tr>
-   <td colspan="2" style="text-align: center">
-    الاولى
+     
+
+     @if ($groupsCheck == 1)
+     <td colspan="3" style="text-align: center">
+    @else
+    <td colspan="2" style="text-align: center">
+    @endif
+ 
+     <strong>الاولى </strong>
     <hr>
     [08:00 - 10:00]
   </td>
-    <td colspan="2" style="text-align: center">
-      الثانية
+  @if ($groupsCheck == 1)
+  <td colspan="3" style="text-align: center">
+ @else
+ <td colspan="2" style="text-align: center">
+ @endif
+ <strong>الثانية </strong>
+      
       <hr>
       [10:00 - 12:00]
     </td>
-    <td colspan="2" style="text-align: center">
-      الثالثة
+    @if ($groupsCheck == 1)
+    <td colspan="3" style="text-align: center">
+   @else
+   <td colspan="2" style="text-align: center">
+   @endif
+   <strong>الثالثة </strong>
+      
       <hr>
     [12:00 - 02:00]
     </td>
-    <td colspan="2" style="text-align: center">
-      الرابعة
+    @if ($groupsCheck == 1)
+    <td colspan="3" style="text-align: center">
+   @else
+   <td colspan="2" style="text-align: center">
+   @endif
+   <strong>الرابعة </strong>
+      
       <hr>
       [02:00 - 04:00]
     </td>
@@ -247,19 +325,27 @@
 
     @foreach ($Saturday as $item)
      <tr>
-        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info"> <strong>{{App\Models\subject::getSubjectName($item->Stp)}}</strong></td>
         <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-    
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getStpGroupByDayID($item->id)}}</td>
+        @endif
 
-        <td class="alert-success">{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Sp)}}</strong></td>
         <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-        
-        <td class="alert-danger">{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-        <td class="alert-danger">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-      
-        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-        <td class="alert-info">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-        
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getSpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Tp)}}</strong></td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getTpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Fp)}}</strong></td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getFpGroupByDayID($item->id)}}</td>
+        @endif
      </tr>
      @endforeach
             
@@ -272,18 +358,26 @@
     @foreach ($Sunday as $item)
      <tr >
  
-        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Stp)}}</strong></td>
         <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-      
-        <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
- 
-        <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-   
-        <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-      
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getStpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Sp)}}</strong></td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getSpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Tp)}}</strong></td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getTpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Fp)}}</strong></td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getFpGroupByDayID($item->id)}}</td>
+        @endif
        
      </tr>
      @endforeach
@@ -296,18 +390,26 @@
       
       @foreach ($Monday as $item)
      <tr >
-        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Stp)}}</strong></td>
         <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-   
-        <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-        
-        <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-      
-        <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-  
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getStpGroupByDayID($item->id)}}</td>
+        @endif
+        <td  class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Sp)}}</strong></td>
+        <td  class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getSpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Tp)}}</strong></td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getTpGroupByDayID($item->id)}}</td>
+        @endif
+        <td  class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Fp)}}</strong></td>
+        <td  class="alert-success">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getFpGroupByDayID($item->id)}}</td>
+        @endif
     </tr>
      @endforeach
     
@@ -320,18 +422,26 @@
       
       @foreach ($Tuesday as $item)
      <tr >
-        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Stp)}}</strong></td>
         <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-      
-        <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-         
-        <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-     
-        <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-     
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getStpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Sp)}}</strong></td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getSpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Tp)}}</strong></td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getTpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Fp)}}</strong></td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getFpGroupByDayID($item->id)}}</td>
+        @endif
      </tr>
      @endforeach
     
@@ -343,18 +453,26 @@
       
       @foreach ($Wedensday as $item)
      <tr>
-        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Stp)}}</strong></td>
         <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-      
-        <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
- 
-        <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-      
-        <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-       
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getStpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Sp)}}</strong></td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getSpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Tp)}}</strong></td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getTpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Fp)}}</strong></td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getFpGroupByDayID($item->id)}}</td>
+        @endif
      </tr>
      @endforeach
     
@@ -366,18 +484,26 @@
      
      @foreach ($Thursday as $item)
      <tr >
-        <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Stp)}}</strong></td>
         <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-       
-        <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-    
-        <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-   
-        <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-        <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-        
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getStpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Sp)}}</strong></td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getSpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-info"><strong>{{App\Models\subject::getSubjectName($item->Tp)}}</strong></td>
+        <td class="alert-info">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-info">{{App\Models\TimeTable_Group::getTpGroupByDayID($item->id)}}</td>
+        @endif
+        <td class="alert-success"><strong>{{App\Models\subject::getSubjectName($item->Fp)}}</strong></td>
+        <td class="alert-success">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+        @if ($groupsCheck == 1)
+        <td class="alert-success">{{App\Models\TimeTable_Group::getFpGroupByDayID($item->id)}}</td>
+        @endif
      </tr>
      @endforeach
       
@@ -396,7 +522,9 @@
 
 
 @section('page-js-script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
@@ -440,6 +568,24 @@ function CreatePDFfromHTML() {
         $(".html-content").hide();
     });
 }
+ 
+ 
+ 
+ 
+  
+
+        
+      
+  
+
+
+
+       
+
 </script>
  
+  
+  
+  
+   
 @endsection

@@ -45,7 +45,7 @@
                     <div class="form-group row">
                         <div class="col-md-10">
                             <div class="input-group">
-                                <select id="select" name="subject_id" class="form-control input-sm" size="1">
+                                <select id="myop" name="subject_id" class="form-control input-sm" size="1">
                                     <option value="0" disabled selected>قم بإختيار مقرر</option>
                                     @foreach ($Department_subjects as $subject)
                                     <option value="{{$subject->id}}">{{$subject->arabic_name}}</option>
@@ -55,8 +55,20 @@
                                 </select>
                              </div>
                         </div>
-    
-                    
+                    </div>
+                        <div class="form-group row">
+                            
+                                <div class="input-group">
+                             <label class="col-md-3" for="">المجموعة : </label> 
+                                <div class="col-md-3">
+                                    <select id="my-select" name="subject_group" class="form-control input-sm" size="1">
+                             
+                                         
+                                      
+                                   
+                                    </select>
+                                 </div>
+                            </div>
 
                           
                  
@@ -162,5 +174,57 @@
 
  
  
+
+@endsection
+
+@section('js-scripts')
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script>
+ 
+ 
+
+
+
+$('#myop').change(function(){
+    var id = document.getElementById("myop").value;
+   var i = 0;
+  
+    $.ajax({ 
+         url: "{{ route('getGroups') }}",
+         data: {"subject_id":id},
+         type: 'get',
+         success: function(result){
+             
+               
+              $("#my-select").empty();
+              var xY = 'A'
+         
+              for(x = 0 ; x < result.data ; x++){
+             
+        var option = document.createElement("option");
+        option.text = xY;
+        option.value = x;
+        var select = document.getElementById("my-select");
+        select.appendChild(option);
+        xY = String.fromCharCode(xY.charCodeAt() + 1)
+       }
+
+
+         }
+        });
+
+        
+      
+    
+
+})
+
+
+
+
+       
+
+</script>
+
 
 @endsection

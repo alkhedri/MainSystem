@@ -98,81 +98,100 @@
                                             <input type="text" id="input-normal" name="english_name" class="form-control" value="{{$subject->english_name}}">
                                         </div>
                                     </div>
+
+
                                     <div class="form-group row">
-                                        <label class="col-lg-4 form-control-label" for="input-large">رمز المقرر</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="code" class="form-control input-lg" value="{{$subject->code}}">
-                                        </div>
+                                        <label class="col-lg-4 form-control-label" for="input-large">
+                                              رمز المقرر - عدد الوحدات</label>
+                                        <div class="col-lg-3">
+                                            <strong>
+                                                <input type="text" id="input-large" name="code" class="form-control input-lg" value="{{$subject->code}}">
+                                            </strong>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-4 form-control-label" for="input-large">عدد الوحدات</label>
-                                        <div class="col-lg-6">
-                                                
-                                       <Select id="input-large" name="units" class="form-control input-lg" placeholder=".input-lg">
-                                        <option value="{{$subject->units}}" selected  hidden>{{$subject->units}}</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                       </Select> </div>
+                                  
+                                        <div class="col-lg-3">
+                                            <strong>
+                                                <Select id="input-large" name="units" class="form-control input-lg" placeholder=".input-lg">
+                                                    <option value="{{$subject->units}}" selected  hidden>{{$subject->units}}</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                   </Select>      </strong>
                                     </div>
+                                </div> 
                                     <div class="form-group row">
-                                        <label class="col-lg-4 form-control-label" for="input-large">درجة الأعمال</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="work" class="form-control input-lg" value="{{$subject->work_mark}}">
-                                        </div>
+                                        <label class="col-lg-4 form-control-label input-lg" for="input-large">درجة : الأعمال | الإمتحان</label>
+                                        <div class="col-lg-3">
+                                            <strong>
+                                                <input type="text" id="input-large" name="work" class="form-control input-lg" value="{{$subject->work_mark}}">
+                                            </strong>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-4 form-control-label" for="input-large">درجة الإمتحان </label>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="input-large" name="final" class="form-control input-lg" value="{{$subject->final_mark}}">
-                                        </div>
+                                  
+                                        <div class="col-lg-3">
+                                            <strong>
+                                                <input type="text" id="input-large" name="final" class="form-control input-lg" value="{{$subject->final_mark}}">
+                                            </strong>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-4 form-control-label" for="input-large">ساعات النظري</label>
-                                        <div class="col-lg-6">
-                                            
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label class="col-lg-4 form-control-label" for="input-large">ساعات : العملي | النظري</label>
+                                    <div class="col-lg-3">
+                                        <strong>
                                             <Select id="input-large" name="course_hours" class="form-control input-lg" placeholder=".input-lg">
                                                 <option value="{{$subject->course_hours}}" selected  hidden>{{$subject->course_hours}}</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
                                                 <option value="4">4</option>
-                                               </Select>  </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-lg-4 form-control-label" for="input-large">ساعات العملي</label>
-                                        <div class="col-lg-6"> 
-                                             
+                                               </Select>        </strong>
+                                </div>
+                              
+                                    <div class="col-lg-3">
+                                        <strong>
                                             <Select id="input-large" name="work_hours" class="form-control input-lg" placeholder=".input-lg">
                                                 <option value="{{$subject->work_hours}}" selected  hidden>{{$subject->work_hours}}</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
                                                 <option value="4">4</option>
-                                               </Select>  
-                                            </div>
-                                    </div>
+                                               </Select>         </strong>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-4 form-control-label" for="input-large">   المجموعات</label>
+                                <div class="col-lg-6"> 
+                                    <Select id="input-large" name="groups" class="form-control input-lg" placeholder=".input-lg">
+                                        <option value="{{$subject->groups}}" selected  hidden>{{$subject->groups}}</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                       </Select>         </strong>
+                                </div>
+                            </div>
+                               
+ 
+                                @foreach (App\Models\subject_group::getSubjectGroups($subject->id) as $item)
+                                    
+                               
+
                                     <div class="form-group row">
                                         <label class="col-lg-4 form-control-label" for="input-large">أستاذ المقرر</label>
                                         <div class="col-lg-6"> 
-                                            <Select id="input-large" name="professor_id" class="form-control" value="">
-                                                <option value="{{$subject->proffesor_id}}" selected hidden> {{ App\Models\instructor::getInstructorsName($subject->proffesor_id) }}</option>
-                                              
+                                            <Select id="input-large" name="instructors[]" class="form-control" value="">
+                                                <option value="{{$item->instructor_id}}" selected hidden> {{ App\Models\instructor::getInstructorsName($item->instructor_id) }}</option>
                                              @foreach ($instructors as $instructor)
-                                             
                                              <option value="{{$instructor->id}}"> {{ App\Models\instructor::getInstructorsName($instructor->id)}}</option>
-                                       
                                              @endforeach
-                                              
-                                           
                                                </Select>  
-                                         
                                         </div>
 
-                                          <a class=" btn btn-primary btn-sm" href="{{route('SubjectsProfessor', ['id' => $subject->id])}}">+</a>
+                                          <a class=" btn btn-primary btn-sm" href="{{route('SubjectsProfessor', ['id' => $subject->id , 'group_id' => $item->id])}}">+</a>
                                     </div>
+                                    @endforeach
                                     <div class="form-actions" dir="ltr">
                                         <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
  

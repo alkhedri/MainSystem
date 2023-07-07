@@ -169,16 +169,23 @@ class StudentsController extends Controller
     {
         $user_id = auth()->user()->id;
         $college_id =  Instructor::where('id',$user_id)->value('college_id');
+
         $current_semester =  college::where('id',$college_id)->value('current_semester');
     
      
        
-        $subject_id =  subject::where('id',$request->subject_id)->where('proffesor_id',$user_id)->value('id');
-        $studentsCount =  student_mark::where('subject_id',$subject_id)->where('semester_id',$current_semester)->get()->count();
-       
+        $subject_id =  subject::where('id',$request->subject_id)
+        ->value('id');
 
-         
-        return view('instructors.Professor.notifyAll', compact('subject_id' , 'studentsCount'));
+        $studentsCount =  student_mark::where('subject_id',$subject_id)
+        ->where('subject_group',$request->group_id)
+        ->where('semester_id',$current_semester)
+        ->get()
+        ->count();
+       
+        
+        $group_id = $request->group_id;
+        return view('instructors.Professor.notifyAll', compact('subject_id' , 'studentsCount' , 'group_id'));
 
     }
     public function NotofyAllAction(Request $request)
@@ -195,7 +202,10 @@ class StudentsController extends Controller
         $college_id =  Instructor::where('id',$user_id)->value('college_id');
         $current_semester =  college::where('id',$college_id)->value('current_semester');
     
-        $students =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester)->get();
+        $students =  student_mark::where('subject_id',$request->subject_id)
+        ->where('semester_id',$current_semester)
+        ->where('subject_group',$request->group_id)
+        ->get();
     
         foreach($students as $student){
                             Notification::insert(

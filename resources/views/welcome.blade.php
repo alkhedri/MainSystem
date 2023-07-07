@@ -163,8 +163,11 @@ button:active {
                     </div>
                     <div class="hero-copy" style="text-align: center;">
                         <div class="mainlogoDesktop">
-                     
-                            <img src="img\{{App\Models\system::getMainlogo()}}" class="img-avatar"  alt="" style="width: 200px;height:200px;">
+                          <?php
+                   
+                   $tmp = \App\Models\system::getMainlogo();
+                ?>
+                            <img src="  {{ Storage::url("/img/$tmp") }}" class="img-avatar"  alt="" style="width: 200px;height:200px;">
             
                         </div>
                        

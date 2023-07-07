@@ -309,7 +309,7 @@ Route::group(['middleware' => ['role:instructor']], function() {
  
  Route::get('/examsDate', 'App\Http\Controllers\Instructors\SubjectsController@examsDate')->name('examsDate');;
  Route::post('/examsDate/examsDateInsert', 'App\Http\Controllers\Instructors\SubjectsController@examsDateAction_Insert')->name('examsDateInsert');;
- Route::get('/examsDate/examsDateDelete', 'App\Http\Controllers\Instructors\SubjectsController@examsDateAction_Delete')->name('examsDateDelete');;
+ Route::delete('/examsDate/examsDateDelete', 'App\Http\Controllers\Instructors\SubjectsController@examsDateAction_Delete')->name('examsDateDelete');;
  
  
  Route::get('/Model2Template', 'App\Http\Controllers\modelsController@Model2TemplatePrint')->name('Model2Template');;
@@ -364,7 +364,10 @@ Route::group(['middleware' => ['role:instructor']], function() {
     Route::group(['middleware' => ['role:student', 'permission:subjects-delete']], function() {
     Route::get('/EditSubjects', 'App\Http\Controllers\Students\StudentController@show_EditSubjects')->name('EditSubjects');
     Route::post('/AddSubject', 'App\Http\Controllers\Students\StudentController@AddSubject')->name('AddSubject');
-    Route::delete('/DropSubject', 'App\Http\Controllers\Students\StudentController@DropSubject')->name('DropSubject');
+    Route::DELETE('/DropSubject', 'App\Http\Controllers\Students\StudentController@DropSubject')->name('DropSubject');
+
+    Route::get('/getGroups', 'App\Http\Controllers\Students\StudentController@getGroups')->name('getGroups');
+
 });
     
 Route::group(['middleware' => ['role:student', 'permission:placements']], function() {

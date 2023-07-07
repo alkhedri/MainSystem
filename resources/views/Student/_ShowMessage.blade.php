@@ -19,12 +19,12 @@
 @section('content')
 @foreach ($message as $item)
 <div class="alert alert-primary" role="alert">
-    <h4 class="alert-heading">{{$item->title}}</h4>
-    <p>المرسل : {{ App\Models\Instructor::getInstructorsName($item->sender_id)}}</p>
-    <p>التاريخ : {{$item->date}}</p>
+    <h4 class="alert-heading mb-0"><i class="fa fa-hashtag"></i>      العنوان : {{$item->title}}</h4>
+    <p ><i class="icon-user"></i>        المرسل : {{ App\Models\Instructor::getInstructorsName($item->sender_id)}}</p>
+    <p><i class="fa fa-calendar"></i>        التاريخ : {{$item->date}}</p>
     <hr>
-    <h2>الرسالة</h2>
-    <h4 class="mb-0">{{$item->message}}</h4>
+    <h3><i class="icon-envelope-letter"></i>        الرسالة</h3>
+    <h4 class="m-3">{{$item->message}}</h4>
   </div>
 @endforeach
 

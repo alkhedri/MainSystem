@@ -18,7 +18,7 @@ use App\Models\timeTable;
 
 use App\Models\ExamsTable;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class InstrController extends Controller
 {
 
@@ -169,7 +169,7 @@ class InstrController extends Controller
         
          if ($subject_id != $request->id)
          abort(404);
-
+       
         return view('instructors.DEC.SubjectDetails' , compact('subjects' , 'requirements' ,'subject_Code' , 'instructors' , 'Department_subjects'));
     }
     
@@ -183,11 +183,11 @@ class InstrController extends Controller
         $Department_subjects =  subject::all()->where('department_id',$department_id);
         $subject_Code =  subject::where('id',$request->id)->value('code');
       
-        $requirements =  subject_requirement::all()->where('subject',$request->id);
+        
         $instructors =  instructor::all();
       
-
-       return view('instructors.DEC._CollegeProfs' , compact('subjects' , 'requirements' ,'subject_Code' , 'instructors' , 'Department_subjects'));
+        $group_id = $request->group_id;
+       return view('instructors.DEC._CollegeProfs' , compact('subjects' , 'group_id' ,'subject_Code' , 'instructors' , 'Department_subjects'));
     }
 
     public function index_NewSubject()
@@ -236,6 +236,14 @@ class InstrController extends Controller
 
 
         $Department_subjects = subject::where('department_id',$department_id)->get();
+
+
+        $groupsCheck = 0;
+        foreach($Department_subjects as $subject)
+                if ($subject->groups > 1)
+                    $groupsCheck = 1;
+
+
         $Department_Rooms = room::where('department_id',$department_id)->get();
     $departmentName = department::where('id',$department_id)->value('arabic_name');
         
@@ -248,7 +256,8 @@ class InstrController extends Controller
             'Thursday',
             'Department_subjects',
             'Department_Rooms',
-            'departmentName'
+            'departmentName',
+            'groupsCheck'
         ));   
     }
      
@@ -321,8 +330,14 @@ class InstrController extends Controller
     {
         $user_id = auth()->user()->id;
  
-        $subjects =  subject::where('proffesor_id',$user_id)->get();
-   
+     
+
+        $subjects = DB::table('subjects')
+        ->join('subject_groups', 'subjects.id', '=', 'subject_groups.subject_id')
+        ->select('subjects.*' , 'subject_groups.group')
+        ->where('subject_groups.instructor_id' , $user_id)
+        ->get();
+      
            
         return view('instructors.Professor.SubjectsList' , compact('subjects'));
     }

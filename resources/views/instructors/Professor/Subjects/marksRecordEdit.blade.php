@@ -9,7 +9,7 @@
     <li class="breadcrumb-item">عضو هيئة التدريس</li>
     <li class="breadcrumb-item">قائمة المقررات</a></li>
 
-        <li class="breadcrumb-item"><a href="{{route('marksRecord' , ['subject_id' => $subject_id])}}">
+        <li class="breadcrumb-item"><a href="{{route('marksRecord' , ['subject_id' => $subject_id , 'group_id' =>$group_id])}}">
             {{App\Models\subject::getSubjectName($subject_id) }}
         
         </a></li>
@@ -64,9 +64,10 @@
 <td   ><input style="width: 100px" type="text" class="form-control input-md     font-weight-bold  " name="work[]" value="{{$mark->work}}" style="text-align: center" ></td>
 <td    ><input style="width: 100px" type="text"  class="form-control input-md    font-weight-bold" name="final[]" value="{{$mark->final}}" style="text-align: center"></td>
 <input type="hidden" name="ids[]" value="{{$mark->id}}">
+<input type="hidden" name="group_id" value="{{$group_id}}">
 
-                                
-               
+                        
+
                            
                                 </tr>
                                 @endforeach

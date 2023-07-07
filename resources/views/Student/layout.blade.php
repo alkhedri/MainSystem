@@ -30,6 +30,15 @@
 
 
         }
+        @media only screen and (max-width: 600px) {
+        .mobile {
+       
+             width: 100%;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+        }
+    }
     </style>
  </head>
  
@@ -40,7 +49,16 @@
          <div class="container-fluid">
             
              <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
-             <img class="navbar-brand" src="/img/{{App\Models\system::getDashlogo()}}" class=""  alt="الشعار" style="width: 125px; height:58px">
+             <div class="mobile">
+                <?php
+                   
+                $tmp = \App\Models\system::getDashlogo();
+                ?>
+           
+               <img class="navbar-brand" src="  {{ Storage::url("/img/$tmp") }}" class=""  alt="الشعار" 
+                style="width: 7.813em; height:3.225em ;">
+             </div>
+            
              <ul class="nav navbar-nav hidden-md-down">
                  <li class="nav-item">
                      <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>
@@ -253,9 +271,9 @@
       
      </footer>
 
-
-     <!-- Bootstrap and necessary plugins -->
     
+     <!-- Bootstrap and necessary plugins -->
+      @yield('js-scripts')
      <script src="js/libs/jquery.min.js"></script>
      <script src="js/libs/tether.min.js"></script>
      <script src="js/libs/bootstrap.min.js"></script>

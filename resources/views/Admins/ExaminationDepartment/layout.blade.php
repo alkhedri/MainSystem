@@ -36,7 +36,13 @@
      <header class="navbar">
          <div class="container-fluid">
              <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
-             <img class="navbar-brand" src="/img/{{App\Models\system::getDashlogo()}}" class=""  alt="الشعار" style="width: 125px; height:58px">
+
+             <?php
+                   
+             $tmp = \App\Models\system::getDashlogo();
+             ?>
+           
+             <img class="navbar-brand" src="{{ Storage::url("/img/$tmp") }}" class=""  alt="الشعار" style="width: 125px; height:58px">
              <ul class="nav navbar-nav hidden-md-down">
                  <li class="nav-item">
                      <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>

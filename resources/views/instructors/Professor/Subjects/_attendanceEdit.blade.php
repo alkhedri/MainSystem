@@ -11,7 +11,7 @@
     <li class="breadcrumb-item">عضو هيئة التدريس</li>
     <li class="breadcrumb-item">قائمة المقررات</a>
         <li class="breadcrumb-item">  
-            <a href="{{route("marksRecord" , ['subject_id' => $subject_id])}}"> {{App\Models\subject::getSubjectName($subject_id) }}</a>
+            <a href="{{route("marksRecord" , ['subject_id' => $subject_id , 'group_id' =>$group_id])}}"> {{App\Models\subject::getSubjectName($subject_id) }}</a>
         </li>
 
             <li class="breadcrumb-item"> <a href="{{route('attendanceRecord' , ['subject_id' => $subject_id])}}">سجل الحضور</a> </li>

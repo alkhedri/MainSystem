@@ -116,123 +116,11 @@
           </div>
       </div>
    
-      <div class="hidden-sm-up">
-        <div style="overflow-x:auto;">
-            <table>
-                <tr>
-                    <th rowspan="2"> اليوم / المحاضرة </th>
-                             
-                              
-                </tr>
-               <tr>
-               <th colspan="2" style="text-align: center" > 
-                الاولىssss
-               <br>
-               [10:30 - 8:30]
-            </th>
-                <th colspan="2" style="text-align: center">
-                    الثانية
-                    <br>
-                    [12:30 - 10:30]
-                </th>
-                <th colspan="2" style="text-align: center">
-                    الثالثة
-                    <br>
-                    [02:30 - 12:30]
-                </th>
-                <th colspan="2" style="text-align: center">
-                    الرابعة
-                    <br>
-                    [04:30 - 02:30]
-                </th>
-               
-               </tr>
-                  <tr style="">
-                      
-                    <th rowspan="1"  style="text-align: center;vertical-align:middle"  >السبت</th>
-                  
-                    
-                    <td> </td>
-                    <td>8:30</td>
-         
-              
-                    <td> </td>
-                     <td>10:00</td>
-              
-              
-                     <td> </td>
-                      <td>قاعه</td>
-          
-              
-                      <td> </td>
-                        <td>قاعه</td>
-                     
-                     
-                  </tr>
-                  
-               
-                   <tr>
-                    <th rowspan="1" style="text-align: center;vertical-align:middle">الاحد</th>
-                    <td>برمجة حاسوب</td>
-                    <td>8:30</td>
-         
-              
-                    <td>هيكلة بيانات</td>
-                     <td>10:00</td>
-              
-              
-                      <td>مقرر</td>
-                      <td>قاعه</td>
-          
-              
-                        <td>مقرر</td>
-                        <td>قاعه</td>
-                  
-                  </tr>
-               
-                        <tr>
-                    <th rowspan="1" style="text-align: center;vertical-align:middle">الاثنين</th>
-                    <td>برمجة حاسوب</td>
-                    <td>8:30</td>
-                  
-              
-                    <td>هيكلة بيانات</td>
-                     <td>10:00</td>
-                   
-              
-                      <td>مقرر</td>
-                      <td>قاعه</td>
-                      
-                       
-                        <td>مقرر</td>
-                        <td>قاعه</td>
-              
-                  </tr>
-                  <tr>
-                      <th rowspan="1" style="text-align: center;vertical-align:middle">الثلاثاء</th>
-                      <td>برمجة حاسوب</td>
-                      <td>8:30</td>
-             
-                
-                      <td>هيكلة بيانات</td>
-                       <td>10:00</td>
-                   
-                
-                        <td>مقرر</td>
-                        <td>قاعه</td>
-                       
-                         
-                          <td>مقرر</td>
-                          <td>قاعه</td>
-                           
-                    </tr>
-            </table>
-          </div>
-      </div>
+
 
     
-        
-      <table class="table  table-bordered hidden-sm-down" style="width:100%" id="table"     >
+      <div style="overflow-x:auto;">
+      <table class="table  table-bordered" style="width:100%" id="table"     >
         <tr>
             <th rowspan="2" style="text-align: center">
               المحاضرة
@@ -242,22 +130,38 @@
           
           </tr>
          <tr>
+          @if ($groupsCheck == 1)
+          <td colspan="3" style="text-align: center">
+         @else
          <td colspan="2" style="text-align: center">
+         @endif
           الاولى
           <hr>
           [08:00 - 10:00]
         </td>
-          <td colspan="2" style="text-align: center">
+        @if ($groupsCheck == 1)
+        <td colspan="3" style="text-align: center">
+       @else
+       <td colspan="2" style="text-align: center">
+       @endif
             الثانية
             <hr>
             [10:00 - 12:00]
           </td>
-          <td colspan="2" style="text-align: center">
+          @if ($groupsCheck == 1)
+     <td colspan="3" style="text-align: center">
+    @else
+    <td colspan="2" style="text-align: center">
+    @endif
             الثالثة
             <hr>
           [12:00 - 02:00]
           </td>
-          <td colspan="2" style="text-align: center">
+        @if ($groupsCheck == 1)
+     <td colspan="3" style="text-align: center">
+    @else
+    <td colspan="2" style="text-align: center">
+    @endif
             الرابعة
             <hr>
             [02:00 - 04:00]
@@ -277,33 +181,85 @@
               <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
               @if($item->Stp == NULL)
               <td class="alert-info"> </td>
+              <td class="alert-info"> </td>
               @else
               <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+              @if ($groupsCheck == 1 )
+
+              <td class="alert-info">
+                 
+                @if ( (App\Models\student_mark::checkSubjectGroup($item->Stp)) ==  (App\Models\TimeTable_Group::getStpGroupByDayID($item->id)))
+                {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getStpGroupByDayID($item->id))  }}
+                @else
+                    <span> not </span>
+                @endif
+                   </td>
               @endif
-             
+              @endif
+      
+          
+            
+              
       
               <td class="alert-success">{{App\Models\subject::getSubjectName($item->Sp)}}</td>
               @if($item->Sp == NULL)
               <td class="alert-success"> </td>
+              <td class="alert-success"> </td>
               @else
               <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-              @endif
+              @if ($groupsCheck == 1)
+              <td class="alert-success">
 
+                @if ( (App\Models\student_mark::checkSubjectGroup($item->Sp)) ==  (App\Models\TimeTable_Group::getSpGroupByDayID($item->id)))
+                {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getSpGroupByDayID($item->id))  }}
+                @else
+                    <span> not </span>
+                @endif
+
+             
+           
+              </td>
+              @endif
+              @endif
+            
 
               <td class="alert-danger">{{App\Models\subject::getSubjectName($item->Tp)}}</td>
               @if($item->Tp == NULL)
               <td class="alert-danger"> </td>
+              <td class="alert-danger"> </td>
               @else
               <td class="alert-danger">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-              @endif
+              @if ($groupsCheck == 1)
+              <td class="alert-danger"> 
+                @if ( (App\Models\student_mark::checkSubjectGroup($item->Tp)) ==  (App\Models\TimeTable_Group::getTpGroupByDayID($item->id)))
+                {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getTpGroupByDayID($item->id))  }}
+                @else
+                    <span> not </span>
+                @endif
 
+              </td>
+              @endif
+              @endif
+             
 
               <td class="alert-info">{{App\Models\subject::getSubjectName($item->Fp)}}</td>
               @if($item->Fp == NULL)
               <td class="alert-info"> </td>
+              <td class="alert-info"> </td>
               @else
               <td class="alert-info">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+              @if ($groupsCheck == 1)
+              <td class="alert-info">
+                @if ( (App\Models\student_mark::checkSubjectGroup($item->Fp)) ==  (App\Models\TimeTable_Group::getFpGroupByDayID($item->id)))
+                {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getFpGroupByDayID($item->id))  }}
+                @else
+                    <span> not </span>
+                @endif
+
+              </td>
               @endif
+              @endif
+            
            </tr>
            @endforeach
                   
@@ -316,18 +272,77 @@
           @foreach ($Sunday as $item)
            <tr >
        
-              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+            @if($item->Stp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info">
+              
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Stp)) ==  (App\Models\TimeTable_Group::getStpGroupByDayID($item->id)))
+                {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getStpGroupByDayID($item->id))  }}
+                @else
+                    <span> not </span>
+                @endif
             
-              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-       
-              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-         
-              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
             
+            </td>
+            @endif
+            @endif
+    
+    
+            <td class="alert-success">{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+            @if($item->Sp == NULL)
+            <td class="alert-success"> </td>
+            <td class="alert-success"> </td>
+            @else
+            <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-success"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Sp)) ==  (App\Models\TimeTable_Group::getSpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getSpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif  @endif
+            @endif
+          
+
+            <td class="alert-danger">{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+            @if($item->Tp == NULL)
+            <td class="alert-danger"> </td>
+            <td class="alert-danger"> </td>
+            @else
+            <td class="alert-danger">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-danger"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Tp)) ==  (App\Models\TimeTable_Group::getTpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getTpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>  @endif
+            @endif
+           
+
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+            @if($item->Fp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Fp)) ==  (App\Models\TimeTable_Group::getFpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getFpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>    @endif
+            @endif
              
            </tr>
            @endforeach
@@ -340,18 +355,75 @@
             
             @foreach ($Monday as $item)
            <tr >
-              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-         
-              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-              
-              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-            
-              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-        
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+            @if($item->Stp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info">
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Stp)) ==  (App\Models\TimeTable_Group::getStpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getStpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>
+            @endif
+            @endif
+    
+    
+            <td class="alert-success">{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+            @if($item->Sp == NULL)
+            <td class="alert-success"> </td>
+            <td class="alert-success"> </td>
+            @else
+            <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-success"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Sp)) ==  (App\Models\TimeTable_Group::getSpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getSpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif @endif
+            @endif
+          
+
+            <td class="alert-danger">{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+            @if($item->Tp == NULL)
+            <td class="alert-danger"> </td>
+            <td class="alert-danger"> </td>
+            @else
+            <td class="alert-danger">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-danger"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Tp)) ==  (App\Models\TimeTable_Group::getTpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getTpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>  @endif
+            @endif
+           
+
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+            @if($item->Fp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Fp)) ==  (App\Models\TimeTable_Group::getFpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getFpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>    @endif
+            @endif
           </tr>
            @endforeach
           
@@ -364,18 +436,74 @@
             
             @foreach ($Tuesday as $item)
            <tr >
-              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-            
-              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-               
-              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+            @if($item->Stp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Stp)) ==  (App\Models\TimeTable_Group::getStpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getStpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+            </td>
+            @endif
+            @endif
+    
+    
+            <td class="alert-success">{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+            @if($item->Sp == NULL)
+            <td class="alert-success"> </td>
+            <td class="alert-success"> </td>
+            @else
+            <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-success"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Sp)) ==  (App\Models\TimeTable_Group::getSpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getSpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif @endif
+            @endif
+          
+
+            <td class="alert-danger">{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+            @if($item->Tp == NULL)
+            <td class="alert-danger"> </td>
+            <td class="alert-danger"> </td>
+            @else
+            <td class="alert-danger">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-danger"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Tp)) ==  (App\Models\TimeTable_Group::getTpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getTpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>  @endif
+            @endif
            
-              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-           
+
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+            @if($item->Fp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Fp)) ==  (App\Models\TimeTable_Group::getFpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getFpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>   @endif
+            @endif
            </tr>
            @endforeach
           
@@ -387,17 +515,73 @@
             
             @foreach ($Wedensday as $item)
            <tr>
-              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-            
-              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
-       
-              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-            
-              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+            @if($item->Stp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Stp)) ==  (App\Models\TimeTable_Group::getStpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getStpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+            </td>   @endif
+            @endif
+    
+    
+            <td class="alert-success">{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+            @if($item->Sp == NULL)
+            <td class="alert-success"> </td>
+            <td class="alert-success"> </td>
+            @else
+            <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-success"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Sp)) ==  (App\Models\TimeTable_Group::getSpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getSpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif   @endif
+            @endif
+          
+
+            <td class="alert-danger">{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+            @if($item->Tp == NULL)
+            <td class="alert-danger"> </td>
+            <td class="alert-danger"> </td>
+            @else
+            <td class="alert-danger">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-danger"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Tp)) ==  (App\Models\TimeTable_Group::getTpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getTpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>  @endif
+            @endif
+           
+
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+            @if($item->Fp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Fp)) ==  (App\Models\TimeTable_Group::getFpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getFpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>   @endif
+            @endif
              
            </tr>
            @endforeach
@@ -410,24 +594,80 @@
            
            @foreach ($Thursday as $item)
            <tr >
-              <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
-              <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
-             
-              <td>{{App\Models\subject::getSubjectName($item->Sp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Stp)}}</td>
+            @if($item->Stp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getStpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Stp)) ==  (App\Models\TimeTable_Group::getStpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getStpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+            </td>  @endif
+            @endif
+    
+    
+            <td class="alert-success">{{App\Models\subject::getSubjectName($item->Sp)}}</td>
+            @if($item->Sp == NULL)
+            <td class="alert-success"> </td>
+            <td class="alert-success"> </td>
+            @else
+            <td class="alert-success">{{App\Models\TimeTable_Room::getSpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-success"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Sp)) ==  (App\Models\TimeTable_Group::getSpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getSpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+            </td>  @endif
+            @endif
           
-              <td>{{App\Models\subject::getSubjectName($item->Tp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
-         
-              <td>{{App\Models\subject::getSubjectName($item->Fp)}}</td>
-              <td>{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
-              
+
+            <td class="alert-danger">{{App\Models\subject::getSubjectName($item->Tp)}}</td>
+            @if($item->Tp == NULL)
+            <td class="alert-danger"> </td>
+            <td class="alert-danger"> </td>
+            @else
+            <td class="alert-danger">{{App\Models\TimeTable_Room::getTpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-danger"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Tp)) ==  (App\Models\TimeTable_Group::getTpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getTpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>  @endif
+            @endif
+           
+
+            <td class="alert-info">{{App\Models\subject::getSubjectName($item->Fp)}}</td>
+            @if($item->Fp == NULL)
+            <td class="alert-info"> </td>
+            <td class="alert-info"> </td>
+            @else
+            <td class="alert-info">{{App\Models\TimeTable_Room::getFpRoomByDayID($item->id)}}</td>
+            @if ($groupsCheck == 1)
+            <td class="alert-info"> 
+              @if ( (App\Models\student_mark::checkSubjectGroup($item->Fp)) ==  (App\Models\TimeTable_Group::getFpGroupByDayID($item->id)))
+              {{  App\Models\TimeTable_Group::getGroupName(App\Models\TimeTable_Group::getFpGroupByDayID($item->id))  }}
+              @else
+                  <span> not </span>
+              @endif
+
+            </td>   @endif
+            @endif
            </tr>
            @endforeach
             
           
         </table>
- 
+      </div>
 </div>
  
   <div class="card-footer">

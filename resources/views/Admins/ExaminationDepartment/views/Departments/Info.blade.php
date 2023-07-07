@@ -150,7 +150,8 @@
              
             </div>
                 <div class="card-block" style="display: flex; justify-content : center">
-                <img src="depicon/{{$department->icon}}" class="img-avatar" alt="الشعار" style="width: 300px; height:300px">
+                <img src="{{ Storage::url("/departments/$department->icon") }}" class="img-avatar" alt="الشعار" style="width: 300px; height:300px">
+                
             </div>
         </div>
     </div>

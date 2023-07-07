@@ -18,6 +18,8 @@
 <div class="alert alert-primary" role="alert">
     قم بالضغط على عنوان الرسالة لعرض التفاصيل .
   </div>
+  <div class="card">
+    <div class="card-block">
 <table class="table table-hover table-outline m-b-0">
     <thead class="thead-default">
         <tr>
@@ -37,26 +39,27 @@
       <td class="text-xs-left"> {{$loop->index + 1}}</td>
             <td>
                 <div style="text-align: right;"> 
-                {{ App\Models\Instructor::getInstructorsName($notification->sender_id)}}
-                </div>
+               <strong> {{ App\Models\Instructor::getInstructorsName($notification->sender_id)}}</strong>  
+                 </div>
                 <div class="small text-muted" style="text-align: right;">
-                    {{ App\Models\Instructor::getInstructorDepartment($notification->sender_id)}}
+                    <strong>  {{ App\Models\Instructor::getInstructorDepartment($notification->sender_id)}}</strong> 
                 </div>
             </td>
             <td class="text-xs-center">
-                <a href="{{route('ShowNotificationMessage' , ['id' => $notification->id])}}">   {{$notification->title}}</a>
+                <strong>    <a href="{{route('ShowNotificationMessage' , ['id' => $notification->id])}}">   {{$notification->title}}</a></strong> 
              
             </td>
      
         
             <td class="text-xs-center">
                  
-                {{$notification->date}} 
+                <strong>  {{$notification->date}} </strong>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-
+</div>
+</div>
 {{$notifications->links()}}
 @endsection

@@ -31,8 +31,10 @@
         <div class="card border border-info">
             <div class="card-block p-a-1 clearfix">
                 <i class=" pull-left">
-                    <img src="colicon/{{$College->icon}}" class="img-avatar" alt="الشعار" style="width: 90px; height:90px">
-               
+                     
+                   
+                    <img src="{{ Storage::url("/colleges/$College->icon") }}" style="width: 90px; height:90px">
+                    
 
                 </i>
                 <div class="h5 text-info m-b-0 m-t-h">كلية  <span>{{$College->arabic_name  }}</span></div>
@@ -40,8 +42,8 @@
             </div>
             <div class="card-footer p-x-1 p-y-h">
                 <div class=" text-center">
-                    <a href="{{route('CollegeInfo' , ['id' => $College->id ])}}" class="btn btn-secondary btn-block" data-toggle="tooltip" data-placement="right" title="عرض"><i class="icon-bubbles"> </i>
-                        عرض
+                    <a href="{{route('CollegeInfo' , ['id' => $College->id ])}}" class="btn btn-secondary btn-block" data-toggle="tooltip" data-placement="right" title="عرض بيانات الكلية"><i class="icon-magnifier-add"> </i>
+                              عرض
                     </a>
                   
                     </div>

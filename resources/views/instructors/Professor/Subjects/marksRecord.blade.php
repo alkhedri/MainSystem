@@ -22,9 +22,9 @@
                          
 <div class="row" style="margin-bottom: 20px">
 
-    <a href="{{route('marksRecord' , ['subject_id' => $subject_id])}}" class="btn btn-success btn-md"><i class="icon-layers"></i>  تعديل الدرجات</a>
-    <a href="{{route('attendanceRecord' , ['subject_id' => $subject_id])}}" class="btn btn-primary btn-md"><i class="icon-people"></i>  سجل الحضور</a>
-    <a href="{{route('examsDate' , ['subject_id' => $subject_id])}}" class="btn btn-primary btn-md"><i class="icon-calendar"></i>  مواعيد الامتحانات</a>
+    <a href="{{route('marksRecord' , ['subject_id' => $subject_id, 'group_id' => $group_id])}}" class="btn btn-success btn-md"><i class="icon-layers"></i>  تعديل الدرجات</a>
+    <a href="{{route('attendanceRecord' , ['subject_id' => $subject_id, 'group_id' => $group_id])}}" class="btn btn-primary btn-md"><i class="icon-people"></i>  سجل الحضور</a>
+    <a href="{{route('examsDate' , ['subject_id' => $subject_id, 'group_id' => $group_id])}}" class="btn btn-primary btn-md"><i class="icon-calendar"></i>  مواعيد الامتحانات</a>
     
     
 
@@ -86,10 +86,10 @@
                             </tbody>
                         </table>
                            
-                        <a   style="margin-right : 10px" class="pull-left btn btn-success "href="{{route('NotifyEach' , ['subject_id' => $subject_id])}}"><i class="fa fa-bullhorn"></i>        إشعار بالدرجات</a>
+                        <a   style="margin-right : 10px" class="pull-left btn btn-success "href="{{route('NotifyEach' , ['subject_id' => $subject_id , 'group_id' => $group_id])}}"><i class="fa fa-bullhorn"></i>        إشعار بالدرجات</a>
     
                        
-                        <a   class="pull-left btn btn-primary "href="{{route('marksRecordEdit' , ['subject_id' => $subject_id])}}"><i class="fa fa-edit"></i>        تعديل</a>
+                        <a   class="pull-left btn btn-primary "href="{{route('marksRecordEdit' , ['subject_id' => $subject_id , 'group_id' => $group_id])}}"><i class="fa fa-edit"></i>        تعديل</a>
                   
 
                         

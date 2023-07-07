@@ -31,4 +31,17 @@ class subject extends Model
         $data =  subject::where('id', $id)->value('units'); 
          return $data;
      }
+
+          ///GET GROUPS
+          public static function getSubjectGroups($id){
+            $data =  subject::where('id', $id)->value('groups'); 
+             return $data;
+         }
+
+
+
+
+
+
+         
 }

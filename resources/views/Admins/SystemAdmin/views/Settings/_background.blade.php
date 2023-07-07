@@ -25,7 +25,7 @@
  
   <div class="row">
     <div class="col-md-3">
-        <div class="card">
+        <div class="card" style="border:2px solid black">
        
             <div class="image">
                 <img src="/svg/PolygonLuminary.svg" alt="" style="width: 100% ; height:100%">
@@ -48,7 +48,7 @@
            </div>
      </div>
     <div class="col-md-3">
-        <div class="card">
+        <div class="card" style="border:2px solid black">
             <div class="image">
                 <img src="/svg/AnimatedShape.svg" alt="" style="width: 100% ; height:100%">
             </div>
@@ -69,7 +69,7 @@
            </div>
      </div>
     <div class="col-md-3">
-        <div class="card">
+        <div class="card" style="border:2px solid black">
             <div class="image">
                 <img src="/svg/Colored Shapes.svg" alt="" style="width: 100% ; height:100%">
 
@@ -93,7 +93,7 @@
      </div>
  
     <div class="col-md-3">
-        <div class="card">
+        <div class="card" style="border:2px solid black">
             <div class="image"></div>
              <div class="content">
                

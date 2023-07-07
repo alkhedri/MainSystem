@@ -21,13 +21,21 @@ class student_attendanceRecord extends Model
         return  'غياب';
     }
 
-    public static function CountPresent($date , $id){
-        $Present = student_attendanceRecord::where('date', $date)->where('subject_id', $id)->where('status', 1)->get();   
+    public static function CountPresent($date , $id ,$group){
+        $Present = student_attendanceRecord::where('date', $date)
+        ->where('subject_id', $id)
+        ->where('group_id', $group)
+        ->where('status', 1)
+        ->get();   
         return  $Present->count();  
     }
 
-    public static function CountUpsent($date , $id){
-        $Upsent = student_attendanceRecord::where('date', $date)->where('subject_id', $id)->where('status', 0)->get();   
+    public static function CountUpsent($date , $id ,$group){
+        $Upsent = student_attendanceRecord::where('date', $date)
+        ->where('subject_id', $id)
+        ->where('group_id', $group)
+        ->where('status', 0)
+        ->get();   
         return  $Upsent->count();  
     }
 

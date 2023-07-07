@@ -98,8 +98,8 @@ class ExaminationController extends Controller
       
       if (!is_null($request->image)){
         $imageName = time().'.'.$request->image->extension();  
-       
-        $request->image->move(public_path('depicon'), $imageName);
+      
+        $request->image->move(storage_path('app/public/departments/'), $imageName);
         department::where('id', $request->id)
         ->update([
             'english_name' => $request->english_name,

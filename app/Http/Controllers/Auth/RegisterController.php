@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Instructor;
-use App\Models\City;
-use App\Models\Department;
-use App\Models\College;
-use App\Models\Student;
+use App\Models\city;
+use App\Models\department;
+use App\Models\college;
+use App\Models\student;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -66,9 +66,9 @@ class RegisterController extends Controller
     public function showRegistrationForm() {
      
        
-        $ids = City::all('name','id');
-        $departments = Department::all('arabic_name','id');
-        $colleges = College::all('arabic_name','id');
+        $ids = city::all('name','id');
+        $departments = department::all('arabic_name','id');
+        $colleges = college::all('arabic_name','id');
     
         return view ('auth.register',  compact('ids' , 'departments' , 'colleges'));
  

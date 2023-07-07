@@ -30,8 +30,11 @@
 
                                 <div class="pricing-table-inner is-revealing">
                                     <div class="mainlogoDesktop">
-                              
-                                        <img src="img\{{App\Models\system::getMainlogo()}}" class="img-avatar"  alt="" style="width: 200px;height:200px;">
+                                        <?php
+                   
+                                        $tmp = \App\Models\system::getMainlogo();
+                                     ?>
+                                        <img src="  {{ Storage::url("/img/$tmp") }}" class="img-avatar"  alt="" style="width: 200px;height:200px;">
             
                                     </div>
                                         <form method="POST" action="{{ route('login') }}" style="text-align: center" dir="rtl">

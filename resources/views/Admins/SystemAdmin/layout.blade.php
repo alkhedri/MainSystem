@@ -27,13 +27,7 @@ background-image:  url('/svg/{{App\Models\system::background()}}') ;
 
 
 }
-        .card {
-  max-width: 300px;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  border: 2px solid black;
-}
+
 
 .content {
   padding: 1.1rem;
@@ -91,9 +85,15 @@ background-image:  url('/svg/{{App\Models\system::background()}}') ;
          <div class="container-fluid">
             
              <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
-            
-              <img class="navbar-brand" src="/img/{{App\Models\system::getDashlogo()}}" class=""  alt="الشعار" style="width: 125px; height:58px">
-           
+              
+                    <?php
+                   
+                        $tmp = \App\Models\system::getDashlogo();
+                        ?>
+                   
+             
+             <img class="navbar-brand" src="  {{ Storage::url("/img/$tmp") }}"   alt="الشعار" style="width: 125px; height:58px">
+          
              <ul class="nav navbar-nav hidden-md-down">
                  <li class="nav-item">
                      <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>
@@ -162,7 +162,7 @@ background-image:  url('/svg/{{App\Models\system::background()}}') ;
                                     <li class="nav-item">
                                       <a class="nav-link" href="{{route('SystemIcons')}}"><i class="icon-screen-desktop"></i>أيقونات النظام</a>
                                       <a class="nav-link" href="{{route('SystemText')}}"><i class="icon-pencil"></i>النصوص</a>
-                                      <a class="nav-link" href="{{route('SystemBackground')}}"><i class="icon-pencil"></i>الخلفية</a>
+                                      <a class="nav-link" href="{{route('SystemBackground')}}"><i class="icon-picture"></i>الخلفية</a>
                                     
                                       
                                     </li>

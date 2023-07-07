@@ -15,6 +15,7 @@ use App\Models\timeTable;
 use App\Models\placement_request;
 use App\Models\User;
 use App\Models\student_warning;
+use App\Models\subject_group;
 
 
 use App\Http\Controllers\Controller;
@@ -40,7 +41,17 @@ class StudentController extends Controller
 
         $alertsCount = student_warning::where('student_id',$user_id)->count();
 
-        $Student_subjects = student_mark::where('student_id',$user_id)->where('semester_id',$current_semester)->get();
+        $Student_subjects = student_mark::where('student_id',$user_id)
+        ->where('semester_id',$current_semester)
+        ->get();
+        $department_subject = subject::where('department_id',$department_id)
+        ->get();
+
+        $groupsCheck = 0;
+        foreach($department_subject as $subject)
+                if ($subject->groups > 1)
+                    $groupsCheck = 1;
+        
          $alertDates = 0;
         foreach ($Student_subjects as $subject){
 
@@ -61,7 +72,16 @@ class StudentController extends Controller
          
         foreach($Saturday as $day){
          
-            $subject = student_mark::where('subject_id' , $day->Stp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+            $subject = student_mark::where('subject_id' , $day->Stp)
+            ->where('student_id' ,$user_id)
+            ->where('semester_id' ,$current_semester)
+            ->get()
+            ->count();
+
+
+           
+       
+
              if ($subject == 0)
                 unset($day->Stp);
             
@@ -79,9 +99,127 @@ class StudentController extends Controller
               
           }
 
+        foreach($Sunday as $day){
+         
+            $subject = student_mark::where('subject_id' , $day->Stp)
+            ->where('student_id' ,$user_id)
+            ->where('semester_id' ,$current_semester)
+            ->get()
+            ->count();
+            
+             if ($subject == 0)
+                unset($day->Stp);
+            
+                $subject = student_mark::where('subject_id' , $day->Sp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                if ($subject == 0)
+                   unset($day->Sp);
 
+                   $subject = student_mark::where('subject_id' , $day->Tp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                   if ($subject == 0)
+                      unset($day->Tp);
+
+                      $subject = student_mark::where('subject_id' , $day->Fp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                      if ($subject == 0)
+                         unset($day->Fp);
+              
+          }
        
-  
+          foreach($Monday as $day){
+         
+            $subject = student_mark::where('subject_id' , $day->Stp)
+            ->where('student_id' ,$user_id)
+            ->where('semester_id' ,$current_semester)
+            ->get()
+            ->count();
+            
+             if ($subject == 0)
+                unset($day->Stp);
+            
+                $subject = student_mark::where('subject_id' , $day->Sp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                if ($subject == 0)
+                   unset($day->Sp);
+
+                   $subject = student_mark::where('subject_id' , $day->Tp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                   if ($subject == 0)
+                      unset($day->Tp);
+
+                      $subject = student_mark::where('subject_id' , $day->Fp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                      if ($subject == 0)
+                         unset($day->Fp);
+              
+          }
+          foreach($Tuesday as $day){
+         
+            $subject = student_mark::where('subject_id' , $day->Stp)
+            ->where('student_id' ,$user_id)
+            ->where('semester_id' ,$current_semester)
+            ->get()
+            ->count();
+            
+             if ($subject == 0)
+                unset($day->Stp);
+            
+                $subject = student_mark::where('subject_id' , $day->Sp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                if ($subject == 0)
+                   unset($day->Sp);
+
+                   $subject = student_mark::where('subject_id' , $day->Tp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                   if ($subject == 0)
+                      unset($day->Tp);
+
+                      $subject = student_mark::where('subject_id' , $day->Fp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                      if ($subject == 0)
+                         unset($day->Fp);
+              
+          }
+          foreach($Wedensday as $day){
+         
+            $subject = student_mark::where('subject_id' , $day->Stp)
+            ->where('student_id' ,$user_id)
+            ->where('semester_id' ,$current_semester)
+            ->get()
+            ->count();
+            
+             if ($subject == 0)
+                unset($day->Stp);
+            
+                $subject = student_mark::where('subject_id' , $day->Sp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                if ($subject == 0)
+                   unset($day->Sp);
+
+                   $subject = student_mark::where('subject_id' , $day->Tp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                   if ($subject == 0)
+                      unset($day->Tp);
+
+                      $subject = student_mark::where('subject_id' , $day->Fp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                      if ($subject == 0)
+                         unset($day->Fp);
+              
+          }
+          foreach($Thursday as $day){
+         
+            $subject = student_mark::where('subject_id' , $day->Stp)
+            ->where('student_id' ,$user_id)
+            ->where('semester_id' ,$current_semester)
+            ->get()
+            ->count();
+            
+             if ($subject == 0)
+                unset($day->Stp);
+            
+                $subject = student_mark::where('subject_id' , $day->Sp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                if ($subject == 0)
+                   unset($day->Sp);
+
+                   $subject = student_mark::where('subject_id' , $day->Tp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                   if ($subject == 0)
+                      unset($day->Tp);
+
+                      $subject = student_mark::where('subject_id' , $day->Fp)->where('student_id' ,$user_id)->where('semester_id' ,$current_semester)->get()->count();
+                      if ($subject == 0)
+                         unset($day->Fp);
+              
+          }
           toast('لديك عدد [ '.$notificationsCountUnRead.' ] اشعار غير مقروء', 'info');
       
      
@@ -97,8 +235,8 @@ class StudentController extends Controller
             'Tuesday',
             'Wedensday',
             'Thursday',
-            'user_id'
-
+            'user_id',
+            'groupsCheck'
                
             
             ));
@@ -318,8 +456,7 @@ class StudentController extends Controller
         ->where('semester_id', $current_semester )
         ->where('subject_id', $request->subject_id)->first();
 
-        $checkAvalibility = subject::where('department_id', $department_id )
-        ->where('id', $request->subject_id)
+        $checkAvalibility = subject::where('id', $request->subject_id)
         ->value('avaliablity');
 
         
@@ -368,11 +505,21 @@ class StudentController extends Controller
             return back()->with('Alert', 'غير مسموح بتنزيل هذا المقرر');
             
             
-            
+            $subject_groups =  subject_group::where('subject_id',$request->subject_id)->get();
+            $check = 0;
+            foreach($subject_groups as $group)
+                   if ($group->group == $request->subject_group)
+                       $check = 1;
+   
+                       if($check == 0)
+                       return back()->with('Alert', 'خطأ في إختيار المجموعة');
+ 
+
         student_mark::Insert(
             [
              'student_id' => $user_id,
              'subject_id' => $request->subject_id,
+             'subject_group' => $request->subject_group,
              'semester_id' => $current_semester,
              'department_id' => $department_id,
              'college_id' => $college_id,
@@ -540,5 +687,13 @@ class StudentController extends Controller
             'Department_Rooms',
             'departmentName'
         ));   
+    }
+
+    public function getGroups(Request $request){
+        $groups = subject_group::where('subject_id',$request->subject_id)->get();
+
+        return response()->json(['status_code' => '200', 'data' => $groups->count()]);
+     
+        
     }
 }

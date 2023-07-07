@@ -20,7 +20,7 @@
  
 <div class="row "    style="overflow-x:auto;">
 
-
+    <div class="card">
 <table class="table table-hover table-outline">
     <thead class="thead-default">
         <tr>
@@ -57,5 +57,6 @@
         @endforeach
     </tbody>
 </table>
+</div>
 </div>
 @endsection

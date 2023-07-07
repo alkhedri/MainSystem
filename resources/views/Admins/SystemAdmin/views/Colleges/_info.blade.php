@@ -103,7 +103,8 @@
              
             </div>
             <div class="card-block" style="display: flex; justify-content : center">
-                <img src="/colicon/{{$data->icon}}" class="img-avatar" alt="الشعار" style="width: 300px; height:300px">
+                <img src=" {{ Storage::url("/colleges/$data->icon") }}" class="img-avatar" alt="الشعار" style="width: 300px; height:300px">
+               
             </div>
         </div>
     </div>

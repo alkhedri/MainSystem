@@ -73,7 +73,7 @@
                                     <div class="row  list-group-item">
                                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('  الإسم [عربي]   :  ') }}</label>
             
-                                            <label for="name" class="col-md-8 col-form-label text-md-end"> {{$student->arabic_name}} </label>
+                                            <label for="name" class="font-weight-bold col-form-label text-md-end"> {{$student->arabic_name}} </label>
             
                                   
                                     </div>
@@ -83,26 +83,19 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __(' الإسم [إنجليزي] : ') }}</label>
             
                                         <div class="col-md-8">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$student->english_name}}  " required  autofocus>
+                                              <label for="name" class="font-weight-bold col-form-label text-md-end"> {{$student->english_name}}  </label>
             
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                   
                                         </div>
                                     </div>
                                     <div class="row list-group-item">
                                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('البريد الإلكتروني :') }}</label>
             
                                         <div class="col-md-8">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="  {{App\Models\student::getStudentEmail($student->id) }} " required  autofocus>
+ 
+                                            <label for="name" class="font-weight-bold col-form-label text-md-end">  {{App\Models\student::getStudentEmail($student->id) }}  </label>
             
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                    
                                         </div>
                                     </div>
                                   
@@ -110,13 +103,10 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('الرقم الوطني') }}</label>
             
                                         <div class="col-md-8">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value=" {{$student->nat_id}} " required  autofocus>
+ 
+                                            <label for="name" class="font-weight-bold col-form-label text-md-end"> {{$student->nat_id}}  </label>
             
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                     
                                         </div>
                                     </div>
 
@@ -158,13 +148,9 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('سنة الإلتحاق') }}</label>
             
                                         <div class="col-md-6">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="          {{$student->enrollment_date}}" required  autofocus>
-            
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+ 
+                                            <label for="name" class="font-weight-bold col-form-label text-md-end">  {{App\Models\semester::getName($student->enrollment_date) }}  </label>
+             
                                         </div>
                                     </div>
 
@@ -172,7 +158,8 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('المشرف') }}</label>
             
                                         <div class="col-md-6">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{App\Models\student::getStudentSpv($student->spv_id) }}"  readonly   >
+ 
+                                            <label for="name" class="col-form-label text-md-end font-weight-bold"> {{App\Models\student::getStudentSpv($student->spv_id) }} </label>
              
                                         </div>
                                     </div>

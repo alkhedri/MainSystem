@@ -81,7 +81,7 @@
                 <div class="card-block">
                     @foreach ($subjects as $subject)
                                      
-                                <form action="{{route('SubjectsProfessorAction' , ['id' => $subject->id])}}" method="post" class="form-horizontal ">
+                                <form action="{{route('SubjectsProfessorAction' , ['subject_id' => $subject->id])}}" method="post" class="form-horizontal ">
                                   
                                    @csrf
                                      
@@ -102,7 +102,7 @@
                                          
                                         </div>
 
-                              
+                                              <input type="hidden" name="group_id" id="" value="{{$group_id}}">
                                     </div>
                                     <div class="form-actions" dir="ltr">
                                         <button type="submit" class="btn btn-primary">حفظ التغييرات</button>

@@ -13,9 +13,11 @@ use App\Models\subject_date;
 use App\Models\subject_requirement;
 use App\Models\notification;
 use App\Models\student_attendanceRecord;
+use App\Models\subject_group;
 
 use App\Models\timeTable;
 use App\Models\TimeTable_Room;
+use App\Models\TimeTable_Group;
 use App\Models\ExamsTable;
 
 use App\Http\Controllers\Controller;
@@ -34,11 +36,25 @@ class SubjectsController extends Controller
         $current_semester_id = College::where('id',$College_id)->value('current_semester');
 
 
-        $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
-        $marksData =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester_id)->paginate(5);;
+        $subjects =  subject::where('id',$request->subject_id)->paginate(5);;
+        $marksData =  student_mark::where('subject_id',$request->subject_id)
+        ->where('subject_group',$request->group_id)
+        ->where('semester_id',$current_semester_id)->paginate(5);;
    
         $subject_id = $request->subject_id;
-        return view('instructors.Professor.Subjects.marksRecord' , compact('subjects' , 'marksData' , 'subject_id'));
+
+
+        $subject_groups =  subject_group::where('instructor_id',$user_id)->get();
+        $check = 0;
+         foreach($subject_groups as $group)
+                if ($group->group == $request->group_id)
+                    $check = 1;
+
+                    if($check == 0)
+                    abort(404);
+
+        $group_id = $request->group_id;
+        return view('instructors.Professor.Subjects.marksRecord' , compact('subjects' , 'marksData' , 'subject_id' , 'group_id'));
          
     }
 
@@ -56,11 +72,23 @@ class SubjectsController extends Controller
         $current_semester_id = College::where('id',$College_id)->value('current_semester');
 
 
-        $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
-        $marksData =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester_id)->paginate(5);;
+        $subjects =  subject::where('id',$request->subject_id)->paginate(5);;
+        $marksData =  student_mark::where('subject_id',$request->subject_id)
+        ->where('subject_group',$request->group_id)
+        ->where('semester_id',$current_semester_id)->paginate(5);;
    
+        $subject_groups =  subject_group::where('instructor_id',$user_id)->get();
+        $check = 0;
+         foreach($subject_groups as $group)
+                if ($group->group == $request->group_id)
+                    $check = 1;
+
+                    if($check == 0)
+                    abort(404);
      $subject_id = $request->subject_id;
-        return view('instructors.Professor.Subjects.marksRecordEdit' , compact('subjects' , 'marksData' , 'subject_id'));
+
+     $group_id = $request->group_id;
+        return view('instructors.Professor.Subjects.marksRecordEdit' , compact('subjects' , 'marksData' , 'subject_id' , 'group_id'));
          
     }
     
@@ -69,6 +97,19 @@ class SubjectsController extends Controller
     {
         $user_id = auth()->user()->id;
 
+        $subject_groups =  subject_group::where('instructor_id',$user_id)->get();
+        $check = 0;
+         foreach($subject_groups as $group)
+                if ($group->group == $request->group_id)
+                    $check = 1;
+
+                    if($check == 0)
+                    abort(404);
+
+        
+
+
+
         $count_items = count($request->ids);
         $final = $request->get('final');
         $work = $request->get('work');
@@ -76,7 +117,7 @@ class SubjectsController extends Controller
 
         $subject_id =  student_mark::where('id',$ids[0])->value('subject_id');
 
-        $subject_professor =  subject::where('id',$subject_id)->value('proffesor_id');
+        
 
         $subjectWorkLimit =  subject::where('id',$subject_id)->value('work_mark');
        
@@ -96,12 +137,12 @@ class SubjectsController extends Controller
                 toast('لايمكن أن تكون الدرجات بالسالب !','warning');
                 return back();
             }
-            elseif ($subject_professor != $user_id)
-            {
+       
                 
-            }
+           
             else{
             student_mark::where('id', $ids[$i])
+            ->where('subject_group', $request->group_id)
             ->update([
                 'work' => $work[$i],
                 'final' => $final[$i],
@@ -124,54 +165,91 @@ class SubjectsController extends Controller
     {
         $user_id = auth()->user()->id;
  
-    
+        $subject_groups =  subject_group::where('instructor_id',$user_id)->get();
+        $check = 0;
+         foreach($subject_groups as $group)
+                if ($group->group == $request->group_id)
+                    $check = 1;
 
-        $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
+                    if($check == 0)
+                    abort(404);
+
+        $subjects =  subject::where('id',$request->subject_id)->paginate(5);;
       
    
         $todaysdate = date('Y-m-d');
-        $recordsDates = student_attendanceRecord::where('subject_id',$request->subject_id)->groupBy('date')->get();
+        $recordsDates = student_attendanceRecord::where('subject_id',$request->subject_id)
+        ->where('group_id',$request->group_id)
+        ->groupBy('date')->get();
 
-        $students =  student_attendanceRecord::where('subject_id',$request->subject_id)->where('date',$todaysdate)->get();
+        $students =  student_attendanceRecord::where('subject_id',$request->subject_id)
+        ->where('group_id',$request->group_id)
+        ->where('date',$todaysdate)->get();
        
-        $Newstudents =  student_mark::where('subject_id',$request->subject_id)->get();
+        $Newstudents =  student_mark::where('subject_id',$request->subject_id)
+        ->where('subject_group',$request->group_id)
+        ->get();
         
        
         $subject_id = $request->subject_id;
-
+        $group_id = $request->group_id;
         $title = 'حذف سجل الحضور';
         $text = "هل أنت متأكد من حذ هذا السجل ؟";
         confirmDelete($title, $text);
-        return view('instructors.Professor.Subjects.attendanceRecord' , compact('subjects' , 'students' , 'subject_id' , 'recordsDates' , 'todaysdate' , 'Newstudents'));
+
+        return view('instructors.Professor.Subjects.attendanceRecord' , compact('subjects' , 'students' , 'subject_id' , 'group_id' , 'recordsDates' , 'todaysdate' , 'Newstudents'));
          
     } 
 
     
     public function attendance_EditRecord(Request $request)
     {
+        $user_id = auth()->user()->id;
+ 
+        $subject_groups =  subject_group::where('instructor_id',$user_id)->get();
+        $check = 0;
+         foreach($subject_groups as $group)
+                if ($group->group == $request->group_id)
+                    $check = 1;
+
+                    if($check == 0)
+                    abort(404);
         
-   
-        
-        $students =  student_attendanceRecord::where('subject_id',$request->subject_id)->where('date',$request->date)->get();
-        
-       
+     
+        $students = student_attendanceRecord::where('subject_id',$request->subject_id)
+        ->where('date',$request->date)
+        ->where('group_id',$request->group_id)
+        ->get();
+
+        $group_id = $request->group_id;
         $subject_id = $request->subject_id;
         $recordDate = $request->date;
+        
 
-
-        return view('instructors.Professor.Subjects._attendanceEdit' , compact(  'students' , 'recordDate' ,'subject_id' ));
+        return view('instructors.Professor.Subjects._attendanceEdit' , compact(  'students' , 'group_id', 'recordDate' ,'subject_id' ));
          
     }
     public function AttendanceRecordAction(Request $request)
     {
         $user_id = auth()->user()->id;
+        $subject_groups =  subject_group::where('instructor_id',$user_id)->get();
+        $check = 0;
+         foreach($subject_groups as $group)
+                if ($group->group == $request->group_id)
+                    $check = 1;
 
+                    if($check == 0)
+                    abort(404);
         $College_id = Instructor::where('id',$user_id)->value('college_id');
        
         $current_semester_id = College::where('id',$College_id)->value('current_semester');
 
  
-        $students =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester_id)->get();
+        $students =  student_mark::where('subject_id',$request->subject_id)
+        ->where('semester_id',$current_semester_id)
+        ->where('subject_group',$request->group_id)
+        
+        ->get();
         
         if (student_attendanceRecord::where('date', date('Y-m-d') )->where('subject_id', $request->subject_id )->exists()) {
             return back()->with('exist', 'سجل الحضور لهذا اليوم موجود بالفعل');
@@ -184,6 +262,7 @@ class SubjectsController extends Controller
                 [
                  'student_id' => $student->student_id,
                  'subject_id' => $request->subject_id,
+                 'group_id' => $request->group_id,
                  'date' => date('Y-m-d'),
                  'status' => 0,
             
@@ -198,8 +277,19 @@ class SubjectsController extends Controller
     }
     public function AttendanceRecordAction_Update(Request $request)
     {
-     
-        student_attendanceRecord::where('student_id', $request->student_id)->where('date', $request->date)->where('subject_id', $request->subject_id)
+        $user_id = auth()->user()->id;
+        $subject_groups =  subject_group::where('instructor_id',$user_id)->get();
+        $check = 0;
+         foreach($subject_groups as $group)
+                if ($group->group == $request->group_id)
+                    $check = 1;
+
+                    if($check == 0)
+                    abort(404);
+
+        student_attendanceRecord::where('student_id', $request->student_id)
+        ->where('date', $request->date)
+        ->where('subject_id', $request->subject_id)
         ->update([
  
             'status' => $request->status,
@@ -225,7 +315,9 @@ class SubjectsController extends Controller
     } 
     public function Attendance_sheet(Request $request){
 
-        $students =  student_attendanceRecord::where('subject_id',$request->subject_id)->groupby('student_id')->get();
+        $students =  student_attendanceRecord::where('subject_id',$request->subject_id)
+        ->where('group_id', $request->group_id)
+        ->groupby('student_id')->get();
         
        $subject_id = $request->subject_id;
 
@@ -263,7 +355,7 @@ class SubjectsController extends Controller
         $current_semester_id = College::where('id',$College_id)->value('current_semester');
 
 
-        $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
+        $subjects =  subject::where('id',$request->subject_id)->paginate(5);;
         
    
  
@@ -274,9 +366,9 @@ class SubjectsController extends Controller
         $students =  student_attendanceRecord::where('subject_id',$request->subject_id)->where('date',$request->date)->get();
         $Newstudents =  student_mark::where('subject_id',$request->subject_id)->get();
         
-         
+        $group_id = $request->group_id;
          $todaysdate = date('Y-m-d');
-         return view('instructors.Professor.Subjects.attendanceRecord' , compact('subjects' , 'students' , 'subject_id' , 'recordsDates' , 'todaysdate' , 'Newstudents'));
+         return view('instructors.Professor.Subjects.attendanceRecord' , compact('subjects' , 'students' ,  'group_id','subject_id' , 'recordsDates' , 'todaysdate' , 'Newstudents'));
     
     }
 
@@ -286,12 +378,18 @@ class SubjectsController extends Controller
         $user_id = auth()->user()->id;
  
       
-        $dates =  subject_date::where('subject_id',$request->subject_id)->get();
+        $dates =  subject_date::where('subject_id',$request->subject_id)
+        ->where('group_id',$request->group_id)
+        ->get();
      
-        $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
-       
+        $subjects =  subject::where('id',$request->subject_id)->paginate(5);;
+        $group_id = $request->group_id;
         $subject_id = $request->subject_id;
-        return view('instructors.Professor.Subjects.examsDates' , compact('dates'  , 'subject_id'  , 'subjects'));
+
+        $title = 'حذف الموعد ';
+        $text = "هل أنت متأكد من حذ هذا الموعد ؟";
+        confirmDelete($title, $text);
+        return view('instructors.Professor.Subjects.examsDates' , compact('dates'  , 'subject_id'  , 'subjects' , 'group_id'));
          
     }
 
@@ -316,6 +414,7 @@ class SubjectsController extends Controller
              'details' => $request->details,
              'department_id' => $department_id,
              'subject_id' => $request->subject_id,
+             'group_id' => $request->group_id,
              
              ]
         );
@@ -361,6 +460,7 @@ class SubjectsController extends Controller
 
              'course_hours' => $request->course_hours,
              'work_hours' => $request->work_hours,
+             'groups' => 1,
 
              'work_mark' => 40,
              'final_mark' => 60,
@@ -370,12 +470,20 @@ class SubjectsController extends Controller
 
              'avaliablity' => 0,
              'required' => 1,
+           
 
+             
              'proffesor_id' => NULL,
              
              ]
         );
-       
+        subject_group::insert(
+            [
+             'subject_id' => subject::select('id')->max('id'),
+             'group' => 0,
+             'instructor_id' => NULL,
+             ]
+        );
         return back()->with('subjectInserted', [
             'Arabic_name' =>  $request->arabic_name,
             'English_name' =>  $request->english_name,
@@ -401,16 +509,19 @@ class SubjectsController extends Controller
             'code' => 'required|max:7',
             'work' => 'required|numeric',
             'final' => 'required|numeric',
+            'groups' => 'required',
 
 
         ]);
-    
+        
             subject::where('id', $request->id)
             ->update([
                 'arabic_name' =>  $request->arabic_name,
                 'english_name' => $request->english_name,
                 'units' => $request->units,
                 'code' => $request->code,
+                'groups' => $request->groups,
+            
 
                 'course_hours' => $request->course_hours,
                 'work_hours' => $request->work_hours,
@@ -418,23 +529,47 @@ class SubjectsController extends Controller
                 'final_mark' => $request->final,
                 'proffesor_id' => $request->professor_id,
              ]);
+
+//------------ SUBHECT GROUPS TABLE DELETE AND RE CRAETE DATA
+                subject_group::where('subject_id',$request->id)->delete();
+                for($i = 0 ; $i < $request->groups ; $i++)
+                subject_group::insert(
+                    [
+                     'subject_id' => $request->id,
+                     'group' => $i,
+                     'instructor_id' => NULL,
+                     ]
+                );
+
        
-   
+        
+             $instructors = $request->get('instructors');
+             $i=0;
+              foreach( $instructors as  $instructor){
+                
+                subject_group::where('subject_id', $request->id)->where('group', $i)
+                ->update([
+                    'instructor_id' =>  $instructor,
+            
+                ]);
+                $i++;
+              }
+              
 
         return back()->with('message', 'تم تعديل البيانات ');;
     }
     public function Update_SubjectProfessor(Request $request){
  
-    
-            subject::where('id', $request->id)
+        
+        subject_group::where('id', $request->group_id)
             ->update([
  
-                'proffesor_id' => $request->professor_id,
+                'instructor_id' => $request->professor_id,
              ]);
        
    
-
-        return redirect()->route('SubjectsMenu');
+            
+        return redirect()->route('SubjectsDetails' , ['id' => $request->subject_id ]);
     }
 
     
@@ -505,7 +640,14 @@ class SubjectsController extends Controller
                         'Fp' => $request->ForthRoom,
                      ]);
      
-
+                     TimeTable_Group::insert(
+                        [
+                            'day_id' => TimeTable::select('id')->max('id'),
+                            'Stp' => $request->FirstGroup,
+                            'Sp' => $request->SecondGroup,
+                            'Tp' => $request->ThirdGroup,
+                            'Fp' => $request->ForthGroup,
+                         ]);
     return back();
 } 
 
@@ -581,6 +723,10 @@ public function TimeTableDeleteAction(Request $request)
           ->update([
           'Stp' => NULL,
             ]);
+            TimeTable_Group::where('day_id', $request->id)
+            ->update([
+            'Stp' => NULL,
+              ]);
 
     }
          
@@ -593,6 +739,10 @@ public function TimeTableDeleteAction(Request $request)
                 ->update([
                 'Sp' => NULL,
                   ]);
+                  TimeTable_Group::where('day_id', $request->id)
+                  ->update([
+                  'Sp' => NULL,
+                    ]);
             }
        
             elseif($request->period == 3){
@@ -604,6 +754,10 @@ public function TimeTableDeleteAction(Request $request)
                 ->update([
                 'Tp' => NULL,
                   ]);
+                  TimeTable_Group::where('day_id', $request->id)
+                  ->update([
+                  'Tp' => NULL,
+                    ]);
             }
       
             elseif($request->period == 4){
@@ -615,13 +769,30 @@ public function TimeTableDeleteAction(Request $request)
                 ->update([
                 'Fp' => NULL,
                   ]);
+                  TimeTable_Group::where('day_id', $request->id)
+                  ->update([
+                  'Fp' => NULL,
+                    ]);
             }
       
 
-            $check = TimeTable::where('id', $request->id)->where('department_id',$department_id)->value( 'Stp' , 'Sp' , 'Tp'  ,'Fp');
+            $check = TimeTable::where('id', $request->id)
+            ->where('department_id',$department_id)
+            ->value( 'Stp' , 'Sp' , 'Tp'  ,'Fp');
+
             if(is_null($check)){
-                TimeTable_Room::where('day_id',$request->id)->delete();
-                TimeTable::where('id',$request->id)->where('department_id',$department_id)->delete();
+
+                TimeTable_Group::where('day_id',$request->id)
+                ->delete();
+
+                TimeTable_Room::where('day_id',$request->id)
+                ->delete();
+
+                TimeTable::where('id',$request->id)
+                ->where('department_id',$department_id)
+                ->delete();
+
+
             }
             
 
@@ -715,8 +886,12 @@ public function TimeTableDeleteAction(Request $request)
         $current_semester_id = College::where('id',$College_id)->value('current_semester');
 
 
-        $subjects =  subject::where('proffesor_id',$user_id)->where('id',$request->subject_id)->paginate(5);;
-        $subjectStudents =  student_mark::where('subject_id',$request->subject_id)->where('semester_id',$current_semester_id)->paginate(5);;
+        $subjects =  subject::where('id',$request->subject_id)->paginate(5);
+
+        $subjectStudents =  student_mark::where('subject_id',$request->subject_id)
+        ->where('subject_group',$request->group_id)
+        ->where('semester_id',$current_semester_id)
+        ->paginate(5);;
    
         $subject_id = $request->subject_id;
         return view('instructors.Professor.Subjects.notifyEach' , compact('subjects' , 'subjectStudents' , 'subject_id'));

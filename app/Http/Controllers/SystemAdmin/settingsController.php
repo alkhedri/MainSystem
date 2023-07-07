@@ -28,7 +28,7 @@ class settingsController extends Controller
 
         $imageName = time().'.'.$request->image->extension();  
        
-        $request->image->move(public_path('img'), $imageName);
+        $request->image->move(storage_path('app/public/img/'), $imageName);
         system::where('id', 1)
         ->update([
             'mainLogo' => $imageName,
@@ -51,8 +51,8 @@ class settingsController extends Controller
       if (!is_null($request->image)){
 
         $imageName = time().'.'.$request->image->extension();  
-       
-        $request->image->move(public_path('img'), $imageName);
+        
+        $request->image->move(storage_path('app/public/img/'), $imageName);
         system::where('id', 1)
         ->update([
             'dashBaordLogo' => $imageName,

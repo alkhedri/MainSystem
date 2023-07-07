@@ -58,7 +58,10 @@
                         </span>
                     </div>
                 </div>
-                   <input type="hidden" value="{{$subject_id}}" name="subject_id">
+                <input type="hidden" value="{{$subject_id}}" name="subject_id">
+                <input type="hidden" value="{{$group_id}}" name="group_id">
+
+                   
                 <div class="form-group form-actions" dir="ltr">
                     <button type="submit" class="btn btn-sm btn-primary">اشعار</button>
                 </div>

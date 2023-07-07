@@ -53,7 +53,7 @@ class mainController extends Controller
       if (!is_null($request->image)){
         $imageName = time().'.'.$request->image->extension();  
        
-        $request->image->move(public_path('colicon'), $imageName);
+        $request->image->move(storage_path('app/public/colleges/'), $imageName);
         college::where('id', $request->id)
         ->update([
             'english_name' => $request->english_name,
